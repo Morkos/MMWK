@@ -18,10 +18,12 @@
 #import "GraphicsEngine.h"
 
 @interface Player : Character<PhysicsContext> {
-	
-
+	NSArray *attackingRowIndexes;
+	uint currentAttack;
 }
 
+@property (nonatomic, retain) NSArray *attackingRowIndexes;
+@property (nonatomic, assign) uint currentAttack;
 
 + (Character *) characterAtPosition:(CGPoint)position 
 							   size:(CGSize)size 

@@ -64,4 +64,8 @@
 	return [texCoordsArray objectAtIndex:rowInd];
 }
 
+- (uint) getNumOfColumnsInRow:(uint) rowInd {
+	return [[texCoordsArray objectAtIndex:rowInd] count];
+}
+
 @end

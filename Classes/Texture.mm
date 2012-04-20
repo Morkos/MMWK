@@ -11,7 +11,9 @@
 
 @implementation Texture
 
-@synthesize textureId, width, height;
+@synthesize textureId, 
+			    width, 
+				height;
 
 + (Texture *) textureWithFilename: (NSString *)filename{
 	Texture *texture = [[Texture alloc] init];

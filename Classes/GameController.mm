@@ -20,52 +20,54 @@ static Node *node = nil;
 	
 	//TODO: Move to separate game initialization code
 	Texture *texture1 = [Texture textureWithFilename:[[NSBundle mainBundle] 
-													  pathForResource:@"megamanSpSheet" 
-													  ofType:@"png"]];
+								     pathForResource:@"lancelotSpSheet" 
+											  ofType:@"png"]];
 	
 	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-															   pathForResource:@"node" 
-															   ofType:@"png"]];
+										   pathForResource:@"node" 
+												    ofType:@"png"]];
 	
 	Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 															   pathForResource:@"background" 
 															   ofType:@"png"]];
 	
-	SpriteSheet *overlaySprite = [SpriteSheet createWithTexture:overlayTexture  
-													  numOfRows:1
-									columns:[NSArray arrayWithObjects:
-													 [NSNumber numberWithInt:1],
-													 nil
-											]
-								  ];
+	SpriteSheet *overlaySprite = 
+		[SpriteSheet createWithTexture:overlayTexture  
+							 numOfRows:1
+							   columns:[NSArray arrayWithObjects:
+										     [NSNumber numberWithInt:1],
+											 nil
+									   ]
+		];
 	
-	SpriteSheet *sprite = [SpriteSheet createWithTexture:texture1 
-											   numOfRows:6
-									columns:[NSArray arrayWithObjects:
-													 [NSNumber numberWithInt:8],
-													 [NSNumber numberWithInt:8],
-													 [NSNumber numberWithInt:8],
-													 [NSNumber numberWithInt:8],
-													 [NSNumber numberWithInt:8],
-													 [NSNumber numberWithInt:8],
-													 nil
-											]
-						   ];
+	SpriteSheet *sprite = 
+		[SpriteSheet createWithTexture:texture1 
+							 numOfRows:5
+							   columns:[NSArray arrayWithObjects:
+											 [NSNumber numberWithInt:1],
+											 [NSNumber numberWithInt:4],
+											 [NSNumber numberWithInt:3],
+											 [NSNumber numberWithInt:7],
+											 [NSNumber numberWithInt:4],
+											 nil
+									   ]
+		];
 	
 	//take this out.
-	Character *box = [Player characterAtPosition:CGPointMake(0.5, 0) 
-									        size:CGSizeMake(0.2, 0.2) 
+	Character *box = [Player characterAtPosition:CGPointMake(0.9, 0) 
+									        size:CGSizeMake(0.4, 0.4) 
 									 spriteSheet:sprite];
 	
 	Character *player = [Player characterAtPosition:CGPointMake(0.0, 0) 
-											size:CGSizeMake(0.2, 0.2) 
+											size:CGSizeMake(0.4, 0.4) 
 								    spriteSheet:sprite];
 
 	node = [Overlay nodeAtPosition:CGPointMake(0.5, 0.5) 
-										  size:CGSizeMake(0.1, 0.1)
-								   spriteSheet:overlaySprite];
+							  size:CGSizeMake(0.1, 0.1)
+					   spriteSheet:overlaySprite];
 	
-	Background *background = [Background backgroundWithTexture:backgroundTexture scrollSpeed:0.01f];
+	Background *background = [Background backgroundWithTexture:backgroundTexture 
+												   scrollSpeed:0.01f];
 	
 	[[ObjectContainer singleton] addObject:background];
 	[[ObjectContainer singleton] addObject:player];
@@ -203,7 +205,8 @@ static Node *node = nil;
 		[node hide];
 	}
 	
-	[[ObjectContainer singleton].background scroll:RIGHT];
+	//[[ObjectContainer singleton].background scroll:RIGHT];
+	[[ObjectContainer singleton].player attack];
 }
 
 - (void) gameLoop

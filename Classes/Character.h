@@ -27,7 +27,7 @@
 
 @property (nonatomic, assign) PlayerState currentState;
 @property (nonatomic, retain) SpriteSheet *sprite;
-@property (nonatomic, assign) uint spsheetRowInd, spsheetColInd;
+@property (assign) uint spsheetRowInd, spsheetColInd;
 @property (nonatomic, assign) CADisplayLink *displayLink;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;

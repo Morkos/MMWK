@@ -26,7 +26,8 @@ typedef enum {
 
 typedef enum {
 	MOVING_STATE,
-	STOP_STATE
+	STOP_STATE,
+	ATTACKING_STATE
 } PlayerState;
 
 typedef enum {

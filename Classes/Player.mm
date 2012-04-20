@@ -17,9 +17,13 @@ static NSMutableDictionary * directionToOpposite = [NSMutableDictionary new];
 
 @implementation Player
 
+@synthesize attackingRowIndexes,
+			currentAttack;
+
 // Texture row indexes in the sprite sheet
 static const uint STANDING_ROW_INDEX = 0; 
-static const uint MOVEMENT_ROW_INDEX = 3;
+static const uint MOVEMENT_ROW_INDEX = 1;
+static const uint ATTACKING_ROW_INDEX = 2;
 
 //Private method
 - (void) moveTowards:(Direction) dir{
@@ -41,6 +45,12 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 	player.currentDirection = RIGHT;
 	player.currentOrientation = ORIENTATION_FORWARD;
 	player.physicsEngine = [PhysicsEngine getInstance];
+	player.attackingRowIndexes = [NSArray arrayWithObjects:
+									[NSNumber numberWithInt:2],
+									[NSNumber numberWithInt:3],
+									[NSNumber numberWithInt:4],
+									 nil
+								  ];
 	
 	//TODO: move to PropState.h
 	[directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
@@ -98,8 +108,18 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 -(void) update {
 	switch(self.currentState) {
 		case MOVING_STATE:
+			spsheetRowInd = MOVEMENT_ROW_INDEX;
 			[self moveTowards:currentDirection];
-			[self.displayLink setFrameInterval:2];
+			[self.displayLink setFrameInterval:8];
+			break;
+			
+		case ATTACKING_STATE:
+			[self.displayLink setFrameInterval:6];
+			break;
+			
+		case STOP_STATE:
+			spsheetRowInd = STANDING_ROW_INDEX;
+			[self.displayLink setFrameInterval:8];
 			break;
 			
 		default:
@@ -109,8 +129,21 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 }
 
 - (void) animate {
-	if (spsheetColInd++ >= [[sprite getTextureCoords:spsheetRowInd] count] - 1) {
+	if (currentState == ATTACKING_STATE) {
+		// Only supports left and right
+		if (currentOrientation == ORIENTATION_FORWARD) {
+			[self move:CGPointMake(0.05f, 0.0f)];
+		} else {
+			[self move:CGPointMake(-0.05f, 0.0f)];
+		}
+	}
+	
+	if (spsheetColInd++ >= [sprite getNumOfColumnsInRow:spsheetRowInd] - 1) {
 		spsheetColInd = 0;
+		
+		if (currentState == ATTACKING_STATE) {
+			currentState = STOP_STATE;
+		}
 	}
 }
 
@@ -125,8 +158,6 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 	if (currentDirection != UP && currentDirection != DOWN) {
 		currentOrientation = getOrientationFromDirection(currentDirection);
 	}
-	
-	spsheetRowInd = MOVEMENT_ROW_INDEX;
 }
 
 - (void) stand {
@@ -139,15 +170,44 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 	position.y += movement.y;
 }
 
-- (void) attack {
+- (uint) getNumberOfAttacks {
+	return [attackingRowIndexes count];
 }
-
+							
+- (uint) getRowForAttack:(uint) attackIndex {
+	return [[attackingRowIndexes objectAtIndex:attackIndex] intValue];
+}
+							
+- (void) attack {
+	// Begin attack if player isn't attacking already
+	if (currentState != ATTACKING_STATE) {
+	    currentState = ATTACKING_STATE;
+		currentAttack = 0;
+		spsheetRowInd = [self getRowForAttack:currentAttack];
+	} 
+	
+	// Else check attacking sprite for regular combo chains
+	else {
+		uint lastAttackingImageIndex = [sprite getNumOfColumnsInRow:spsheetRowInd] - 1;
+		DLOG("%d\n", lastAttackingImageIndex);
+		// If attack is called when its at the last animation image 
+		// of an attack and there is still an attack series next, 
+		// initiate a combo for the next series of image
+		if (spsheetColInd == lastAttackingImageIndex && 
+			++currentAttack < [self getNumberOfAttacks]) {
+			spsheetRowInd = [self getRowForAttack:currentAttack];
+			spsheetColInd = 0;
+		}
+			
+	}
+}
+							
 // physics
 - (void) resolveCollisions {
 	if([physicsEngine isTheirACollision:[ObjectContainer singleton].player 
 							  otherProp:[[ObjectContainer singleton] getObject:2]]) {
 		
-		[self moveTowards:(Direction)([[directionToOpposite objectForKey:[NSNumber 
+		[[ObjectContainer singleton].player moveTowards:(Direction)([[directionToOpposite objectForKey:[NSNumber 
 														   numberWithInt:currentDirection]] intValue])];
 	}
 }
