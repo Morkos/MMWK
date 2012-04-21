@@ -198,18 +198,17 @@ static const uint ATTACKING_ROW_INDEX = 2;
 			spsheetRowInd = [self getRowForAttack:currentAttack];
 			spsheetColInd = 0;
 		}
-			
 	}
 }
 							
 // physics
 - (void) resolveCollisions {
-	if([physicsEngine isTheirACollision:[ObjectContainer singleton].player 
+	/*if([physicsEngine isTheirACollision:[ObjectContainer singleton].player 
 							  otherProp:[[ObjectContainer singleton] getObject:2]]) {
 		
 		[[ObjectContainer singleton].player moveTowards:(Direction)([[directionToOpposite objectForKey:[NSNumber 
 														   numberWithInt:currentDirection]] intValue])];
-	}
+	}*/
 }
 
 @end

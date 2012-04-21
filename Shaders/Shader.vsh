@@ -7,7 +7,7 @@
 //
 
 attribute vec2 position;
-uniform vec2 translate;
+uniform vec3 translate;
 uniform vec2 scale;
 //attribute vec4 color;
 attribute vec2 texture_coord;
@@ -22,6 +22,7 @@ void main()
 	
     gl_Position.x += translate.x;
     gl_Position.y += translate.y;
+	gl_Position.z = translate.z;
 	
     //colorVarying = color;
 	texture_coordVarying = texture_coord;

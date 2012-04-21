@@ -10,23 +10,28 @@
 
 @implementation GraphicsEngine
 
-+ (void) drawCharacter:(Player *)character {
++ (void) drawCharacter:(Character *)character {
 
 	SpriteSheet *sprite = character.sprite;
 	NSArray *texCoordsArray = [sprite getTextureCoords:character.spsheetRowInd];
 	
 	TexCoords *texCoords = [texCoordsArray objectAtIndex:character.spsheetColInd];
 	
-	[self drawTexture:sprite.sheet 
+	// Depth of a character is the same as the y-coordinates
+	Position position = {character.position.x, character.position.y, 
+											(character.position.y + 1.0) / 2.0};
+	DLOG("Z position: %f", position.z);
+	
+	[self drawTexture:sprite.sheet
 			texCoords:texCoords 
-			 position:character.position
+			 position:position
 				 size:character.size
 		  orientation:character.currentOrientation];
 }
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
-			position:(CGPoint) position 
+			position:(Position) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation {
 		
@@ -53,7 +58,7 @@
 	glBindTexture(GL_TEXTURE_2D, texture.textureId);
 	
 	//glUniform1i(ShaderConstants::uniforms[UNIFORM_TEXTURE_SAMPLER], 0);
-	glUniform2f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y);
+	glUniform3f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y, position.z);
 	glUniform2f(ShaderConstants::uniforms[UNIFORM_SCALE], size.width, size.height);
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);
 	glEnableVertexAttribArray(ATTRIB_VERTEX);

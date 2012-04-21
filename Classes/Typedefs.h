@@ -12,8 +12,12 @@
 
 typedef unsigned int uint;
 
-typedef struct Center {
+typedef struct {
 	float x,y;
-} Center ;
+} Center;
+
+typedef struct {
+	float x,y,z; 
+} Position;
 
 #endif

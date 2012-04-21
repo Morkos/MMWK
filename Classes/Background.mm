@@ -35,7 +35,9 @@
 	
 	// Drawing the left side of the background
 	GLfloat shift = 1.0 - rightBoundary;
-	CGPoint position = CGPointMake(-shift, 0.0);
+	
+	// Backgrounds are always drawn behind everything
+	Position position = {-shift, 0.0, 1.0};
 
 	[GraphicsEngine drawTexture:texture 
 					  texCoords:texCoords 
