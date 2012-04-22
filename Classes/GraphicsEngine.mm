@@ -57,7 +57,6 @@
 	
 	glBindTexture(GL_TEXTURE_2D, texture.textureId);
 	
-	//glUniform1i(ShaderConstants::uniforms[UNIFORM_TEXTURE_SAMPLER], 0);
 	glUniform3f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y, position.z);
 	glUniform2f(ShaderConstants::uniforms[UNIFORM_SCALE], size.width, size.height);
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);

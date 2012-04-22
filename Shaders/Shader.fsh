@@ -15,6 +15,7 @@ void main()
     gl_FragColor = texture2D(textureSampler, texture_coordVarying);
 	
 	// If alpha value == 0, don't draw the pixel at all
+	// This is so that depth sorting would work
 	if (gl_FragColor.a == 0.0) {
 		discard;
 	}
