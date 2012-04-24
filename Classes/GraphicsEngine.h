@@ -21,6 +21,8 @@
 
 }
 
++ (void) initializeProperties;
+
 // Does not support UP and DOWN
 + (void) drawCharacter:(Character *) character;
 

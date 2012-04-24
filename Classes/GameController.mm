@@ -204,9 +204,6 @@ static Node *node = nil;
 	if ([node isPressed:glPoint]) {
 		[node hide];
 	}
-	
-	//[[ObjectContainer singleton].background scroll:RIGHT];
-	[[ObjectContainer singleton].player attack];
 }
 
 - (void) gameLoop
@@ -227,9 +224,7 @@ static Node *node = nil;
 			[obj resolveCollisions];
 		}
 		
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LEQUAL);
-		glDepthMask(GL_TRUE);
+		[GraphicsEngine initializeProperties];
 		[obj draw];
 	}
 

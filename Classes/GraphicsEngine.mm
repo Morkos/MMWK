@@ -10,6 +10,12 @@
 
 @implementation GraphicsEngine
 
++ (void) initializeProperties {
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glDepthMask(GL_TRUE);
+}
+
 + (void) drawCharacter:(Character *)character {
 
 	SpriteSheet *sprite = character.sprite;
