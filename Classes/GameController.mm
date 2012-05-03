@@ -31,6 +31,10 @@ static Node *node = nil;
 															   pathForResource:@"background" 
 															   ofType:@"png"]];
 	
+	Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+														  pathForResource:@"slash" 
+														  ofType:@"png"]];
+	
 	SpriteSheet *overlaySprite = 
 		[SpriteSheet createWithTexture:overlayTexture  
 							 numOfRows:1
@@ -53,14 +57,37 @@ static Node *node = nil;
 									   ]
 		];
 	
+	// Particle effects
+	// TODO: Use configuration file
+	ParticleEffectsManager *effectsManager = [ParticleEffectsManager manager:1];
+	
+	BezierCurve *path = [BezierCurve curveFrom:CGPointMake(0.0, 0.0)
+											to:CGPointMake(0.0, -0.4) 
+											c0:CGPointMake(0.1, -0.1) 
+											c1:CGPointMake(0.1, -0.2) 
+								   numOfPoints:50];
+	
+	SlashingParticleEffect *slashingParticleEffect = 
+			[SlashingParticleEffect createEffect:path 
+										   speed:5 
+									particleSize:CGSizeMake(0.05f, 0.1f)
+									  startAngle:0.5f
+										endAngle:2.0f
+							  distanceFromSource:0.2f
+										   image:slashTexture];
+	
+	[effectsManager addEffect:slashingParticleEffect key:@"attack0"];
+	
 	//take this out.
 	Character *box = [Player characterAtPosition:CGPointMake(0.9, 0) 
 									        size:CGSizeMake(0.4, 0.4) 
-									 spriteSheet:sprite];
+									 spriteSheet:sprite
+								  effectsManager:effectsManager];
 	
 	Character *player = [Player characterAtPosition:CGPointMake(0.0, 0) 
 											size:CGSizeMake(0.4, 0.4) 
-								    spriteSheet:sprite];
+								     spriteSheet:sprite
+								  effectsManager:effectsManager];
 
 	node = [Overlay nodeAtPosition:CGPointMake(0.5, 0.5) 
 							  size:CGSizeMake(0.1, 0.1)
@@ -228,7 +255,6 @@ static Node *node = nil;
 		[obj draw];
 	}
 
-    
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
 #if defined(DEBUG)
@@ -341,9 +367,10 @@ static Node *node = nil;
     }
     
     // Get uniform locations.
-	ShaderConstants::uniforms[UNIFORM_TEXTURE_SAMPLER] = glGetUniformLocation(programId, "textureSampler");
+	ShaderConstants::uniforms[UNIFORM_OPACITY] = glGetUniformLocation(programId, "opacity");
 	ShaderConstants::uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(programId, "translate");
 	ShaderConstants::uniforms[UNIFORM_SCALE] = glGetUniformLocation(programId, "scale");
+	ShaderConstants::uniforms[UNIFORM_ROTATE] = glGetUniformLocation(programId, "angle");
 	
     
     // Set vertex and fragment shaders up for deletion when glDetachShader gets called.

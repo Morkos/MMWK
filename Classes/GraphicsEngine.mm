@@ -26,7 +26,6 @@
 	// Depth of a character is the same as the y-coordinates
 	Position position = {character.position.x, character.position.y, 
 											(character.position.y + 1.0) / 2.0};
-	DLOG("Z position: %f", position.z);
 	
 	[self drawTexture:sprite.sheet
 			texCoords:texCoords 
@@ -35,12 +34,54 @@
 		  orientation:character.currentOrientation];
 }
 
++ (void) drawParticleEffects:(ParticleEffectsManager *) effectsManager {
+	// Draw all particle effects
+	for (NSString *key in effectsManager.particleEffects) {
+		id<ParticleEffect> effect = [effectsManager.particleEffects objectForKey:key];
+		if ([effect isActive]) {
+			[effect draw];
+		}
+	}
+}
+
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
 			position:(Position) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation {
-		
+	
+	[self drawTexture:texture
+			texCoords:texCoordsParam 
+			 position:position 
+				 size:size 
+		  orientation:orientation
+			  opacity:-1.0f];
+}
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoordsParam
+			position:(Position) position 
+				size:(CGSize) size 
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity {
+	
+	[self drawTexture:texture
+			texCoords:texCoordsParam 
+			 position:position 
+				 size:size 
+			    angle:0.0f
+		  orientation:orientation
+			  opacity:-1.0f];
+}
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoordsParam
+			position:(Position) position 
+				size:(CGSize) size 
+			   angle:(GLfloat) angle
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity {
+	
 	static const GLfloat squareVertices[] = {
 		 -1.0f, 1.0f,
 		 1.0f, 1.0f,
@@ -65,6 +106,8 @@
 	
 	glUniform3f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y, position.z);
 	glUniform2f(ShaderConstants::uniforms[UNIFORM_SCALE], size.width, size.height);
+	glUniform1f(ShaderConstants::uniforms[UNIFORM_OPACITY], opacity);
+	glUniform1f(ShaderConstants::uniforms[UNIFORM_ROTATE], angle);
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
 	glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);

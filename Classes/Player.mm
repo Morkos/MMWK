@@ -14,11 +14,11 @@
 static CGPoint cgPoints[NUM_OF_DIRECTIONS]; 
 static NSMutableDictionary * directionToOpposite = [NSMutableDictionary new];
 
-
 @implementation Player
 
 @synthesize attackingRowIndexes,
-			currentAttack;
+			currentAttack,
+			effectsManager;
 
 // Texture row indexes in the sprite sheet
 static const uint STANDING_ROW_INDEX = 0; 
@@ -30,15 +30,18 @@ static const uint ATTACKING_ROW_INDEX = 2;
 	[self move:cgPoints[dir]];
 }
 
-+ (Character *) characterAtPosition:(CGPoint)position 
-							   size:(CGSize)size 
-						spriteSheet:(SpriteSheet *)spriteSheet {
++ (Character *) characterAtPosition:(CGPoint) position 
+							   size:(CGSize) size 
+						spriteSheet:(SpriteSheet *) spriteSheet 
+					effectsManager:(ParticleEffectsManager *) effectsManager {
 	
 	Player *player = [[Player alloc] init];
 	
 	player.position = position;
 	player.size = size;
 	player.sprite = spriteSheet;
+	player.effectsManager = effectsManager;
+	
 	player.spsheetRowInd = STANDING_ROW_INDEX;
 	player.spsheetColInd = 0;
 	player.currentState = STOP_STATE;
@@ -85,7 +88,7 @@ static const uint ATTACKING_ROW_INDEX = 2;
 	cgPoints[UP_RIGHT]   = CGPointMake( 0.01f,  0.01f); 
 	cgPoints[UP_LEFT]    = CGPointMake(-0.01f,  0.01f); 
 	cgPoints[DOWN_RIGHT] = CGPointMake( 0.01f, -0.01f); 
-	cgPoints[DOWN_LEFT]  = CGPointMake(-0.01f, -0.01f); 
+	cgPoints[DOWN_LEFT]  = CGPointMake(-0.01f, -0.01f);
 	
 	return player;
 }
@@ -149,6 +152,7 @@ static const uint ATTACKING_ROW_INDEX = 2;
 
 - (void) draw {
 	[GraphicsEngine drawCharacter:self];
+	[GraphicsEngine drawParticleEffects:effectsManager];
 }
 
 - (void) runTo:(Direction) dir {
@@ -185,11 +189,10 @@ static const uint ATTACKING_ROW_INDEX = 2;
 		currentAttack = 0;
 		spsheetRowInd = [self getRowForAttack:currentAttack];
 	} 
-	
 	// Else check attacking sprite for regular combo chains
 	else {
 		uint lastAttackingImageIndex = [sprite getNumOfColumnsInRow:spsheetRowInd] - 1;
-		DLOG("%d\n", lastAttackingImageIndex);
+		
 		// If attack is called when its at the last animation image 
 		// of an attack and there is still an attack series next, 
 		// initiate a combo for the next series of image
@@ -199,6 +202,10 @@ static const uint ATTACKING_ROW_INDEX = 2;
 			spsheetColInd = 0;
 		}
 	}
+	
+	// Invoke particle effect
+	[effectsManager invokeEffect:[NSString stringWithFormat:@"attack%d", currentAttack] 
+							prop:self];
 }
 							
 // physics

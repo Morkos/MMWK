@@ -36,12 +36,13 @@
 
 - (void) draw {
 	if (currentState == OVERLAY_SHOWN) {
-		Position gamePosition = {position.x, position.y, 0.0};
+		Position gamePosition = {position.x, position.y, 0.0f};
 		[GraphicsEngine drawTexture:sprite.sheet 
 						  texCoords:[TexCoords defaultTexCoords] 
 						   position:gamePosition 
 							   size:size
-						orientation:ORIENTATION_FORWARD];
+						orientation:ORIENTATION_FORWARD
+							opacity:1.0f];
 	}
 }
 

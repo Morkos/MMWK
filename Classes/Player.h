@@ -16,18 +16,24 @@
 #import "SpriteSheet.h"
 #import "Character.h"
 #import "GraphicsEngine.h"
+#import "ParticleEffectsManager.h"
+
+@class SlashingParticleEffect;
 
 @interface Player : Character<PhysicsContext> {
 	NSArray *attackingRowIndexes;
 	uint currentAttack;
+	ParticleEffectsManager *effectsManager;
 }
 
 @property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, assign) uint currentAttack;
+@property (nonatomic, retain) ParticleEffectsManager *effectsManager;
 
-+ (Character *) characterAtPosition:(CGPoint)position 
-							   size:(CGSize)size 
-						spriteSheet:(SpriteSheet *)spriteSheet;
++ (Character *) characterAtPosition:(CGPoint) position 
+							   size:(CGSize) size 
+						spriteSheet:(SpriteSheet *) spriteSheet
+					effectsManager:(ParticleEffectsManager *) effectsManager;
 
 - (void) startAnimation;
 - (bool) hasSprite;

@@ -14,6 +14,7 @@
 #import "ShaderConstants.h"
 #import "Player.h"
 #import "Loggers.h"
+#import "ParticleEffectsManager.h"
 
 @class Player;
 
@@ -26,12 +27,29 @@
 // Does not support UP and DOWN
 + (void) drawCharacter:(Character *) character;
 
-// NOTE: texCoords will be modified upon each draw. Create new TexCoords for each call 
++ (void) drawParticleEffects:(ParticleEffectsManager *) effectsManager;
+
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoords
 			position:(Position) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation;
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoords
+			position:(Position) position 
+				size:(CGSize) size 
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity;
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoords
+			position:(Position) position 
+				size:(CGSize) size 
+			   angle:(GLfloat) angle
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity;
+
 
 + (CGPoint) convertPointToGl:(CGPoint) point 
 				  screenSize:(CGSize) screenSize;
