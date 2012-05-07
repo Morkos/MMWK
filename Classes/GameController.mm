@@ -61,10 +61,10 @@ static Node *node = nil;
 	// TODO: Use configuration file
 	ParticleEffectsManager *effectsManager = [ParticleEffectsManager manager:1];
 	
-	BezierCurve *path = [BezierCurve curveFrom:CGPointMake(0.0, 0.0)
-											to:CGPointMake(0.0, -0.4) 
-											c0:CGPointMake(0.1, -0.1) 
-											c1:CGPointMake(0.1, -0.2) 
+	BezierCurve *path = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
+											to:CGPointMake(0.4, -0.2) 
+											c0:CGPointMake(0.5, 0.1) 
+											c1:CGPointMake(0.5, 0.0) 
 								   numOfPoints:50];
 	
 	SlashingParticleEffect *slashingParticleEffect = 
@@ -73,7 +73,8 @@ static Node *node = nil;
 									particleSize:CGSizeMake(0.05f, 0.1f)
 									  startAngle:0.5f
 										endAngle:2.0f
-							  distanceFromSource:0.2f
+								   opacityFactor:1.15f
+								   frameInterval:1
 										   image:slashTexture];
 	
 	[effectsManager addEffect:slashingParticleEffect key:@"attack0"];

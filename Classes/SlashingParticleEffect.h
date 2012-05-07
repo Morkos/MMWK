@@ -20,11 +20,16 @@
 
 /**
  * Implements a slashing particle effect. 
+ * BUG: Since there is only one list of particles at any one time, one 
+ *		slashing effect cannot be invoked more than once.
  */
 @interface SlashingParticleEffect : NSObject<ParticleEffect> {
 	CADisplayLink *displayLink;
 	NSMutableArray *particles;
-	GLfloat distanceFromSource;
+	CGPoint source;
+	Orientation orientation;
+	GLfloat opacityFactor;
+	NSInteger frameInterval;
 	uint speed;
 	uint curIndex;
 	bool isActive;
@@ -32,7 +37,10 @@
 
 @property (nonatomic, retain) CADisplayLink *displayLink;
 @property (nonatomic, retain) NSMutableArray *particles;
-@property (nonatomic, assign) GLfloat distanceFromSource;
+@property (nonatomic, assign) CGPoint source;
+@property (nonatomic, assign) Orientation orientation;
+@property (nonatomic, assign) GLfloat opacityFactor;
+@property (nonatomic, assign) NSInteger frameInterval;
 @property (nonatomic, assign) uint speed;
 @property (nonatomic, assign) uint curIndex;
 @property (nonatomic, assign, readonly, getter=isActive) bool isActive;
@@ -45,7 +53,8 @@
  * @param particleSize Size of each particle
  * @param startAngle The starting angle of the first particle 
  * @param endAngle The end angle of the last particle
- * @param distanceFromSource Distance of the effect from the source (the prop)
+ * @param opacityFactor The factor by how much to fade out the particles
+ * @param frameInterval The frame interval for the effect's animation
  * @param image The texture to use for the slashing effect
  */
 + (SlashingParticleEffect *) createEffect:(BezierCurve *) path 
@@ -53,7 +62,8 @@
 							 particleSize:(CGSize) size
 							   startAngle:(GLfloat) startAngle
 								 endAngle:(GLfloat) endAngle
-					   distanceFromSource:(GLfloat) distance
+							opacityFactor:(GLfloat) opacityFactor
+							frameInterval:(NSInteger) frameInterval
 									image:(Texture *) image;
 
 - (void) draw;

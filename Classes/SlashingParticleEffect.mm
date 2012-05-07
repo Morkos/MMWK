@@ -13,7 +13,10 @@
 
 @synthesize speed,
 			particles,
-			distanceFromSource,
+			source,
+			orientation,
+			opacityFactor,
+			frameInterval,
 			displayLink,
 			curIndex,
 			isActive;
@@ -22,7 +25,7 @@
 	if (!self.displayLink) {
 		CADisplayLink *aDisplayLink = [CADisplayLink displayLinkWithTarget:self 
 																  selector:@selector(animate)];
-		[aDisplayLink setFrameInterval:1];
+		[aDisplayLink setFrameInterval:frameInterval];
 		[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] 
 						   forMode:NSDefaultRunLoopMode];
 		
@@ -42,12 +45,14 @@
 							 particleSize:(CGSize) size
 							   startAngle:(GLfloat) startAngle
 								 endAngle:(GLfloat) endAngle
-					   distanceFromSource:(GLfloat) distance
+							opacityFactor:(GLfloat) opacityFactor
+							frameInterval:(NSInteger) frameInterval
 									image:(Texture *) image {
 	
 	SlashingParticleEffect *effect = [[SlashingParticleEffect alloc] init];
 	effect.speed = speed;
-	effect.distanceFromSource = distance;
+	effect.opacityFactor = opacityFactor;
+	effect.frameInterval = frameInterval;
 	
 	uint numOfParticles = [path.points count];
 	NSMutableArray *particles = [NSMutableArray arrayWithCapacity:numOfParticles];
@@ -100,8 +105,19 @@
 		if (curIndex < [particles count]) {
 			Particle *particle = ((Particle *)[particles objectAtIndex:curIndex]);
 			[particle moveBack];
-			[particle moveTo:(particle.position + CGPointMake(distanceFromSource, 0))];
+			
+			CGPoint newPosition = source;
+			// Flip slash horizontally
+			if (orientation == ORIENTATION_FORWARD) {
+				newPosition.x += particle.position.x;
+			} else if (orientation == ORIENTATION_BACKWARDS) {
+				newPosition.x -= particle.position.x;
+			}
+			newPosition.y += particle.position.y;
+			
+			[particle moveTo:newPosition];
 			particle.isAlive = true;
+			particle.orientation = orientation;
 			curIndex++;			  
 		} else {
 			break;
@@ -115,7 +131,7 @@
 		
 		if (particle.isAlive) {
 			isActive = true;
-			particle.opacity /= 1.15f;
+			particle.opacity /= opacityFactor;
 			
 			if (particle.opacity < 0.1) {
 				particle.isAlive = false;
@@ -138,11 +154,10 @@
 	}
 	
 	Character *character = (Character *) prop;
+	orientation = character.currentOrientation;
 	
-	if (((character.currentOrientation == ORIENTATION_FORWARD) && distanceFromSource < 0) || 
-		((character.currentOrientation == ORIENTATION_BACKWARDS) && distanceFromSource > 0)) {
-		distanceFromSource = -distanceFromSource;
-	}
+	// TODO: Change to GL after merge with Mark's change
+	source = character.position;
 	
 	[self startAnimation];
 }

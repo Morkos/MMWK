@@ -18,6 +18,7 @@
 	CGPoint position;
 	GLfloat angle;
 	CGSize size;
+	Orientation orientation;
 	bool isAlive;
 }
 
@@ -27,6 +28,7 @@
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) GLfloat angle;
 @property (nonatomic, assign) CGSize size;
+@property (nonatomic, assign) Orientation orientation;
 @property (nonatomic, assign) bool isAlive;
 		   
 + (Particle *) particleWithPosition:(CGPoint) position

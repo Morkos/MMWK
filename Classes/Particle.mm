@@ -17,6 +17,7 @@
 			prevPosition,
 			position,
 			size,
+			orientation,
 			angle,
 			isAlive;
 
@@ -35,6 +36,7 @@
 	particle.startingOpacity = opacity;
 	particle.opacity = opacity;
 	particle.isAlive = isAlive;
+	particle.orientation = ORIENTATION_FORWARD;
 	
 	return particle;
 }
@@ -47,7 +49,7 @@
 						   position:glPosition 
 							   size:size 
 							  angle:angle
-						orientation:ORIENTATION_FORWARD
+						orientation:orientation
 							opacity:opacity];
 	}
 }
