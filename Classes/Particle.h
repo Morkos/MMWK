@@ -16,7 +16,7 @@
 	GLfloat startingOpacity, opacity;
 	CGPoint prevPosition;
 	CGPoint position;
-	GLfloat angle;
+	GLfloat angle, startAngle;
 	CGSize size;
 	Orientation orientation;
 	bool isAlive;
@@ -26,7 +26,7 @@
 @property (nonatomic, assign) GLfloat startingOpacity, opacity;
 @property (nonatomic, assign) CGPoint prevPosition;
 @property (nonatomic, assign) CGPoint position;
-@property (nonatomic, assign) GLfloat angle;
+@property (nonatomic, assign) GLfloat angle, startAngle;
 @property (nonatomic, assign) CGSize size;
 @property (nonatomic, assign) Orientation orientation;
 @property (nonatomic, assign) bool isAlive;
@@ -47,7 +47,13 @@
 - (void) moveTo:(CGPoint) newPosition;
 
 /**
- * Move back to previous position
+ * Rotate the particle by angle in radians
+ * @param angleIncrement The angle in radians to rotate by
+ */
+- (void) rotateBy:(GLfloat) angleIncrement;
+
+/**
+ * Move back to original state
  */
 - (void) moveBack;
 

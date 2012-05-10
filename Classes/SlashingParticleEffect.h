@@ -30,6 +30,7 @@
 	Orientation orientation;
 	GLfloat opacityFactor;
 	NSInteger frameInterval;
+	GLfloat startAngle, angleIncrements;
 	uint speed;
 	uint curIndex;
 	bool isActive;
@@ -41,6 +42,7 @@
 @property (nonatomic, assign) Orientation orientation;
 @property (nonatomic, assign) GLfloat opacityFactor;
 @property (nonatomic, assign) NSInteger frameInterval;
+@property (nonatomic, assign) GLfloat startAngle, angleIncrements;
 @property (nonatomic, assign) uint speed;
 @property (nonatomic, assign) uint curIndex;
 @property (nonatomic, assign, readonly, getter=isActive) bool isActive;

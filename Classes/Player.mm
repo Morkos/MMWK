@@ -188,6 +188,10 @@ static const uint ATTACKING_ROW_INDEX = 2;
 	    currentState = ATTACKING_STATE;
 		currentAttack = 0;
 		spsheetRowInd = [self getRowForAttack:currentAttack];
+		
+		// Invoke particle effect
+		[effectsManager invokeEffect:[NSString stringWithFormat:@"attack%d", currentAttack] 
+								prop:self];
 	} 
 	// Else check attacking sprite for regular combo chains
 	else {
@@ -200,12 +204,12 @@ static const uint ATTACKING_ROW_INDEX = 2;
 			++currentAttack < [self getNumberOfAttacks]) {
 			spsheetRowInd = [self getRowForAttack:currentAttack];
 			spsheetColInd = 0;
+			
+			// Invoke particle effect
+			[effectsManager invokeEffect:[NSString stringWithFormat:@"attack%d", currentAttack] 
+									prop:self];
 		}
 	}
-	
-	// Invoke particle effect
-	[effectsManager invokeEffect:[NSString stringWithFormat:@"attack%d", currentAttack] 
-							prop:self];
 }
 							
 // physics

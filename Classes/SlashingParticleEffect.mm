@@ -17,6 +17,8 @@
 			orientation,
 			opacityFactor,
 			frameInterval,
+			startAngle,
+			angleIncrements,
 			displayLink,
 			curIndex,
 			isActive;
@@ -50,15 +52,10 @@
 									image:(Texture *) image {
 	
 	SlashingParticleEffect *effect = [[SlashingParticleEffect alloc] init];
-	effect.speed = speed;
-	effect.opacityFactor = opacityFactor;
-	effect.frameInterval = frameInterval;
-	
 	uint numOfParticles = [path.points count];
 	NSMutableArray *particles = [NSMutableArray arrayWithCapacity:numOfParticles];
 	
 	GLfloat divisor = pow(numOfParticles/2, 2);
-	GLfloat angleIncrements = (endAngle - startAngle) / numOfParticles;
 	uint halfNumOfParticles = numOfParticles/2;
 	for (uint i = 0; i < numOfParticles; i++) {
 		CGPoint position = [[path.points objectAtIndex:i] CGPointValue];
@@ -74,7 +71,7 @@
 		//TODO: Use parameters instead of hard coded values
 		[particles addObject:[Particle particleWithPosition:position 
 													   size:size
-													  angle:startAngle + (i * angleIncrements)
+													  angle:0.0f
 													opacity:opacity
 													  image:image
 													isAlive:false
@@ -83,9 +80,14 @@
 	}
 	
 	effect.particles = particles;
+	effect.speed = speed;
+	effect.opacityFactor = opacityFactor;
+	effect.frameInterval = frameInterval;
+	effect.startAngle = startAngle;
+	effect.angleIncrements = (endAngle - startAngle) / numOfParticles;
 	
 	// TODO: Hack so it wouldn't be invoked on construction the first time.
-	effect.curIndex = [particles count];
+	effect.curIndex = numOfParticles;
 	
 	return effect;
 }
@@ -107,17 +109,22 @@
 			[particle moveBack];
 			
 			CGPoint newPosition = source;
+			GLfloat angle = startAngle + (i * angleIncrements);
+			
 			// Flip slash horizontally
 			if (orientation == ORIENTATION_FORWARD) {
 				newPosition.x += particle.position.x;
+				[particle rotateBy:angle];
 			} else if (orientation == ORIENTATION_BACKWARDS) {
 				newPosition.x -= particle.position.x;
+				[particle rotateBy:-angle];
 			}
+			
 			newPosition.y += particle.position.y;
 			
 			[particle moveTo:newPosition];
 			particle.isAlive = true;
-			particle.orientation = orientation;
+
 			curIndex++;			  
 		} else {
 			break;
