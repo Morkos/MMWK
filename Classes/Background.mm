@@ -24,7 +24,7 @@ static Camera * camera = [Camera getInstance];
 	
 	Background *background = [[Background alloc] init];
 	background.texture = texture;
-	background.rightBoundary = 100;
+	background.rightBoundary = camera.frameDimension.width;
 	background.scrollSpeed = scrollSpeed;
 	background.scrollDirection = NO_WHERE;
 	
