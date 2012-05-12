@@ -12,11 +12,16 @@
 
 @interface Texture : NSObject {
     GLuint textureId;
-	size_t width, height;
+	size_t width;
+	size_t height;
+	
+	NSArray * collisionMap;
 }
 
 @property (nonatomic, assign) GLuint textureId;
-@property (nonatomic, assign) size_t width, height;
+@property (nonatomic, assign) size_t width;
+@property (nonatomic, assign) size_t height;
+@property (nonatomic, retain) NSArray * collisionMap;
 
 + (Texture *) textureWithFilename: (NSString *)filename;
 

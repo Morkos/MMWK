@@ -7,6 +7,9 @@
 //
 
 #import "Background.h"
+#import "Camera.h"
+
+static Camera * camera = [Camera getInstance];
 
 @implementation Background
 
@@ -16,11 +19,13 @@
 			scrollDirection,
 			displayLink;
 
-+ (Background *) backgroundWithTexture:(Texture *) texture scrollSpeed:(GLfloat)scrollSpeed {
++ (Background *) backgroundWithTexture:(Texture *) texture 
+						   scrollSpeed:(GLfloat)scrollSpeed {
+	
 	Background *background = [[Background alloc] init];
 	background.texture = texture;
-	background.rightBoundary = 1.0;
-	background.scrollSpeed = 0.01;
+	background.rightBoundary = 100;
+	background.scrollSpeed = scrollSpeed;
 	background.scrollDirection = NO_WHERE;
 	
 	[background startAnimation];
@@ -28,29 +33,38 @@
 }
 
 - (void) draw {
+		
 	TexCoords *texCoords = [TexCoords defaultTexCoords];
 	
 	/* PERF: Don't draw the side of the background that is not on the screen
 	   Maybe taken care of by OpenGL already */
 	
 	// Drawing the left side of the background
-	GLfloat shift = 1.0 - rightBoundary;
+	NSInteger shift = rightBoundary - (camera.frameDimension.width / 2);
+	CGPoint positionLeft = CGPointMake(shift, camera.frameDimension.width / 2);
+	CGPoint positionRight = positionLeft;
+	positionRight.x += camera.frameDimension.width;
+	positionLeft = [GraphicsEngine convertPointToGl:positionLeft];
+	positionRight = [GraphicsEngine convertPointToGl:positionRight];
 	
-	// Backgrounds are always drawn behind everything
-	Position position = {-shift, 0.0, 1.0};
-
+	Position glPositionLeft = {positionLeft.x, positionLeft.y, 1.0};
+	Position glPositionRight = {positionRight.x, positionRight.y, 1.0}; 
+		
+	CGSize size = CGSizeMake(camera.frameDimension.width,
+							 camera.frameDimension.height);
+	CGSize glSize = [GraphicsEngine convertSizeToGl:size];
+	
 	[GraphicsEngine drawTexture:texture 
 					  texCoords:texCoords 
-					   position:position
-						   size:CGSizeMake(1.0, 1.0) 
+					   position:glPositionLeft
+						   size:glSize 
 					orientation:ORIENTATION_FORWARD];
 	
 	// Drawing the right side of the background
-	position.x += 2.0;
 	[GraphicsEngine drawTexture:texture 
 					  texCoords:texCoords 
-					   position:position 
-						   size:CGSizeMake(1.0, 1.0) 
+					   position:glPositionRight
+						   size:glSize 
 					orientation:ORIENTATION_FORWARD];
 }
 
@@ -58,6 +72,7 @@
 	CADisplayLink *aDisplayLink = [[CADisplayLink displayLinkWithTarget:self 
 															   selector:@selector(animate)] 
 								   retain];
+	
 	[aDisplayLink setFrameInterval:1];
 	[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] 
 					   forMode:NSDefaultRunLoopMode];
@@ -66,14 +81,13 @@
 }
 
 - (GLfloat) wrapBoundary:(GLfloat) boundary {
-	if (boundary < -1.0) {
-		GLfloat shift = 1.0 + boundary;
-		boundary = 1.0 + shift;
-	} else if (boundary > 1.0) {
-		GLfloat shift = 1.0 - boundary;
-		boundary = -1.0 + shift;
-	}	
-	
+
+	if (boundary < camera.frameBoundary.left) {
+		GLfloat shift = boundary;
+		boundary = camera.frameDimension.width + shift;
+
+	} 
+
 	return boundary;
 }
 
@@ -81,6 +95,7 @@
 }
 
 - (void) animate {
+	
 	if (scrollDirection == LEFT) {
 		rightBoundary -= scrollSpeed;
 	} else if (scrollDirection == RIGHT) {

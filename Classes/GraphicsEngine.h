@@ -26,7 +26,6 @@
 
 // Does not support UP and DOWN
 + (void) drawCharacter:(Character *) character;
-
 + (void) drawParticleEffects:(ParticleEffectsManager *) effectsManager;
 
 + (void) drawTexture:(Texture *) texture 
@@ -50,8 +49,13 @@
 		 orientation:(Orientation) orientation
 			 opacity:(GLfloat) opacity;
 
++ (void) drawTextureInGameCoordinates:(Texture *)texture 
+							texCoords:(TexCoords *)texCoordsParam 
+							 position:(CGPoint)position 
+								 size:(CGSize)size
+						  orientation:(Orientation) orientation;
 
-+ (CGPoint) convertPointToGl:(CGPoint) point 
-				  screenSize:(CGSize) screenSize;
++ (CGPoint) convertPointToGl:(CGPoint) point;
++ (CGSize) convertSizeToGl:(CGSize) size;
 
 @end

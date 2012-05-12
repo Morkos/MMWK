@@ -49,12 +49,13 @@
 						<reference key="NSSuperview" ref="184854543"/>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
 						<object class="IBUIAccessibilityConfiguration" key="IBUIAccessibilityConfiguration">
+							<integer value="4" key="IBUIAccessibilityTraits"/>
 							<boolean value="YES" key="IBUIIsAccessibilityElement"/>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">dpadNintendo.jpg</string>
+							<string key="NSResourceName">dpadNintendo.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="829722440">
@@ -171,7 +172,7 @@
 					<string>DpadButton</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAw5YAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAw5cAAA</bytes>
 					</object>
 					<string>AttackButton</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -448,7 +449,7 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>attackButton.png</string>
-				<string>dpadNintendo.jpg</string>
+				<string>dpadNintendo.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>

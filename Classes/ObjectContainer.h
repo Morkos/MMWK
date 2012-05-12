@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Player.h"
 #import "Background.h"
+#import "Node.h"
 
 // TODO: Sometimes adding this fixes errors, and then removing them doesn cause errors anymore
 @class Player, Background;
@@ -16,11 +17,13 @@
 @interface ObjectContainer : NSObject {
 	NSMutableArray *objArray;
 	Player *player;
+	Node *node;
 	Background *background;
 }
 
 @property (nonatomic, retain) NSMutableArray *objArray;
-@property (nonatomic, readonly, retain) Player *player;
+@property (nonatomic, retain) Player *player;
+@property (nonatomic, retain) Node *node;
 @property (nonatomic, readonly, retain) Background *background;
 
 + (ObjectContainer *) singleton;

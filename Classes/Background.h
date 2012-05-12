@@ -14,11 +14,13 @@
 #import "Loggers.h"
 
 @interface Background : NSObject <Drawable> {
+	
 	CADisplayLink *displayLink;
 	Texture *texture;
 	GLfloat rightBoundary; 
 	GLfloat scrollSpeed;
 	Direction scrollDirection;
+
 }
 
 @property (nonatomic, retain) CADisplayLink *displayLink;
@@ -26,7 +28,8 @@
 @property (nonatomic, assign) GLfloat rightBoundary, scrollSpeed;
 @property (nonatomic, assign) Direction scrollDirection;
 
-+ (Background *) backgroundWithTexture:(Texture *) texture scrollSpeed:(GLfloat)scrollSpeed;
++ (Background *) backgroundWithTexture:(Texture *)texture 
+						   scrollSpeed:(GLfloat)scrollSpeed;
 
 - (void) startAnimation;
 - (GLfloat) wrapBoundary:(GLfloat) boundary;

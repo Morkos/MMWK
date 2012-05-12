@@ -8,99 +8,23 @@
 
 
 #import "GameController.h"
+#import "Loggers.h"
+#import "LevelLoader.h"
+#import "LevelEnum.h"
 
 static Program * program = [Program getProgram];
-static Node *node = nil;
+
+//TODO: very bad...global variable
+NSUInteger gblTicks;
 
 @implementation GameController
 
 @synthesize animating, context, displayLink;
 
 + (void) setupObjectsInWorld {
+	LevelLoader * loader = [LevelLoader getInstance];
+	[loader loadLevel:LEVEL1];
 	
-	//TODO: Move to separate game initialization code
-	Texture *texture1 = [Texture textureWithFilename:[[NSBundle mainBundle] 
-								     pathForResource:@"lancelotSpSheet" 
-											  ofType:@"png"]];
-	
-	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-										   pathForResource:@"node" 
-												    ofType:@"png"]];
-	
-	Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-															   pathForResource:@"background" 
-															   ofType:@"png"]];
-	
-	Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-														  pathForResource:@"slash" 
-														  ofType:@"png"]];
-	
-	SpriteSheet *overlaySprite = 
-		[SpriteSheet createWithTexture:overlayTexture  
-							 numOfRows:1
-							   columns:[NSArray arrayWithObjects:
-										     [NSNumber numberWithInt:1],
-											 nil
-									   ]
-		];
-	
-	SpriteSheet *sprite = 
-		[SpriteSheet createWithTexture:texture1 
-							 numOfRows:5
-							   columns:[NSArray arrayWithObjects:
-											 [NSNumber numberWithInt:1],
-											 [NSNumber numberWithInt:4],
-											 [NSNumber numberWithInt:3],
-											 [NSNumber numberWithInt:7],
-											 [NSNumber numberWithInt:4],
-											 nil
-									   ]
-		];
-	
-	// Particle effects
-	// TODO: Use configuration file
-	ParticleEffectsManager *effectsManager = [ParticleEffectsManager manager:1];
-	
-	BezierCurve *path = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
-											to:CGPointMake(0.4, -0.2) 
-											c0:CGPointMake(0.5, 0.1) 
-											c1:CGPointMake(0.5, 0.0) 
-								   numOfPoints:50];
-	
-	SlashingParticleEffect *slashingParticleEffect = 
-			[SlashingParticleEffect createEffect:path 
-										   speed:5 
-									particleSize:CGSizeMake(0.05f, 0.1f)
-									  startAngle:0.5f
-										endAngle:2.0f
-								   opacityFactor:1.15f
-								   frameInterval:1
-										   image:slashTexture];
-	
-	[effectsManager addEffect:slashingParticleEffect key:@"attack0"];
-	
-	//take this out.
-	Character *box = [Player characterAtPosition:CGPointMake(0.9, 0) 
-									        size:CGSizeMake(0.4, 0.4) 
-									 spriteSheet:sprite
-								  effectsManager:effectsManager];
-	
-	Character *player = [Player characterAtPosition:CGPointMake(0.0, 0) 
-											size:CGSizeMake(0.4, 0.4) 
-								     spriteSheet:sprite
-								  effectsManager:effectsManager];
-
-	node = [Overlay nodeAtPosition:CGPointMake(0.5, 0.5) 
-							  size:CGSizeMake(0.1, 0.1)
-					   spriteSheet:overlaySprite];
-	
-	Background *background = [Background backgroundWithTexture:backgroundTexture 
-												   scrollSpeed:0.01f];
-	
-	[[ObjectContainer singleton] addObject:background];
-	[[ObjectContainer singleton] addObject:player];
-	[[ObjectContainer singleton] addObject:box];
-    [[ObjectContainer singleton] addObject:node];	
 }
 
 - (void)awakeFromNib {
@@ -226,8 +150,9 @@ static Node *node = nil;
 	GLint screenWidth = ((EAGLView *)self.view).framebufferWidth;
 	GLint screenHeight = ((EAGLView *)self.view).framebufferHeight;
 	CGSize screenSize = CGSizeMake(screenWidth, screenHeight);
-	CGPoint glPoint = [GraphicsEngine convertPointToGl:point 
-											screenSize:screenSize];
+	CGPoint glPoint = [GraphicsEngine convertPointToGl:point];
+	
+	Node * node = [ObjectContainer singleton].node;
 	
 	if ([node isPressed:glPoint]) {
 		[node hide];
@@ -236,19 +161,23 @@ static Node *node = nil;
 
 - (void) gameLoop
 {
+	
     [(EAGLView *)self.view setFramebuffer];
     
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
     // Use shader program.
     glUseProgram(program.programId);
     
     // Animate and draw all objects
-	for (id<Drawable,PhysicsContext> obj in [ObjectContainer singleton].objArray) {
+	for (id<Drawable,Collidable> obj in [ObjectContainer singleton].objArray) {
+		
+		gblTicks++;
+
 		[obj update];
 		
-		if ([obj conformsToProtocol:@protocol(PhysicsContext)]) {
+		if ([obj conformsToProtocol:@protocol(Collidable)]) {
 			[obj resolveCollisions];
 		}
 		

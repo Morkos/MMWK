@@ -156,8 +156,8 @@
 	Character *character = (Character *) prop;
 	orientation = character.currentOrientation;
 	
-	// TODO: Change to GL after merge with Mark's change
-	source = character.position;
+	// TODO: Change screen size. Mark shall remove dependency on screen size
+	source = [GraphicsEngine convertPointToGl:character.position];
 	
 	[self startAnimation];
 }

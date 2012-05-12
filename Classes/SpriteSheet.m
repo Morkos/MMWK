@@ -30,6 +30,7 @@
 	spriteSheet.sizeY = (texture.height / rows);
 	spriteSheet.sizeTexX = 1.0 / maxNumOfColumns;
 	spriteSheet.sizeTexY = 1.0 / rows;
+
 	[spriteSheet initTexCoordsArray:columns];
 	
 	return spriteSheet;

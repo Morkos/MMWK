@@ -12,9 +12,47 @@
 
 typedef unsigned int uint;
 
-typedef struct {
-	float x,y;
+typedef struct Center {
+	
+	CGPoint origin;
+	
 } Center;
+
+
+typedef struct Rectangle {
+	
+	CGPoint topLeft;
+	CGPoint bottomRight;
+	
+} Rectangle;
+
+/**
+ * Positive dimensions
+ */
+typedef struct PositiveDimension {
+	
+	NSUInteger width;
+	NSUInteger height;
+	
+} PositiveDimension;
+
+/**
+ * Denotes Game boundaries
+ */
+
+typedef struct Boundary {
+	
+	NSUInteger left;
+	NSUInteger right;
+	
+} Boundary;
+
+typedef struct Coordinate {
+	
+	NSInteger x;
+	NSInteger y;
+	
+} Coordinate;
 
 typedef struct {
 	float x,y,z; 

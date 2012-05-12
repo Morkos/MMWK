@@ -10,45 +10,25 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 #import <QuartzCore/QuartzCore.h>
-#import "ShaderConstants.h"
-#import "PropState.h"
-#import "Typedefs.h"
 #import "SpriteSheet.h"
 #import "Character.h"
 #import "GraphicsEngine.h"
-#import "ParticleEffectsManager.h"
 
-@class SlashingParticleEffect;
-
-@interface Player : Character<PhysicsContext> {
-	NSArray *attackingRowIndexes;
-	uint currentAttack;
-	ParticleEffectsManager *effectsManager;
+@interface Player : Character<Collidable> {
+	
 }
 
-@property (nonatomic, retain) NSArray *attackingRowIndexes;
-@property (nonatomic, assign) uint currentAttack;
-@property (nonatomic, retain) ParticleEffectsManager *effectsManager;
++ (Player *) create:(CGPoint)position 
+			   size:(CGSize)size 
+		spriteSheet:(SpriteSheet *)spriteSheet
+	 effectsManager:effectsManager;
 
-+ (Character *) characterAtPosition:(CGPoint) position 
-							   size:(CGSize) size 
-						spriteSheet:(SpriteSheet *) spriteSheet
-					effectsManager:(ParticleEffectsManager *) effectsManager;
-
-- (void) startAnimation;
-- (bool) hasSprite;
-
-// from GraphicsContext protocol
-- (void) draw;
-- (void) update;
-- (void) animate;
-
-
-// Actions
-- (void) stand;
-- (void) runTo:(Direction) dir;
-- (void) move:(CGPoint)movement;
-- (void) attack;
 - (void) resolveCollisions;
+
+// collision reactions
+- (void) collidesWithPlayer;
+- (void) collidesWithScreen;
+
+
 
 @end
