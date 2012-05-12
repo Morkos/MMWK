@@ -139,8 +139,17 @@ static Camera* camera = [Camera getInstance];
 	
 }
 
-+ (CGPoint) convertPointToGl:(CGPoint)point {
-	
++ (CGPoint) convertScreenPointToGl:(CGPoint) point
+                        screenSize:(CGSize) screenSize {
+    CGFloat halfwidth = screenSize.width / 2;
+	CGFloat halfheight = screenSize.height / 2;
+	CGFloat newX = (point.x - halfwidth) / halfwidth;
+	CGFloat newY = (halfheight - point.y) / halfheight;
+    
+	return CGPointMake(newX, newY); 
+}
+
++ (CGPoint) convertPointToGl:(CGPoint) point {	
 	return convertGameCoordinatesToOpenGL(point);
 }
 

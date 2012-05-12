@@ -150,7 +150,8 @@ NSUInteger gblTicks;
 	GLint screenWidth = ((EAGLView *)self.view).framebufferWidth;
 	GLint screenHeight = ((EAGLView *)self.view).framebufferHeight;
 	CGSize screenSize = CGSizeMake(screenWidth, screenHeight);
-	CGPoint glPoint = [GraphicsEngine convertPointToGl:point];
+	CGPoint glPoint = [GraphicsEngine convertScreenPointToGl:point
+                                                  screenSize:screenSize];
 	
 	Node * node = [ObjectContainer singleton].node;
 	

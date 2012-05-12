@@ -55,6 +55,9 @@
 								 size:(CGSize)size
 						  orientation:(Orientation) orientation;
 
++ (CGPoint) convertScreenPointToGl:(CGPoint) point
+                        screenSize:(CGSize) screenSize;
+
 + (CGPoint) convertPointToGl:(CGPoint) point;
 + (CGSize) convertSizeToGl:(CGSize) size;
 
