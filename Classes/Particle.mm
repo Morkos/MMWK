@@ -19,6 +19,7 @@
 			size,
 			orientation,
 			angle,
+			startAngle,
 			isAlive;
 
 + (Particle *) particleWithPosition:(CGPoint) position
@@ -31,7 +32,7 @@
 	Particle *particle = [[Particle alloc] init];
 	particle.position = particle.prevPosition = position;
 	particle.size = size;
-	particle.angle = angle;
+	particle.angle = particle.startAngle = angle;
 	particle.image = image;
 	particle.startingOpacity = opacity;
 	particle.opacity = opacity;
@@ -43,7 +44,7 @@
 
 - (void) draw {
 	if (isAlive) {
-		Position glPosition = {position.x, position.y, (position.y + 1.0) / 2.0};
+		Position glPosition = {position.x, position.y, 0.0f};
 		[GraphicsEngine drawTexture:image
 						  texCoords:[TexCoords defaultTexCoords]
 						   position:glPosition 
@@ -59,10 +60,16 @@
 	position = newPosition;
 }
 
+- (void) rotateBy:(GLfloat) angleIncrement {
+	angle += angleIncrement;
+}
+
 - (void) moveBack {
 	CGPoint temp = position;
 	position = prevPosition;
 	prevPosition = temp;
+	
+	angle = startAngle;
 }
 
 @end

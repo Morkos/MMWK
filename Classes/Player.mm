@@ -77,10 +77,9 @@ effectsManager:(ParticleEffectsManager *)effectsManagerParam {
 }
 
 - (void) collidesWithScreen {
-	[super moveTowards:(Direction)([[directionToOpposite 
-									objectForKey:[NSNumber 
-												  numberWithInt:currentDirection]] intValue])];
-	
+    [super moveTowards:(Direction)([[directionToOpposite 
+									 objectForKey:[NSNumber 
+												   numberWithInt:currentDirection]] intValue])];
 }
 
 @end
