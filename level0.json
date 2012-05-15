@@ -1,5 +1,7 @@
 {
-	 "Background" : "background",
+	 "Backgrounds" : ["mariolvl", "background"],
+     "BgSequence"  : [0, 0, 1, 1],
+    
      "Title"	  : "Manifest Destiny",
      "Player"     :
      {
@@ -7,6 +9,7 @@
 		"Position" : [25, 50],
 		"Size"     : [40, 40]
      },
+     
 	 "Node"		  : 
 	 {
 		"Image"	   : "node",

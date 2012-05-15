@@ -12,9 +12,14 @@
 #import "SpriteSheet.h"
 #import "ObjectContainer.h"
 #import "Overlay.h"
+#import "Camera.h"
 
 static const LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
+
+//TODO: changg Background class to a singleton
+static Background *background = [Background backgroundWithScrollSpeed:1.0f];
+static Camera * camera = [Camera getInstance];
 
 @implementation LevelLoader
 
@@ -29,13 +34,13 @@ static NSDictionary * classToSetup;
 		
 		//set up entry point functions for each key in files for each level.
 		classToSetup = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSValue valueWithPointer:@selector(setUpBackground:)], @"Background",
+							[NSValue valueWithPointer:@selector(setUpBackground:)], @"Backgrounds",
+                            [NSValue valueWithPointer:@selector(setUpBgSequence:)], @"BgSequence",
 							[NSValue valueWithPointer:@selector(setUpPlayer:)]	  , @"Player",
 							[NSValue valueWithPointer:@selector(setUpTitle:)]	  , @"Title",
 							[NSValue valueWithPointer:@selector(setUpNodes:)]     , @"Node",
 							[NSValue valueWithPointer:@selector(setUpEnemies:)]   , @"Enemies",
 							 nil ];
-		
 	}
 	
 	return levelLoader;
@@ -57,7 +62,6 @@ static NSDictionary * classToSetup;
 	NSDictionary *items = [decoder objectWithData:jsonData];
 	
 	for(id key in [[items allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
-		
 		DLOG("Key=%@, value=%@", key, [items objectForKey:key]);
 			
 		//delegates to a setUp* fxn
@@ -66,8 +70,6 @@ static NSDictionary * classToSetup;
 				   withObject:[items objectForKey:key]];
 			
 	}
-	
-	DLOG("Total class count: %d", [items count]);
 }
 
 - (void) setUpTitle:(id)levelTitle {
@@ -76,19 +78,28 @@ static NSDictionary * classToSetup;
 		
 }
 
-- (void) setUpBackground:(id)backgroundName {
+- (void) setUpBackground:(id)backgrounds {
+	    
+	for(id bg in backgrounds) {
+		DLOG("Creating texture for %@", bg);
+		Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+																   pathForResource:bg
+																			ofType:@"png"]];
+        [background addBackgroundTexture:backgroundTexture];
+	}
 	
-		
-	Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-															   pathForResource:backgroundName 
-																		ofType:@"png"]];
-	
-	Background *background = [Background backgroundWithTexture:backgroundTexture 
-												   scrollSpeed:1.0f];
 	
 	[[ObjectContainer singleton] addObject:background];
 	
 	
+}
+
+- (void) setUpBgSequence:(id)bgSequence {
+        
+    background.bgSequence = bgSequence;
+    //end of level is denoted by number of bg frames * frame width
+    //TODO: this will be refactored out into the Stage class.
+    camera.endOfLevelBoundary = [background.bgSequence count] * camera.frameDimension.width;    
 }
 
 - (void) setUpNodes:(id)attributes {
@@ -122,9 +133,7 @@ static NSDictionary * classToSetup;
 									 size:size
 							  spriteSheet:overlaySprite];
 	
-	
-    [[ObjectContainer singleton] addObject:node];
-	
+    [[ObjectContainer singleton] addObject:node];	
 }
 						
 - (void) setUpPlayer:(id)attributes {
@@ -227,12 +236,11 @@ static NSDictionary * classToSetup;
 					 effectsManager:effectsManager];
 	
 	[[ObjectContainer singleton] addObject:player];
-	
 }
 						
-- (void) setUpEnemies:(id)attributes {
+- (void) setUpEnemies:(id)enemies {
 	
-	for(id enemy in attributes) {
+	for(id enemy in enemies) {
 		DLOG("enemy: %@", enemy);
 	}
 }

@@ -54,7 +54,7 @@
 
 - (void) draw {
 	if (currentState == OVERLAY_SHOWN) {
-		Position gamePosition = {position.x, position.y, 0.0f};
+		GLPosition gamePosition = {position.x, position.y, 0.0f};
 		[GraphicsEngine drawTexture:sprite.sheet 
 						  texCoords:[TexCoords defaultTexCoords] 
 						   position:gamePosition 

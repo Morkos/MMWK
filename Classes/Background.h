@@ -16,7 +16,8 @@
 @interface Background : NSObject <Drawable> {
 	
 	CADisplayLink *displayLink;
-	Texture *texture;
+	NSMutableArray *textures;
+    NSMutableArray *bgSequence;
 	GLfloat rightBoundary; 
 	GLfloat scrollSpeed;
 	Direction scrollDirection;
@@ -24,12 +25,13 @@
 }
 
 @property (nonatomic, retain) CADisplayLink *displayLink;
-@property (nonatomic, retain) Texture *texture;
+@property (nonatomic, retain) NSMutableArray *textures;
+@property (nonatomic, retain) NSMutableArray *bgSequence;
 @property (nonatomic, assign) GLfloat rightBoundary, scrollSpeed;
 @property (nonatomic, assign) Direction scrollDirection;
 
-+ (Background *) backgroundWithTexture:(Texture *)texture 
-						   scrollSpeed:(GLfloat)scrollSpeed;
++ (Background *) backgroundWithScrollSpeed:(GLfloat)scrollSpeed;
+- (void) addBackgroundTexture:(Texture *)texture;
 
 - (void) startAnimation;
 - (GLfloat) wrapBoundary:(GLfloat) boundary;

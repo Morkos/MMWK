@@ -13,23 +13,38 @@ static Camera * camera = [Camera getInstance];
 
 @implementation Background
 
-@synthesize texture, 
+@synthesize textures, 
+            bgSequence,
 			rightBoundary,
 			scrollSpeed,
 			scrollDirection,
 			displayLink;
 
-+ (Background *) backgroundWithTexture:(Texture *) texture 
-						   scrollSpeed:(GLfloat)scrollSpeed {
++ (Background *) backgroundWithScrollSpeed:(GLfloat)scrollSpeed {
 	
 	Background *background = [[Background alloc] init];
-	background.texture = texture;
+	background.textures = [NSMutableArray arrayWithCapacity:10];
 	background.rightBoundary = camera.frameDimension.width;
 	background.scrollSpeed = scrollSpeed;
 	background.scrollDirection = NO_WHERE;
 	
 	[background startAnimation];
 	return background;
+}
+
+///////////////////////////////////////////////////////////////
+//helper/private method
+- (NSUInteger) getBgIndexFromPosition:(CGPoint) position {
+	
+    return [[bgSequence objectAtIndex:(position.x / camera.frameDimension.width)] intValue];
+	
+}
+///////////////////////////////////////////////////////////////
+
+- (void) addBackgroundTexture:(Texture *) texture {
+	
+	[self.textures addObject:texture];
+	 
 }
 
 - (void) draw {
@@ -39,36 +54,43 @@ static Camera * camera = [Camera getInstance];
 	/* PERF: Don't draw the side of the background that is not on the screen
 	   Maybe taken care of by OpenGL already */
 	
-	// Drawing the left side of the background
+    /*
+     * TODO: Remove mixing of game coordinates and opengl positions here
+     *       Try to remove the dependency off the depth field
+     */
 	NSInteger shift = rightBoundary - (camera.frameDimension.width / 2);
-	CGPoint positionLeft = CGPointMake(shift, camera.frameDimension.width / 2);
-	CGPoint positionRight = positionLeft;
-	positionRight.x += camera.frameDimension.width;
-	positionLeft = [GraphicsEngine convertPointToGl:positionLeft];
-	positionRight = [GraphicsEngine convertPointToGl:positionRight];
+	CGPoint positionLeftNoDepth = CGPointMake(shift, camera.frameDimension.width / 2);
+	CGPoint positionRightNoDepth = positionLeftNoDepth;
+    
+	positionRightNoDepth.x += camera.frameDimension.width;
 	
-	Position glPositionLeft = {positionLeft.x, positionLeft.y, 1.0};
-	Position glPositionRight = {positionRight.x, positionRight.y, 1.0}; 
+    CGPoint glPositionLeft  = [GraphicsEngine convertPointToGl:positionLeftNoDepth];
+	CGPoint glPositionRight = [GraphicsEngine convertPointToGl:positionRightNoDepth];
+	
+    GLPosition glPositionLeftWithDepth = {glPositionLeft.x, glPositionLeft.y, 1.0};
+    GLPosition glPositionRightWithDepth = {glPositionRight.x, glPositionRight.y, 1.0}; 
 		
 	CGSize size = CGSizeMake(camera.frameDimension.width,
 							 camera.frameDimension.height);
 	CGSize glSize = [GraphicsEngine convertSizeToGl:size];
 	
-	[GraphicsEngine drawTexture:texture 
+    // Drawing the left side of the background
+	[GraphicsEngine drawTexture:[self.textures objectAtIndex:[self getBgIndexFromPosition:positionLeftNoDepth]]
 					  texCoords:texCoords 
-					   position:glPositionLeft
+					   position:glPositionLeftWithDepth
 						   size:glSize 
 					orientation:ORIENTATION_FORWARD];
 	
 	// Drawing the right side of the background
-	[GraphicsEngine drawTexture:texture 
+	[GraphicsEngine drawTexture:[self.textures objectAtIndex:[self getBgIndexFromPosition:positionRightNoDepth]] 
 					  texCoords:texCoords 
-					   position:glPositionRight
+					   position:glPositionRightWithDepth
 						   size:glSize 
 					orientation:ORIENTATION_FORWARD];
 }
 
 - (void) startAnimation {
+	
 	CADisplayLink *aDisplayLink = [[CADisplayLink displayLinkWithTarget:self 
 															   selector:@selector(animate)] 
 								   retain];
@@ -83,6 +105,7 @@ static Camera * camera = [Camera getInstance];
 - (GLfloat) wrapBoundary:(GLfloat) boundary {
 
 	if (boundary < camera.frameBoundary.left) {
+		
 		GLfloat shift = boundary;
 		boundary = camera.frameDimension.width + shift;
 
@@ -92,6 +115,7 @@ static Camera * camera = [Camera getInstance];
 }
 
 - (void) update {
+
 }
 
 - (void) animate {

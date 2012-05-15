@@ -16,6 +16,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 
 @synthesize frameDimension,
 			frameBoundary,
+            endOfLevelBoundary,
 			mainPlayer,
 			lockCamera;
 
@@ -66,6 +67,12 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 	Player * player = [ObjectContainer singleton].player;
 		
 	NSInteger distanceFromTheRight = frameBoundary.right - player.position.x;
+    
+    //end of level.
+    if (player.position.x > (endOfLevelBoundary - DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME)) {
+        [self lockCamera];
+    }
+
 	
 	if (!self.isLocked && distanceFromTheRight < DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME) {
 	 
@@ -73,6 +80,14 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 		frameBoundary.right += shift; 
 		frameBoundary.left  += shift;
 	}
+    
 }
+
+- (void) lockCamera {
+    
+    self.lockCamera = TRUE;
+    
+}
+    
 
 @end

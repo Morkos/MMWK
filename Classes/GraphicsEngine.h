@@ -30,20 +30,20 @@
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoords
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation;
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoords
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation
 			 opacity:(GLfloat) opacity;
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoords
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 			   angle:(GLfloat) angle
 		 orientation:(Orientation) orientation
