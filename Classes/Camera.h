@@ -28,7 +28,7 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
 
 /**
  *
- * Initializes the camera with the mainPlayer a
+ * Initializes the camera with the mainPlayer with a
  * default frame dimension of 100x100 (width = 100, height = 100)
  *
  * @return single instance of Camera
@@ -36,9 +36,9 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
 + (Camera *) getInstance;
 
 /**
- * Initializes the camera with user-specified frame dimension
+ * Initializes the camera with a user-specified frame dimension
  *
- * @return single instance of WorldCoordinates
+ * @return single instance of Camera
  */
 + (Camera *) getInstance:(PositiveDimension) positiveDimension;
 
