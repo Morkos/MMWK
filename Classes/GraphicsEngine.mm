@@ -11,16 +11,64 @@
 
 static CGPoint convertGameCoordinatesToOpenGL(CGPoint gameCoordinates);
 static CGSize convertSizeToOpenGL(CGSize size);
-
 static Camera* camera = [Camera getInstance];
 
 @implementation GraphicsEngine
 
++ (void) initializeProperties {
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glDepthMask(GL_TRUE);
+}
+
+
++ (void) drawParticleEffects:(ParticleEffectsManager *) effectsManager {
+	// Draw all particle effects
+	for (NSString *key in effectsManager.particleEffects) {
+		id<ParticleEffect> effect = [effectsManager.particleEffects objectForKey:key];
+		if ([effect isActive]) {
+			[effect draw];
+		}
+	}
+}
+
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
-			position:(CGPoint) position 
+			position:(Position) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation {
+	
+	[self drawTexture:texture
+			texCoords:texCoordsParam 
+			 position:position 
+				 size:size 
+		  orientation:orientation
+			  opacity:-1.0f];
+}
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoordsParam
+			position:(Position) position 
+				size:(CGSize) size 
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity {
+	
+	[self drawTexture:texture
+			texCoords:texCoordsParam 
+			 position:position 
+				 size:size 
+			    angle:0.0f
+		  orientation:orientation
+			  opacity:-1.0f];
+}
+
++ (void) drawTexture:(Texture *) texture 
+		   texCoords:(TexCoords *) texCoordsParam
+			position:(Position) position 
+				size:(CGSize) size 
+			   angle:(GLfloat) angle
+		 orientation:(Orientation) orientation
+			 opacity:(GLfloat) opacity {
 	
 	static const GLfloat squareVertices[] = {
 		-1.0f,   1.0f,
@@ -44,9 +92,10 @@ static Camera* camera = [Camera getInstance];
 	
 	glBindTexture(GL_TEXTURE_2D, texture.textureId);
 	
-	//glUniform1i(ShaderConstants::uniforms[UNIFORM_TEXTURE_SAMPLER], 0);
-	glUniform2f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y);
+	glUniform3f(ShaderConstants::uniforms[UNIFORM_TRANSLATE], position.x, position.y, position.z);
 	glUniform2f(ShaderConstants::uniforms[UNIFORM_SCALE], size.width, size.height);
+	glUniform1f(ShaderConstants::uniforms[UNIFORM_OPACITY], opacity);
+	glUniform1f(ShaderConstants::uniforms[UNIFORM_ROTATE], angle);
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 0, squareVertices);
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
 	glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, GL_FALSE, 0, textureVertices);
@@ -77,37 +126,31 @@ static Camera* camera = [Camera getInstance];
 		 orientation:(Orientation) orientation {
 	
 	CGPoint openGLPoint = convertGameCoordinatesToOpenGL(position);
-	CGSize  openGLSize  = convertSizeToOpenGL(size); 
+	CGSize  openGLSize  = convertSizeToOpenGL(size);
+	
+	// Depth of a character is the same as the y-coordinates
+    Position glPosition = {openGLPoint.x, openGLPoint.y, (openGLPoint.y + 1.0) / 2.0}; 
 	
 	[self drawTexture:texture 
-			texCoords:(TexCoords *)texCoordsParam 
-			 position:(CGPoint)openGLPoint 
-				 size:(CGSize)openGLSize
+			texCoords:texCoordsParam 
+			 position:glPosition
+				 size:openGLSize
 		  orientation:orientation];
 	
 }
 
-+ (void) drawTextureInOpenGLCoordinates:(Texture *) texture
-							  texCoords:(TexCoords *) texCoordsParam
-							   position:(CGPoint) position
-								   size:(CGSize) size {
-	[self drawTexture:texture
-			texCoords:texCoordsParam 
-			 position:position 
-				 size:size 
-		  orientation:ORIENTATION_FORWARD];
-	
-}
-
-+ (CGPoint) convertPointToGl:(CGPoint)point 
-				  screenSize:(CGSize) screenSize {
-	
-	CGFloat halfwidth = screenSize.width / 2;
++ (CGPoint) convertScreenPointToGl:(CGPoint) point
+                        screenSize:(CGSize) screenSize {
+    CGFloat halfwidth = screenSize.width / 2;
 	CGFloat halfheight = screenSize.height / 2;
 	CGFloat newX = (point.x - halfwidth) / halfwidth;
 	CGFloat newY = (halfheight - point.y) / halfheight;
-	
+    
 	return CGPointMake(newX, newY); 
+}
+
++ (CGPoint) convertPointToGl:(CGPoint) point {	
+	return convertGameCoordinatesToOpenGL(point);
 }
 
 static CGPoint convertGameCoordinatesToOpenGL(CGPoint gameCoordinates) {
@@ -121,6 +164,10 @@ static CGPoint convertGameCoordinatesToOpenGL(CGPoint gameCoordinates) {
 	CGPoint openGLPoint = { openGLWidth, openGLHeight };
 	
 	return openGLPoint;	
+}
+
++ (CGSize) convertSizeToGl:(CGSize) size {
+	return convertSizeToOpenGL(size);
 }
 
 static CGSize convertSizeToOpenGL(CGSize size) {

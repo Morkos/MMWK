@@ -3,9 +3,9 @@
      "Title"	  : "Manifest Destiny",
      "Player"     :
      {
-		"Image"    : "megamanSpSheet",
+		"Image"    : "lancelotSpSheet",
 		"Position" : [25, 50],
-		"Size"     : [20, 20]
+		"Size"     : [40, 40]
      },
 	 "Node"		  : 
 	 {

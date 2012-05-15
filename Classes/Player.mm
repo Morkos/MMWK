@@ -18,11 +18,13 @@ static NSMutableDictionary * directionToOpposite = [NSMutableDictionary new];
 
 - (id) init:(CGPoint)pos 
 	   size:(CGSize)sz 
-spriteSheet:(SpriteSheet *)spriteSheet {
+spriteSheet:(SpriteSheet *)spriteSheet
+effectsManager:(ParticleEffectsManager *)effectsManagerParam {
 	
 	if(self = [super init:pos 
 					 size:sz 
-			  spriteSheet:spriteSheet]) {
+			  spriteSheet:spriteSheet
+		   effectsManager:effectsManagerParam]) {
 	   
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
 							   forKey:[NSNumber numberWithInt:LEFT]]; 
@@ -48,13 +50,15 @@ spriteSheet:(SpriteSheet *)spriteSheet {
 	return self;
 	
 }
-+ (Player *) create:(CGPoint)position 
-			   size:(CGSize)size 
-		spriteSheet:(SpriteSheet *)spriteSheet {
++ (Player *) create:(CGPoint) position 
+			   size:(CGSize) size 
+		spriteSheet:(SpriteSheet *) spriteSheet
+	 effectsManager:(ParticleEffectsManager *) effectsManager {
 	
 	Player *player = [[Player alloc] init:position 
 									 size:size 
-							  spriteSheet:spriteSheet];
+							  spriteSheet:spriteSheet
+						   effectsManager:effectsManager];
 	
 	DLOG("initializing player...");	
 	return player;
@@ -63,26 +67,18 @@ spriteSheet:(SpriteSheet *)spriteSheet {
 // physics
 - (void) resolveCollisions {
 	[physicsEngine detectScreenCollision:[ObjectContainer singleton].player];
-		
-	/*
-	[physicsEngine detectRectangleCollision:[ObjectContainer singleton].player 
-								  otherProp:[[ObjectContainer singleton] getObject:2]];
-	 */
-	
 }
-
+							
 - (void) collidesWithPlayer {
 	[super moveTowards:(Direction)([[directionToOpposite 
 									objectForKey:[NSNumber 
 												  numberWithInt:currentDirection]] intValue])];
-	
 }
 
 - (void) collidesWithScreen {
-	[super moveTowards:(Direction)([[directionToOpposite 
-									objectForKey:[NSNumber 
-												  numberWithInt:currentDirection]] intValue])];
-	
+    [super moveTowards:(Direction)([[directionToOpposite 
+									 objectForKey:[NSNumber 
+												   numberWithInt:currentDirection]] intValue])];
 }
 
 @end

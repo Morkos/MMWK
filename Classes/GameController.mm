@@ -22,7 +22,6 @@ NSUInteger gblTicks;
 @synthesize animating, context, displayLink;
 
 + (void) setupObjectsInWorld {
-	
 	LevelLoader * loader = [LevelLoader getInstance];
 	[loader loadLevel:LEVEL1];
 	
@@ -151,8 +150,8 @@ NSUInteger gblTicks;
 	GLint screenWidth = ((EAGLView *)self.view).framebufferWidth;
 	GLint screenHeight = ((EAGLView *)self.view).framebufferHeight;
 	CGSize screenSize = CGSizeMake(screenWidth, screenHeight);
-	CGPoint glPoint = [GraphicsEngine convertPointToGl:point 
-											screenSize:screenSize];
+	CGPoint glPoint = [GraphicsEngine convertScreenPointToGl:point
+                                                  screenSize:screenSize];
 	
 	Node * node = [ObjectContainer singleton].node;
 	
@@ -167,7 +166,7 @@ NSUInteger gblTicks;
     [(EAGLView *)self.view setFramebuffer];
     
     glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
     // Use shader program.
     glUseProgram(program.programId);
@@ -182,10 +181,11 @@ NSUInteger gblTicks;
 		if ([obj conformsToProtocol:@protocol(Collidable)]) {
 			[obj resolveCollisions];
 		}
+		
+		[GraphicsEngine initializeProperties];
 		[obj draw];
 	}
 
-    
     // Validate program before drawing. This is a good check, but only really necessary in a debug build.
     // DEBUG macro must be defined in your debug configurations if that's not already the case.
 #if defined(DEBUG)
@@ -298,9 +298,10 @@ NSUInteger gblTicks;
     }
     
     // Get uniform locations.
-	ShaderConstants::uniforms[UNIFORM_TEXTURE_SAMPLER] = glGetUniformLocation(programId, "textureSampler");
+	ShaderConstants::uniforms[UNIFORM_OPACITY] = glGetUniformLocation(programId, "opacity");
 	ShaderConstants::uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(programId, "translate");
 	ShaderConstants::uniforms[UNIFORM_SCALE] = glGetUniformLocation(programId, "scale");
+	ShaderConstants::uniforms[UNIFORM_ROTATE] = glGetUniformLocation(programId, "angle");
 	
     
     // Set vertex and fragment shaders up for deletion when glDetachShader gets called.

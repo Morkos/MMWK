@@ -16,12 +16,12 @@
 
 @interface Player : Character<Collidable> {
 	
-	
 }
 
 + (Player *) create:(CGPoint)position 
 			   size:(CGSize)size 
-		spriteSheet:(SpriteSheet *)spriteSheet;
+		spriteSheet:(SpriteSheet *)spriteSheet
+	 effectsManager:effectsManager;
 
 - (void) resolveCollisions;
 

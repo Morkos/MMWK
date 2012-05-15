@@ -13,7 +13,7 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 
 // Texture row indexes in the sprite sheet
 static const uint STANDING_ROW_INDEX = 0; 
-static const uint MOVEMENT_ROW_INDEX = 3;
+static const uint MOVEMENT_ROW_INDEX = 1;
 
 @implementation Character
 
@@ -21,11 +21,14 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 @synthesize sprite, 
 			spsheetRowInd, 
 			spsheetColInd, 
+			attackingRowIndexes,
+			currentAttack,
 			displayLink, 
 			currentState, 
 			physicsEngine,
 			currentDirection,
-			currentOrientation;
+			currentOrientation,
+			effectsManager;
 
 //Private method
 - (void) move:(CGPoint)movement {
@@ -36,7 +39,8 @@ static const uint MOVEMENT_ROW_INDEX = 3;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
-spriteSheet:(SpriteSheet *) spriteSheet {
+spriteSheet:(SpriteSheet *) spriteSheet 
+effectsManager:(ParticleEffectsManager *) effectsManagerParam {
 	
 	if(self = [super init]) {
 		
@@ -47,9 +51,18 @@ spriteSheet:(SpriteSheet *) spriteSheet {
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
+		self.effectsManager = effectsManagerParam;
 		
 		self.spsheetRowInd = STANDING_ROW_INDEX;
 		self.spsheetColInd = MOVEMENT_ROW_INDEX;
+		
+		// TODO: Put in configuration file passed in as parameter
+		self.attackingRowIndexes = [NSArray arrayWithObjects:
+									  [NSNumber numberWithInt:2],
+									  [NSNumber numberWithInt:3],
+									  [NSNumber numberWithInt:4],
+									  nil 
+									  ];
 		
 		[self startAnimation];
 		
@@ -70,17 +83,6 @@ spriteSheet:(SpriteSheet *) spriteSheet {
 	
 }
 
-+ (id) create:(CGPoint) position 
-		 size:(CGSize)size 
-  spriteSheet:(SpriteSheet *)spriteSheet {
-	
-	Character *character = [[Character alloc] init:position 
-											  size:size 
-									   spriteSheet:spriteSheet];
-	
-	return character;
-}
-
 - (void) startAnimation {
 	CADisplayLink *aDisplayLink = [[CADisplayLink displayLinkWithTarget:self 
 															   selector:@selector(animate)] 
@@ -94,17 +96,40 @@ spriteSheet:(SpriteSheet *) spriteSheet {
 
 
 - (void) animate {
+	//TODO: This HAX NEEDS TO GOOOOOO!!
+	if (currentState == ATTACKING_STATE) {
+		// Only supports left and right
+		if (currentOrientation == ORIENTATION_FORWARD) {
+			[self move:CGPointMake(0.05f, 0.0f)];
+		} else {
+			[self move:CGPointMake(-0.05f, 0.0f)];
+		}
+	}
+	
 	if (spsheetColInd++ >= [[sprite getTextureCoords:spsheetRowInd] count] - 1) {
 		spsheetColInd = 0;
+		
+		// TODO: THIS IS HAX TOOOOO
+		if (currentState == ATTACKING_STATE) {
+			currentState = STOP_STATE;
+		}
 	}
 }
 
 - (void) update {
-	TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
+	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
 	switch(self.currentState) {
 		case MOVING_STATE:
 			[self moveTowards:currentDirection];
-			[self.displayLink setFrameInterval:2];
+			[self.displayLink setFrameInterval:8];
+			break;
+			
+		case ATTACKING_STATE:
+			[self.displayLink setFrameInterval:6];
+			break;
+			
+		case STOP_STATE:
+			[self stand];
 			break;
 			
 		default:
@@ -116,6 +141,7 @@ spriteSheet:(SpriteSheet *) spriteSheet {
 
 - (void) draw {
 	[GraphicsEngine drawCharacter:self];
+	[GraphicsEngine drawParticleEffects:effectsManager];
 }
 
 - (void) runTo:(Direction) dir {
@@ -136,6 +162,41 @@ spriteSheet:(SpriteSheet *) spriteSheet {
 - (void) stand {
 	currentState = STOP_STATE;
 	spsheetRowInd = STANDING_ROW_INDEX;
+}
+
+
+- (uint) getNumberOfAttacks {
+	return [attackingRowIndexes count];
+}
+
+- (uint) getRowForAttack:(uint) attackIndex {
+	return [[attackingRowIndexes objectAtIndex:attackIndex] intValue];
+}
+
+- (void) attack {
+	// Begin attack if player isn't attacking already
+	if (currentState != ATTACKING_STATE) {
+	    currentState = ATTACKING_STATE;
+		currentAttack = 0;
+		spsheetRowInd = [self getRowForAttack:currentAttack];
+	} 
+	// Else check attacking sprite for regular combo chains
+	else {
+		uint lastAttackingImageIndex = [sprite getNumOfColumnsInRow:spsheetRowInd] - 1;
+		
+		// If attack is called when its at the last animation image 
+		// of an attack and there is still an attack series next, 
+		// initiate a combo for the next series of image
+		if (spsheetColInd == lastAttackingImageIndex && 
+			++currentAttack < [self getNumberOfAttacks]) {
+			spsheetRowInd = [self getRowForAttack:currentAttack];
+			spsheetColInd = 0;
+		}
+	}
+	
+	// Invoke particle effect
+	[effectsManager invokeEffect:[NSString stringWithFormat:@"attack%d", currentAttack] 
+							prop:self];
 }
 
 @end

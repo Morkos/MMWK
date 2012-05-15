@@ -54,4 +54,8 @@ typedef struct Coordinate {
 	
 } Coordinate;
 
+typedef struct {
+	float x,y,z; 
+} Position;
+
 #endif

@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "JSONKit.h"
 #import "LevelEnum.h"
+#import "BezierCurve.h"
+#import "SlashingParticleEffect.h"
+#import "ParticleEffectsManager.h"
 
 @interface LevelLoader : NSObject {
-	
 	JSONDecoder * decoder;
-	
 }
 
 @property (nonatomic, retain) JSONDecoder * decoder;

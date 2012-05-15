@@ -22,6 +22,8 @@
 #import "ShaderConstants.h"
 #import "ObjectContainer.h"
 #import "PhysicsContext.h"
+#import "SlashingParticleEffect.h"
+#import "ParticleEffectsManager.h"
 
 @interface GameController : UIViewController
 {

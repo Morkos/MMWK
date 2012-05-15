@@ -9,10 +9,20 @@
 //varying lowp vec4 colorVarying;
 varying lowp vec2 texture_coordVarying;
 uniform sampler2D textureSampler;
+uniform lowp float opacity;
 
 void main()
 {
     gl_FragColor = texture2D(textureSampler, texture_coordVarying);
-	//gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-	//gl_FragColor = colorVarying;
+	
+	// If alpha value == 0, don't draw the pixel at all
+	// This is so that depth sorting would work
+	if (gl_FragColor.a == 0.0) {
+		discard;
+	}
+	
+	// If opacity is non-negative, use that opacity for pixels
+	if (opacity >= 0.0) {
+		gl_FragColor.a *= opacity;
+	}
 }

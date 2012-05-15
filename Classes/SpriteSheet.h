@@ -18,12 +18,10 @@
 	Texture *sheet;
 	
 	// Size of a single image in x,y direction
-	uint sizeX;
-	uint sizeY;
+	uint sizeX, sizeY;
 	
 	// Size of a single image in x,y texture coords
-	GLfloat sizeTexX;
-	GLfloat sizeTexY;
+	GLfloat sizeTexX, sizeTexY;
 	
 	// Array of array of texture coordinates for each row
 	NSMutableArray *texCoordsArray;
@@ -41,6 +39,7 @@
 
 - (void) initTexCoordsArray:(NSArray *) columns;
 - (NSArray *) getTextureCoords:(uint) rowIndex;
+- (uint) getNumOfColumnsInRow:(uint)rowIndex;
 
 @end
 

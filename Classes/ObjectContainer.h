@@ -11,6 +11,9 @@
 #import "Background.h"
 #import "Node.h"
 
+// TODO: Sometimes adding this fixes errors, and then removing them doesn cause errors anymore
+@class Player, Background;
+
 @interface ObjectContainer : NSObject {
 	NSMutableArray *objArray;
 	Player *player;

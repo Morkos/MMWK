@@ -30,7 +30,6 @@
 	spriteSheet.sizeY = (texture.height / rows);
 	spriteSheet.sizeTexX = 1.0 / maxNumOfColumns;
 	spriteSheet.sizeTexY = 1.0 / rows;
-	DLOG("sizeX = %d, sizeY = %d, sizeTexX = %lf, sizeTexY = %lf", spriteSheet.sizeX, spriteSheet.sizeY, spriteSheet.sizeTexX, spriteSheet.sizeTexY);
 
 	[spriteSheet initTexCoordsArray:columns];
 	
@@ -66,5 +65,8 @@
 	return [texCoordsArray objectAtIndex:rowInd];
 }
 
+- (uint) getNumOfColumnsInRow:(uint) rowInd {
+	return [[texCoordsArray objectAtIndex:rowInd] count];
+}
 
 @end

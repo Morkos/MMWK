@@ -149,21 +149,82 @@ static NSDictionary * classToSetup;
 																	  ofType:@"png"]];
 	
 	SpriteSheet *sprite = [SpriteSheet createWithTexture:playerTexture 
-											   numOfRows:6
+											   numOfRows:5
 												 columns:[NSArray arrayWithObjects:
-																 [NSNumber numberWithInt:8],
-																 [NSNumber numberWithInt:8],
-																 [NSNumber numberWithInt:8],
-																 [NSNumber numberWithInt:8],
-																 [NSNumber numberWithInt:8],
-																 [NSNumber numberWithInt:8],
+																 [NSNumber numberWithInt:1],
+																 [NSNumber numberWithInt:4],
+																 [NSNumber numberWithInt:3],
+																 [NSNumber numberWithInt:7],
+																 [NSNumber numberWithInt:4],
 																 nil
 														 ]
 						   ];
 	
+	
+	Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+														  pathForResource:@"slash" 
+														  ofType:@"png"]];
+	
+	// Particle effects
+	// TODO: Use configuration file
+	ParticleEffectsManager *effectsManager = [ParticleEffectsManager manager:3];
+	
+	BezierCurve *pathAttack0 = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
+												   c0:CGPointMake(0.5, 0.1)
+												   c1:CGPointMake(0.5, 0.05)
+												   to:CGPointMake(0.4, 0.0)
+										  numOfPoints:50];	
+	
+	SlashingParticleEffect *attackEffect0 = 
+	[SlashingParticleEffect createEffect:pathAttack0
+								   speed:5 
+							particleSize:CGSizeMake(0.025f, 0.025f)
+							  startAngle:0.5f
+								endAngle:2.0f
+						   opacityFactor:1.15f
+						   frameInterval:1
+								   image:slashTexture];
+	
+	BezierCurve *pathAttack1 = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
+                                                   c0:CGPointMake(0.5, 0.1) 
+                                                   c1:CGPointMake(0.5, -0.2) 
+                                                   to:CGPointMake(0.4, -0.4) 
+                                          numOfPoints:50];
+	
+    SlashingParticleEffect *attackEffect1 = 
+	[SlashingParticleEffect createEffect:pathAttack1 
+								   speed:5 
+							particleSize:CGSizeMake(0.025f, 0.025f)
+							  startAngle:0.5f
+								endAngle:2.0f
+						   opacityFactor:1.15f
+						   frameInterval:1
+								   image:slashTexture];
+	
+    BezierCurve *pathAttack2 = [BezierCurve curveFrom:CGPointMake(0.4, 0.1)
+                                                   c0:CGPointMake(0.2, 0.05)
+                                                   c1:CGPointMake(0.1, 0.02)
+                                                   to:CGPointMake(0.0, 0.0)
+                                          numOfPoints:50];
+	
+    SlashingParticleEffect *attackEffect2 =
+	[SlashingParticleEffect createEffect:pathAttack2
+								   speed:5
+							particleSize:CGSizeMake(0.025f, 0.025f)
+							  startAngle:0.5f
+								endAngle:2.0f
+						   opacityFactor:1.15f
+						   frameInterval:1
+								   image:slashTexture];
+	
+    [effectsManager addEffect:attackEffect0 key:@"attack0"];
+    [effectsManager addEffect:attackEffect1 key:@"attack1"];
+    [effectsManager addEffect:attackEffect2 key:@"attack2"];
+	
 	Player *player = [Player create:position 
 							   size:size
-						spriteSheet:sprite];
+						spriteSheet:sprite
+					 effectsManager:effectsManager];
 	
 	[[ObjectContainer singleton] addObject:player];
 	

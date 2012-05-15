@@ -41,23 +41,31 @@ static Camera * camera = [Camera getInstance];
 	
 	// Drawing the left side of the background
 	NSInteger shift = rightBoundary - (camera.frameDimension.width / 2);
-	CGPoint position = CGPointMake(shift, camera.frameDimension.width / 2);
+	CGPoint positionLeft = CGPointMake(shift, camera.frameDimension.width / 2);
+	CGPoint positionRight = positionLeft;
+	positionRight.x += camera.frameDimension.width;
+	positionLeft = [GraphicsEngine convertPointToGl:positionLeft];
+	positionRight = [GraphicsEngine convertPointToGl:positionRight];
+	
+	Position glPositionLeft = {positionLeft.x, positionLeft.y, 1.0};
+	Position glPositionRight = {positionRight.x, positionRight.y, 1.0}; 
 		
-	[GraphicsEngine drawTextureInGameCoordinates:texture 
-									   texCoords:texCoords 
-										position:position
-											size:CGSizeMake(camera.frameDimension.width, 
-															camera.frameDimension.height) 
-									 orientation:ORIENTATION_FORWARD];
+	CGSize size = CGSizeMake(camera.frameDimension.width,
+							 camera.frameDimension.height);
+	CGSize glSize = [GraphicsEngine convertSizeToGl:size];
+	
+	[GraphicsEngine drawTexture:texture 
+					  texCoords:texCoords 
+					   position:glPositionLeft
+						   size:glSize 
+					orientation:ORIENTATION_FORWARD];
 	
 	// Drawing the right side of the background
-	position.x += camera.frameDimension.width;
-	[GraphicsEngine drawTextureInGameCoordinates:texture 
-									   texCoords:texCoords 
-										position:position 
-											size:CGSizeMake(camera.frameDimension.width,
-															camera.frameDimension.height)
-									 orientation:ORIENTATION_FORWARD];
+	[GraphicsEngine drawTexture:texture 
+					  texCoords:texCoords 
+					   position:glPositionRight
+						   size:glSize 
+					orientation:ORIENTATION_FORWARD];
 }
 
 - (void) startAnimation {
