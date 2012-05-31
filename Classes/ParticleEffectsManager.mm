@@ -1,5 +1,5 @@
 //
-//  ParticleManager.mm
+//  ParticleEffectsManager.mm
 //  DragonEye
 //
 //  Created by alkaiser on 4/30/12.
@@ -11,7 +11,8 @@
 
 @implementation ParticleEffectsManager
 
-@synthesize particleEffects;
+@synthesize particleEffects,
+            currentEffect;
 
 + (ParticleEffectsManager *) manager:(NSUInteger)numEffects {
 	
@@ -28,7 +29,11 @@
 
 - (void) invokeEffect:(NSString *) key 
 				 prop:(Prop *) prop {
-	[[particleEffects objectForKey:key] invoke:prop];
+    currentEffect = [particleEffects objectForKey:key];
+	[currentEffect invoke:prop];
 }
 
+- (void) updateCurrentEffect {
+    [currentEffect update];
+}
 @end

@@ -13,33 +13,19 @@
 
 @synthesize speed,
 			particles,
+            timer,
 			source,
 			orientation,
 			opacityFactor,
 			frameInterval,
 			startAngle,
 			angleIncrements,
-			displayLink,
 			curIndex,
 			isActive;
 
 - (void) startAnimation {
-	if (!self.displayLink) {
-		CADisplayLink *aDisplayLink = [CADisplayLink displayLinkWithTarget:self 
-																  selector:@selector(animate)];
-		[aDisplayLink setFrameInterval:frameInterval];
-		[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] 
-						   forMode:NSDefaultRunLoopMode];
-		
-		self.displayLink = aDisplayLink;
-	}
-}
-
-- (void) stopAnimation {
-	if (self.displayLink) {
-		[self.displayLink invalidate];
-		self.displayLink = nil;
-	}
+	isActive = true;
+    [timer reset];
 }
 
 + (SlashingParticleEffect *) createEffect:(BezierCurve *) path 
@@ -48,7 +34,7 @@
 							   startAngle:(GLfloat) startAngle
 								 endAngle:(GLfloat) endAngle
 							opacityFactor:(GLfloat) opacityFactor
-							frameInterval:(NSInteger) frameInterval
+							frameInterval:(ulong) frameInterval
 									image:(Texture *) image {
 	
 	SlashingParticleEffect *effect = [[SlashingParticleEffect alloc] init];
@@ -85,6 +71,7 @@
 	effect.frameInterval = frameInterval;
 	effect.startAngle = startAngle;
 	effect.angleIncrements = (endAngle - startAngle) / numOfParticles;
+    effect.timer = [FrameBasedTimer createTimerWithFrameInterval:frameInterval];
 	
 	// TODO: Hack so it wouldn't be invoked on construction the first time.
 	effect.curIndex = numOfParticles;
@@ -99,57 +86,53 @@
 }
 
 - (void) update {
-}
+    if (isActive && 
+        [timer updateTimer]) {
+        // Create a particle for each point in the path
+        for (uint i = 0; i < speed; i++) {
+            if (curIndex < [particles count]) {
+                Particle *particle = ((Particle *)[particles objectAtIndex:curIndex]);
+                [particle moveBack];
+                
+                CGPoint newPosition = source;
+                GLfloat angle = startAngle + (i * angleIncrements);
+                
+                // Flip slash horizontally
+                if (orientation == ORIENTATION_FORWARD) {
+                    newPosition.x += particle.position.x;
+                    [particle rotateBy:angle];
+                } else if (orientation == ORIENTATION_BACKWARDS) {
+                    newPosition.x -= particle.position.x;
+                    [particle rotateBy:-angle];
+                }
+                
+                newPosition.y += particle.position.y;
+                
+                [particle moveTo:newPosition];
+                particle.isAlive = true;
 
-- (void) animate {
-	// Create a particle for each point in the path
-	for (uint i = 0; i < speed; i++) {
-		if (curIndex < [particles count]) {
-			Particle *particle = ((Particle *)[particles objectAtIndex:curIndex]);
-			[particle moveBack];
-			
-			CGPoint newPosition = source;
-			GLfloat angle = startAngle + (i * angleIncrements);
-			
-			// Flip slash horizontally
-			if (orientation == ORIENTATION_FORWARD) {
-				newPosition.x += particle.position.x;
-				[particle rotateBy:angle];
-			} else if (orientation == ORIENTATION_BACKWARDS) {
-				newPosition.x -= particle.position.x;
-				[particle rotateBy:-angle];
-			}
-			
-			newPosition.y += particle.position.y;
-			
-			[particle moveTo:newPosition];
-			particle.isAlive = true;
-
-			curIndex++;			  
-		} else {
-			break;
-		}
-	}
-	
-	// Fade out each particle that has been drawn
-	isActive = false;
-	for (uint i = 0; i < curIndex; i++) {
-		Particle * particle = [particles objectAtIndex:i];
-		
-		if (particle.isAlive) {
-			isActive = true;
-			particle.opacity /= opacityFactor;
-			
-			if (particle.opacity < 0.1) {
-				particle.isAlive = false;
-				particle.opacity = particle.startingOpacity;
-			}
-		}
-	}
-	
-	if (!isActive) {
-		[self stopAnimation];
-	}
+                curIndex++;			  
+            } else {
+                break;
+            }
+        }
+        
+        // Fade out each particle that has been drawn
+        isActive = false;
+        for (uint i = 0; i < curIndex; i++) {
+            Particle * particle = [particles objectAtIndex:i];
+            
+            if (particle.isAlive) {
+                isActive = true;
+                particle.opacity /= opacityFactor;
+                
+                if (particle.opacity < 0.1) {
+                    particle.isAlive = false;
+                    particle.opacity = particle.startingOpacity;
+                }
+            }
+        }
+    }
 }
 
 - (void) invoke:(Prop *) prop {

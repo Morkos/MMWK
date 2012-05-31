@@ -77,6 +77,7 @@ animator:(SpriteSheetAnimator *) animatorParam {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
     [animator animate];
 	[currentState updateState];
+    [effectsManager updateCurrentEffect];
 }
 
 

@@ -13,7 +13,6 @@
 
 @required
 - (void) draw;
-- (void) animate;
 - (void) update;
 
 @end

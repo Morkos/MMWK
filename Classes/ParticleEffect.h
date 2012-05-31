@@ -19,6 +19,10 @@
  * @param prop The prop object used as the source
  */
 - (void) invoke:(Prop *) prop;
+
+/**
+ * Returns true if the particle effect is still active
+ */
 - (bool) isActive;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ParticleManager.h
+//  ParticleEffectsManager.h
 //  DragonEye
 //
 //  Created by alkaiser on 4/30/12.
@@ -13,9 +13,11 @@
 
 @interface ParticleEffectsManager : NSObject {
 	NSMutableDictionary *particleEffects;
+    id<ParticleEffect> currentEffect;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *particleEffects;
+@property (nonatomic, retain) id<ParticleEffect> currentEffect;
 
 /**
  * Create a particle effects manager that stores various particle effects
@@ -39,5 +41,10 @@
  */
 - (void) invokeEffect:(NSString *) key 
 				 prop:(Prop *) prop;
+
+/**
+ * Update the animation of the effect. Should be called in the game loop
+ */
+- (void) updateCurrentEffect;
 
 @end

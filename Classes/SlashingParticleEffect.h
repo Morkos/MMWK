@@ -17,6 +17,7 @@
 #import "Particle.h"
 #import "ParticleEffect.h"
 #import "Math.h"
+#import "FrameBasedTimer.h"
 
 /**
  * Implements a slashing particle effect. 
@@ -24,24 +25,24 @@
  *		slashing effect cannot be invoked more than once.
  */
 @interface SlashingParticleEffect : NSObject<ParticleEffect> {
-	CADisplayLink *displayLink;
 	NSMutableArray *particles;
+    id<AnimationTimer> timer;
 	CGPoint source;
 	Orientation orientation;
 	GLfloat opacityFactor;
-	NSInteger frameInterval;
+	ulong frameInterval;
 	GLfloat startAngle, angleIncrements;
 	uint speed;
 	uint curIndex;
 	bool isActive;
 }
 
-@property (nonatomic, retain) CADisplayLink *displayLink;
 @property (nonatomic, retain) NSMutableArray *particles;
+@property (nonatomic, retain) id<AnimationTimer> timer;
 @property (nonatomic, assign) CGPoint source;
 @property (nonatomic, assign) Orientation orientation;
 @property (nonatomic, assign) GLfloat opacityFactor;
-@property (nonatomic, assign) NSInteger frameInterval;
+@property (nonatomic, assign) ulong frameInterval;
 @property (nonatomic, assign) GLfloat startAngle, angleIncrements;
 @property (nonatomic, assign) uint speed;
 @property (nonatomic, assign) uint curIndex;
@@ -65,12 +66,11 @@
 							   startAngle:(GLfloat) startAngle
 								 endAngle:(GLfloat) endAngle
 							opacityFactor:(GLfloat) opacityFactor
-							frameInterval:(NSInteger) frameInterval
+							frameInterval:(ulong) frameInterval
 									image:(Texture *) image;
 
 - (void) draw;
 - (void) update;
-- (void) animate;
 - (void) invoke:(Prop *) prop;
 
 @end
