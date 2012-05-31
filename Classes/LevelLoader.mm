@@ -13,7 +13,7 @@
 #import "ObjectContainer.h"
 #import "Overlay.h"
 
-static const LevelLoader * levelLoader = NULL;
+static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
 
 @implementation LevelLoader
@@ -220,11 +220,26 @@ static NSDictionary * classToSetup;
     [effectsManager addEffect:attackEffect0 key:@"attack0"];
     [effectsManager addEffect:attackEffect1 key:@"attack1"];
     [effectsManager addEffect:attackEffect2 key:@"attack2"];
+    
+    NSDictionary *stringToRowMap = 
+    [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithInt:0], @"stand", 
+                            [NSNumber numberWithInt:1], @"move", 
+                            [NSNumber numberWithInt:2], @"attack0", 
+                            [NSNumber numberWithInt:3], @"attack1", 
+                            [NSNumber numberWithInt:4], @"attack2", 
+                            nil];
+    
+    id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
+    
+    SpriteSheetAnimator *animator = [SpriteSheetAnimator createWithSpsheet:sprite 
+                                                    stringToRowMap:stringToRowMap 
+                                                             timer:animationTimer];
 	
 	Player *player = [Player create:position 
 							   size:size
-						spriteSheet:sprite
-					 effectsManager:effectsManager];
+					 effectsManager:effectsManager
+                           animator:animator];
 	
 	[[ObjectContainer singleton] addObject:player];
 	

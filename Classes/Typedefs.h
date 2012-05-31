@@ -11,6 +11,7 @@
 #define TYPEDEFS_H
 
 typedef unsigned int uint;
+typedef unsigned long ulong;
 
 typedef struct Center {
 	

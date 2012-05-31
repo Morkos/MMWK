@@ -16,4 +16,8 @@
 	[[ObjectContainer singleton].player attack];
 }
 
+- (void)touchesEnded:(NSSet *)touches 
+		   withEvent:(UIEvent *)event {
+}
+
 @end

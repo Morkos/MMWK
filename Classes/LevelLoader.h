@@ -12,6 +12,8 @@
 #import "BezierCurve.h"
 #import "SlashingParticleEffect.h"
 #import "ParticleEffectsManager.h"
+#import "SpritesheetAnimator.h"
+#import "FrameBasedTimer.h"
 
 @interface LevelLoader : NSObject {
 	JSONDecoder * decoder;

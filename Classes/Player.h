@@ -20,8 +20,8 @@
 
 + (Player *) create:(CGPoint)position 
 			   size:(CGSize)size 
-		spriteSheet:(SpriteSheet *)spriteSheet
-	 effectsManager:effectsManager;
+	 effectsManager:(ParticleEffectsManager *) effectsManager
+           animator:(SpriteSheetAnimator *) animator;
 
 - (void) resolveCollisions;
 

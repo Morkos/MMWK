@@ -18,13 +18,13 @@ static NSMutableDictionary * directionToOpposite = [NSMutableDictionary new];
 
 - (id) init:(CGPoint)pos 
 	   size:(CGSize)sz 
-spriteSheet:(SpriteSheet *)spriteSheet
-effectsManager:(ParticleEffectsManager *)effectsManagerParam {
+effectsManager:(ParticleEffectsManager *)effectsManagerParam 
+animator:(SpriteSheetAnimator *)animatorParam {
 	
 	if(self = [super init:pos 
 					 size:sz 
-			  spriteSheet:spriteSheet
-		   effectsManager:effectsManagerParam]) {
+		   effectsManager:effectsManagerParam
+               animator:animatorParam]) {
 	   
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
 							   forKey:[NSNumber numberWithInt:LEFT]]; 
@@ -52,13 +52,13 @@ effectsManager:(ParticleEffectsManager *)effectsManagerParam {
 }
 + (Player *) create:(CGPoint) position 
 			   size:(CGSize) size 
-		spriteSheet:(SpriteSheet *) spriteSheet
-	 effectsManager:(ParticleEffectsManager *) effectsManager {
+	 effectsManager:(ParticleEffectsManager *) effectsManager
+           animator:(SpriteSheetAnimator *) animator {
 	
 	Player *player = [[Player alloc] init:position 
 									 size:size 
-							  spriteSheet:spriteSheet
-						   effectsManager:effectsManager];
+						   effectsManager:effectsManager
+                                 animator:animator];
 	
 	DLOG("initializing player...");	
 	return player;

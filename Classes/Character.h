@@ -11,54 +11,51 @@
 #import "PhysicsEngine.h"
 #import "SpriteSheet.h"
 #import "ParticleEffectsManager.h"
+#import "SpritesheetAnimator.h"
+#import "CharacterState.h"
+#import "MoveState.h"
+#import "AttackState.h"
+#import "StandState.h"
 
 @interface Character : Prop {
-	
-	PhysicsEngine * physicsEngine;
-	
-	PlayerState currentState;
+	PhysicsEngine *physicsEngine;
+	id<CharacterState> currentState;
 	Direction currentDirection;
 	Orientation currentOrientation;
-	SpriteSheet *sprite;
-	CADisplayLink *displayLink;
-	
-	// Current matrix index in the sprite sheet
-	uint spsheetRowInd, spsheetColInd;
 	
 	NSArray *attackingRowIndexes;
 	uint currentAttack;
 	
 	ParticleEffectsManager *effectsManager;
+    SpriteSheetAnimator * animator;
 }
 
-@property (nonatomic, assign) PlayerState currentState;
-@property (nonatomic, retain) SpriteSheet *sprite;
-@property (assign) uint spsheetRowInd, spsheetColInd;
+@property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, retain) NSArray *attackingRowIndexes;
-@property (nonatomic, assign) uint currentAttack;
-@property (nonatomic, assign) CADisplayLink *displayLink;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, retain) ParticleEffectsManager *effectsManager;
+@property (nonatomic, retain) SpriteSheetAnimator * animator;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
-spriteSheet:(SpriteSheet *) spriteSheet
-effectsManager:(ParticleEffectsManager *) effectsManager;
+effectsManager:(ParticleEffectsManager *) effectsManager
+animator:(SpriteSheetAnimator *) animator;
 
-- (void) startAnimation;
 - (void) runTo:(Direction) dir;
 - (void) moveTowards:(Direction) dir;
 
 // from GraphicsContext protocol
 - (void) draw;
 - (void) update;
-- (void) animate;
 
 // Actions
 - (void) stand;
 - (uint) getNumberOfAttacks;
 - (uint) getRowForAttack:(uint) attackIndex;
 - (void) attack;
+
+- (void) setState:(id<CharacterState>) newState;
+
 @end

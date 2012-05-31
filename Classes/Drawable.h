@@ -1,5 +1,5 @@
 //
-//  GraphicsContext.h
+//  Drawable.h
 //  DragonEye
 //
 //  Created by alkaiser on 4/3/12.

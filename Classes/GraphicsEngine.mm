@@ -107,10 +107,10 @@ static Camera* camera = [Camera getInstance];
 
 + (void) drawCharacter:(Character *)character {
 
-	SpriteSheet *sprite = character.sprite;
-	NSArray *texCoordsArray = [sprite getTextureCoords:character.spsheetRowInd];
+	SpriteSheet *sprite = character.animator.spSheet;
+	NSArray *texCoordsArray = [sprite getTextureCoords:character.animator.spsheetRowInd];
 	
-	TexCoords *texCoords = [texCoordsArray objectAtIndex:character.spsheetColInd];
+	TexCoords *texCoords = [texCoordsArray objectAtIndex:character.animator.spsheetColInd];
 	
 	[self drawTextureInGameCoordinates:sprite.sheet 
 			texCoords:texCoords 

@@ -23,12 +23,6 @@ typedef enum {
 } Direction;
 
 typedef enum {
-	MOVING_STATE,
-	STOP_STATE,
-	ATTACKING_STATE
-} PlayerState;
-
-typedef enum {
 	OVERLAY_HIDDEN,
 	OVERLAY_SHOWN
 } OverlayState;
