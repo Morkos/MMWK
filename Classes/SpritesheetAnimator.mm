@@ -16,6 +16,7 @@
             spsheetRowInd,
             spsheetColInd,
             isReplay,
+            isAnimating,
             currentKey;
 
 + (SpriteSheetAnimator *) createWithSpsheet:(SpriteSheet *) spSheet
@@ -44,18 +45,18 @@
     self.currentKey = key;
     self.spsheetRowInd = [[stringToRowMap objectForKey:key] intValue];
     self.spsheetColInd = 0;
+    self.isAnimating = true;
     [timer setFrameInterval:frameInterval];
 }
 
 - (void) stopAnimation {
-    currentKey = nil;
+    isAnimating = false;
 }
 
 - (void) animate {
-    uint lastIndex = [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
-
     if ([self isAnimating]) {
         if ([timer updateTimer]) {
+            uint lastIndex = [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
             if (spsheetColInd++ >= lastIndex) {
                 spsheetColInd = 0;
                 
@@ -65,10 +66,6 @@
             }
         }
     }
-}
-         
-- (bool) isAnimating {
-    return currentKey != nil;
 }
 
 - (bool) isLastAnimation {

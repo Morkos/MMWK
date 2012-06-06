@@ -20,7 +20,7 @@
     NSDictionary *stringToRowMap;
     id<AnimationTimer> timer;
     uint spsheetRowInd, spsheetColInd;
-    bool isReplay;
+    bool isReplay, isAnimating;
     NSString *currentKey;
 }
 
@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSDictionary *stringToRowMap;
 @property (nonatomic, retain) id<AnimationTimer> timer;
 @property (nonatomic, assign) uint spsheetRowInd, spsheetColInd;
-@property (nonatomic, assign) bool isReplay;
+@property (nonatomic, assign) bool isReplay, isAnimating;
 @property (nonatomic, copy) NSString *currentKey;
 
 + (SpriteSheetAnimator *) createWithSpsheet:(SpriteSheet *) spSheet

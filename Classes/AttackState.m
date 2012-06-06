@@ -37,6 +37,8 @@
         // Invoke particle effect
         [character.effectsManager invokeEffect:key 
                                           prop:character];
+        
+        isNextAttack = false;
     }
     
     if ([character.animator isLastAnimation]) {
@@ -46,7 +48,6 @@
         }
     }
     
-    isNextAttack = false;
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {
