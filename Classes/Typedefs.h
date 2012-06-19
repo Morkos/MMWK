@@ -56,7 +56,9 @@ typedef struct Coordinate {
 } Coordinate;
 
 typedef struct {
-	float x,y,z; 
-} Position;
+	CGFloat x,y,z; 
+} GLPosition;
+
+
 
 #endif

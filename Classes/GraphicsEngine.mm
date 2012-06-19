@@ -34,7 +34,7 @@ static Camera* camera = [Camera getInstance];
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation {
 	
@@ -48,7 +48,7 @@ static Camera* camera = [Camera getInstance];
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 		 orientation:(Orientation) orientation
 			 opacity:(GLfloat) opacity {
@@ -64,7 +64,7 @@ static Camera* camera = [Camera getInstance];
 
 + (void) drawTexture:(Texture *) texture 
 		   texCoords:(TexCoords *) texCoordsParam
-			position:(Position) position 
+			position:(GLPosition) position 
 				size:(CGSize) size 
 			   angle:(GLfloat) angle
 		 orientation:(Orientation) orientation
@@ -129,7 +129,7 @@ static Camera* camera = [Camera getInstance];
 	CGSize  openGLSize  = convertSizeToOpenGL(size);
 	
 	// Depth of a character is the same as the y-coordinates
-    Position glPosition = {openGLPoint.x, openGLPoint.y, (openGLPoint.y + 1.0) / 2.0}; 
+    GLPosition glPosition = {openGLPoint.x, openGLPoint.y, (openGLPoint.y + 1.0) / 2.0}; 
 	
 	[self drawTexture:texture 
 			texCoords:texCoordsParam 
