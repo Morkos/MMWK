@@ -30,18 +30,26 @@
 @property (nonatomic, assign) GLfloat rightBoundary, scrollSpeed;
 @property (nonatomic, assign) Direction scrollDirection;
 
+/**
+ * Factory method to create and initialize attributes
+ * for the background.
+ *
+ * @param scrollSpeed - how fast the background scrolls/moves.
+ * @return a pointer to the background.
+ */
 + (Background *) backgroundWithScrollSpeed:(GLfloat)scrollSpeed;
-- (void) addBackgroundTexture:(Texture *)texture;
 
+/**
+ * Add a image/texture to the sequence of backgrounds
+ *
+ * @param texture - the texture to be added
+ */
+- (void) addBackgroundTexture:(Texture *)texture;
 - (void) startAnimation;
-- (GLfloat) wrapBoundary:(GLfloat) boundary;
 
 // From Drawable protocol
 - (void) draw;
 - (void) update;
 - (void) animate;
-
-- (void) scroll:(Direction) direction;
-- (void) stopScrolling;
 
 @end

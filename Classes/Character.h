@@ -23,7 +23,7 @@
 	CADisplayLink *displayLink;
 	
 	// Current matrix index in the sprite sheet
-	uint spsheetRowInd, spsheetColInd;
+	NSUInteger spsheetRowInd, spsheetColInd;
 	
 	NSArray *attackingRowIndexes;
 	uint currentAttack;
@@ -33,7 +33,7 @@
 
 @property (nonatomic, assign) PlayerState currentState;
 @property (nonatomic, retain) SpriteSheet *sprite;
-@property (assign) uint spsheetRowInd, spsheetColInd;
+@property (assign) NSUInteger spsheetRowInd, spsheetColInd;
 @property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, assign) uint currentAttack;
 @property (nonatomic, assign) CADisplayLink *displayLink;

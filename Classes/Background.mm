@@ -133,8 +133,4 @@ static Camera * camera = [Camera getInstance];
 	scrollDirection = direction;
 }
 
-- (void) stopScrolling {
-	scrollDirection = NO_WHERE;
-}
-
 @end

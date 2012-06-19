@@ -14,4 +14,11 @@
 
 }
 
+/**
+ * Every touch on the attack button (bottom-right corner),
+ * this function will be called.
+ */
+- (void)touchesBegan:(NSSet *)touches 
+		   withEvent:(UIEvent *)event;
+
 @end

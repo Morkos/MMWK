@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PhysicsContext.h"
 #import "Prop.h"
 
 /**

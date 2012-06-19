@@ -12,7 +12,7 @@
 
 @synthesize objArray,
 			player,
-			node,
+			nodes,
 			background;
 
 static ObjectContainer *singleContainer;
@@ -30,13 +30,14 @@ static ObjectContainer *singleContainer;
 - (id) init {
 	if (self = [super init]) {
 		self.objArray = [NSMutableArray arrayWithCapacity:10];
+        self.nodes    = [NSMutableArray arrayWithCapacity:10];
 	}
 	return self;
 }
 
 - (void) addObject:(id)object {
 	[objArray addObject:object];
-		
+        
 	// Store player in a singleton player object
 	if ([[object class] isSubclassOfClass:[Player class]]) {
 		if (!player) {
@@ -56,9 +57,8 @@ static ObjectContainer *singleContainer;
 	}
 	
 	if([[object class] isSubclassOfClass:[Node class]]) {
-		if (!node) {
-			node = (Node *) object;
-		} 
+        //Node * node = (Node *) object;
+        [self.nodes addObject:object];
 	}
 }
 

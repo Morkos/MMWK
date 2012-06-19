@@ -16,7 +16,11 @@
 static Direction indexToDirection[MAX_DIRECTIONS + 1];
 static BOOL withinCenterOfDPad(float, float, float);
 
-//Private Method (alternative style for private fxns; although there's no clean way of doing private methods
+//TODO: take out if issue is not fixed.
+static CoordinateSystem * coordinateSystem;
+
+//Private Method (alternative style for private fxns; although there's 
+//no clean way of doing private methods
 //in Objective-C)
 - (id) init:(NSInteger)imgWidth imgHeight:(NSInteger)imgHeight {
 	
@@ -35,19 +39,21 @@ static BOOL withinCenterOfDPad(float, float, float);
 	//start counter-clock wise, and have the 0th index be the RIGHT direction
 	//and wrap around back to the RIGHT direction on the last index.
 	//TODO: initialize this only once.
-	indexToDirection[0] = RIGHT;
-	indexToDirection[1] = UP_RIGHT;
-	indexToDirection[2] = UP;
-	indexToDirection[3] = UP_LEFT;
-	indexToDirection[4] = LEFT;
-	indexToDirection[5] = DOWN_LEFT;
-	indexToDirection[6] = DOWN;
-	indexToDirection[7] = DOWN_RIGHT;
-	indexToDirection[8] = RIGHT;
+    if(!coordinateSystem) {
+        indexToDirection[0] = RIGHT;
+        indexToDirection[1] = UP_RIGHT;
+        indexToDirection[2] = UP;
+        indexToDirection[3] = UP_LEFT;
+        indexToDirection[4] = LEFT;
+        indexToDirection[5] = DOWN_LEFT;
+        indexToDirection[6] = DOWN;
+        indexToDirection[7] = DOWN_RIGHT;
+        indexToDirection[8] = RIGHT;
 	
-	CoordinateSystem * coordinateSystem = [[CoordinateSystem alloc] init:imgWidth 
-															   imgHeight:imgHeight];
-	[coordinateSystem autorelease];
+        coordinateSystem = [[CoordinateSystem alloc] init:imgWidth 
+                                                imgHeight:imgHeight];
+    }
+	//[coordinateSystem autorelease];
 	return coordinateSystem;
 	
 }

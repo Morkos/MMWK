@@ -7,6 +7,7 @@
 //
 
 #import "math.h"
+#import <math.h>
 
 #define HALF_CYCLE_IN_DEGREES 180
 #define FULL_CYCLE_IN_DEGREES 360

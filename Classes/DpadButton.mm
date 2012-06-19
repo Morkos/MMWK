@@ -10,10 +10,29 @@
 #import "CoordinateSystem.h"
 #import "Loggers.h"
 
-//Private fxns.
-static void decideHowPlayerShouldMove(CGPoint, NSInteger, NSInteger);
-
+static BOOL flag = false;
 @implementation DpadButton
+
+//pure C-style for private functions within in a file.
+- (void) decideHowPlayerShouldMove:(CGPoint) point
+                             width:(NSInteger) width
+                            height:(NSInteger) height {
+	
+	ObjectContainer *singleton = [ObjectContainer singleton];
+	Player *player = singleton.player;
+	
+    
+    CoordinateSystem * coordinateSystem = [CoordinateSystem initWithDimensions:width 
+                                                                     imgHeight:height];
+    
+    Direction direction = [coordinateSystem decideDirectionFromCartestian:point.x 
+                                                              yCoordinate:point.y];
+	if (direction == NO_WHERE) {
+		[player stand];
+	} else {
+		[player runTo:direction];
+	}	    
+}
 
 - (void)touchesBegan:(NSSet *)touches 
 		   withEvent:(UIEvent *)event {
@@ -21,9 +40,9 @@ static void decideHowPlayerShouldMove(CGPoint, NSInteger, NSInteger);
 	UITouch *touch = [[touches allObjects] objectAtIndex:0];
 	CGPoint point  = [touch locationInView:self];
 	
-	decideHowPlayerShouldMove(point, 
-							  self.frame.size.width, 
-							  self.frame.size.height);
+	[self decideHowPlayerShouldMove:point 
+                              width:self.frame.size.width 
+                             height:self.frame.size.height];
 }
 
 
@@ -33,9 +52,9 @@ static void decideHowPlayerShouldMove(CGPoint, NSInteger, NSInteger);
 	UITouch *touch = [[touches allObjects] objectAtIndex:0];
 	CGPoint point  = [touch locationInView:self];
 	
-	decideHowPlayerShouldMove(point,
-							  self.frame.size.width,
-							  self.frame.size.height);
+	[self decideHowPlayerShouldMove:point 
+                              width:self.frame.size.width 
+                             height:self.frame.size.height];
 }
 
 - (void)touchesEnded:(NSSet *)touches 
@@ -47,21 +66,4 @@ static void decideHowPlayerShouldMove(CGPoint, NSInteger, NSInteger);
 	[player stand];
 }
 
-//pure C-style for private functions within in a file.
-static void decideHowPlayerShouldMove(CGPoint point, NSInteger width, NSInteger height) {
-	
-	ObjectContainer *singleton = [ObjectContainer singleton];
-	Player *player = singleton.player;
-	
-	CoordinateSystem * coordinateSystem = [CoordinateSystem initWithDimensions:width 
-																	 imgHeight:height];
-	
-	Direction direction = [coordinateSystem decideDirectionFromCartestian:point.x 
-															  yCoordinate:point.y];
-	if (direction == NO_WHERE) {
-		[player stand];
-	} else {
-		[player runTo:direction];
-	}	
-}
 @end

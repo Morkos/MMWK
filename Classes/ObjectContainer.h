@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "Background.h"
 #import "Node.h"
+#import "Queue.h"
 
 // TODO: Sometimes adding this fixes errors, and then removing them doesn cause errors anymore
 @class Player, Background;
@@ -17,13 +18,13 @@
 @interface ObjectContainer : NSObject {
 	NSMutableArray *objArray;
 	Player *player;
-	Node *node;
+	NSMutableArray *node;
 	Background *background;
 }
 
 @property (nonatomic, retain) NSMutableArray *objArray;
 @property (nonatomic, retain) Player *player;
-@property (nonatomic, retain) Node *node;
+@property (nonatomic, retain) NSMutableArray *nodes;
 @property (nonatomic, readonly, retain) Background *background;
 
 + (ObjectContainer *) singleton;
