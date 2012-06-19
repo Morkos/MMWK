@@ -38,7 +38,7 @@ static Camera * camera = [Camera getInstance];
                             [NSValue valueWithPointer:@selector(setUpBgSequence:)], @"BgSequence",
 							[NSValue valueWithPointer:@selector(setUpPlayer:)]	  , @"Player",
 							[NSValue valueWithPointer:@selector(setUpTitle:)]	  , @"Title",
-							[NSValue valueWithPointer:@selector(setUpNodes:)]     , @"Node",
+							[NSValue valueWithPointer:@selector(setUpNodes:)]     , @"Nodes",
 							[NSValue valueWithPointer:@selector(setUpEnemies:)]   , @"Enemies",
 							 nil ];
 	}
@@ -48,7 +48,7 @@ static Camera * camera = [Camera getInstance];
 }
 
 - (void) loadLevel:(Level)level {
-	
+	NSLog(@"loading level...");
 	//concatenates "level" string with numeric value of Level enum being passed in.
 	NSString *levelName = [NSString stringWithFormat:@"level%d", level];	
 	
@@ -61,8 +61,10 @@ static Camera * camera = [Camera getInstance];
 	
 	NSDictionary *items = [decoder objectWithData:jsonData];
 	
+    NSLog(@"here............%@", items);
 	for(id key in [[items allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
-		DLOG("Key=%@, value=%@", key, [items objectForKey:key]);
+        NSLog(@"iterating.....");
+		NSLog(@"Key=%@, value=%@", key, [items objectForKey:key]);
 			
 		//delegates to a setUp* fxn
 		SEL delegate = (SEL)([[classToSetup objectForKey:key] pointerValue]);
@@ -73,13 +75,17 @@ static Camera * camera = [Camera getInstance];
 }
 
 - (void) setUpTitle:(id)levelTitle {
-	
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
 	DLOG("Title is %@", levelTitle);
-		
+    [pool release];
+
 }
 
 - (void) setUpBackground:(id)backgrounds {
-	    
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
 	for(id bg in backgrounds) {
 		DLOG("Creating texture for %@", bg);
 		Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
@@ -90,26 +96,32 @@ static Camera * camera = [Camera getInstance];
 	
 	
 	[[ObjectContainer singleton] addObject:background];
+    [pool release];
+
 	
 	
 }
 
 - (void) setUpBgSequence:(id)bgSequence {
-        
+    
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     background.bgSequence = bgSequence;
     //end of level is denoted by number of bg frames * frame width
     //TODO: this will be refactored out into the Stage class.
-    camera.endOfLevelBoundary = [background.bgSequence count] * camera.frameDimension.width;    
+    camera.endOfLevelBoundary = [background.bgSequence count] * camera.frameDimension.width;   
+    
+    [pool release];
 }
 
 - (void) setUpNodes:(id)attributes {
 	
-	NSArray * positionList = [attributes objectForKey:@"Position"];
-	NSArray * sizeList	   = [attributes objectForKey:@"Size"];
-	NSString * imageName   = [attributes objectForKey:@"Image"];
-	
-	CGPoint position = CGPointMake([[positionList objectAtIndex:0] floatValue], 
-								   [[positionList objectAtIndex:1] floatValue]);
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+    
+	NSArray * positions = [attributes objectForKey:@"Positions"];
+	NSArray * sizeList = [attributes objectForKey:@"Size"];
+	NSString * imageName = [attributes objectForKey:@"Image"];
 	
 	CGSize size = CGSizeMake([[sizeList objectAtIndex:0] floatValue], 
 							 [[sizeList objectAtIndex:1] floatValue]);
@@ -128,16 +140,28 @@ static Camera * camera = [Camera getInstance];
 																  nil
 																]
 								  ];
+    
+    for (id position in positions) {
+        
+        CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
+                                  [[position objectAtIndex:1] floatValue]);
+                    
+     	Node * node = [Overlay nodeAtPosition:pos
+                                         size:size
+                                  spriteSheet:overlaySprite];       
+    
+        [[ObjectContainer singleton] addObject:node];	
+        
+    }
 	
-	Node * node = [Overlay nodeAtPosition:position
-									 size:size
-							  spriteSheet:overlaySprite];
-	
-    [[ObjectContainer singleton] addObject:node];	
+    [pool release];
+
 }
 						
 - (void) setUpPlayer:(id)attributes {
 		
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
 	NSArray * positionList = [attributes objectForKey:@"Position"];
 	NSArray * sizeList	   = [attributes objectForKey:@"Size"];
 	NSString * imageName   = [attributes objectForKey:@"Image"];
@@ -251,13 +275,18 @@ static Camera * camera = [Camera getInstance];
                            animator:animator];
 	
 	[[ObjectContainer singleton] addObject:player];
+    
+    [pool release];
 }
 						
 - (void) setUpEnemies:(id)enemies {
-	
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
 	for(id enemy in enemies) {
 		DLOG("enemy: %@", enemy);
 	}
+    [pool release];
+
 }
 
 

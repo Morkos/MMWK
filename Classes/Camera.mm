@@ -18,10 +18,11 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 			frameBoundary,
             endOfLevelBoundary,
 			mainPlayer,
-			lockCamera;
+			isCameraLocked;
 
 - (void) triggerUpdateLoop {
 	
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	CADisplayLink *aDisplayLink = [[CADisplayLink displayLinkWithTarget:self 
 															   selector:@selector(update)] 
 								   retain];
@@ -30,11 +31,12 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 	[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] 
 					   forMode:NSDefaultRunLoopMode];
 	
+    [pool release];
 }
 
 + (Camera *) getInstance {
 	
-	DLOG("Setup and returning Camera singleton.");
+	//DLOG("Setup and returning Camera singleton.");
 	return [Camera getInstance:defaultFrameDimension];
 	
 }
@@ -49,7 +51,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 		camera.frameDimension = position;		
 		camera.frameBoundary = bounds;
 		camera.mainPlayer = [ObjectContainer singleton].player;
-		camera.lockCamera = FALSE;
+		camera.isCameraLocked = FALSE;
 		
 		[camera triggerUpdateLoop];
 		
@@ -57,7 +59,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 			 camera.frameBoundary.left, 
 			 camera.frameBoundary.right);
 	}
-	
+    
 	return camera;
 	
 }
@@ -85,7 +87,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 
 - (void) lockCamera {
     
-    self.lockCamera = TRUE;
+    self.isCameraLocked = true;
     
 }
     

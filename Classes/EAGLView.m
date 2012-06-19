@@ -98,7 +98,7 @@
         if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
             NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
 		
-		DLOG(@"Framebuffer width height %d, %d", framebufferWidth, framebufferHeight);
+		DLOG("Framebuffer width height %d, %d", framebufferWidth, framebufferHeight);
     }
 }
 

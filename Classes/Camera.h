@@ -22,7 +22,7 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
 	PositiveDimension frameDimension;
 	Boundary frameBoundary;
 	Character * mainPlayer;
-	BOOL lockCamera;
+	BOOL isCameraLocked;
 
 }
 
@@ -30,10 +30,9 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
 @property (nonatomic, assign) PositiveDimension frameDimension;
 @property (nonatomic, assign) Boundary frameBoundary;
 @property (nonatomic, assign) Character * mainPlayer;
-@property (nonatomic, assign, getter=isLocked) BOOL lockCamera;
+@property (nonatomic, assign, getter = isLocked) BOOL isCameraLocked;
 
 /**
- *
  * Initializes the camera with the mainPlayer with a
  * default frame dimension of 100x100 (width = 100, height = 100)
  *

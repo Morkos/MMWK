@@ -22,6 +22,7 @@ NSUInteger gblTicks;
 @synthesize animating, context, displayLink;
 
 + (void) setupObjectsInWorld {
+    NSLog(@"here...");
 	LevelLoader * loader = [LevelLoader getInstance];
 	[loader loadLevel:LEVEL1];
 	
@@ -141,7 +142,9 @@ NSUInteger gblTicks;
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet *)touches 
+           withEvent:(UIEvent *)event {
+    
 	UITouch *touch = [[touches allObjects] objectAtIndex:0];
 	CGPoint point = [touch locationInView:self.view];
 	
@@ -153,15 +156,32 @@ NSUInteger gblTicks;
 	CGPoint glPoint = [GraphicsEngine convertScreenPointToGl:point
                                                   screenSize:screenSize];
 	
-	Node * node = [ObjectContainer singleton].node;
-	
-	if ([node isPressed:glPoint]) {
-		[node hide];
-	}
+    NSMutableArray * nodes = [ObjectContainer singleton].nodes;
+    NSMutableArray * nodesCopy = [NSArray arrayWithArray:nodes];
+     
+	for(id node in nodesCopy) {
+        if ([node isPressed:glPoint]) {
+            if ([nodes peek] == node) {
+                [node hide];
+                [nodes dequeue];
+            } else {
+                NSLog(@"You touched the incorrect node.");
+            }
+        }
+    }
 }
 
-- (void) gameLoop
-{
+- (void) touchesEnded:(NSSet *)touches 
+            withEvent:(UIEvent *)event {
+    
+    NSMutableArray * nodes = [ObjectContainer singleton].nodes;
+    if ([nodes count] == 0) {
+        
+    }
+    
+}
+
+- (void) gameLoop {
 	
     [(EAGLView *)self.view setFramebuffer];
     

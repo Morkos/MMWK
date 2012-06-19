@@ -22,7 +22,7 @@
 @property (nonatomic, retain) JSONDecoder * decoder;
 
 /**
- * LevelLoader is a JSON parser that parses loads the main player,
+ * LevelLoader is a JSON parser that parses and loads the main player,
  * background, and other level related attributes.
  *
  * @return single instance of LevelLoader

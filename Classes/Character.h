@@ -24,7 +24,6 @@
 	Orientation currentOrientation;
 	
 	NSArray *attackingRowIndexes;
-	uint currentAttack;
 	
 	ParticleEffectsManager *effectsManager;
     SpriteSheetAnimator * animator;

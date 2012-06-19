@@ -18,7 +18,7 @@
 	[sprite addTexture:firstTexture];
 	va_start(argList, firstTexture);
 	Texture *eachTexture;
-	while (eachTexture = va_arg(argList, Texture *)) {
+	while ((eachTexture = va_arg(argList, Texture *))) {
 		[sprite addTexture:eachTexture];
 	}
 	va_end(argList);

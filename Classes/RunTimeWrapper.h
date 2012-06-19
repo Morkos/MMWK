@@ -13,6 +13,12 @@
 
 }
 
+/**
+ * Call a method with no args via a string at runtime.
+ * 
+ * @param NSString * prefix of the method name to be called
+ * @param NSObject * the object you are calling the method on
+ */
 + (void) callWithNoArgs:(NSString *) prefix
 				 object:(NSObject *) object;
 

@@ -12,7 +12,7 @@
 #import "ObjectContainer.h"
 
 //TODO: move these to a better location
-static NSMutableDictionary * directionToOpposite = [NSMutableDictionary new];
+static NSMutableDictionary * directionToOpposite;
 
 @implementation Player
 
@@ -26,6 +26,7 @@ animator:(SpriteSheetAnimator *)animatorParam {
 		   effectsManager:effectsManagerParam
                animator:animatorParam]) {
 	   
+       directionToOpposite = [NSMutableDictionary new];
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
 							   forKey:[NSNumber numberWithInt:LEFT]]; 
 	   [directionToOpposite setObject:[NSNumber numberWithInt:LEFT] 
@@ -67,18 +68,25 @@ animator:(SpriteSheetAnimator *)animatorParam {
 // physics
 - (void) resolveCollisions {
 	[physicsEngine detectScreenCollision:[ObjectContainer singleton].player];
+    
 }
 							
 - (void) collidesWithPlayer {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+
 	[super moveTowards:(Direction)([[directionToOpposite 
 									objectForKey:[NSNumber 
 												  numberWithInt:currentDirection]] intValue])];
+    [pool release];
+
 }
 
 - (void) collidesWithScreen {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     [super moveTowards:(Direction)([[directionToOpposite 
 									 objectForKey:[NSNumber 
 												   numberWithInt:currentDirection]] intValue])];
+    [pool release];
 }
 
 @end
