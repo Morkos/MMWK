@@ -29,7 +29,7 @@
 
 - (void) updateState {
     if (isNextAttack && [character.animator isLastAnimation]) {
-        NSString *key = [NSString stringWithFormat:@"attack%d", currentAttack++];
+        NSString *key = [NSString stringWithFormat:ANIMATOR_ATTACK, currentAttack++];
         
         // Invoke sprite animation
         [character.animator startAnimation:key replay:false];

@@ -39,6 +39,9 @@ static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.20f;
 + (CoordinateSystem *) initWithDimensions:(NSInteger)imgWidth
 								imgHeight:(NSInteger)imgHeight;
 
++ (CGFloat) calculateDegreesFromPoint:(CGPoint) fromPoint
+                              toPoint:(CGPoint) toPoint;
+
 /**
  * Given a point (x,y) relative to the coordinate system,
  * it will specify which direction the point is in.

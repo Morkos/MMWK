@@ -23,6 +23,7 @@
 #import "ObjectContainer.h"
 #import "SlashingParticleEffect.h"
 #import "ParticleEffectsManager.h"
+#import "Camera.h"
 
 @interface GameController : UIViewController
 {

@@ -25,10 +25,10 @@
 }
 
 + (BezierCurve *) curveFrom:(CGPoint)p0
-							   c0:(CGPoint)c0
-							   c1:(CGPoint)c1
-							   to:(CGPoint)p1
-					  numOfPoints:(uint)numOfPoints {
+                         c0:(CGPoint)c0
+                         c1:(CGPoint)c1
+                         to:(CGPoint)p1
+                numOfPoints:(uint)numOfPoints {
 	BezierCurve *curve = [[BezierCurve alloc] init];
 	
 	CGFloat interval = 1.0/numOfPoints;

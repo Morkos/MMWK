@@ -12,6 +12,10 @@
 #import "Typedefs.h"
 #import "AnimationTimer.h"
 
+extern const NSString *ANIMATOR_STAND;
+extern const NSString *ANIMATOR_MOVE;
+extern NSString *ANIMATOR_ATTACK;
+
 /**
  * A utility class used to animate an object
  */

@@ -8,6 +8,7 @@
 
 #import "Typedefs.h"
 #import "Character.h"
+#import "FrameBasedTimer.h"
 
 //1 <= x <= 80 roughly
 static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
@@ -23,14 +24,15 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
 	Boundary frameBoundary;
 	Character * mainPlayer;
 	BOOL isCameraLocked;
-
+    id<AnimationTimer> timer;
 }
 
 @property (nonatomic, assign) NSUInteger endOfLevelBoundary;
 @property (nonatomic, assign) PositiveDimension frameDimension;
 @property (nonatomic, assign) Boundary frameBoundary;
-@property (nonatomic, assign) Character * mainPlayer;
+@property (nonatomic, retain) Character * mainPlayer;
 @property (nonatomic, assign, getter = isLocked) BOOL isCameraLocked;
+@property (nonatomic, retain) id<AnimationTimer> timer;
 
 /**
  * Initializes the camera with the mainPlayer with a
@@ -47,6 +49,7 @@ static const NSUInteger DISTANCE_FROM_RIGHT_TO_ADVANCE_FRAME = 50;
  */
 + (Camera *) getInstance:(PositiveDimension) positiveDimension;
 
+- (void) update;
 - (void) lockCamera;
 
 

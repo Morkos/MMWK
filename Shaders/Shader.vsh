@@ -21,7 +21,7 @@ void main()
 						 0.0, scale.y);
 						 
 	mat2 rotateMat;
-	if (angle >= 0.0) {
+	if (angle <= 0.0) {
 	  rotateMat = mat2(cos(angle), -sin(angle),
 					   sin(angle), cos(angle));
 	} else {
@@ -29,7 +29,7 @@ void main()
 					   -sin(-angle), cos(-angle));
 	}
 	
-    gl_Position = vec4(scaleMat * rotateMat * position, 0.0, 1.0);
+    gl_Position = vec4(rotateMat * scaleMat * position, 0.0, 1.0);
 	
     gl_Position.x += translate.x;
     gl_Position.y += translate.y;

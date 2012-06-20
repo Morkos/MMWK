@@ -29,11 +29,15 @@
 
 - (void) invokeEffect:(NSString *) key 
 				 prop:(Prop *) prop {
-    currentEffect = [particleEffects objectForKey:key];
-	[currentEffect invoke:prop];
+    [[particleEffects objectForKey:key] invoke:prop];
 }
 
 - (void) updateCurrentEffect {
-    [currentEffect update];
+    for (NSString *key in particleEffects) {
+		id<ParticleEffect> effect = [particleEffects objectForKey:key];
+		if ([effect isActive]) {
+			[effect update];
+		}
+	}
 }
 @end

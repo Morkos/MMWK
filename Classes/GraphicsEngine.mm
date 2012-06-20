@@ -59,7 +59,7 @@ static Camera* camera = [Camera getInstance];
 				 size:size 
 			    angle:0.0f
 		  orientation:orientation
-			  opacity:-1.0f];
+			  opacity:opacity];
 }
 
 + (void) drawTexture:(Texture *) texture 

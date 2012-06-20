@@ -58,27 +58,40 @@ static CoordinateSystem * coordinateSystem;
 	
 }
 
++ (CGFloat) calculateDegreesFromPoint:(CGPoint) fromPoint
+                              toPoint:(CGPoint) toPoint {
+	
+    CGFloat xDiff = toPoint.x - fromPoint.x;
+    
+    //normalize y to origin by flipping substraction
+    CGFloat yDiff = fromPoint.y - toPoint.y;
+    
+	CGFloat degrees = 0;
+	
+	NSNumber * angle = [NSNumber numberWithFloat:atan2f(yDiff, xDiff)];
+    degrees = TO_DEGREES([angle floatValue]);
+	
+	if (degrees < 0) {
+		degrees += FULL_CYCLE_IN_DEGREES;
+	}
+
+    return degrees;
+}
+
 - (Direction) decideDirectionFromCartestian:(CGFloat)xCoordinate 
 								yCoordinate:(CGFloat)yCoordinate {
 	
 	//normalize x to origin by subtracting it
 	CGFloat pointX = xCoordinate - self.width;
-	//normalize y to origin by flipping substraction
-	CGFloat pointY = self.height - yCoordinate;
+	CGFloat pointY = yCoordinate - self.height;
 	
-	//find radius using pythag. d thm
+	CGFloat degrees = [CoordinateSystem calculateDegreesFromPoint:CGPointMake(0.0f, 0.0f) 
+                                        toPoint:CGPointMake(pointX, pointY)];
+    
+    degrees += UP_RIGHT_DIRECTION_STARTS_AT_DEGREE;
+	
+    //find radius using pythag. d thm
 	CGFloat radius = PYTHAG(self.width, self.height);
-	
-	CGFloat degrees = 0; 
-	
-	NSNumber * angle = [NSNumber numberWithFloat:atan2f(pointY, pointX)];
-    degrees = TO_DEGREES([angle floatValue]);
-	degrees += UP_RIGHT_DIRECTION_STARTS_AT_DEGREE;
-	
-	if (degrees < 0) {
-		degrees += FULL_CYCLE_IN_DEGREES;
-	}
-	
 	if (withinCenterOfDPad(pointX, pointY, radius)) {
 		return NO_WHERE;
 		

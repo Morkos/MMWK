@@ -19,6 +19,10 @@
             isAnimating,
             currentKey;
 
+const NSString *ANIMATOR_STAND = @"stand";
+const NSString *ANIMATOR_MOVE = @"move";
+NSString *ANIMATOR_ATTACK = @"attack%d";
+
 + (SpriteSheetAnimator *) createWithSpsheet:(SpriteSheet *) spSheet
                              stringToRowMap:(NSDictionary *) stringToRowMap 
                                       timer:(id<AnimationTimer>) timer {

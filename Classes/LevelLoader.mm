@@ -13,6 +13,7 @@
 #import "ObjectContainer.h"
 #import "Overlay.h"
 #import "Camera.h"
+#import "NodeConnector.h"
 
 static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
@@ -132,6 +133,10 @@ static Camera * camera = [Camera getInstance];
 	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 															pathForResource:imageName
 															ofType:@"png"]];
+    
+    Texture *connectorTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+                                                              pathForResource:@"nodeConnector"
+                                                              ofType:@"png"]];
 	
 	SpriteSheet *overlaySprite = [SpriteSheet createWithTexture:overlayTexture  
 													  numOfRows:1
@@ -141,6 +146,7 @@ static Camera * camera = [Camera getInstance];
 																]
 								  ];
     
+    Node *prevNode = nil;
     for (id position in positions) {
         
         CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
@@ -150,12 +156,23 @@ static Camera * camera = [Camera getInstance];
                                          size:size
                                   spriteSheet:overlaySprite];       
     
-        [[ObjectContainer singleton] addObject:node];	
+        [[ObjectContainer singleton] addObject:node];
         
+        if (prevNode != nil) {
+            NodeConnector *nodeConnector = 
+            [NodeConnector createFromStart:prevNode 
+                                    toNode:node 
+                                     image:connectorTexture
+                                      size:CGSizeMake(0.02f, 0.02f)
+             ];
+            
+            [[ObjectContainer singleton] addObject:nodeConnector];
+        }
+        
+        prevNode = node;
     }
 	
     [pool release];
-
 }
 						
 - (void) setUpPlayer:(id)attributes {

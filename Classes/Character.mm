@@ -11,10 +11,6 @@
 
 static CGPoint cgPoints[MAX_DIRECTIONS]; 
 
-// Texture row indexes in the sprite sheet
-static const NSUInteger STANDING_ROW_INDEX = 0; 
-static const NSUInteger MOVEMENT_ROW_INDEX = 1;
-
 @implementation Character
 
 @synthesize attackingRowIndexes,

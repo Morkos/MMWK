@@ -13,11 +13,9 @@
 
 @interface ParticleEffectsManager : NSObject {
 	NSMutableDictionary *particleEffects;
-    id<ParticleEffect> currentEffect;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *particleEffects;
-@property (nonatomic, retain) id<ParticleEffect> currentEffect;
 
 /**
  * Create a particle effects manager that stores various particle effects
