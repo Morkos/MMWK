@@ -106,18 +106,27 @@ static Camera* camera = [Camera getInstance];
 
 
 + (void) drawCharacter:(Character *)character {
-
-	SpriteSheet *sprite = character.animator.spSheet;
-	NSArray *texCoordsArray = [sprite getTextureCoords:character.animator.spsheetRowInd];
+    SpriteSheetAnimator *animator = character.animator;
+	TexCoords *texCoords = [animator getCurrentTexCoords];
 	
-	TexCoords *texCoords = [texCoordsArray objectAtIndex:character.animator.spsheetColInd];
-	
-	[self drawTextureInGameCoordinates:sprite.sheet 
+	[self drawTextureInGameCoordinates:animator.spSheet.sheet 
 			texCoords:texCoords 
 			 position:character.position
 				 size:character.size
 		  orientation:character.currentOrientation];
 }
+
++ (void) drawOverlay:(Overlay *)overlay {
+    SpriteSheetAnimator *animator = overlay.animator;
+	TexCoords *texCoords = [animator getCurrentTexCoords];
+	
+	[self drawTextureInGameCoordinates:animator.spSheet.sheet 
+                             texCoords:texCoords 
+                              position:overlay.position
+                                  size:overlay.size
+                           orientation:ORIENTATION_FORWARD];
+}
+
 
 + (void) drawTextureInGameCoordinates:(Texture *) texture
 		   texCoords:(TexCoords *) texCoordsParam

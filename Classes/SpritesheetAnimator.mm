@@ -19,10 +19,6 @@
             isAnimating,
             currentKey;
 
-const NSString *ANIMATOR_STAND = @"stand";
-const NSString *ANIMATOR_MOVE = @"move";
-NSString *ANIMATOR_ATTACK = @"attack%d";
-
 + (SpriteSheetAnimator *) createWithSpsheet:(SpriteSheet *) spSheet
                              stringToRowMap:(NSDictionary *) stringToRowMap 
                                       timer:(id<AnimationTimer>) timer {
@@ -74,6 +70,13 @@ NSString *ANIMATOR_ATTACK = @"attack%d";
 
 - (bool) isLastAnimation {
     return spsheetColInd == [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
+}
+
+- (TexCoords *) getCurrentTexCoords {
+    SpriteSheet *sprite = self.spSheet;
+	NSArray *texCoordsArray = [sprite getTextureCoords:self.spsheetRowInd];
+	
+	return [texCoordsArray objectAtIndex:self.spsheetColInd];
 }
 
 @end

@@ -11,63 +11,30 @@
 
 @implementation Overlay
 
-@synthesize sprite, currentState, position, size;
+@synthesize animator, 
+            currentState, 
+            position, 
+            size;
 
 + (void) initialize:(Overlay *)overlay 
 		   position:(CGPoint)position 
 			   size:(CGSize)size 
-		spriteSheet:(SpriteSheet *)spriteSheet {
+		spriteSheet:(SpriteSheetAnimator *)animator {
 	
 	overlay.position = position;
 	overlay.size = size;
-	overlay.sprite = spriteSheet;
+	overlay.animator = animator;
 	overlay.currentState = OVERLAY_SHOWN;
-}
-
-+ (Overlay *) overlayAtPosition:(CGPoint)position 
-						   size:(CGSize)size 
-					spriteSheet:(SpriteSheet *)spriteSheet {
-	
-	Overlay *overlay = [[Overlay alloc] init];
-	
-	[Overlay initialize:overlay 
-			   position:position 
-				   size:size 
-			spriteSheet:spriteSheet];
-	
-	return overlay;
-}
-
-+ (Node *) nodeAtPosition:(CGPoint)position 
-					 size:(CGSize)size 
-			  spriteSheet:(SpriteSheet *)spriteSheet {
-	
-	Node *node = [[Node alloc] init];
-	
-	[Overlay initialize:node 
-			   position:position 
-				   size:size 
-			spriteSheet:spriteSheet];
-	
-	return node;
 }
 
 - (void) draw {
 	if (currentState == OVERLAY_SHOWN) {
-		GLPosition gamePosition = {position.x, position.y, 0.0f};
-		[GraphicsEngine drawTexture:sprite.sheet 
-						  texCoords:[TexCoords defaultTexCoords] 
-						   position:gamePosition 
-							   size:size
-						orientation:ORIENTATION_FORWARD
-							opacity:1.0f];
+		[GraphicsEngine drawOverlay:self];
 	}
 }
 
 - (void) update {
-}
-
-- (void) animate {
+    [animator animate];
 }
 
 - (void) hide {

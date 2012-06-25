@@ -13,7 +13,8 @@ static const UInt8 ALPHA_THRESHOLD = 99;
 
 @implementation Texture
 
-@synthesize textureId, 
+@synthesize filepath,
+            textureId, 
 		    width, 
 			height,
 			collisionMap;
@@ -78,13 +79,13 @@ static const UInt8 ALPHA_THRESHOLD = 99;
 }
 
 
-+ (Texture *) textureWithFilename: (NSString *)filename{
++ (Texture *) textureWithFilename: (NSString *)filepath{
 	Texture *texture = [[Texture alloc] init];
 	
 	// 1
-    CGImageRef spriteImage = [UIImage imageWithContentsOfFile:filename].CGImage;
+    CGImageRef spriteImage = [UIImage imageWithContentsOfFile:filepath].CGImage;
     if (!spriteImage) {
-        NSLog(@"Failed to load image %@", filename);
+        NSLog(@"Failed to load image %@", filepath);
         exit(1);
     }
 	
@@ -123,6 +124,7 @@ static const UInt8 ALPHA_THRESHOLD = 99;
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteData);
 		
     
+    texture.filepath = filepath;
 	texture.textureId = texName; 
 	texture.width = width;
 	texture.height = height;
@@ -136,6 +138,11 @@ static const UInt8 ALPHA_THRESHOLD = 99;
     spriteData = NULL;
 	
 	return texture;
+}
+
+- (void) dealloc {
+    glDeleteTextures(1, &textureId);
+    [super dealloc];
 }
 
 @end

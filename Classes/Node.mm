@@ -8,7 +8,6 @@
 
 #import "Node.h"
 
-
 @implementation Node
 
 - (CGFloat) distanceFrom:(CGPoint) point1 to:(CGPoint)point2 {
@@ -22,9 +21,32 @@
 	return distance;
 }
 
++ (Node *) nodeAtPosition:(CGPoint)position 
+					 size:(CGSize)size 
+			  animator:(SpriteSheetAnimator *)animator {
+	
+	Node *node = [[Node alloc] init];
+	
+	[Overlay initialize:node 
+			   position:position 
+				   size:size 
+			spriteSheet:animator];
+    
+    [animator startAnimation:ANIMATOR_NODE_NEUTRAL replay:true];
+	
+	return node;
+}
+
 - (bool) isPressed:(CGPoint)point {
 	DLOG("Touched (%f, %f), node position(%f, %f), height %f", point.x, point.y, self.position.x, self.position.y, size.height);
 	return [self distanceFrom:point to:self.position] < size.height;
+}
+
+- (void) markValid {
+    [animator startAnimation:ANIMATOR_NODE_VALID replay:false];
+}
+- (void) markInvalid {
+    [animator startAnimation:ANIMATOR_NODE_INVALID replay:false];
 }
 
 @end

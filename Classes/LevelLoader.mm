@@ -13,7 +13,6 @@
 #import "ObjectContainer.h"
 #import "Overlay.h"
 #import "Camera.h"
-#import "NodeConnector.h"
 
 static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
@@ -89,18 +88,13 @@ static Camera * camera = [Camera getInstance];
 
 	for(id bg in backgrounds) {
 		DLOG("Creating texture for %@", bg);
-		Texture *backgroundTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-																   pathForResource:bg
-																			ofType:@"png"]];
+		Texture *backgroundTexture = [[SpriteSheetManager getInstance] loadTexture:bg];
         [background addBackgroundTexture:backgroundTexture];
 	}
 	
 	
 	[[ObjectContainer singleton] addObject:background];
     [pool release];
-
-	
-	
 }
 
 - (void) setUpBgSequence:(id)bgSequence {
@@ -133,43 +127,36 @@ static Camera * camera = [Camera getInstance];
 	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 															pathForResource:imageName
 															ofType:@"png"]];
-    
-    Texture *connectorTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-                                                              pathForResource:@"nodeConnector"
-                                                              ofType:@"png"]];
 	
 	SpriteSheet *overlaySprite = [SpriteSheet createWithTexture:overlayTexture  
-													  numOfRows:1
 														columns:[NSArray arrayWithObjects:
 																  [NSNumber numberWithInt:1],
 																  nil
 																]
 								  ];
     
-    Node *prevNode = nil;
+    NSDictionary *stringToRowMap = 
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSNumber numberWithInt:0], ANIMATOR_NODE_NEUTRAL, 
+         nil];
+    
+    id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
+    
+    SpriteSheetAnimator *overlayAnimator = 
+    [SpriteSheetAnimator createWithSpsheet:overlaySprite 
+                            stringToRowMap:stringToRowMap 
+                                     timer:animationTimer];
+    
     for (id position in positions) {
         
         CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
                                   [[position objectAtIndex:1] floatValue]);
                     
-     	Node * node = [Overlay nodeAtPosition:pos
-                                         size:size
-                                  spriteSheet:overlaySprite];       
+     	Node * node = [Node nodeAtPosition:pos
+                                      size:size
+                                  animator:overlayAnimator];       
     
         [[ObjectContainer singleton] addObject:node];
-        
-        if (prevNode != nil) {
-            NodeConnector *nodeConnector = 
-            [NodeConnector createFromStart:prevNode 
-                                    toNode:node 
-                                     image:connectorTexture
-                                      size:CGSizeMake(0.02f, 0.02f)
-             ];
-            
-            [[ObjectContainer singleton] addObject:nodeConnector];
-        }
-        
-        prevNode = node;
     }
 	
     [pool release];
@@ -194,12 +181,11 @@ static Camera * camera = [Camera getInstance];
 	DLOG("imageName: %@, position:(%lf, %lf), size:(%lf,%lf)", 
 		 imageName, position.x, position.y, size.width, size.height);
 	
-	Texture *playerTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+	/*Texture *playerTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 															 pathForResource:imageName 
 																	  ofType:@"png"]];
 	
 	SpriteSheet *sprite = [SpriteSheet createWithTexture:playerTexture 
-											   numOfRows:5
 												 columns:[NSArray arrayWithObjects:
 																 [NSNumber numberWithInt:1],
 																 [NSNumber numberWithInt:4],
@@ -209,7 +195,9 @@ static Camera * camera = [Camera getInstance];
 																 nil
 														 ]
 						   ];
-	
+	*/
+    
+    SpriteSheet *sprite = [[SpriteSheetManager getInstance] loadSpriteSheet:imageName];
 	
 	Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 														  pathForResource:@"slash" 
@@ -267,18 +255,18 @@ static Camera * camera = [Camera getInstance];
 						   frameInterval:1
 								   image:slashTexture];
 	
-    [effectsManager addEffect:attackEffect0 key:@"attack0"];
-    [effectsManager addEffect:attackEffect1 key:@"attack1"];
-    [effectsManager addEffect:attackEffect2 key:@"attack2"];
+    [effectsManager addEffect:attackEffect0 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 0)];
+    [effectsManager addEffect:attackEffect1 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 1)];
+    [effectsManager addEffect:attackEffect2 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 2)];
     
     NSDictionary *stringToRowMap = 
     [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSNumber numberWithInt:0], @"stand", 
-                            [NSNumber numberWithInt:1], @"move", 
-                            [NSNumber numberWithInt:2], @"attack0", 
-                            [NSNumber numberWithInt:3], @"attack1", 
-                            [NSNumber numberWithInt:4], @"attack2", 
-                            nil];
+                    [NSNumber numberWithInt:0], ANIMATOR_STAND, 
+                    [NSNumber numberWithInt:1], ANIMATOR_MOVE, 
+                    [NSNumber numberWithInt:2], NSSTRING_FORMAT(ANIMATOR_ATTACK, 0), 
+                    [NSNumber numberWithInt:3], NSSTRING_FORMAT(ANIMATOR_ATTACK, 1), 
+                    [NSNumber numberWithInt:4], NSSTRING_FORMAT(ANIMATOR_ATTACK, 2), 
+                    nil];
     
     id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
     

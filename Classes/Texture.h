@@ -11,6 +11,7 @@
 #import <OpenGLES/ES2/glext.h>
 
 @interface Texture : NSObject {
+    NSString *filepath;
     GLuint textureId;
 	size_t width;
 	size_t height;
@@ -18,11 +19,13 @@
 	NSArray * collisionMap;
 }
 
+@property (nonatomic, retain) NSString *filepath;
 @property (nonatomic, assign) GLuint textureId;
 @property (nonatomic, assign) size_t width;
 @property (nonatomic, assign) size_t height;
 @property (nonatomic, retain) NSArray * collisionMap;
 
-+ (Texture *) textureWithFilename: (NSString *)filename;
++ (Texture *) textureWithFilename: (NSString *)filepath;
 
+- (void) dealloc;
 @end

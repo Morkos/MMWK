@@ -34,7 +34,6 @@
 
 
 + (SpriteSheet *) createWithTexture:(Texture *) texture 
-						  numOfRows:(uint) rows
 						    columns:(NSArray *) columns;
 
 - (void) initTexCoordsArray:(NSArray *) columns;

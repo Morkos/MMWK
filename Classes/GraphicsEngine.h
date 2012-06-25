@@ -13,10 +13,11 @@
 #import "SpriteSheet.h"
 #import "ShaderConstants.h"
 #import "Player.h"
+#import "Overlay.h"
 #import "Loggers.h"
 #import "ParticleEffectsManager.h"
 
-@class Player;
+@class Player, Overlay;
 
 @interface GraphicsEngine : NSObject {
 
@@ -26,6 +27,7 @@
 
 // Does not support UP and DOWN
 + (void) drawCharacter:(Character *) character;
++ (void) drawOverlay:(Overlay *) overlay;
 + (void) drawParticleEffects:(ParticleEffectsManager *) effectsManager;
 
 + (void) drawTexture:(Texture *) texture 

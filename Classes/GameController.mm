@@ -22,10 +22,13 @@ NSUInteger gblTicks;
 @synthesize animating, context, displayLink;
 
 + (void) setupObjectsInWorld {
-    NSLog(@"here...");
+    SpriteSheetManager *spriteSheetManager = [SpriteSheetManager getInstance];
+    [spriteSheetManager loadFromFile:[[NSBundle mainBundle] 
+                                      pathForResource:@"spriteSheets"
+                                      ofType:@"json"
+                                      ]];
 	LevelLoader * loader = [LevelLoader getInstance];
 	[loader loadLevel:LEVEL1];
-	
 }
 
 - (void)awakeFromNib {

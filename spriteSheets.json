@@ -1,0 +1,13 @@
+{
+    "background" :
+    {
+        "filetype" : "png",
+        "columns"  : [1]
+    },
+    
+    "lancelotSpSheet" :
+    {
+        "filetype" : "png",
+        "columns"  : [1, 4, 3, 7, 4]
+    }
+}

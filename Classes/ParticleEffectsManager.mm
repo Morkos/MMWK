@@ -11,8 +11,7 @@
 
 @implementation ParticleEffectsManager
 
-@synthesize particleEffects,
-            currentEffect;
+@synthesize particleEffects;
 
 + (ParticleEffectsManager *) manager:(NSUInteger)numEffects {
 	

@@ -59,6 +59,8 @@ typedef struct {
 	CGFloat x,y,z; 
 } GLPosition;
 
+// Shortcut macro for format NSStrings
+#define NSSTRING_FORMAT(str, ...) [NSString stringWithFormat:(str), ##__VA_ARGS__]
 
 
 #endif

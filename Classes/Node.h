@@ -12,9 +12,15 @@
 #import "Loggers.h"
 
 @interface Node : Overlay {
-	
+ 
 }
 
++ (Node *) nodeAtPosition:(CGPoint)position 
+					 size:(CGSize)size 
+			  animator:(SpriteSheetAnimator *)spriteSheet;
+
 - (bool) isPressed:(CGPoint)point;
+- (void) markValid;
+- (void) markInvalid;
 
 @end

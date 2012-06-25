@@ -14,6 +14,9 @@
 #import "ParticleEffectsManager.h"
 #import "SpritesheetAnimator.h"
 #import "FrameBasedTimer.h"
+#import "AnimatorConstants.h"
+#import "SpriteSheetManager.h"
+#import "TextureManager.h"
 
 @interface LevelLoader : NSObject {
 	JSONDecoder * decoder;

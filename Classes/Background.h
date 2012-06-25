@@ -12,23 +12,22 @@
 #import "PropState.h"
 #import "GraphicsEngine.h"
 #import "Loggers.h"
+#import "FrameBasedTimer.h"
 
 @interface Background : NSObject <Drawable> {
-	
-	CADisplayLink *displayLink;
 	NSMutableArray *textures;
     NSMutableArray *bgSequence;
 	GLfloat rightBoundary; 
 	GLfloat scrollSpeed;
 	Direction scrollDirection;
-
+    id<AnimationTimer> timer;
 }
 
-@property (nonatomic, retain) CADisplayLink *displayLink;
 @property (nonatomic, retain) NSMutableArray *textures;
 @property (nonatomic, retain) NSMutableArray *bgSequence;
 @property (nonatomic, assign) GLfloat rightBoundary, scrollSpeed;
 @property (nonatomic, assign) Direction scrollDirection;
+@property (nonatomic, retain) id<AnimationTimer> timer;
 
 /**
  * Factory method to create and initialize attributes
@@ -45,11 +44,9 @@
  * @param texture - the texture to be added
  */
 - (void) addBackgroundTexture:(Texture *)texture;
-- (void) startAnimation;
 
 // From Drawable protocol
 - (void) draw;
 - (void) update;
-- (void) animate;
 
 @end

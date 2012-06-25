@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "CharacterState.h"
 #import "Character.h"
+#import "AnimatorConstants.h"
 
 @class Character;
 

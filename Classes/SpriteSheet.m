@@ -18,10 +18,9 @@
 			texCoordsArray;
 
 + (SpriteSheet *) createWithTexture:(Texture *) texture 
-						  numOfRows:(uint) rows
 						    columns:(NSArray *) columns {
 	
-	assert([columns count] == rows);
+	uint rows = [columns count];
 	uint maxNumOfColumns = [[columns valueForKeyPath:@"@max.intValue"] intValue];
 	
 	SpriteSheet *spriteSheet = [[SpriteSheet alloc] init];

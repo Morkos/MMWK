@@ -18,7 +18,7 @@ static Camera * camera = [Camera getInstance];
 			rightBoundary,
 			scrollSpeed,
 			scrollDirection,
-			displayLink;
+            timer;
 
 + (Background *) backgroundWithScrollSpeed:(GLfloat)scrollSpeed {
 	
@@ -27,8 +27,8 @@ static Camera * camera = [Camera getInstance];
 	background.rightBoundary = camera.frameDimension.width;
 	background.scrollSpeed = scrollSpeed;
 	background.scrollDirection = NO_WHERE;
+    background.timer = [FrameBasedTimer createTimerWithFrameInterval:1];
 	
-	[background startAnimation];
 	return background;
 }
 
@@ -89,19 +89,6 @@ static Camera * camera = [Camera getInstance];
 					orientation:ORIENTATION_FORWARD];
 }
 
-- (void) startAnimation {
-	
-	CADisplayLink *aDisplayLink = [[CADisplayLink displayLinkWithTarget:self 
-															   selector:@selector(animate)] 
-								   retain];
-	
-	[aDisplayLink setFrameInterval:1];
-	[aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] 
-					   forMode:NSDefaultRunLoopMode];
-	
-	self.displayLink = aDisplayLink;
-}
-
 - (GLfloat) wrapBoundary:(GLfloat) boundary {
 
 	if (boundary < camera.frameBoundary.left) {
@@ -115,18 +102,15 @@ static Camera * camera = [Camera getInstance];
 }
 
 - (void) update {
-
-}
-
-- (void) animate {
-	
-	if (scrollDirection == LEFT) {
-		rightBoundary -= scrollSpeed;
-	} else if (scrollDirection == RIGHT) {
-		rightBoundary += scrollSpeed;
-	}
-	
-	rightBoundary = [self wrapBoundary:rightBoundary];
+    if ([timer updateTimer]) {
+        if (scrollDirection == LEFT) {
+            rightBoundary -= scrollSpeed;
+        } else if (scrollDirection == RIGHT) {
+            rightBoundary += scrollSpeed;
+        }
+        
+        rightBoundary = [self wrapBoundary:rightBoundary];
+    }
 }
 	 
 - (void) scroll:(Direction) direction {

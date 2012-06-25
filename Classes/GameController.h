@@ -24,6 +24,7 @@
 #import "SlashingParticleEffect.h"
 #import "ParticleEffectsManager.h"
 #import "Camera.h"
+#import "SpriteSheetManager.h"
 
 @interface GameController : UIViewController
 {

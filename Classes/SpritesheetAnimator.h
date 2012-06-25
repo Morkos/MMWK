@@ -11,10 +11,7 @@
 #import "SpriteSheet.h"
 #import "Typedefs.h"
 #import "AnimationTimer.h"
-
-extern const NSString *ANIMATOR_STAND;
-extern const NSString *ANIMATOR_MOVE;
-extern NSString *ANIMATOR_ATTACK;
+#import "TexCoords.h"
 
 /**
  * A utility class used to animate an object
@@ -53,5 +50,7 @@ extern NSString *ANIMATOR_ATTACK;
 - (bool) isAnimating;
 
 - (bool) isLastAnimation;
+
+- (TexCoords *) getCurrentTexCoords;
 
 @end

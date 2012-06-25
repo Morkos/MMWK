@@ -9,36 +9,31 @@
 #import <Foundation/Foundation.h>
 #import "Drawable.h"
 #import "GraphicsEngine.h"
-#import "SpriteSheet.h"
+#import "SpriteSheetAnimator.h"
 #import "PropState.h"
 
 @class Node;
 
 @interface Overlay : NSObject <Drawable> {
-	SpriteSheet *sprite;
+	SpriteSheetAnimator *animator;
 	OverlayState currentState;
 	CGPoint position;
 	CGSize size;
 }
 
-@property (nonatomic, retain) SpriteSheet *sprite;
+@property (nonatomic, retain) SpriteSheetAnimator *animator;
 @property (nonatomic, assign) OverlayState currentState;
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
 
-// Factory methods
-+ (Overlay *) overlayAtPosition:(CGPoint)position 
-						 size:(CGSize)size 
-				  spriteSheet:(SpriteSheet *)spriteSheet;
-
-+ (Node *) nodeAtPosition:(CGPoint)position 
-					 size:(CGSize)size 
-			  spriteSheet:(SpriteSheet *)spriteSheet;
++ (void) initialize:(Overlay *)overlay 
+		   position:(CGPoint)position 
+			   size:(CGSize)size 
+		spriteSheet:(SpriteSheetAnimator *)animator;
 
 // From GraphicsContext protocol
 - (void) draw;
 - (void) update;
-- (void) animate;
 
 - (void) show;
 - (void) hide;
