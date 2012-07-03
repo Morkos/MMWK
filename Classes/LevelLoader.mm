@@ -13,6 +13,7 @@
 #import "ObjectContainer.h"
 #import "Overlay.h"
 #import "Camera.h"
+#import "FreezeModeManager.h"
 
 static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
@@ -38,17 +39,14 @@ static Camera * camera = [Camera getInstance];
                             [NSValue valueWithPointer:@selector(setUpBgSequence:)], @"BgSequence",
 							[NSValue valueWithPointer:@selector(setUpPlayer:)]	  , @"Player",
 							[NSValue valueWithPointer:@selector(setUpTitle:)]	  , @"Title",
-							[NSValue valueWithPointer:@selector(setUpNodes:)]     , @"Nodes",
+							[NSValue valueWithPointer:@selector(setUpCombos:)]    , @"Combos",
 							[NSValue valueWithPointer:@selector(setUpEnemies:)]   , @"Enemies",
 							 nil ];
 	}
-	
 	return levelLoader;
-		
 }
 
 - (void) loadLevel:(Level)level {
-	NSLog(@"loading level...");
 	//concatenates "level" string with numeric value of Level enum being passed in.
 	NSString *levelName = [NSString stringWithFormat:@"level%d", level];	
 	
@@ -61,7 +59,8 @@ static Camera * camera = [Camera getInstance];
 	
 	NSDictionary *items = [decoder objectWithData:jsonData];
 	
-    NSLog(@"here............%@", items);
+    NSLog(@"Key/Values in level%d.json %@", level, items);
+    //TODO: get rid of this sort fiasco.
 	for(id key in [[items allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
         NSLog(@"iterating.....");
 		NSLog(@"Key=%@, value=%@", key, [items objectForKey:key]);
@@ -114,12 +113,11 @@ static Camera * camera = [Camera getInstance];
     [pool release];
 }
 
-- (void) setUpNodes:(id)attributes {
+- (void) setUpCombos:(id)attributes {
 	
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-    
-	NSArray * positions = [attributes objectForKey:@"Positions"];
+	NSDictionary * comboToNodes = [attributes objectForKey:@"NodePositions"];
 	NSArray * sizeList = [attributes objectForKey:@"Size"];
 	NSString * imageName = [attributes objectForKey:@"Image"];
 	
@@ -131,7 +129,7 @@ static Camera * camera = [Camera getInstance];
  
 	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 															pathForResource:imageName
-															ofType:@"png"]];
+                                                                     ofType:@"png"]];
 	
 	SpriteSheet *overlaySprite = [SpriteSheet createWithTexture:overlayTexture  
 													  numOfRows:1
@@ -141,18 +139,31 @@ static Camera * camera = [Camera getInstance];
 																]
 								  ];
     
-    for (id position in positions) {
+    FreezeModeManager * manager = nil;
+
+    for (id comboId in [comboToNodes allKeys]) {
         
-        CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
-                                  [[position objectAtIndex:1] floatValue]);
+        NSMutableArray * tempNodeList = [NSMutableArray arrayWithCapacity:10];
+        
+        for(id position in [comboToNodes objectForKey:comboId]) {
+            CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
+                                      [[position objectAtIndex:1] floatValue]);
                     
-     	Node * node = [Overlay nodeAtPosition:pos
-                                         size:size
-                                  spriteSheet:overlaySprite];       
-    
-        [[ObjectContainer singleton] addObject:node];	
+            Node * node = [Overlay nodeAtPosition:pos
+                                             size:size
+                                      spriteSheet:overlaySprite];
+            
+            [tempNodeList addObject:node];
+        }
         
+        NSDictionary * nodesDictionary = [NSDictionary dictionaryWithObjectsAndKeys:tempNodeList, comboId,
+                                          nil];
+       
+        manager = [FreezeModeManager getInstance];
+        [manager addNodes:nodesDictionary];
     }
+    
+    [[ObjectContainer singleton] addObject:manager];
 	
     [pool release];
 
@@ -160,8 +171,6 @@ static Camera * camera = [Camera getInstance];
 						
 - (void) setUpPlayer:(id)attributes {
 		
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
 	NSArray * positionList = [attributes objectForKey:@"Position"];
 	NSArray * sizeList	   = [attributes objectForKey:@"Size"];
 	NSString * imageName   = [attributes objectForKey:@"Image"];
@@ -275,18 +284,12 @@ static Camera * camera = [Camera getInstance];
                            animator:animator];
 	
 	[[ObjectContainer singleton] addObject:player];
-    
-    [pool release];
 }
 						
 - (void) setUpEnemies:(id)enemies {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
 	for(id enemy in enemies) {
 		DLOG("enemy: %@", enemy);
 	}
-    [pool release];
-
 }
 
 

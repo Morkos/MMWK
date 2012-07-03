@@ -10,23 +10,26 @@
 #import "Loggers.h"
 #import <Foundation/NSDictionary.h>
 #import "ObjectContainer.h"
+#import "FreezeModeManager.h"
 
-//TODO: move these to a better location
+//TODO: move this to a better location
 static NSMutableDictionary * directionToOpposite;
 
 @implementation Player
 
-- (id) init:(CGPoint)pos 
-	   size:(CGSize)sz 
+@synthesize specialBar;
+
+- (id)    init:(CGPoint)pos 
+          size:(CGSize)sz 
 effectsManager:(ParticleEffectsManager *)effectsManagerParam 
-animator:(SpriteSheetAnimator *)animatorParam {
+      animator:(SpriteSheetAnimator *)animatorParam {
 	
 	if(self = [super init:pos 
 					 size:sz 
 		   effectsManager:effectsManagerParam
-               animator:animatorParam]) {
+                 animator:animatorParam]) {
 	   
-       directionToOpposite = [NSMutableDictionary new];
+       directionToOpposite = [[NSMutableDictionary alloc] init];
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
 							   forKey:[NSNumber numberWithInt:LEFT]]; 
 	   [directionToOpposite setObject:[NSNumber numberWithInt:LEFT] 
@@ -60,6 +63,8 @@ animator:(SpriteSheetAnimator *)animatorParam {
 									 size:size 
 						   effectsManager:effectsManager
                                  animator:animator];
+    
+    player.specialBar = [SpecialBar getInstance];
 	
 	DLOG("initializing player...");	
 	return player;
@@ -87,6 +92,12 @@ animator:(SpriteSheetAnimator *)animatorParam {
 									 objectForKey:[NSNumber 
 												   numberWithInt:currentDirection]] intValue])];
     [pool release];
+}
+
+- (void) initiateComboAttempt:(NSUInteger) hits {
+    NSString * hitCount = [[[NSNumberFormatter alloc] init] stringFromNumber:[NSNumber numberWithInt:hits]];
+    NSLog(@"hit count: %@", hitCount);
+    [[FreezeModeManager getInstance] changeNodes:hitCount];
 }
 
 @end

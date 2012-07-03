@@ -12,7 +12,7 @@
 #import "Loggers.h"
 
 @interface Node : Overlay {
-	
+    
 }
 
 - (bool) isPressed:(CGPoint)point;
