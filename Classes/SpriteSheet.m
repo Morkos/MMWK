@@ -56,16 +56,16 @@
 			[texCoordsForRow addObject:texCoords];
 		}
 		
-		[texCoordsArray addObject:texCoordsForRow];
+		[self.texCoordsArray addObject:texCoordsForRow];
 	}
 }
 
 - (NSArray *) getTextureCoords:(uint) rowInd {
-	return [texCoordsArray objectAtIndex:rowInd];
+	return [self.texCoordsArray objectAtIndex:rowInd];
 }
 
 - (uint) getNumOfColumnsInRow:(uint) rowInd {
-	return [[texCoordsArray objectAtIndex:rowInd] count];
+	return [[self.texCoordsArray objectAtIndex:rowInd] count];
 }
 
 @end

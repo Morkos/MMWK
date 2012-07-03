@@ -124,30 +124,22 @@ static Camera * camera = [Camera getInstance];
 	DLOG("imageName: %@, position:(%lf, %lf), size:(%lf,%lf)", 
 		 imageName, position.x, position.y, size.width, size.height);
  
-	Texture *overlayTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-															pathForResource:imageName
-															ofType:@"png"]];
-	
-	SpriteSheet *overlaySprite = [SpriteSheet createWithTexture:overlayTexture  
-														columns:[NSArray arrayWithObjects:
-																  [NSNumber numberWithInt:1],
-																  nil
-																]
-								  ];
+	SpriteSheet *overlaySprite = [[SpriteSheetManager getInstance] loadSpriteSheet:imageName];
     
     NSDictionary *stringToRowMap = 
         [NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithInt:0], ANIMATOR_NODE_NEUTRAL, 
+            [NSNumber numberWithInt:0], ANIMATOR_NODE_NEUTRAL,
+            [NSNumber numberWithInt:1], ANIMATOR_NODE_VALID, 
+            [NSNumber numberWithInt:2], ANIMATOR_NODE_INVALID, 
          nil];
     
-    id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
-    
-    SpriteSheetAnimator *overlayAnimator = 
-    [SpriteSheetAnimator createWithSpsheet:overlaySprite 
-                            stringToRowMap:stringToRowMap 
-                                     timer:animationTimer];
-    
     for (id position in positions) {
+        id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
+        
+        SpriteSheetAnimator *overlayAnimator = 
+        [SpriteSheetAnimator createWithSpsheet:overlaySprite 
+                                stringToRowMap:stringToRowMap 
+                                         timer:animationTimer];
         
         CGPoint pos = CGPointMake([[position objectAtIndex:0] floatValue],
                                   [[position objectAtIndex:1] floatValue]);
@@ -180,22 +172,6 @@ static Camera * camera = [Camera getInstance];
 	
 	DLOG("imageName: %@, position:(%lf, %lf), size:(%lf,%lf)", 
 		 imageName, position.x, position.y, size.width, size.height);
-	
-	/*Texture *playerTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
-															 pathForResource:imageName 
-																	  ofType:@"png"]];
-	
-	SpriteSheet *sprite = [SpriteSheet createWithTexture:playerTexture 
-												 columns:[NSArray arrayWithObjects:
-																 [NSNumber numberWithInt:1],
-																 [NSNumber numberWithInt:4],
-																 [NSNumber numberWithInt:3],
-																 [NSNumber numberWithInt:7],
-																 [NSNumber numberWithInt:4],
-																 nil
-														 ]
-						   ];
-	*/
     
     SpriteSheet *sprite = [[SpriteSheetManager getInstance] loadSpriteSheet:imageName];
 	

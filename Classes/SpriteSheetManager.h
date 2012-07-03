@@ -11,6 +11,10 @@
 #import "TextureManager.h"
 #import "SpriteSheet.h"
 
+/**
+ * A utility class to manage the creation of sprite sheets
+ * from a json file.
+ */
 @interface SpriteSheetManager : NSObject {
     JSONDecoder *decoder;
     TextureManager *textureManager;
@@ -27,7 +31,20 @@
 
 - (void) loadFromFile:(NSString *) jsonFilepath;
 
+/**
+ * Loads a sprite sheet based on the filename provided in the JSON
+ * file. 
+ *
+ * @filename: The key provided in the JSON file (without extension)
+ */
 - (SpriteSheet *) loadSpriteSheet:(NSString *) filename;
+
+/**
+ * Loads a texture based on the filename provided in the JSON
+ * file. 
+ *
+ * @filename: The key provided in the JSON file (without extension)
+ */
 - (Texture *) loadTexture:(NSString *) filename;
 
 @end 

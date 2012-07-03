@@ -119,20 +119,20 @@ static Camera* camera = [Camera getInstance];
 + (void) drawOverlay:(Overlay *)overlay {
     SpriteSheetAnimator *animator = overlay.animator;
 	TexCoords *texCoords = [animator getCurrentTexCoords];
-	
-	[self drawTextureInGameCoordinates:animator.spSheet.sheet 
+	GLPosition glPosition = {overlay.position.x, overlay.position.y, 0.0};
+	[self drawTexture:animator.spSheet.sheet 
                              texCoords:texCoords 
-                              position:overlay.position
+                              position:glPosition
                                   size:overlay.size
                            orientation:ORIENTATION_FORWARD];
 }
 
 
 + (void) drawTextureInGameCoordinates:(Texture *) texture
-		   texCoords:(TexCoords *) texCoordsParam
-			position:(CGPoint) position
-				size:(CGSize) size 
-		 orientation:(Orientation) orientation {
+                            texCoords:(TexCoords *) texCoordsParam
+                             position:(CGPoint) position
+                                 size:(CGSize) size 
+                          orientation:(Orientation) orientation {
 	
 	CGPoint openGLPoint = convertGameCoordinatesToOpenGL(position);
 	CGSize  openGLSize  = convertSizeToOpenGL(size);

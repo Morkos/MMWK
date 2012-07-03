@@ -165,9 +165,10 @@ NSUInteger gblTicks;
 	for(id node in nodesCopy) {
         if ([node isPressed:glPoint]) {
             if ([nodes peek] == node) {
-                [node hide];
+                [node markValid];
                 [nodes dequeue];
             } else {
+                [node markInvalid];
                 NSLog(@"You touched the incorrect node.");
             }
         }

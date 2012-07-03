@@ -54,15 +54,13 @@
 }
 
 - (void) animate {
-    if ([self isAnimating]) {
-        if ([timer updateTimer]) {
-            uint lastIndex = [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
-            if (spsheetColInd++ >= lastIndex) {
-                spsheetColInd = 0;
-                
-                if (!isReplay) {
-                    [self stopAnimation];
-                }
+    if ([self isAnimating] && [timer updateTimer]) {
+        uint lastIndex = [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
+        if (spsheetColInd++ >= lastIndex) {
+            spsheetColInd = 0;
+            
+            if (!isReplay) {
+                [self stopAnimation];
             }
         }
     }
