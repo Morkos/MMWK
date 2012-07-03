@@ -13,10 +13,13 @@
 #import "SpriteSheet.h"
 #import "Character.h"
 #import "GraphicsEngine.h"
+#import "SpecialBar.h"
 
 @interface Player : Character<Collidable> {
-	
+    SpecialBar * specialBar;
 }
+
+@property (nonatomic, retain) SpecialBar * specialBar;
 
 + (Player *) create:(CGPoint)position 
 			   size:(CGSize)size 
@@ -24,10 +27,18 @@
            animator:(SpriteSheetAnimator *) animator;
 
 - (void) resolveCollisions;
-
 // collision reactions
 - (void) collidesWithPlayer;
 - (void) collidesWithScreen;
+
+/**
+ * Based on the number of hits/taps and hold on the attack button
+ * this will trigger a combo attempt (draw the nodes on screen 
+ * for player to swipe).
+ *
+ * @param NSUInteger - number of taps on attack button.
+ */
+- (void) initiateComboAttempt:(NSUInteger) hits;
 
 
 

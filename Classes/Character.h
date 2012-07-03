@@ -18,6 +18,7 @@
 #import "StandState.h"
 
 @interface Character : Prop {
+    
 	PhysicsEngine *physicsEngine;
 	id<CharacterState> currentState;
 	Direction currentDirection;
@@ -27,6 +28,7 @@
 	
 	ParticleEffectsManager *effectsManager;
     SpriteSheetAnimator * animator;
+    
 }
 
 @property (nonatomic, retain) id<CharacterState> currentState;

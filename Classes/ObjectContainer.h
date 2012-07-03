@@ -18,7 +18,7 @@
 @interface ObjectContainer : NSObject {
 	NSMutableArray *objArray;
 	Player *player;
-	NSMutableArray *node;
+	NSMutableArray *nodes;
 	Background *background;
 }
 

@@ -12,7 +12,6 @@
 #import "Loggers.h"
 
 @interface Node : Overlay {
- 
 }
 
 + (Node *) nodeAtPosition:(CGPoint)position 

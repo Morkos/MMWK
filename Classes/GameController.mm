@@ -11,6 +11,7 @@
 #import "Loggers.h"
 #import "LevelLoader.h"
 #import "LevelEnum.h"
+#import "FreezeModeManager.h"
 
 static Program * program = [Program getProgram];
 
@@ -27,6 +28,8 @@ NSUInteger gblTicks;
                                       pathForResource:@"spriteSheets"
                                       ofType:@"json"
                                       ]];
+    NSLog(@"Loading the first level.");
+    
 	LevelLoader * loader = [LevelLoader getInstance];
 	[loader loadLevel:LEVEL1];
 }
@@ -159,29 +162,14 @@ NSUInteger gblTicks;
 	CGPoint glPoint = [GraphicsEngine convertScreenPointToGl:point
                                                   screenSize:screenSize];
 	
-    NSMutableArray * nodes = [ObjectContainer singleton].nodes;
-    NSMutableArray * nodesCopy = [NSArray arrayWithArray:nodes];
-     
-	for(id node in nodesCopy) {
-        if ([node isPressed:glPoint]) {
-            if ([nodes peek] == node) {
-                [node markValid];
-                [nodes dequeue];
-            } else {
-                [node markInvalid];
-                NSLog(@"You touched the incorrect node.");
-            }
-        }
-    }
+    [[FreezeModeManager getInstance] processNodesTouches:glPoint];
+   
 }
 
 - (void) touchesEnded:(NSSet *)touches 
             withEvent:(UIEvent *)event {
     
-    NSMutableArray * nodes = [ObjectContainer singleton].nodes;
-    if ([nodes count] == 0) {
-        
-    }
+    //TODO: can user lift finger while all nodes have not been touched?
     
 }
 

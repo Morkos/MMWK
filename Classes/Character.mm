@@ -8,6 +8,9 @@
 
 #import "Character.h"
 #import "GraphicsEngine.h"
+#import "SpecialBar.h"
+#import "ObjectContainer.h"
+#import "FreezeModeManager.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS]; 
 

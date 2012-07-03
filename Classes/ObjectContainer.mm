@@ -30,7 +30,6 @@ static ObjectContainer *singleContainer;
 - (id) init {
 	if (self = [super init]) {
 		self.objArray = [NSMutableArray arrayWithCapacity:10];
-        self.nodes    = [NSMutableArray arrayWithCapacity:10];
 	}
 	return self;
 }
@@ -54,11 +53,6 @@ static ObjectContainer *singleContainer;
 		} else {
 			DLOG("ERROR! More than one background!");
 		}
-	}
-	
-	if([[object class] isSubclassOfClass:[Node class]]) {
-        //Node * node = (Node *) object;
-        [self.nodes addObject:object];
 	}
 }
 
