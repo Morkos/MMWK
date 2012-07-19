@@ -12,6 +12,7 @@
 
 static FreezeModeManager * manager = nil;
 static NSMutableArray * nodesOnScreen = nil;
+static int nextValidNodetoTouch = 0;
 
 @implementation FreezeModeManager
 @synthesize currentComboKey,
@@ -39,24 +40,33 @@ static NSMutableArray * nodesOnScreen = nil;
 }
 
 - (void) changeNodes:(NSString *)comboKey {
-    NSMutableArray * nodesArray = [self.nodesDictionary objectForKey:comboKey];
-    //shallow copy
-    nodesOnScreen = [NSMutableArray arrayWithArray:nodesArray];    
-    [nodesOnScreen retain];
+    NSMutableArray * comboNodes = [self.nodesDictionary objectForKey:comboKey];
+    /**
+     * calls copyWithZone on each element in the array to create a deep copy
+     * except that it resets the nodeVisualState to neutral
+     */
+    nodesOnScreen = [[NSMutableArray alloc] initWithArray:comboNodes 
+                                                copyItems:YES];
+    
+    nextValidNodetoTouch = 0;
 }
 
 - (void) processNodesTouches:(CGPoint)touchPoint {
-    
     NSMutableArray * nodesShallowCopy = [NSArray arrayWithArray:nodesOnScreen];
     
-	for(id node in nodesShallowCopy) {
+    for(id node in nodesShallowCopy) {
         if ([node isPressed:touchPoint]) {
-            if ([nodesOnScreen peek] == node) {
+            BOOL correctNodeIsTouched = 
+                [nodesOnScreen objectAtIndex:nextValidNodetoTouch] == node;
+            BOOL nodeHasNotBeenTouched = [node isNeutral];
+            if (correctNodeIsTouched && nodeHasNotBeenTouched) {
                 [node markValid];
-                [nodesOnScreen dequeue];
+                nextValidNodetoTouch = (nextValidNodetoTouch + 1) % [nodesOnScreen count];
             } else {
-                [node markInvalid];
-                NSLog(@"You touched the incorrect node.");
+                if(nodeHasNotBeenTouched) {
+                    [node markInvalid];
+                    NSLog(@"You touched the incorrect node.");
+                }
             }
         }
     }

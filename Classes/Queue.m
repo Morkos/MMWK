@@ -8,7 +8,8 @@
 
 #import "Queue.h"
 
-@implementation NSMutableArray (Queue)
+//Possible TODO: change this to inheritance and add a traversal ptr.
+@implementation NSMutableArray (QueueAdditions)
 
 - (id) dequeue {
     if([self count] == 0) {
@@ -24,7 +25,4 @@
     [self addObject:obj];
 }
 
-- (id) peek {
-    return [self objectAtIndex:0];
-}
 @end
