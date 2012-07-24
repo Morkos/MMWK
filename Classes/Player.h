@@ -40,6 +40,13 @@
  */
 - (void) initiateComboAttempt:(NSUInteger) hits;
 
+/**
+ * Once the player hits all the combo nodes correctly then
+ * this method will get triggered
+ *
+ * @param comboKey - a key referencing which animation to play
+ */
+- (void) initiateComboAnimation:(NSString *) comboKey;
 
 
 @end

@@ -11,6 +11,7 @@
 #import <Foundation/NSDictionary.h>
 #import "ObjectContainer.h"
 #import "FreezeModeManager.h"
+#import "ComboState.h"
 
 //TODO: move this to a better location
 static NSMutableDictionary * directionToOpposite;
@@ -98,6 +99,12 @@ effectsManager:(ParticleEffectsManager *)effectsManagerParam
     NSString * hitCount = [[[NSNumberFormatter alloc] init] stringFromNumber:[NSNumber numberWithInt:hits]];
     NSLog(@"hit count: %@", hitCount);
     [[FreezeModeManager getInstance] changeNodes:hitCount];
+}
+
+- (void) initiateComboAnimation:(NSString *)comboKey {
+    NSLog(@"Initiating combo animation...");
+    [self setState:[ComboState createWithCharacter:self
+                                          comboKey:ANIMATOR_ATTACK]];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "FreezeModeManager.h"
 #import "Node.h"
 #import "Queue.h"
+#import "ObjectContainer.h"
 
 static FreezeModeManager * manager = nil;
 static NSMutableArray * nodesOnScreen = nil;
@@ -45,23 +46,29 @@ static int nextValidNodetoTouch = 0;
      * calls copyWithZone on each element in the array to create a deep copy
      * except that it resets the nodeVisualState to neutral
      */
-    nodesOnScreen = [[NSMutableArray alloc] initWithArray:comboNodes 
+    nodesOnScreen = [[NSMutableArray alloc] initWithArray:comboNodes
                                                 copyItems:YES];
-    
     nextValidNodetoTouch = 0;
 }
 
-- (void) processNodesTouches:(CGPoint)touchPoint {
-    NSMutableArray * nodesShallowCopy = [NSArray arrayWithArray:nodesOnScreen];
-    
-    for(id node in nodesShallowCopy) {
+- (void) processNodesTouches:(CGPoint)touchPoint {    
+    for(id node in nodesOnScreen) {
         if ([node isPressed:touchPoint]) {
             BOOL correctNodeIsTouched = 
                 [nodesOnScreen objectAtIndex:nextValidNodetoTouch] == node;
             BOOL nodeHasNotBeenTouched = [node isNeutral];
+            
             if (correctNodeIsTouched && nodeHasNotBeenTouched) {
                 [node markValid];
                 nextValidNodetoTouch = (nextValidNodetoTouch + 1) % [nodesOnScreen count];
+                
+                //all nodes have been touched correctly
+                if(nextValidNodetoTouch == 0) {
+                    [nodesOnScreen removeAllObjects];
+                    //TODO: play effect in disappearing the nodes.
+                    [[ObjectContainer singleton].player 
+                     initiateComboAnimation:self.currentComboKey];
+                }
             } else {
                 if(nodeHasNotBeenTouched) {
                     [node markInvalid];

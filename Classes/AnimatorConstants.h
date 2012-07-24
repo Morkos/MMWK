@@ -26,8 +26,8 @@ extern NSString *ANIMATOR_NODE_NEUTRAL;
 /**
  * Player animator keys
  */
-extern const NSString *ANIMATOR_STAND;
-extern const NSString *ANIMATOR_MOVE;
+extern NSString *ANIMATOR_STAND;
+extern NSString *ANIMATOR_MOVE;
 extern NSString *ANIMATOR_ATTACK;
 
 #endif
