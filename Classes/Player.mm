@@ -18,7 +18,8 @@ static NSMutableDictionary * directionToOpposite;
 
 @implementation Player
 
-@synthesize specialBar;
+@synthesize specialBar,
+            renderTarget;
 
 - (id)    init:(CGPoint)pos 
           size:(CGSize)sz 
@@ -66,6 +67,8 @@ effectsManager:(ParticleEffectsManager *)effectsManagerParam
                                  animator:animator];
     
     player.specialBar = [SpecialBar getInstance];
+    player.renderTarget = [TextureRenderTarget renderTargetWithWidth:100
+                                                              height:100];
 	
 	DLOG("initializing player...");	
 	return player;

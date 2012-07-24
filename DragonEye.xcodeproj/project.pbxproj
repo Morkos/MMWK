@@ -51,8 +51,11 @@
 		0480038C14F1C9B000440480 /* Program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0480038B14F1C9B000440480 /* Program.mm */; };
 		048004FE14FC749F00440480 /* cabban1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 048004FC14FC749F00440480 /* cabban1.jpg */; };
 		048004FF14FC749F00440480 /* cabban2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 048004FD14FC749F00440480 /* cabban2.jpg */; };
+		0481E04115B7F21D007EB6B2 /* TextureRenderTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481E04015B7F21D007EB6B2 /* TextureRenderTarget.m */; };
 		04852C0915A2C12E004C86ED /* FreezeModeManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04852C0615A2C12E004C86ED /* FreezeModeManager.mm */; };
 		04852C0A15A2C12E004C86ED /* SpecialBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04852C0815A2C12E004C86ED /* SpecialBar.m */; };
+		048567FE15BE7ADE006B88E2 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 048567FD15BE7ADD006B88E2 /* Shader.m */; };
+		0485682915BE848A006B88E2 /* ComboState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485682815BE848A006B88E2 /* ComboState.m */; };
 		04893EB914F17E7400AAB4BC /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04893EB814F17E7400AAB4BC /* Texture.mm */; };
 		04A09D4E155BB03B0077BE5B /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A09D46155BB03B0077BE5B /* Camera.mm */; };
 		04A09D4F155BB03B0077BE5B /* JSONKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A09D48155BB03B0077BE5B /* JSONKit.mm */; };
@@ -159,10 +162,16 @@
 		0480038B14F1C9B000440480 /* Program.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Program.mm; sourceTree = "<group>"; };
 		048004FC14FC749F00440480 /* cabban1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cabban1.jpg; sourceTree = "<group>"; };
 		048004FD14FC749F00440480 /* cabban2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cabban2.jpg; sourceTree = "<group>"; };
+		0481E03F15B7F21D007EB6B2 /* TextureRenderTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureRenderTarget.h; sourceTree = "<group>"; };
+		0481E04015B7F21D007EB6B2 /* TextureRenderTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureRenderTarget.m; sourceTree = "<group>"; };
 		04852C0515A2C12E004C86ED /* FreezeModeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreezeModeManager.h; sourceTree = "<group>"; };
 		04852C0615A2C12E004C86ED /* FreezeModeManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FreezeModeManager.mm; sourceTree = "<group>"; };
 		04852C0715A2C12E004C86ED /* SpecialBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialBar.h; sourceTree = "<group>"; };
 		04852C0815A2C12E004C86ED /* SpecialBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialBar.m; sourceTree = "<group>"; };
+		048567FC15BE7ADD006B88E2 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		048567FD15BE7ADD006B88E2 /* Shader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shader.m; sourceTree = "<group>"; };
+		0485682715BE848A006B88E2 /* ComboState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboState.h; sourceTree = "<group>"; };
+		0485682815BE848A006B88E2 /* ComboState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboState.m; sourceTree = "<group>"; };
 		04893EB814F17E7400AAB4BC /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
 		04A09D45155BB03B0077BE5B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		04A09D46155BB03B0077BE5B /* Camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Camera.mm; sourceTree = "<group>"; };
@@ -279,6 +288,8 @@
 		044BB2DA1575E9F0005A092B /* States */ = {
 			isa = PBXGroup;
 			children = (
+				0485682715BE848A006B88E2 /* ComboState.h */,
+				0485682815BE848A006B88E2 /* ComboState.m */,
 				044BB2DB1575EB27005A092B /* CharacterState.h */,
 				044BB2DE1575F2FF005A092B /* MoveState.h */,
 				044BB2DF1575F2FF005A092B /* MoveState.m */,
@@ -346,6 +357,10 @@
 				047B1C3D152AD96D00DA4662 /* GraphicsEngine.mm */,
 				04A09D45155BB03B0077BE5B /* Camera.h */,
 				04A09D46155BB03B0077BE5B /* Camera.mm */,
+				0481E03F15B7F21D007EB6B2 /* TextureRenderTarget.h */,
+				0481E04015B7F21D007EB6B2 /* TextureRenderTarget.m */,
+				048567FC15BE7ADD006B88E2 /* Shader.h */,
+				048567FD15BE7ADD006B88E2 /* Shader.m */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -643,6 +658,9 @@
 				044BB32215959FC6005A092B /* AnimatorConstants.mm in Sources */,
 				04852C0915A2C12E004C86ED /* FreezeModeManager.mm in Sources */,
 				04852C0A15A2C12E004C86ED /* SpecialBar.m in Sources */,
+				0481E04115B7F21D007EB6B2 /* TextureRenderTarget.m in Sources */,
+				048567FE15BE7ADE006B88E2 /* Shader.m in Sources */,
+				0485682915BE848A006B88E2 /* ComboState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

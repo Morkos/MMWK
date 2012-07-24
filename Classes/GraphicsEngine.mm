@@ -76,6 +76,8 @@ static Camera* camera = [Camera getInstance];
 		-1.0f,  -1.0f,
 		 1.0f,  -1.0f,
 	};
+    
+    //static const GLfloat horzFloats[10] = {1.0/10.0};
 	
 	TexCoords *texCoords = [TexCoords copyOfTexCoords:texCoordsParam];
 	

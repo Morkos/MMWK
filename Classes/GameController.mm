@@ -261,7 +261,6 @@ NSUInteger gblTicks;
 
 - (BOOL)loadShaders
 {
-    GLuint vertShader, fragShader;
     NSString *vertShaderPathname, *fragShaderPathname;
     
     // Create shader program.
@@ -270,7 +269,8 @@ NSUInteger gblTicks;
     
     // Create and compile vertex shader.
     vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname])
+    Shader *vertShader = [Shader shaderWithFile:vertShaderPathname type:GL_VERTEX_SHADER];
+    if (!vertShader)
     {
         DLOG("Failed to compile vertex shader");
         return FALSE;
@@ -278,17 +278,18 @@ NSUInteger gblTicks;
     
     // Create and compile fragment shader.
     fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname])
+    Shader *fragShader = [Shader shaderWithFile:fragShaderPathname type:GL_FRAGMENT_SHADER];
+    if (!fragShader)
     {
         DLOG("Failed to compile fragment shader");
         return FALSE;
     }
     
     // Attach vertex shader to program.
-    glAttachShader(programId, vertShader);
+    glAttachShader(programId, vertShader.shaderId);
     
     // Attach fragment shader to program.
-    glAttachShader(programId, fragShader);
+    glAttachShader(programId, fragShader.shaderId);
     
     // Bind attribute locations.
     // This needs to be done prior to linking.
@@ -299,16 +300,10 @@ NSUInteger gblTicks;
     if (![program linkProgram]) {
         DLOG("Failed to link program: %d", programId);
         
-        if (vertShader) {
-            glDeleteShader(vertShader);
-            vertShader = 0;
-        }
-        if (fragShader) {
-            glDeleteShader(fragShader);
-            fragShader = 0;
-        }
+        [vertShader dealloc];
+        [fragShader dealloc];
         
-        return FALSE;
+        @throw([NSException exceptionWithName:@"ProgramLink" reason:@"Link error" userInfo:nil]);
     }
     
     // Get uniform locations.
@@ -316,15 +311,12 @@ NSUInteger gblTicks;
 	ShaderConstants::uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(programId, "translate");
 	ShaderConstants::uniforms[UNIFORM_SCALE] = glGetUniformLocation(programId, "scale");
 	ShaderConstants::uniforms[UNIFORM_ROTATE] = glGetUniformLocation(programId, "angle");
+    ShaderConstants::uniforms[UNIFORM_KERNEL] = glGetUniformLocation(programId, "kernel");
 	
     
     // Set vertex and fragment shaders up for deletion when glDetachShader gets called.
-    if (vertShader) {
-        glDeleteShader(vertShader);
-	}
-    if (fragShader) {
-        glDeleteShader(fragShader);
-	}
+    [vertShader dealloc];
+    [fragShader dealloc];
     
     return TRUE;
 }

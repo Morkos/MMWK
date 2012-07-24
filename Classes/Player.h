@@ -14,12 +14,15 @@
 #import "Character.h"
 #import "GraphicsEngine.h"
 #import "SpecialBar.h"
+#import "TextureRenderTarget.h"
 
 @interface Player : Character<Collidable> {
     SpecialBar * specialBar;
+    TextureRenderTarget *renderTarget;
 }
 
 @property (nonatomic, retain) SpecialBar * specialBar;
+@property (nonatomic, retain) TextureRenderTarget *renderTarget;
 
 + (Player *) create:(CGPoint)position 
 			   size:(CGSize)size 

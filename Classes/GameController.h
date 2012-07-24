@@ -19,6 +19,7 @@
 #import "Background.h"
 #import "Node.h"
 #import "Loggers.h"
+#import "Shader.h"
 #import "ShaderConstants.h"
 #import "ObjectContainer.h"
 #import "SlashingParticleEffect.h"
