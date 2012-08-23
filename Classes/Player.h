@@ -21,11 +21,8 @@
 
 @property (nonatomic, retain) SpecialBar * specialBar;
 
-+ (Player *) create:(CGPoint)position 
-			   size:(CGSize)size 
-	 effectsManager:(ParticleEffectsManager *) effectsManager
-           animator:(SpriteSheetAnimator *) animator;
-
+- (Player *) init:(CGPoint)pos
+             size:(CGSize)sz;
 - (void) resolveCollisions;
 // collision reactions
 - (void) collidesWithPlayer;

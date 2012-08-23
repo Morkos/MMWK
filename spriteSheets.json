@@ -15,5 +15,11 @@
     {
         "filetype" : "png",
         "columns"  : [1, 1, 1]
+    },
+    
+    "megamanSpSheet" :
+    {
+        "filetype" : "png",
+        "columns"  : [8, 8, 8, 8, 8, 8]
     }
 }

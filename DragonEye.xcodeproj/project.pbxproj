@@ -74,6 +74,11 @@
 		28FD14FE0DC6FC130079059D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28FD14FD0DC6FC130079059D /* EAGLView.m */; };
 		28FD15000DC6FC520079059D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD14FF0DC6FC520079059D /* OpenGLES.framework */; };
 		28FD15080DC6FC5B0079059D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28FD15070DC6FC5B0079059D /* QuartzCore.framework */; };
+		304FEBB015B7E7B100A66CA2 /* ComboState.m in Sources */ = {isa = PBXBuildFile; fileRef = 304FEBAF15B7E7B100A66CA2 /* ComboState.m */; };
+		308B24AC15E6244C00463C21 /* EnemyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 308B24AB15E6244B00463C21 /* EnemyBuilder.m */; };
+		308C0B8A15C7AAD100594398 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 308C0B8915C7AAD100594398 /* Enemy.m */; };
+		308C0B8E15C7B0A000594398 /* CharacterBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 308C0B8D15C7B0A000594398 /* CharacterBuilder.mm */; };
+		30A176A415DA13F400189673 /* PlayerBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 30A176A315DA13F300189673 /* PlayerBuilder.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +202,16 @@
 		28FD14FD0DC6FC130079059D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
 		28FD14FF0DC6FC520079059D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		28FD15070DC6FC5B0079059D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		304FEBAE15B7E7B100A66CA2 /* ComboState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboState.h; sourceTree = "<group>"; };
+		304FEBAF15B7E7B100A66CA2 /* ComboState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboState.m; sourceTree = "<group>"; };
+		308B24AA15E6244B00463C21 /* EnemyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBuilder.h; sourceTree = "<group>"; };
+		308B24AB15E6244B00463C21 /* EnemyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBuilder.m; sourceTree = "<group>"; };
+		308C0B8815C7AAD100594398 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		308C0B8915C7AAD100594398 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		308C0B8C15C7B0A000594398 /* CharacterBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterBuilder.h; sourceTree = "<group>"; };
+		308C0B8D15C7B0A000594398 /* CharacterBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CharacterBuilder.mm; sourceTree = "<group>"; };
+		30A176A215DA13F300189673 /* PlayerBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBuilder.h; sourceTree = "<group>"; };
+		30A176A315DA13F300189673 /* PlayerBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerBuilder.mm; sourceTree = "<group>"; };
 		30B094FA1526E0200093BEB7 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		30B094FC1526E0360093BEB7 /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* DragonEye_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonEye_Prefix.pch; sourceTree = "<group>"; };
@@ -245,7 +260,15 @@
 				047B17E3151D8A6100DA4662 /* Prop.h */,
 				047B1F4415301ACF00DA4662 /* Prop.mm */,
 				047B1F8315301DFE00DA4662 /* Character.h */,
+				308C0B8C15C7B0A000594398 /* CharacterBuilder.h */,
+				308C0B8D15C7B0A000594398 /* CharacterBuilder.mm */,
+				30A176A215DA13F300189673 /* PlayerBuilder.h */,
+				30A176A315DA13F300189673 /* PlayerBuilder.mm */,
 				047B1F8415301DFE00DA4662 /* Character.mm */,
+				308C0B8815C7AAD100594398 /* Enemy.h */,
+				308C0B8915C7AAD100594398 /* Enemy.m */,
+				308B24AA15E6244B00463C21 /* EnemyBuilder.h */,
+				308B24AB15E6244B00463C21 /* EnemyBuilder.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -284,6 +307,8 @@
 				044BB2DF1575F2FF005A092B /* MoveState.m */,
 				044BB2E11575F9BF005A092B /* AttackState.h */,
 				044BB2E21575F9BF005A092B /* AttackState.mm */,
+				304FEBAE15B7E7B100A66CA2 /* ComboState.h */,
+				304FEBAF15B7E7B100A66CA2 /* ComboState.m */,
 				044BB2E41575F9DE005A092B /* StandState.h */,
 				044BB2E51575F9DF005A092B /* StandState.m */,
 			);
@@ -643,6 +668,11 @@
 				044BB32215959FC6005A092B /* AnimatorConstants.mm in Sources */,
 				04852C0915A2C12E004C86ED /* FreezeModeManager.mm in Sources */,
 				04852C0A15A2C12E004C86ED /* SpecialBar.m in Sources */,
+				304FEBB015B7E7B100A66CA2 /* ComboState.m in Sources */,
+				308C0B8A15C7AAD100594398 /* Enemy.m in Sources */,
+				308C0B8E15C7B0A000594398 /* CharacterBuilder.mm in Sources */,
+				30A176A415DA13F400189673 /* PlayerBuilder.mm in Sources */,
+				308B24AC15E6244C00463C21 /* EnemyBuilder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
