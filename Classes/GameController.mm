@@ -221,55 +221,15 @@ NSUInteger gblTicks;
     // Release any cached data, images, etc. that aren't in use.
 }
 
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
-{
-    GLint status;
-    const GLchar *source;
-    
-    source = (GLchar *)[[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil] UTF8String];
-    if (!source)
-    {
-        NSLog(@"Failed to load vertex shader");
-        return FALSE;
-    }
-    
-    *shader = glCreateShader(type);
-    glShaderSource(*shader, 1, &source, NULL);
-    glCompileShader(*shader);
-    
-#if defined(DEBUG)
-    GLint logLength;
-    glGetShaderiv(*shader, GL_INFO_LOG_LENGTH, &logLength);
-    if (logLength > 0)
-    {
-        GLchar *log = (GLchar *)malloc(logLength);
-        glGetShaderInfoLog(*shader, logLength, &logLength, log);
-        NSLog(@"Shader compile log:\n%s", log);
-        free(log);
-    }
-#endif
-    
-    glGetShaderiv(*shader, GL_COMPILE_STATUS, &status);
-    if (status == 0)
-    {
-        glDeleteShader(*shader);
-        return FALSE;
-    }
-    
-    return TRUE;
-}
-
 - (BOOL)loadShaders
-{
-    NSString *vertShaderPathname, *fragShaderPathname;
-    
+{   
     // Create shader program.
     [program createProgram];
 	GLuint programId = program.programId;
     
     // Create and compile vertex shader.
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    Shader *vertShader = [Shader shaderWithFile:vertShaderPathname type:GL_VERTEX_SHADER];
+    NSString *vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
+    Shader *vertShader = [[ShaderManager getInstance] getShader:vertShaderPathname];
     if (!vertShader)
     {
         DLOG("Failed to compile vertex shader");
@@ -277,8 +237,8 @@ NSUInteger gblTicks;
     }
     
     // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-    Shader *fragShader = [Shader shaderWithFile:fragShaderPathname type:GL_FRAGMENT_SHADER];
+    NSString *fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
+    Shader *fragShader = [[ShaderManager getInstance] getShader:fragShaderPathname];
     if (!fragShader)
     {
         DLOG("Failed to compile fragment shader");
@@ -311,7 +271,6 @@ NSUInteger gblTicks;
 	ShaderConstants::uniforms[UNIFORM_TRANSLATE] = glGetUniformLocation(programId, "translate");
 	ShaderConstants::uniforms[UNIFORM_SCALE] = glGetUniformLocation(programId, "scale");
 	ShaderConstants::uniforms[UNIFORM_ROTATE] = glGetUniformLocation(programId, "angle");
-    ShaderConstants::uniforms[UNIFORM_KERNEL] = glGetUniformLocation(programId, "kernel");
 	
     
     // Set vertex and fragment shaders up for deletion when glDetachShader gets called.

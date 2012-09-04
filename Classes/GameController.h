@@ -21,6 +21,7 @@
 #import "Loggers.h"
 #import "Shader.h"
 #import "ShaderConstants.h"
+#import "ShaderManager.h"
 #import "ObjectContainer.h"
 #import "SlashingParticleEffect.h"
 #import "ParticleEffectsManager.h"
@@ -44,8 +45,5 @@
 - (void) stopGame;
 - (void) gameLoop;
 - (BOOL) loadShaders;
-- (BOOL) compileShader:(GLuint *)shader 
-				  type:(GLenum)type 
-				  file:(NSString *)file;
 
 @end

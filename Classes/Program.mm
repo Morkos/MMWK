@@ -63,12 +63,13 @@ static Program * program = nil;
     return status != 0;
 }
 
-- (BOOL) dispose {
+- (void) dealloc {
 	if (self.programId) {
 		glDeleteProgram(self.programId);
 		self.programId = 0;
 	}
-	return true;
+    
+    [super dealloc];
 }
 
 @end

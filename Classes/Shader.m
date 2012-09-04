@@ -66,6 +66,8 @@
         glDeleteShader(shaderId);
         shaderId = 0;
     }
+    
+    [super dealloc];
 }
 
 @end
