@@ -8,7 +8,6 @@
 
 #import "Character.h"
 #import "GraphicsEngine.h"
-#import "SpecialBar.h"
 #import "ObjectContainer.h"
 #import "FreezeModeManager.h"
 
@@ -53,6 +52,8 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 									  [NSNumber numberWithInt:4],
 									  nil 
 									  ];
+        
+        self.healthGauge = [[Gauge alloc] init];
 		
 		//TODO: change to map?
 		cgPoints[NO_WHERE]   = CGPointMake( 0.00f,   0.00f);
