@@ -42,6 +42,8 @@
 }
 
 - (Character *) build {
+    [self.character setState:
+     [StandState createWithCharacter:self.character]];
     return self.character;
 }
 

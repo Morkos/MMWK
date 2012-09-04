@@ -16,6 +16,7 @@
 #import "MoveState.h"
 #import "AttackState.h"
 #import "StandState.h"
+#import "Gauge.h"
 
 @interface Character : Prop {
     
@@ -32,6 +33,8 @@
     NSUInteger strength;
     NSUInteger defense;
     
+    Gauge *healthGauge;
+    
 }
 
 @property (nonatomic, retain) id<CharacterState> currentState;
@@ -40,9 +43,10 @@
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, retain) ParticleEffectsManager *effectsManager;
-@property (nonatomic, retain) SpriteSheetAnimator * animator;
+@property (nonatomic, retain) SpriteSheetAnimator *animator;
 @property (nonatomic, assign) NSUInteger strength;
 @property (nonatomic, assign) NSUInteger defense;
+@property (nonatomic, retain) Gauge *healthGauge;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz;

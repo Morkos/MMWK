@@ -12,13 +12,14 @@
 #import "ObjectContainer.h"
 #import "FreezeModeManager.h"
 #import "ComboState.h"
+#import "SpecialBar.h"
 
 //TODO: move this to a better location
 static NSMutableDictionary * directionToOpposite;
 
 @implementation Player
 
-@synthesize specialBar;
+@synthesize specialGauge;
 
 - (id)    init:(CGPoint)pos 
           size:(CGSize)sz {
@@ -28,7 +29,7 @@ static NSMutableDictionary * directionToOpposite;
        
        DLOG("initializing player...");	
 
-       self.specialBar = [SpecialBar getInstance];
+       self.specialGauge = [SpecialBar getInstance];
 
        directionToOpposite = [[NSMutableDictionary alloc] init];
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 

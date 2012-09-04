@@ -24,7 +24,8 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 			effectsManager,
             animator,
             strength,
-            defense;
+            defense,
+            healthGauge;
 
 
 //Private method
@@ -65,8 +66,6 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 		cgPoints[DOWN_LEFT]  = CGPointMake(-1.00f,  -1.00f); 
 		
 	}
-	
-    [self setState:[StandState createWithCharacter:self]];
 	return self;
 	
 }

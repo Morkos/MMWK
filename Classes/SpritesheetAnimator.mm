@@ -33,6 +33,7 @@
 
 - (void) startAnimation:(NSString *) key
                  replay:(bool) isReplayParam { 
+    NSLog(@"Here...%@", key);
     [self startAnimation:key 
                   replay:isReplayParam 
            frameInterval:[timer frameInterval]];
@@ -41,6 +42,7 @@
 - (void) startAnimation:(NSString *) key 
                  replay:(bool) isReplayParam
           frameInterval:(ulong) frameInterval {
+    NSLog(@"Here starting animation for %@", key);
     self.isReplay = isReplayParam;
     self.currentKey = key;
     self.spsheetRowInd = [[stringToRowMap objectForKey:key] intValue];

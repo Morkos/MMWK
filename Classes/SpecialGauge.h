@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Gauge.h"
 
-@interface SpecialBar : NSObject {
-@private
-    NSInteger gauge;    
+@interface SpecialBar : Gauge {
+   
 }
-
-@property (nonatomic, assign) NSInteger gauge;
 
 /**
  * SpecialBar is a gauge that allows the main player
@@ -22,9 +20,5 @@
  * @return a single instance of SpecialBar
  */
 + (id) getInstance;
-
-- (void) increaseBar:(NSInteger) quantity;
-- (void) decreaseBar:(NSInteger) quantity;
-
 
 @end

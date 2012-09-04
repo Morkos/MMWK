@@ -13,13 +13,13 @@
 #import "SpriteSheet.h"
 #import "Character.h"
 #import "GraphicsEngine.h"
-#import "SpecialBar.h"
+#import "Gauge.h"
 
 @interface Player : Character<Collidable> {
-    SpecialBar * specialBar;
+    Gauge * specialGauge;
 }
 
-@property (nonatomic, retain) SpecialBar * specialBar;
+@property (nonatomic, retain) Gauge * specialGauge;
 
 - (Player *) init:(CGPoint)pos
              size:(CGSize)sz;

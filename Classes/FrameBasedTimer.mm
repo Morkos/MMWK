@@ -22,7 +22,7 @@
 }
 
 - (bool) updateTimer {
-    if ((frameCount++ % frameInterval) == 0) {
+    if ((self.frameCount++ % self.frameInterval) == 0) {
         return true;
     }
     
