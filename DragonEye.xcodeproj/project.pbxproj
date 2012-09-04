@@ -57,6 +57,10 @@
 		048567FE15BE7ADE006B88E2 /* Shader.m in Sources */ = {isa = PBXBuildFile; fileRef = 048567FD15BE7ADD006B88E2 /* Shader.m */; };
 		0485682915BE848A006B88E2 /* ComboState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485682815BE848A006B88E2 /* ComboState.m */; };
 		04893EB914F17E7400AAB4BC /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04893EB814F17E7400AAB4BC /* Texture.mm */; };
+		048ED06915F5CA89004D10E3 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ED06415F5CA89004D10E3 /* Enemy.m */; };
+		048ED06A15F5CA89004D10E3 /* EnemyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ED06615F5CA89004D10E3 /* EnemyBuilder.m */; };
+		048ED06B15F5CA89004D10E3 /* PlayerBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 048ED06815F5CA89004D10E3 /* PlayerBuilder.mm */; };
+		048ED06E15F5CAFA004D10E3 /* CharacterBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 048ED06D15F5CAFA004D10E3 /* CharacterBuilder.mm */; };
 		04A09D4E155BB03B0077BE5B /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A09D46155BB03B0077BE5B /* Camera.mm */; };
 		04A09D4F155BB03B0077BE5B /* JSONKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A09D48155BB03B0077BE5B /* JSONKit.mm */; };
 		04A09D50155BB03B0077BE5B /* LevelLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A09D4B155BB03B0077BE5B /* LevelLoader.mm */; };
@@ -173,6 +177,14 @@
 		0485682715BE848A006B88E2 /* ComboState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboState.h; sourceTree = "<group>"; };
 		0485682815BE848A006B88E2 /* ComboState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboState.m; sourceTree = "<group>"; };
 		04893EB814F17E7400AAB4BC /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		048ED06315F5CA89004D10E3 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		048ED06415F5CA89004D10E3 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		048ED06515F5CA89004D10E3 /* EnemyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBuilder.h; sourceTree = "<group>"; };
+		048ED06615F5CA89004D10E3 /* EnemyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBuilder.m; sourceTree = "<group>"; };
+		048ED06715F5CA89004D10E3 /* PlayerBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBuilder.h; sourceTree = "<group>"; };
+		048ED06815F5CA89004D10E3 /* PlayerBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerBuilder.mm; sourceTree = "<group>"; };
+		048ED06C15F5CAFA004D10E3 /* CharacterBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterBuilder.h; sourceTree = "<group>"; };
+		048ED06D15F5CAFA004D10E3 /* CharacterBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CharacterBuilder.mm; sourceTree = "<group>"; };
 		04A09D45155BB03B0077BE5B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		04A09D46155BB03B0077BE5B /* Camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Camera.mm; sourceTree = "<group>"; };
 		04A09D47155BB03B0077BE5B /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -245,7 +257,14 @@
 			isa = PBXGroup;
 			children = (
 				044BB2DA1575E9F0005A092B /* States */,
-				04EE5F01156A0F6200D8A1E6 /* Program.h */,
+				048ED06C15F5CAFA004D10E3 /* CharacterBuilder.h */,
+				048ED06D15F5CAFA004D10E3 /* CharacterBuilder.mm */,
+				048ED06315F5CA89004D10E3 /* Enemy.h */,
+				048ED06415F5CA89004D10E3 /* Enemy.m */,
+				048ED06515F5CA89004D10E3 /* EnemyBuilder.h */,
+				048ED06615F5CA89004D10E3 /* EnemyBuilder.m */,
+				048ED06715F5CA89004D10E3 /* PlayerBuilder.h */,
+				048ED06815F5CA89004D10E3 /* PlayerBuilder.mm */,
 				0480038B14F1C9B000440480 /* Program.mm */,
 				042A9BFA15199CFB00916A89 /* ObjectContainer.h */,
 				042A9BFB15199CFB00916A89 /* ObjectContainer.mm */,
@@ -345,6 +364,7 @@
 			children = (
 				04A09E8F155E3A1D0077BE5B /* Effects */,
 				04A09E8E155E3A0C0077BE5B /* Graphics Objects */,
+				04EE5F01156A0F6200D8A1E6 /* Program.h */,
 				047B20281534040500DA4662 /* TexCoords.h */,
 				047B20291534040500DA4662 /* TexCoords.mm */,
 				30B094FC1526E0360093BEB7 /* Texture.h */,
@@ -661,6 +681,10 @@
 				0481E04115B7F21D007EB6B2 /* TextureRenderTarget.m in Sources */,
 				048567FE15BE7ADE006B88E2 /* Shader.m in Sources */,
 				0485682915BE848A006B88E2 /* ComboState.m in Sources */,
+				048ED06915F5CA89004D10E3 /* Enemy.m in Sources */,
+				048ED06A15F5CA89004D10E3 /* EnemyBuilder.m in Sources */,
+				048ED06B15F5CA89004D10E3 /* PlayerBuilder.mm in Sources */,
+				048ED06E15F5CAFA004D10E3 /* CharacterBuilder.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
