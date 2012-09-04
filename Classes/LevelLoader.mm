@@ -14,6 +14,9 @@
 #import "Overlay.h"
 #import "Camera.h"
 #import "FreezeModeManager.h"
+#import "CharacterBuilder.h"
+#import "PlayerBuilder.h"
+#import "EnemyBuilder.h"
 
 static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
@@ -90,7 +93,6 @@ static Camera * camera = [Camera getInstance];
 		Texture *backgroundTexture = [[SpriteSheetManager getInstance] loadTexture:bg];
         [background addBackgroundTexture:backgroundTexture];
 	}
-	
 	
 	[[ObjectContainer singleton] addObject:background];
     [pool release];
@@ -260,17 +262,60 @@ static Camera * camera = [Camera getInstance];
                                                     stringToRowMap:stringToRowMap 
                                                              timer:animationTimer];
 	
-	Player *player = [Player create:position 
-							   size:size
-					 effectsManager:effectsManager
-                           animator:animator];
-	
+	PlayerBuilder *builder = [[PlayerBuilder alloc] init];
+	Character * player = [[[[builder newBuilder:position 
+                                       size:size]
+                        buildAnimator:animator] 
+                        buildParticleEffectsManager:effectsManager]
+                       build];
+    
 	[[ObjectContainer singleton] addObject:player];
 }
 						
-- (void) setUpEnemies:(id)enemies {
-	for(id enemy in enemies) {
+- (void) setUpEnemies:(id)attributes {
+	for(id enemy in attributes) {
 		DLOG("enemy: %@", enemy);
+        
+        NSArray * positionList = [enemy objectForKey:@"Position"];
+        NSArray * sizeList	   = [enemy objectForKey:@"Size"];
+        NSString * imageName   = [enemy objectForKey:@"Image"];
+        
+        CGPoint position = CGPointMake([[positionList objectAtIndex:0] floatValue], 
+                                       [[positionList objectAtIndex:1] floatValue]);
+        
+        CGSize size = CGSizeMake([[sizeList objectAtIndex:0] floatValue], 
+                                 [[sizeList objectAtIndex:1] floatValue]);
+
+        NSLog(@"imageName: %@, position:(%lf, %lf), size:(%lf,%lf)", 
+             imageName, position.x, position.y, size.width, size.height);
+        
+        SpriteSheet *sprite = [[SpriteSheetManager getInstance] loadSpriteSheet:imageName];
+        
+        NSDictionary *stringToRowMap = 
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSNumber numberWithInt:0], ANIMATOR_STAND, 
+         [NSNumber numberWithInt:1], ANIMATOR_MOVE, 
+         [NSNumber numberWithInt:2], NSSTRING_FORMAT(ANIMATOR_ATTACK, 0), 
+         [NSNumber numberWithInt:3], NSSTRING_FORMAT(ANIMATOR_ATTACK, 1), 
+         [NSNumber numberWithInt:4], NSSTRING_FORMAT(ANIMATOR_ATTACK, 2), 
+         nil];
+        
+        id<AnimationTimer> animationTimer = [FrameBasedTimer createTimerWithFrameInterval:8];
+        
+        SpriteSheetAnimator *animator = [SpriteSheetAnimator createWithSpsheet:sprite 
+                                                                stringToRowMap:stringToRowMap 
+                                                                         timer:animationTimer];
+        
+        EnemyBuilder * builder = [[EnemyBuilder alloc] init];
+        
+        Character * other = 
+            [[[builder newBuilder:position 
+                             size:size]
+              buildAnimator:animator] 
+             build];
+    
+        
+        [[ObjectContainer singleton] addObject:other];
 	}
 }
 

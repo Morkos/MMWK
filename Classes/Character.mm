@@ -22,7 +22,10 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 			currentDirection,
 			currentOrientation,
 			effectsManager,
-            animator;
+            animator,
+            strength,
+            defense;
+
 
 //Private method
 - (void) move:(CGPoint)movement {
@@ -32,9 +35,7 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 }
 
 - (id) init:(CGPoint) pos
-	   size:(CGSize) sz 
-effectsManager:(ParticleEffectsManager *) effectsManagerParam
-animator:(SpriteSheetAnimator *) animatorParam {
+	   size:(CGSize) sz {
 	
 	if(self = [super init]) {
 		
@@ -43,9 +44,7 @@ animator:(SpriteSheetAnimator *) animatorParam {
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
-		self.effectsManager = effectsManagerParam;
-        self.animator = animatorParam;
-		
+        
 		// TODO: Put in configuration file passed in as parameter
 		self.attackingRowIndexes = [NSArray arrayWithObjects:
 									  [NSNumber numberWithInt:2],

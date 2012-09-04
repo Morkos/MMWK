@@ -29,6 +29,9 @@
 	ParticleEffectsManager *effectsManager;
     SpriteSheetAnimator * animator;
     
+    NSUInteger strength;
+    NSUInteger defense;
+    
 }
 
 @property (nonatomic, retain) id<CharacterState> currentState;
@@ -38,11 +41,11 @@
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, retain) ParticleEffectsManager *effectsManager;
 @property (nonatomic, retain) SpriteSheetAnimator * animator;
+@property (nonatomic, assign) NSUInteger strength;
+@property (nonatomic, assign) NSUInteger defense;
 
 - (id) init:(CGPoint) pos
-	   size:(CGSize) sz
-effectsManager:(ParticleEffectsManager *) effectsManager
-animator:(SpriteSheetAnimator *) animator;
+	   size:(CGSize) sz;
 
 - (void) runTo:(Direction) dir;
 - (void) moveTowards:(Direction) dir;

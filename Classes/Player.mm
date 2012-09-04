@@ -22,15 +22,15 @@ static NSMutableDictionary * directionToOpposite;
             renderTarget;
 
 - (id)    init:(CGPoint)pos 
-          size:(CGSize)sz 
-effectsManager:(ParticleEffectsManager *)effectsManagerParam 
-      animator:(SpriteSheetAnimator *)animatorParam {
+          size:(CGSize)sz {
 	
 	if(self = [super init:pos 
-					 size:sz 
-		   effectsManager:effectsManagerParam
-                 animator:animatorParam]) {
-	   
+					 size:sz]) {
+       
+       DLOG("initializing player...");	
+
+       self.specialBar = [SpecialBar getInstance];
+
        directionToOpposite = [[NSMutableDictionary alloc] init];
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 
 							   forKey:[NSNumber numberWithInt:LEFT]]; 
@@ -51,27 +51,11 @@ effectsManager:(ParticleEffectsManager *)effectsManagerParam
 							   forKey:[NSNumber numberWithInt:DOWN_RIGHT]]; 
 	   [directionToOpposite setObject:[NSNumber numberWithInt:DOWN_RIGHT] 
 							   forKey:[NSNumber numberWithInt:UP_LEFT]];
+        
 	}
 	
 	return self;
 	
-}
-+ (Player *) create:(CGPoint) position 
-			   size:(CGSize) size 
-	 effectsManager:(ParticleEffectsManager *) effectsManager
-           animator:(SpriteSheetAnimator *) animator {
-	
-	Player *player = [[Player alloc] init:position 
-									 size:size 
-						   effectsManager:effectsManager
-                                 animator:animator];
-    
-    player.specialBar = [SpecialBar getInstance];
-    player.renderTarget = [TextureRenderTarget renderTargetWithWidth:100
-                                                              height:100];
-	
-	DLOG("initializing player...");	
-	return player;
 }
 
 // physics
