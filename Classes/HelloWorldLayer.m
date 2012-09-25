@@ -98,52 +98,26 @@ enum {
 }
 
 -(void) createMenu
-{
-	// Default font size will be 22 points.
-	[CCMenuItemFont setFontSize:22];
+{	
+	CCMenuItem *dpadButton = [CCMenuItemImage itemWithNormalImage:@"dpadNintendo.png"
+                                                    selectedImage:@"dpadNintendo.png"];
+    
+    CCMenuItem *attackButton = [CCMenuItemImage itemWithNormalImage:@"attackButton.png"
+                                                      selectedImage:@"attackButton.png"];
 	
-	// Reset Button
-	CCMenuItemLabel *reset = [CCMenuItemFont itemWithString:@"Reset" block:^(id sender){
-		[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
-	}];
-	
-	// Achievement Menu Item using blocks
-	CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-		
-		
-		GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-		achivementViewController.achievementDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:achivementViewController animated:YES];
-		
-		[achivementViewController release];
-	}];
-	
-	// Leaderboard Menu Item using blocks
-	CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-		
-		
-		GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-		leaderboardViewController.leaderboardDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-		
-		[leaderboardViewController release];
-	}];
-	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
-	
-	[menu alignItemsVertically];
+	CCMenu *menu = [CCMenu menuWithItems:dpadButton, attackButton, nil];
 	
 	CGSize size = [[CCDirector sharedDirector] winSize];
-	[menu setPosition:ccp( size.width/2, size.height/2)];
+	menu.position = ccp(0, 0);
+    
+    // TODO: Remove hard coded values
+	dpadButton.position = ccp(50, 50);
+    dpadButton.scale = 0.75f;
+    
+    attackButton.position = ccp(size.width - 50, 50);
+    attackButton.scale = 0.75f;
 	
-	
-	[self addChild: menu z:-1];	
+	[self addChild: menu z:1];	
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)pos
