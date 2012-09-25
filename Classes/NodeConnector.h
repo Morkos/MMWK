@@ -10,7 +10,6 @@
 #import "LinePoints.h"
 #import "Texture.h"
 #import "Node.h"
-#import "GraphicsEngine.h"
 #import "CoordinateSystem.h"
 #import "PolarCoordinates.h"
 

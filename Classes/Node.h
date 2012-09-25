@@ -10,6 +10,7 @@
 #import <math.h>
 #import "Overlay.h"
 #import "Loggers.h"
+#import "AnimatorConstants.h"
 
 @interface Node : Overlay<NSCopying> {
 @private

@@ -12,17 +12,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SpriteSheet.h"
 #import "Character.h"
-#import "GraphicsEngine.h"
-#import "SpecialBar.h"
-#import "TextureRenderTarget.h"
+#import "Gauge.h"
 
 @interface Player : Character<Collidable> {
-    SpecialBar * specialBar;
-    TextureRenderTarget *renderTarget;
+    Gauge * specialGauge;
 }
 
-@property (nonatomic, retain) SpecialBar * specialBar;
-@property (nonatomic, retain) TextureRenderTarget *renderTarget;
+@property (nonatomic, retain) Gauge * specialGauge;
 
 - (Player *) init:(CGPoint)pos
              size:(CGSize)sz;

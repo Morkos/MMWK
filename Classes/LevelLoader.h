@@ -9,14 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "JSONKit.h"
 #import "LevelEnum.h"
-#import "BezierCurve.h"
-#import "SlashingParticleEffect.h"
 #import "ParticleEffectsManager.h"
 #import "SpritesheetAnimator.h"
 #import "FrameBasedTimer.h"
 #import "AnimatorConstants.h"
 #import "SpriteSheetManager.h"
 #import "TextureManager.h"
+#import "Loggers.h"
+#import "Texture.h"
+#import "SpriteSheet.h"
+#import "ObjectContainer.h"
+#import "Overlay.h"
+#import "Camera.h"
+#import "FreezeModeManager.h"
+#import "CharacterBuilder.h"
+#import "PlayerBuilder.h"
+#import "EnemyBuilder.h"
 
 @interface LevelLoader : NSObject {
 	JSONDecoder * decoder;

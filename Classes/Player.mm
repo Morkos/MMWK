@@ -18,8 +18,7 @@ static NSMutableDictionary * directionToOpposite;
 
 @implementation Player
 
-@synthesize specialBar,
-            renderTarget;
+@synthesize specialGauge;
 
 - (id)    init:(CGPoint)pos 
           size:(CGSize)sz {
@@ -29,7 +28,7 @@ static NSMutableDictionary * directionToOpposite;
        
        DLOG("initializing player...");	
 
-       self.specialBar = [SpecialBar getInstance];
+       self.specialGauge = [[Gauge alloc] init];
 
        directionToOpposite = [[NSMutableDictionary alloc] init];
 	   [directionToOpposite setObject:[NSNumber numberWithInt:RIGHT] 

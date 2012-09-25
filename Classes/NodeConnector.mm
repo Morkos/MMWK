@@ -43,13 +43,13 @@
     for (NSValue *val in line.points) {
         CGPoint point = [val CGPointValue];
         GLPosition gamePosition = {point.x, point.y, 0.0f};
-        [GraphicsEngine drawTexture:image
+        /*[GraphicsEngine drawTexture:image
                           texCoords:[TexCoords defaultTexCoords] 
                            position:gamePosition 
                                size:size 
                               angle:angle
                         orientation:ORIENTATION_FORWARD
-                            opacity:1.0f];
+                            opacity:1.0f];*/
     }
 }
 

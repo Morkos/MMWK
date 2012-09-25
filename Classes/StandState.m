@@ -20,7 +20,7 @@
 }
 
 - (void) start {
-    [character.animator startAnimation:@"stand" replay:true];
+    [character.animator startAnimation:ANIMATOR_STAND replay:true];
 }
 
 - (void) updateState {

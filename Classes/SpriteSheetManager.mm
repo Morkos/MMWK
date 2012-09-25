@@ -12,64 +12,40 @@ static SpriteSheetManager *manager = nil;
 
 @implementation SpriteSheetManager
 
-@synthesize decoder,
-            textureManager,
-            columnDict;
+@synthesize attributesStore;
 
 + (SpriteSheetManager *) getInstance {
     if(manager == nil) {
 		manager = [[SpriteSheetManager alloc] init];
-		manager.decoder = [JSONDecoder decoder];
-        manager.textureManager = [TextureManager getInstance];
-        manager.columnDict = [NSMutableDictionary dictionaryWithCapacity:10];
+        manager.attributesStore = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	
 	return manager;
 }
 
-- (void) loadFromFile:(NSString *) jsonFilepath {
-	NSData *jsonData = [NSData dataWithContentsOfURL:
-                        [NSURL fileURLWithPath:jsonFilepath]];
-    
-    NSDictionary *items = [decoder objectWithData:jsonData];
+- (void) loadFromFile:(NSString *) plistFilepath {
+    NSDictionary *items = [NSDictionary dictionaryWithContentsOfFile:plistFilepath];
     
     for(NSString *filename in [items allKeys]) {
         NSDictionary *attributes = [items objectForKey:filename];
-        NSArray *columns = [attributes objectForKey:@"columns"];
-        NSString *filetype = [attributes objectForKey:@"filetype"];
-        
-        NSString *filepath = [[NSBundle mainBundle] 
-                                pathForResource:filename
-                                         ofType:filetype];
-        
-        NSArray *pair = [NSArray arrayWithObjects:columns,
-                                                  filepath,
-                                                  nil];
 
-        [self.columnDict setObject:pair forKey:filename];
+        [self.attributesStore setObject:attributes forKey:filename];
     }
 }
 
 - (SpriteSheet *) loadSpriteSheet:(NSString *) filename {
-    NSArray *pair = [self.columnDict objectForKey:filename];
+    NSDictionary *attributes = [self.attributesStore objectForKey:filename];
+    NSNumber *numOfColumns = [attributes objectForKey:@"numOfColumns"];
+    NSNumber *numOfRows = [attributes objectForKey:@"numOfRows"];
+    NSDictionary *animationFrames = [attributes objectForKey:@"animationFrames"];
     
-    NSString *filepath = [pair objectAtIndex:1];
-    Texture *texture = [textureManager loadTexture:filepath];
-    
-    NSArray *columns = [pair objectAtIndex:0];
-    
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:filename];
     SpriteSheet *spSheet = [SpriteSheet createWithTexture:texture
-                                                  columns:columns];
+                                          animationFrames:animationFrames
+                                                numOfRows:[numOfRows intValue]
+                                               numOfColumns:[numOfColumns intValue]];
     
     return spSheet;
-}
-
-- (Texture *) loadTexture:(NSString *) filename {
-    NSArray *pair = [self.columnDict objectForKey:filename];
-    NSString *filepath = [pair objectAtIndex:1];
-    Texture *texture = [textureManager loadTexture:filepath];
-    
-    return texture;
 }
 
 @end

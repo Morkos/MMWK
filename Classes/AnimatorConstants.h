@@ -29,5 +29,6 @@ extern NSString *ANIMATOR_NODE_NEUTRAL;
 extern NSString *ANIMATOR_STAND;
 extern NSString *ANIMATOR_MOVE;
 extern NSString *ANIMATOR_ATTACK;
+extern NSString *ANIMATOR_WOUNDED;
 
 #endif

@@ -1,18 +1,18 @@
 {
-	 "Backgrounds" : ["background"],
+	 "Backgrounds" : ["background.png"],
      "BgSequence"  : [0, 0, 0, 0],
     
      "Title"	  : "Manifest Destiny",
      "Player"     :
      {
-		"Image"    : "lancelotSpSheet",
+		"Image"    : "lancelotSpSheet.png",
 		"Position" : [25, 50],
 		"Size"     : [40, 40]
      },
      
 	 "Combos"	   : 
      {   
-        "Image" : "node",
+        "Image" : "node.png",
         "Size"  : [0.175, 0.175],
         "NodePositions" : 
          { 
@@ -24,12 +24,12 @@
          }
      },
 		
-	 "Enemies"    :
+     /*"Enemies"    :
 	 [
 		{
-			"Image"	   : "megamanSpSheet",
+			"Image"	   : "megamanSpSheet.png",
 			"Position" : [75, 75],
 			"Size"     : [20, 20]
 		}
-	 ]
+	 ]*/
 }

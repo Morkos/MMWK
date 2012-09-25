@@ -10,7 +10,6 @@
 #import "Drawable.h"
 #import "Texture.h"
 #import "PropState.h"
-#import "GraphicsEngine.h"
 #import "Loggers.h"
 #import "FrameBasedTimer.h"
 

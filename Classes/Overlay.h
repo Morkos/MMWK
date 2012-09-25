@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Drawable.h"
-#import "GraphicsEngine.h"
 #import "SpriteSheetAnimator.h"
 #import "PropState.h"
-
-@class Node;
 
 @interface Overlay : NSObject <Drawable> {
 	SpriteSheetAnimator *animator;

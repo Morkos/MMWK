@@ -51,6 +51,6 @@
 
 - (bool) isLastAnimation;
 
-- (TexCoords *) getCurrentTexCoords;
+//- (TexCoords *) getCurrentTexCoords;
 
 @end

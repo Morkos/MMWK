@@ -7,16 +7,6 @@
 //
 
 #import "LevelLoader.h"
-#import "Loggers.h"
-#import "Texture.h"
-#import "SpriteSheet.h"
-#import "ObjectContainer.h"
-#import "Overlay.h"
-#import "Camera.h"
-#import "FreezeModeManager.h"
-#import "CharacterBuilder.h"
-#import "PlayerBuilder.h"
-#import "EnemyBuilder.h"
 
 static LevelLoader * levelLoader = NULL;
 static NSDictionary * classToSetup;
@@ -86,7 +76,7 @@ static Camera * camera = [Camera getInstance];
 
 - (void) setUpBackground:(id)backgrounds {
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    /*NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	for(id bg in backgrounds) {
 		DLOG("Creating texture for %@", bg);
@@ -95,7 +85,7 @@ static Camera * camera = [Camera getInstance];
 	}
 	
 	[[ObjectContainer singleton] addObject:background];
-    [pool release];
+    [pool release];*/
 }
 
 - (void) setUpBgSequence:(id)bgSequence {
@@ -187,15 +177,15 @@ static Camera * camera = [Camera getInstance];
     
     SpriteSheet *sprite = [[SpriteSheetManager getInstance] loadSpriteSheet:imageName];
 	
-	Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
+	/*Texture *slashTexture = [Texture textureWithFilename:[[NSBundle mainBundle] 
 														  pathForResource:@"slash" 
-														  ofType:@"png"]];
+														  ofType:@"png"]];*/
 	
 	// Particle effects
 	// TODO: Use configuration file
 	ParticleEffectsManager *effectsManager = [ParticleEffectsManager manager:3];
 	
-	BezierCurve *pathAttack0 = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
+	/*BezierCurve *pathAttack0 = [BezierCurve curveFrom:CGPointMake(0.4, 0.2)
 												   c0:CGPointMake(0.5, 0.1)
 												   c1:CGPointMake(0.5, 0.05)
 												   to:CGPointMake(0.4, 0.0)
@@ -245,7 +235,7 @@ static Camera * camera = [Camera getInstance];
 	
     [effectsManager addEffect:attackEffect0 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 0)];
     [effectsManager addEffect:attackEffect1 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 1)];
-    [effectsManager addEffect:attackEffect2 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 2)];
+    [effectsManager addEffect:attackEffect2 key:NSSTRING_FORMAT(ANIMATOR_ATTACK, 2)];*/
     
     NSDictionary *stringToRowMap = 
     [NSDictionary dictionaryWithObjectsAndKeys:

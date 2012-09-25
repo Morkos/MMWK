@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONKit.h"
-#import "TextureManager.h"
 #import "SpriteSheet.h"
 
 /**
@@ -16,20 +15,16 @@
  * from a json file.
  */
 @interface SpriteSheetManager : NSObject {
-    JSONDecoder *decoder;
-    TextureManager *textureManager;
     
     // A map of filenames (without extension) -> [columns, filepath]
-    NSMutableDictionary *columnDict;
+    NSMutableDictionary *attributesStore;
 }
 
-@property (nonatomic, retain) JSONDecoder * decoder;
-@property (nonatomic, retain) TextureManager *textureManager;
-@property (nonatomic, retain) NSMutableDictionary *columnDict;
+@property (nonatomic, retain) NSMutableDictionary *attributesStore;
 
 + (SpriteSheetManager *) getInstance;
 
-- (void) loadFromFile:(NSString *) jsonFilepath;
+- (void) loadFromFile:(NSString *) plistFilepath;
 
 /**
  * Loads a sprite sheet based on the filename provided in the JSON
@@ -38,13 +33,5 @@
  * @filename: The key provided in the JSON file (without extension)
  */
 - (SpriteSheet *) loadSpriteSheet:(NSString *) filename;
-
-/**
- * Loads a texture based on the filename provided in the JSON
- * file. 
- *
- * @filename: The key provided in the JSON file (without extension)
- */
-- (Texture *) loadTexture:(NSString *) filename;
 
 @end 

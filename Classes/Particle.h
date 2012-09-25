@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Texture.h"
-#import "GraphicsEngine.h"
+#import "PropState.h"
+#import "Typedefs.h"
 
 
 @interface Particle : NSObject {

@@ -33,6 +33,7 @@
 
 - (void) startAnimation:(NSString *) key
                  replay:(bool) isReplayParam { 
+    NSLog(@"Here...%@", key);
     [self startAnimation:key 
                   replay:isReplayParam 
            frameInterval:[timer frameInterval]];
@@ -41,6 +42,7 @@
 - (void) startAnimation:(NSString *) key 
                  replay:(bool) isReplayParam
           frameInterval:(ulong) frameInterval {
+    NSLog(@"Here starting animation for %@", key);
     self.isReplay = isReplayParam;
     self.currentKey = key;
     self.spsheetRowInd = [[stringToRowMap objectForKey:key] intValue];
@@ -54,8 +56,8 @@
 }
 
 - (void) animate {
-    if ([self isAnimating] && [timer updateTimer]) {
-        uint lastIndex = [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
+    /*if ([self isAnimating] && [timer updateTimer]) {
+        uint lastIndex = [spSheet getNumOfColumnsInRow:spsheetRowInd] - 1;
         if (spsheetColInd++ >= lastIndex) {
             spsheetColInd = 0;
             
@@ -63,18 +65,19 @@
                 [self stopAnimation];
             }
         }
-    }
+    }*/
 }
 
 - (bool) isLastAnimation {
-    return spsheetColInd == [[spSheet getTextureCoords:spsheetRowInd] count] - 1;
+    //return spsheetColInd == [spSheet getNumOfColumnsInRow:spsheetRowInd] - 1;
+    return false;
 }
 
-- (TexCoords *) getCurrentTexCoords {
+/*- (TexCoords *) getCurrentTexCoords {
     SpriteSheet *sprite = self.spSheet;
 	NSArray *texCoordsArray = [sprite getTextureCoords:self.spsheetRowInd];
 	
 	return [texCoordsArray objectAtIndex:self.spsheetColInd];
-}
+}*/
 
 @end

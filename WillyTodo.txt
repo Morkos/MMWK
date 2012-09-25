@@ -1,0 +1,2 @@
+Make shader pipeline by using multiple precompiled programs. Create
+NormalShaderPipeline, BlurShaderPipeline, etc. 

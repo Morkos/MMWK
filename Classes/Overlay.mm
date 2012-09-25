@@ -29,7 +29,7 @@
 
 - (void) draw {
 	if (currentState == OVERLAY_SHOWN) {
-		[GraphicsEngine drawOverlay:self];
+		//[GraphicsEngine drawOverlay:self];
 	}
 }
 

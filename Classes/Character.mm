@@ -7,10 +7,6 @@
 //
 
 #import "Character.h"
-#import "GraphicsEngine.h"
-#import "SpecialBar.h"
-#import "ObjectContainer.h"
-#import "FreezeModeManager.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS]; 
 
@@ -24,7 +20,8 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 			effectsManager,
             animator,
             strength,
-            defense;
+            defense,
+            healthGauge;
 
 
 //Private method
@@ -52,6 +49,8 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 									  [NSNumber numberWithInt:4],
 									  nil 
 									  ];
+        
+        self.healthGauge = [[Gauge alloc] init];
 		
 		//TODO: change to map?
 		cgPoints[NO_WHERE]   = CGPointMake( 0.00f,   0.00f);
@@ -65,8 +64,6 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 		cgPoints[DOWN_LEFT]  = CGPointMake(-1.00f,  -1.00f); 
 		
 	}
-	
-    [self setState:[StandState createWithCharacter:self]];
 	return self;
 	
 }
@@ -80,8 +77,8 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 
 
 - (void) draw {
-	[GraphicsEngine drawCharacter:self];
-	[GraphicsEngine drawParticleEffects:effectsManager];
+	/*[GraphicsEngine drawCharacter:self];
+	[GraphicsEngine drawParticleEffects:effectsManager];*/
 }
 
 - (void) runTo:(Direction) dir {

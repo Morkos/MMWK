@@ -16,8 +16,9 @@ NSString *ANIMATOR_NODE_INVALID = @"node_invalid";
 NSString *ANIMATOR_NODE_NEUTRAL = @"node_neutral";
 
 /**
- * Player animator keys
+ * Character animator keys
  */
 NSString *ANIMATOR_STAND = @"stand";
 NSString *ANIMATOR_MOVE = @"move";
 NSString *ANIMATOR_ATTACK = @"attack%d";
+NSString *ANIMATOR_WOUNDED = @"wounded";

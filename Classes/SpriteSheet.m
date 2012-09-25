@@ -8,64 +8,74 @@
 
 #import "SpriteSheet.h"
 
+@interface SpriteSheet ()
+- (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
+@end
+
 @implementation SpriteSheet
 
-@synthesize sheet, 
+@synthesize texture, 
 			sizeX, 
-			sizeY, 
-			sizeTexX, 
-			sizeTexY, 
-			texCoordsArray;
+			sizeY,
+            animationFrames;
 
-+ (SpriteSheet *) createWithTexture:(Texture *) texture 
-						    columns:(NSArray *) columns {
-	
-	uint rows = [columns count];
-	uint maxNumOfColumns = [[columns valueForKeyPath:@"@max.intValue"] intValue];
++ (SpriteSheet *) createWithTexture:(CCTexture2D *) texture 
+                    animationFrames:(NSDictionary *) animationFrames 
+                          numOfRows:(NSUInteger) numOfRows
+                       numOfColumns:(NSUInteger) numOfColumns {
 	
 	SpriteSheet *spriteSheet = [[SpriteSheet alloc] init];
-	spriteSheet.sheet = texture;
-	spriteSheet.sizeX = (texture.width / maxNumOfColumns);
-	spriteSheet.sizeY = (texture.height / rows);
-	spriteSheet.sizeTexX = 1.0 / maxNumOfColumns;
-	spriteSheet.sizeTexY = 1.0 / rows;
-
-	[spriteSheet initTexCoordsArray:columns];
+	spriteSheet.texture = texture;
+	spriteSheet.sizeX = ([texture pixelsWide] / numOfColumns);
+	spriteSheet.sizeY = ([texture pixelsHigh] / numOfRows);
+    spriteSheet.animationFrames = animationFrames;
+    
+    for (NSString *key in animationFrames) {
+        NSArray *animationKeys = [animationFrames valueForKey:key];
+        for (int i = 0; i < [animationKeys count]; i++) {
+            NSArray *rowColPair = [animationKeys objectAtIndex:i];
+            NSUInteger row = [[rowColPair objectAtIndex:0] intValue];
+            NSUInteger column = [[rowColPair objectAtIndex:1] intValue];
+            CGFloat topLeftX = spriteSheet.sizeX * column;
+            CGFloat topLeftY = spriteSheet.sizeY * row;
+            
+            CCSpriteFrame *frame = 
+                [CCSpriteFrame frameWithTexture:texture 
+                                           rect:CGRectMake(topLeftX, topLeftY, spriteSheet.sizeX, spriteSheet.sizeY)];
+            
+            [[CCSpriteFrameCache sharedSpriteFrameCache] 
+                addSpriteFrame:frame name:[NSString stringWithFormat: @"%@%d", key, i]];
+        }
+    }
 	
 	return spriteSheet;
 }
 
-- (void) initTexCoordsArray:(NSArray *) columns {
-	uint numOfRows = [columns count];
-	self.texCoordsArray = [NSMutableArray arrayWithCapacity:numOfRows];
-	
-	for (uint rowInd = 0; rowInd < numOfRows; rowInd++) {
-		uint numOfColumns = [[columns objectAtIndex:rowInd] integerValue];
-		NSMutableArray *texCoordsForRow = [NSMutableArray arrayWithCapacity:numOfColumns];
-		
-		for (uint colInd = 0; colInd < numOfColumns; colInd++) {
-			GLfloat topLeftX = colInd * sizeTexX;
-			GLfloat topLeftY = rowInd * sizeTexY;
-			GLfloat bottomRightX = (colInd+1) * sizeTexX;
-			GLfloat bottomRightY = (rowInd+1) * sizeTexY;
-			
-			TexCoords *texCoords = [TexCoords texCoordsWithTopLeft:CGPointMake(topLeftX, topLeftY) 
-													   bottomRight:CGPointMake(bottomRightX, bottomRightY)
-									];
-			
-			[texCoordsForRow addObject:texCoords];
-		}
-		
-		[self.texCoordsArray addObject:texCoordsForRow];
-	}
+- (NSUInteger) getNumOfFramesForKey:(NSString *) key {
+	return [[self.animationFrames objectForKey:key] count];
 }
 
-- (NSArray *) getTextureCoords:(uint) rowInd {
-	return [self.texCoordsArray objectAtIndex:rowInd];
+- (NSArray *) getSpriteFramesForKey:(NSString *) key {
+    NSUInteger numOfFrames = [self getNumOfFramesForKey:key];
+    NSMutableArray *spriteFrames = [NSMutableArray arrayWithCapacity:numOfFrames];
+    
+    for (int i = 0; i < numOfFrames; i++) {
+        CCSpriteFrame *frame = [self getFrameForKey:key frameNum:i];
+        [spriteFrames addObject:frame];
+    }
+    
+    return spriteFrames;
 }
 
-- (uint) getNumOfColumnsInRow:(uint) rowInd {
-	return [[self.texCoordsArray objectAtIndex:rowInd] count];
+- (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
+    CCSpriteFrame *frame = [self getFrameForKey:key frameNum:frameNum];
+    return [CCSprite spriteWithTexture:texture rect:frame.rect];
+}
+
+- (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
+    NSString *frameKey = [NSString stringWithFormat:@"%@%d", key, frameNum];
+    CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameKey];
+    return frame;
 }
 
 @end

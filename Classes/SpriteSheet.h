@@ -7,38 +7,54 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <OpenGLES/ES2/gl.h>
-#import <OpenGLES/ES2/glext.h>
-#import "Texture.h"
-#import "PropState.h"
-#import "TexCoords.h"
+#import "cocos2d.h"
 
 @interface SpriteSheet : NSObject {
 	// The texture containing the sprite sheet
-	Texture *sheet;
+	CCTexture2D *texture;
 	
 	// Size of a single image in x,y direction
 	uint sizeX, sizeY;
-	
-	// Size of a single image in x,y texture coords
-	GLfloat sizeTexX, sizeTexY;
-	
-	// Array of array of texture coordinates for each row
-	NSMutableArray *texCoordsArray;
+    
+    // A map that maps strings -> row, column
+    // E.g. "stand" -> [[0,0],[0,1],[0,2]]
+    // See spriteSheets.plist for example
+    NSDictionary *animationFrames;
 }
 
-@property (nonatomic, retain) Texture *sheet;
+@property (nonatomic, retain) CCTexture2D *texture;
 @property (nonatomic, assign) uint sizeX, sizeY;
-@property (nonatomic, assign) GLfloat sizeTexX, sizeTexY;
-@property (nonatomic, retain) NSMutableArray *texCoordsArray;
+@property (nonatomic, retain) NSDictionary *animationFrames;
 
+/**
+ * Create spritesheet with given parameters:
+ *
+ * @param texture The texture storing the whole sprite sheet
+ * @param animationFrames The map containing strings -> row, column indexes in the sprite sheet for one animation sequence
+ *                         e.g. "stand" -> [[0,0], [0,1], [0,2]]
+ * @param numOfRows Number of rows in the sprite sheet
+ * @param numOfColumns Number of columns in the sprite sheet
+ */
++ (SpriteSheet *) createWithTexture:(CCTexture2D *) texture 
+                     animationFrames:(NSDictionary *) animationFrames 
+                           numOfRows:(NSUInteger) numOfRows
+                        numOfColumns:(NSUInteger) numOfColumns;
 
-+ (SpriteSheet *) createWithTexture:(Texture *) texture 
-						    columns:(NSArray *) columns;
+/**
+ * Returns the number of frames for a specific animation sequence
+ * @param key A key identifying the animation sequence
+ * @return The number of frames for the sequence
+ */
+- (NSUInteger) getNumOfFramesForKey:(NSString *) key;
 
-- (void) initTexCoordsArray:(NSArray *) columns;
-- (NSArray *) getTextureCoords:(uint) rowIndex;
-- (uint) getNumOfColumnsInRow:(uint)rowIndex;
+/**
+ * Returns the animation sequence in a form of CCSpriteFrame array
+ * @param key A key identifying the animation sequence
+ * @return The number of frames for the sequence
+ */
+- (NSArray *) getSpriteFramesForKey:(NSString *) key;
+
+- (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
 
 @end
 

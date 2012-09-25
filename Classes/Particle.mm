@@ -45,13 +45,13 @@
 - (void) draw {
 	if (isAlive) {
 		GLPosition glPosition = {position.x, position.y, 0.0f};
-		[GraphicsEngine drawTexture:image
+		/*[GraphicsEngine drawTexture:image
 						  texCoords:[TexCoords defaultTexCoords]
 						   position:glPosition 
 							   size:size 
 							  angle:angle
 						orientation:orientation
-							opacity:opacity];
+							opacity:opacity];*/
 	}
 }
 

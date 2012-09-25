@@ -1,25 +1,29 @@
 {
-    "background" :
+    /*"background.png" :
     {
-        "filetype" : "png",
+        
         "columns"  : [1]
-    },
+    },*/
     
-    "lancelotSpSheet" :
+    "lancelotSpSheet.png" :
     {
-        "filetype" : "png",
-        "columns"  : [1, 4, 3, 7, 4]
-    },
-    
-    "node" :
-    {
-        "filetype" : "png",
-        "columns"  : [1, 1, 1]
-    },
-    
-    "megamanSpSheet" :
-    {
-        "filetype" : "png",
-        "columns"  : [8, 8, 8, 8, 8, 8]
+        "maxColumns" : 7
+        "animationFrames"  : {
+            "stand" : [{0,1}], 
+            "walk" : [{1,0},{1,1},{1,2},{1,3}],
+            "attack0" : [{2,0}, {2,1}, {2,2}], 
+            "attack1" : [{3,0},{3,1},{3,2},{3,3},{3,4},{3,5},{3,6}],
+            "attack2" : [{4,0},{4,1},{4,2},{4,3}]
+        }
     }
+    
+    /*"node.png" :
+    {
+        "columns"  : [1, 1, 1]
+    },*/
+    
+    /*"megamanSpSheet.png" :
+    {
+        "columns"  : [8, 8, 8, 8, 8, 8]
+    }*/
 }

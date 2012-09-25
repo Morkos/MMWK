@@ -1,0 +1,4 @@
+Documentation set was installed to Xcode!
+
+Path: /Users/mac/Library/Developer/Shared/Documentation/DocSets/com.dragoneye.dragoneye.DragonEye.docset
+Time: 2012-04-16 22:02:40 -0700

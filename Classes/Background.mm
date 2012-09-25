@@ -49,7 +49,7 @@ static Camera * camera = [Camera getInstance];
 
 - (void) draw {
 		
-	TexCoords *texCoords = [TexCoords defaultTexCoords];
+	//TexCoords *texCoords = [TexCoords defaultTexCoords];
 	
 	/* PERF: Don't draw the side of the background that is not on the screen
 	   Maybe taken care of by OpenGL already */
@@ -64,7 +64,7 @@ static Camera * camera = [Camera getInstance];
     
 	positionRightNoDepth.x += camera.frameDimension.width;
 	
-    CGPoint glPositionLeft  = [GraphicsEngine convertPointToGl:positionLeftNoDepth];
+    /*CGPoint glPositionLeft  = [GraphicsEngine convertPointToGl:positionLeftNoDepth];
 	CGPoint glPositionRight = [GraphicsEngine convertPointToGl:positionRightNoDepth];
 	
     GLPosition glPositionLeftWithDepth = {glPositionLeft.x, glPositionLeft.y, 1.0};
@@ -86,7 +86,7 @@ static Camera * camera = [Camera getInstance];
 					  texCoords:texCoords 
 					   position:glPositionRightWithDepth
 						   size:glSize 
-					orientation:ORIENTATION_FORWARD];
+					orientation:ORIENTATION_FORWARD];*/
 }
 
 - (GLfloat) wrapBoundary:(GLfloat) boundary {

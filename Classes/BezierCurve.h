@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Math.h"
+#import "MyMath.h"
+#import <math.h>
 
 /**
  * A class to create a bezier curve. 

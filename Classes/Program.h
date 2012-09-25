@@ -20,6 +20,5 @@
 - (void) createProgram;
 - (BOOL) linkProgram;
 - (BOOL) validateProgram;
-- (BOOL) dispose;
 
 @end

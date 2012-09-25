@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>lancelotSpSheet.png</key>
+	<dict>
+		<key>numOfRows</key>
+		<integer>5</integer>
+		<key>animationFrames</key>
+		<dict>
+			<key>walk</key>
+			<array>
+				<array>
+					<integer>1</integer>
+					<integer>0</integer>
+				</array>
+				<array>
+					<integer>1</integer>
+					<integer>1</integer>
+				</array>
+				<array>
+					<integer>1</integer>
+					<integer>2</integer>
+				</array>
+				<array>
+					<integer>1</integer>
+					<integer>3</integer>
+				</array>
+			</array>
+			<key>stand</key>
+			<array>
+				<array>
+					<integer>1</integer>
+					<integer>0</integer>
+				</array>
+			</array>
+		</dict>
+		<key>numOfColumns</key>
+		<integer>7</integer>
+	</dict>
+</dict>
+</plist>
