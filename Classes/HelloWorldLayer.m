@@ -20,7 +20,6 @@ enum {
 #pragma mark - HelloWorldLayer
 
 @interface HelloWorldLayer ()
--(void) addNewSpriteAtPosition:(CGPoint)pos;
 -(void) createMenu;
 @end
 
@@ -82,7 +81,15 @@ enum {
                                                         pathForResource:@"spriteSheets"
                                                         ofType:@"plist"]];
         
+        SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+        CharacterBuilder *builder = [CharacterBuilder newBuilder:ccp(20,20) 
+                                                            size:CGSizeMake(10.0f, 10.0f)
+                                                          sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
+                                     ];
+        character = [[builder buildSpriteSheet:spriteSheet] build];
         
+        [parent addChild:character.sprite];
+
 		[self scheduleUpdate];
 	}
 	
@@ -95,60 +102,44 @@ enum {
 }
 
 -(void) update:(ccTime) delta {
+    [character update];
 }
 
 -(void) createMenu
 {	
-	CCMenuItem *dpadButton = [CCMenuItemImage itemWithNormalImage:@"dpadNintendo.png"
-                                                    selectedImage:@"dpadNintendo.png"];
+    CCSprite *sprite = [CCSprite spriteWithFile:@"dpadNintendo.png"];
+    sprite.position = ccp(50, 50);
+    sprite.scale = 0.75f;
     
-    CCMenuItem *attackButton = [CCMenuItemImage itemWithNormalImage:@"attackButton.png"
-                                                      selectedImage:@"attackButton.png"];
-	
-	CCMenu *menu = [CCMenu menuWithItems:dpadButton, attackButton, nil];
-	
-	CGSize size = [[CCDirector sharedDirector] winSize];
-	menu.position = ccp(0, 0);
+    dpadButton = [DpadButton buttonWithSprite:sprite];
     
-    // TODO: Remove hard coded values
-	dpadButton.position = ccp(50, 50);
-    dpadButton.scale = 0.75f;
-    
-    attackButton.position = ccp(size.width - 50, 50);
-    attackButton.scale = 0.75f;
-	
-	[self addChild: menu z:1];	
+	[self addChild:dpadButton.sprite z:1];	
 }
 
--(void) addNewSpriteAtPosition:(CGPoint)pos
-{	
-	CCNode *parent = [self getChildByTag:kTagParentNode];
-	
-    SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
-    CCSprite *sprite = [spriteSheet getSpriteForKey:@"walk" frameNum:0];
-    
-    NSArray *walkAnimFrames = [spriteSheet getSpriteFramesForKey:@"walk"];
-    CCAnimation *walkAnim = [CCAnimation 
-                             animationWithSpriteFrames:walkAnimFrames];
-    walkAnim.delayPerUnit = 0.5f;
-    
-    CCAction *walkAction = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:walkAnim]];
-    
-    [sprite runAction:walkAction];
-    
-    [parent addChild:sprite];
-    
-    sprite.position = pos;
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInView: [touch view]];
+        
+		location = [[CCDirector sharedDirector] convertToGL: location];
+		[dpadButton decideHowPlayerShouldMove:character point:location];
+    }
+}
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInView: [touch view]];
+        
+		location = [[CCDirector sharedDirector] convertToGL: location];
+		[dpadButton decideHowPlayerShouldMove:character point:location];
+    }
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		
-		[self addNewSpriteAtPosition: location];
+	for(UITouch *touch in touches ) {
+        
+        // TODO Migrate DPad to a different layer
+        [character stand];
 	}
 }
 

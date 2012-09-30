@@ -13,31 +13,32 @@
 
 static const NSInteger DEGREES_PER_DIRECTION			   = 45;
 static const NSInteger UP_RIGHT_DIRECTION_STARTS_AT_DEGREE = 25;
-static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.20f;
+static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.10f;
 
 @interface CoordinateSystem : NSObject {
-	
-	NSInteger width;
-	NSInteger height;
-	
+	CGFloat width;
+	CGFloat height;
+    CGPoint center;
 }
 
-@property (nonatomic, assign) NSInteger width;
-@property (nonatomic, assign) NSInteger height;
-
+@property (nonatomic, assign) CGFloat width;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGPoint center;
 
 /**
  * Sets up a simple 2D coordinate system.
  * NOTE: this mainly used by the dpad/joystick, but could possibly 
  * be used for A.I.
  *
+ * @param center - center position of the object
  * @param imgWidth - width of object
  * @param imgHeight - height of object
  * @return CoordinateSystem
  *
  */
-+ (CoordinateSystem *) initWithDimensions:(NSInteger)imgWidth
-								imgHeight:(NSInteger)imgHeight;
++ (CoordinateSystem *) createWithCenter:(CGPoint) center
+                               imgWidth:(CGFloat)imgWidth 
+                              imgHeight:(CGFloat)imgHeight;
 
 + (CGFloat) calculateDegreesFromPoint:(CGPoint) fromPoint
                               toPoint:(CGPoint) toPoint;
@@ -50,12 +51,10 @@ static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.20f;
  *   If one hits the point between the up-arrow and right-arrow 
  *   on the dpad (a coordinate system), it will return UP_RIGHT direction
  *   
- * @param xCoordinate - x coordinate
- * @param yCoordinate - y coordinate
+ * @param point - coordinates of the point
  * @return Direction 
  */
-- (Direction) decideDirectionFromCartestian:(CGFloat)xCoordinate
-								yCoordinate:(CGFloat)yCoordinate;
+- (Direction) decideDirectionFromPoint:(CGPoint) point;
 
 
 @end

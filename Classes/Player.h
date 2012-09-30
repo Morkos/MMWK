@@ -20,8 +20,6 @@
 
 @property (nonatomic, retain) Gauge * specialGauge;
 
-- (Player *) init:(CGPoint)pos
-             size:(CGSize)sz;
 - (void) resolveCollisions;
 // collision reactions
 - (void) collidesWithPlayer;

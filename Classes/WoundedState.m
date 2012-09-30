@@ -20,8 +20,8 @@
 }
 
 - (void) start {
-    [character.animator startAnimation:ANIMATOR_WOUNDED
-                                replay:false];
+    /*[character.animator startAnimation:ANIMATOR_WOUNDED
+                                replay:false];*/
 }
 
 - (void) updateState {

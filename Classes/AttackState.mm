@@ -28,25 +28,25 @@
 }
 
 - (void) updateState {
-    if (isNextAttack && [character.animator isLastAnimation]) {
-        NSString *key = [NSString stringWithFormat:ANIMATOR_ATTACK, currentAttack++];
+    /*if (isNextAttack && [character.animator isLastAnimation]) {
+        //NSString *key = [NSString stringWithFormat:ANIMATOR_ATTACK, currentAttack++];
         
         // Invoke sprite animation
-        [character.animator startAnimation:key replay:false];
+        //[character.animator startAnimation:key replay:false];
         
         // Invoke particle effect
         [character.effectsManager invokeEffect:key 
                                           prop:character];
         
         isNextAttack = false;
-    }
+    }*/
     
-    if ([character.animator isLastAnimation]) {
+    /*if ([character.animator isLastAnimation]) {
         if ((currentAttack >= [character.attackingRowIndexes count] - 1) || 
             !isNextAttack) {
             [character setState:[StandState createWithCharacter:character]];
         }
-    }
+    }*/
     
 }
 

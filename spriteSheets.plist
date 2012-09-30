@@ -8,7 +8,7 @@
 		<integer>5</integer>
 		<key>animationFrames</key>
 		<dict>
-			<key>walk</key>
+			<key>move</key>
 			<array>
 				<array>
 					<integer>1</integer>
@@ -30,7 +30,7 @@
 			<key>stand</key>
 			<array>
 				<array>
-					<integer>1</integer>
+					<integer>0</integer>
 					<integer>0</integer>
 				</array>
 			</array>

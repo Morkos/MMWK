@@ -12,7 +12,6 @@
 @protocol Drawable <NSObject>
 
 @required
-- (void) draw;
 - (void) update;
 
 @end

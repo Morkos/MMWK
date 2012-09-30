@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CharacterState.h"
 #import "Character.h"
+#import "SpriteSheetManager.h"
 
 @class Character;
 

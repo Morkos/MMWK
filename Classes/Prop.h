@@ -10,13 +10,16 @@
 #import "Typedefs.h"
 #import "Collidable.h"
 #import "Drawable.h"
+#import "cocos2d.h"
 
 @interface Prop : NSObject <Drawable, Collidable> {
 	CGPoint position;
 	CGSize  size;
+    CCSprite *sprite;
 }
 
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
+@property (nonatomic, retain) CCSprite *sprite;
 
 @end

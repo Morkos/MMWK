@@ -13,57 +13,35 @@
 static BOOL flag = false;
 @implementation DpadButton
 
-//pure C-style for private functions within in a file.
-- (void) decideHowPlayerShouldMove:(CGPoint) point
-                             width:(NSInteger) width
-                            height:(NSInteger) height {
-	
-	ObjectContainer *singleton = [ObjectContainer singleton];
-	Player *player = singleton.player;
-	
+@synthesize sprite,
+            coordinateSystem;
+
++ (DpadButton *) buttonWithSprite:(CCSprite *) sprite {
+    DpadButton *button = [[DpadButton alloc] init];
+    button.sprite = sprite;
     
-    CoordinateSystem * coordinateSystem = [CoordinateSystem initWithDimensions:width 
-                                                                     imgHeight:height];
+    CGFloat width = sprite.contentSize.width * sprite.scaleX;
+    CGFloat height = sprite.contentSize.height * sprite.scaleY;
     
-    Direction direction = [coordinateSystem decideDirectionFromCartestian:point.x 
-                                                              yCoordinate:point.y];
+    NSLog(@"Width and height of dpad: %lf, %lf, center: (%f, %f)", width, height, sprite.position.x, sprite.position.y);
+    CoordinateSystem * coordinateSystem = [CoordinateSystem createWithCenter:sprite.position
+                                                                    imgWidth:width 
+                                                                   imgHeight:height];
+    
+    button.coordinateSystem = coordinateSystem;
+    return button;
+}
+
+- (void) decideHowPlayerShouldMove:(Character *) player
+                             point:(CGPoint) point {
+    
+    Direction direction = [self.coordinateSystem decideDirectionFromPoint:point];
+    NSLog(@"Direction picked: %d", direction);
 	if (direction == NO_WHERE) {
 		[player stand];
 	} else {
 		[player runTo:direction];
 	}	    
-}
-
-- (void)touchesBegan:(NSSet *)touches 
-		   withEvent:(UIEvent *)event {
-	
-	UITouch *touch = [[touches allObjects] objectAtIndex:0];
-	CGPoint point  = [touch locationInView:self];
-	
-	[self decideHowPlayerShouldMove:point 
-                              width:self.frame.size.width 
-                             height:self.frame.size.height];
-}
-
-
-- (void) touchesMoved:(NSSet *)touches 
-			withEvent:(UIEvent *)event {
-	
-	UITouch *touch = [[touches allObjects] objectAtIndex:0];
-	CGPoint point  = [touch locationInView:self];
-	
-	[self decideHowPlayerShouldMove:point 
-                              width:self.frame.size.width 
-                             height:self.frame.size.height];
-}
-
-- (void)touchesEnded:(NSSet *)touches 
-		   withEvent:(UIEvent *)event {
-	
-	ObjectContainer *singleton = [ObjectContainer singleton];
-	Player *player = singleton.player;
-	
-	[player stand];
 }
 
 @end

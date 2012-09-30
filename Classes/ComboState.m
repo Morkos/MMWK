@@ -29,7 +29,7 @@
 
 - (void) updateState {
     
-    if([character.animator isLastAnimation]) {
+    /*if([character.animator isLastAnimation]) {
         NSString * key = [NSString stringWithFormat:comboKey, currentAttack++];
         [self.character.animator startAnimation:key
                                          replay:false];
@@ -43,7 +43,7 @@
             NSLog(@"set to standing state...");
             [character setState:[StandState createWithCharacter:character]];
         }
-    }
+    }*/
 }
 
 - (void) transitionToState:(id<CharacterState>)newState {
