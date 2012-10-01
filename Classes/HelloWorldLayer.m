@@ -11,6 +11,7 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "PhysicsSprite.h"
+#import "BackgroundLayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -21,7 +22,6 @@ enum {
 
 @interface HelloWorldLayer ()
 -(void) addNewSpriteAtPosition:(CGPoint)pos;
--(void) createMenu;
 @end
 
 
@@ -32,8 +32,7 @@ enum {
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
+    // 'layer' is an autorelease object.
 	HelloWorldLayer *layer = [HelloWorldLayer node];
 	
 	// add layer as a child to scene
@@ -63,94 +62,32 @@ enum {
 		[self addChild:label z:-1];
 		
 		// reset button
-		[self createMenu];
-		
-		
-#if 1
+        
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 		spriteTexture_ = [parent texture];
-#else
-		// doesn't use batch node. Slower
-		spriteTexture_ = [[CCTextureCache sharedTextureCache] addImage:@"grossini_dance_atlas.png"];
-		CCNode *parent = [CCNode node];		
-#endif
-		[self addChild:parent z:0 tag:kTagParentNode];	
-        
+
+		[self addChild:parent z:1 tag:kTagParentNode];	
         
         [[SpriteSheetManager getInstance] loadFromFile:[[NSBundle mainBundle] 
                                                         pathForResource:@"spriteSheets"
                                                         ofType:@"plist"]];
-        
-        
-		[self scheduleUpdate];
-	}
+       
+        [self addChild:[BackgroundLayer node] z:-2];
+    }
 	
 	return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[super dealloc];
 }
 
--(void) update:(ccTime) delta {
-}
-
--(void) createMenu
-{
-	// Default font size will be 22 points.
-	[CCMenuItemFont setFontSize:22];
-	
-	// Reset Button
-	CCMenuItemLabel *reset = [CCMenuItemFont itemWithString:@"Reset" block:^(id sender){
-		[[CCDirector sharedDirector] replaceScene: [HelloWorldLayer scene]];
-	}];
-	
-	// Achievement Menu Item using blocks
-	CCMenuItem *itemAchievement = [CCMenuItemFont itemWithString:@"Achievements" block:^(id sender) {
-		
-		
-		GKAchievementViewController *achivementViewController = [[GKAchievementViewController alloc] init];
-		achivementViewController.achievementDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:achivementViewController animated:YES];
-		
-		[achivementViewController release];
-	}];
-	
-	// Leaderboard Menu Item using blocks
-	CCMenuItem *itemLeaderboard = [CCMenuItemFont itemWithString:@"Leaderboard" block:^(id sender) {
-		
-		
-		GKLeaderboardViewController *leaderboardViewController = [[GKLeaderboardViewController alloc] init];
-		leaderboardViewController.leaderboardDelegate = self;
-		
-		AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-		
-		[[app navController] presentModalViewController:leaderboardViewController animated:YES];
-		
-		[leaderboardViewController release];
-	}];
-	
-	CCMenu *menu = [CCMenu menuWithItems:itemAchievement, itemLeaderboard, reset, nil];
-	
-	[menu alignItemsVertically];
-	
-	CGSize size = [[CCDirector sharedDirector] winSize];
-	[menu setPosition:ccp( size.width/2, size.height/2)];
-	
-	
-	[self addChild: menu z:-1];	
-}
-
--(void) addNewSpriteAtPosition:(CGPoint)pos
-{	
+-(void) addNewSpriteAtPosition:(CGPoint)pos {	
 	CCNode *parent = [self getChildByTag:kTagParentNode];
 	
-    SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+    SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] 
+                                loadSpriteSheet:@"lancelotSpSheet.png"];
     CCSprite *sprite = [spriteSheet getSpriteForKey:@"walk" frameNum:0];
     
     NSArray *walkAnimFrames = [spriteSheet getSpriteFramesForKey:@"walk"];
@@ -167,8 +104,7 @@ enum {
     sprite.position = pos;
 }
 
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	for( UITouch *touch in touches ) {
 		CGPoint location = [touch locationInView: [touch view]];
 		
@@ -181,14 +117,12 @@ enum {
 
 #pragma mark GameKit delegate
 
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
-{
+-(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
 
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
+-(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }

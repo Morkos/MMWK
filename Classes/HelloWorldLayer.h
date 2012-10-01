@@ -13,7 +13,7 @@
 #import "SpriteSheet.h"
 #import "LevelLoader.h"
 
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@interface HelloWorldLayer : CCLayer
 {
 	CCTexture2D *spriteTexture_; // weak ref
 }
