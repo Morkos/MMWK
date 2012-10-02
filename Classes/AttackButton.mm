@@ -19,7 +19,7 @@ static BOOL isComboInitiated = false;
 - (void)touchesBegan:(NSSet *)touches 
 		   withEvent:(UIEvent *)event {
 	
-	[[ObjectContainer singleton].player attack];
+	[[ObjectContainer sharedInstance].player attack];
     hitTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_EXPIRE_ON_HOLD_IN_SECONDS
                                                 target:self 
                                               selector:@selector(initiateCombo:) 
@@ -56,7 +56,7 @@ static BOOL isComboInitiated = false;
     isComboInitiated = TRUE;
 	NSLog(@"Timer Fired with %d consistent hits", hitsInSequence);
     
-    [[ObjectContainer singleton].player initiateComboAttempt:hitsInSequence];
+    [[ObjectContainer sharedInstance].player initiateComboAttempt:hitsInSequence];
     
     hitsInSequence = 0;
     

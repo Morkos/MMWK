@@ -37,7 +37,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 
 		camera.frameDimension = position;		
 		camera.frameBoundary = bounds;
-		camera.mainPlayer = [ObjectContainer singleton].player;
+		camera.mainPlayer = [ObjectContainer sharedInstance].player;
 		camera.isCameraLocked = FALSE;
         camera.timer = [FrameBasedTimer createTimerWithFrameInterval:1];
 		
@@ -53,7 +53,7 @@ static PositiveDimension defaultFrameDimension = { 100, 100 };
 - (void) update {
 	
     if ([timer updateTimer]) {
-        Player * player = [ObjectContainer singleton].player;
+        Player * player = [ObjectContainer sharedInstance].player;
             
         NSInteger distanceFromTheRight = frameBoundary.right - player.position.x;
         

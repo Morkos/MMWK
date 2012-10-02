@@ -27,7 +27,7 @@
 @property (nonatomic, retain) NSMutableArray *nodes;
 @property (nonatomic, readonly, retain) Background *background;
 
-+ (ObjectContainer *) singleton;
++ (ObjectContainer *) sharedInstance;
 - (id) init;
 - (void) addObject:(id)object;
 - (id) getObject:(NSUInteger) index;

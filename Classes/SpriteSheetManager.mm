@@ -23,9 +23,7 @@ static SpriteSheetManager *manager = nil;
 	return manager;
 }
 
-- (void) loadFromFile:(NSString *) plistFilepath {
-    NSDictionary *items = [NSDictionary dictionaryWithContentsOfFile:plistFilepath];
-    
+- (void) loadFromItems:(NSDictionary *) items {
     for(NSString *filename in [items allKeys]) {
         NSDictionary *attributes = [items objectForKey:filename];
 

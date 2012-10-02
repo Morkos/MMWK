@@ -19,7 +19,7 @@
 
 // physics
 - (void) resolveCollisions {
-	[physicsEngine detectScreenCollision:[ObjectContainer singleton].player];
+	[physicsEngine detectScreenCollision:[ObjectContainer sharedInstance].player];
     
 }
 							

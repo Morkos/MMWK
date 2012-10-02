@@ -11,14 +11,14 @@
 
 @implementation PlayerBuilder
 
-- (PlayerBuilder *) newBuilder:(CGPoint)position
++ (PlayerBuilder *) newBuilder:(CGPoint)position
                           size:(CGSize)size 
-                        sprite:(CCSprite *) sprite{
-    
-    self.character = [[Character alloc] init:position 
-                                        size:size
-                                      sprite:sprite];
-    return self;
+                        sprite:(CCSprite *) sprite {
+    PlayerBuilder *builder = [[PlayerBuilder alloc] init];
+    builder.character = [[Player alloc] init:position 
+                                     size:size
+                                   sprite:sprite];
+    return builder;
 }
 
 

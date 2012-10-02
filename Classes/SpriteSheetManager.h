@@ -24,7 +24,7 @@
 
 + (SpriteSheetManager *) getInstance;
 
-- (void) loadFromFile:(NSString *) plistFilepath;
+- (void) loadFromItems:(NSDictionary *) items;
 
 /**
  * Loads a sprite sheet based on the filename provided in the JSON
