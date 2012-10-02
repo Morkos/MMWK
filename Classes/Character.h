@@ -17,7 +17,6 @@
 #import "AttackState.h"
 #import "StandState.h"
 #import "Gauge.h"
-#import "FreezeModeManager.h"
 
 @interface Character : Prop {
     
