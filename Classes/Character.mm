@@ -52,9 +52,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 	position.y += movement.y;
 	
     //TODO comment out and use game position
-    /*movement = CGPointMake(movement.x * 0.1f, movement.y * 0.1f);
-    [sprite runAction:[CCMoveBy actionWithDuration:0.1f position:movement]];*/
-    //[sprite runAction:[CCMoveBy actionWithDuration:0.1f position:ccp(1.0f, 1.0f)]];
     sprite.position = ccpAdd(sprite.position, ccpMult(movement, 2.0f));
     
     NSLog(@"sprite position: (%f, %f), movement: (%f, %f)", 

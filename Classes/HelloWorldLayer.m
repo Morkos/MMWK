@@ -11,6 +11,7 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "PhysicsSprite.h"
+#import "BackgroundLayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -31,8 +32,7 @@ enum {
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
+    // 'layer' is an autorelease object.
 	HelloWorldLayer *layer = [HelloWorldLayer node];
 	
 	// add layer as a child to scene
@@ -52,35 +52,16 @@ enum {
 		//self.isAccelerometerEnabled = YES;
 #elif defined(__CC_PLATFORM_MAC)
 		self.isMouseEnabled = YES;
-#endif
-		
-		CGSize s = [[CCDirector sharedDirector] winSize];
-		
-		// title
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Multi touch the screen" fontName:@"Marker Felt" fontSize:36];
-		label.position = ccp( s.width / 2, s.height - 30);
-		[self addChild:label z:-1];
-		
-		// reset button
-		[self createMenu];
-		
-		
-#if 1
+#endif  
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 		spriteTexture_ = [parent texture];
-#else
-		// doesn't use batch node. Slower
-		spriteTexture_ = [[CCTextureCache sharedTextureCache] addImage:@"grossini_dance_atlas.png"];
-		CCNode *parent = [CCNode node];		
-#endif
-		[self addChild:parent z:0 tag:kTagParentNode];	
-        
+
+		[self addChild:parent z:1 tag:kTagParentNode];	
         
         [[SpriteSheetManager getInstance] loadFromFile:[[NSBundle mainBundle] 
                                                         pathForResource:@"spriteSheets"
                                                         ofType:@"plist"]];
-        
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         CharacterBuilder *builder = [CharacterBuilder newBuilder:ccp(20,20) 
                                                             size:CGSizeMake(10.0f, 10.0f)
@@ -89,15 +70,16 @@ enum {
         character = [[builder buildSpriteSheet:spriteSheet] build];
         
         [parent addChild:character.sprite];
+        [self addChild:[BackgroundLayer node] z:-2];
 
+        [self createMenu];
 		[self scheduleUpdate];
 	}
 	
 	return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
 	[super dealloc];
 }
 
@@ -113,7 +95,7 @@ enum {
     
     dpadButton = [DpadButton buttonWithSprite:sprite];
     
-	[self addChild:dpadButton.sprite z:1];	
+	[self addChild:dpadButton.sprite z:5];	
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -146,14 +128,12 @@ enum {
 
 #pragma mark GameKit delegate
 
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
-{
+-(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }
 
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
+-(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
 	[[app navController] dismissModalViewControllerAnimated:YES];
 }

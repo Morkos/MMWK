@@ -47,48 +47,6 @@ static Camera * camera = [Camera getInstance];
 	 
 }
 
-- (void) draw {
-		
-	//TexCoords *texCoords = [TexCoords defaultTexCoords];
-	
-	/* PERF: Don't draw the side of the background that is not on the screen
-	   Maybe taken care of by OpenGL already */
-	
-    /*
-     * TODO: Remove mixing of game coordinates and opengl positions here
-     *       Try to remove the dependency off the depth field
-     */
-	NSInteger shift = rightBoundary - (camera.frameDimension.width / 2);
-	CGPoint positionLeftNoDepth = CGPointMake(shift, camera.frameDimension.width / 2);
-	CGPoint positionRightNoDepth = positionLeftNoDepth;
-    
-	positionRightNoDepth.x += camera.frameDimension.width;
-	
-    /*CGPoint glPositionLeft  = [GraphicsEngine convertPointToGl:positionLeftNoDepth];
-	CGPoint glPositionRight = [GraphicsEngine convertPointToGl:positionRightNoDepth];
-	
-    GLPosition glPositionLeftWithDepth = {glPositionLeft.x, glPositionLeft.y, 1.0};
-    GLPosition glPositionRightWithDepth = {glPositionRight.x, glPositionRight.y, 1.0}; 
-		
-	CGSize size = CGSizeMake(camera.frameDimension.width,
-							 camera.frameDimension.height);
-	CGSize glSize = [GraphicsEngine convertSizeToGl:size];
-	
-    // Drawing the left side of the background
-	[GraphicsEngine drawTexture:[self.textures objectAtIndex:[self getBgIndexFromPosition:positionLeftNoDepth]]
-					  texCoords:texCoords 
-					   position:glPositionLeftWithDepth
-						   size:glSize 
-					orientation:ORIENTATION_FORWARD];
-	
-	// Drawing the right side of the background
-	[GraphicsEngine drawTexture:[self.textures objectAtIndex:[self getBgIndexFromPosition:positionRightNoDepth]] 
-					  texCoords:texCoords 
-					   position:glPositionRightWithDepth
-						   size:glSize 
-					orientation:ORIENTATION_FORWARD];*/
-}
-
 - (GLfloat) wrapBoundary:(GLfloat) boundary {
 
 	if (boundary < camera.frameBoundary.left) {

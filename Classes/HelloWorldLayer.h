@@ -14,7 +14,7 @@
 #import "DpadButton.h"
 #import "LevelLoader.h"
 
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
+@interface HelloWorldLayer : CCLayer
 {
     DpadButton *dpadButton;
     Character *character;
