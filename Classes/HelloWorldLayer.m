@@ -71,7 +71,7 @@ enum {
 }
 
 -(void) update:(ccTime) delta {
-    [[[ObjectContainer getInstance] player] update];
+    [[[ObjectContainer sharedInstance] player] update];
 }
 
 #pragma mark GameKit delegate
