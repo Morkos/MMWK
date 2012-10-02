@@ -12,17 +12,20 @@
 
 @synthesize character;
 
-- (CharacterBuilder *) newBuilder:(CGPoint)position 
-                             size:(CGSize)size {
-    [character autorelease];
-    character = [[Character alloc] init:position 
-                                   size:size];
++ (CharacterBuilder *) newBuilder:(CGPoint) position 
+                             size:(CGSize) size 
+                           sprite:(CCSprite *)sprite{
+    CharacterBuilder *builder = [[CharacterBuilder alloc] init];
+    [builder.character autorelease];
+    builder.character = [[Character alloc] init:position 
+                                           size:size
+                                         sprite:sprite];
     
-    return self;
+    return builder;
 }
 
-- (CharacterBuilder *) buildAnimator:(SpriteSheetAnimator *)animator {
-    self.character.animator = animator;
+- (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet {
+    self.character.spriteSheet = spriteSheet;
     return self;
 }
 

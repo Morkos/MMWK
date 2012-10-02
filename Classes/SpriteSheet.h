@@ -56,5 +56,9 @@
 
 - (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
 
+- (void) changeSprite:(CCSprite *) sprite   
+                toKey:(NSString *) key 
+             frameNum:(NSUInteger) frameNum;
+
 @end
 

@@ -8,17 +8,39 @@
 
 #import "Character.h"
 
-static CGPoint cgPoints[MAX_DIRECTIONS]; 
+static CGPoint cgPoints[MAX_DIRECTIONS] = {
+    /*NO_WHERE*/   CGPointMake( 0.00f,   0.00f),
+    /*UP*/         CGPointMake( 0.00f,   1.00f), 
+    /*DOWN*/       CGPointMake( 0.00f,  -1.00f), 
+    /*LEFT*/       CGPointMake(-1.00f,   0.00f), 
+    /*RIGHT*/      CGPointMake( 1.00f,   0.00f), 
+    /*UP_LEFT*/    CGPointMake(-1.00f,   1.00f),
+    /*UP_RIGHT*/   CGPointMake( 1.00f,   1.00f), 
+    /*DOWN_LEFT*/  CGPointMake(-1.00f,  -1.00f), 
+    /*DOWN_RIGHT*/ CGPointMake( 1.00f,  -1.00f), 
+};
+
+static Direction directionToOpposite[MAX_DIRECTIONS] = {
+    /*NO_WHERE*/   NO_WHERE,
+    /*UP*/         DOWN,
+    /*DOWN*/       UP,
+    /*LEFT*/       RIGHT,
+    /*RIGHT*/      LEFT,
+    /*UP_LEFT*/    DOWN_RIGHT,
+    /*UP_RIGHT*/   DOWN_LEFT,
+    /*DOWN_LEFT*/  UP_RIGHT,
+    /*DOWN_RIGHT*/ UP_LEFT
+};
 
 @implementation Character
 
-@synthesize attackingRowIndexes,
+@synthesize spriteSheet,
+            attackingRowIndexes,
 			currentState, 
 			physicsEngine,
 			currentDirection,
 			currentOrientation,
 			effectsManager,
-            animator,
             strength,
             defense,
             healthGauge;
@@ -29,15 +51,21 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 	position.x += movement.x;
 	position.y += movement.y;
 	
+    //TODO comment out and use game position
+    sprite.position = ccpAdd(sprite.position, ccpMult(movement, 2.0f));
+    
+    NSLog(@"sprite position: (%f, %f), movement: (%f, %f)", 
+          sprite.position.x, sprite.position.y, movement.x, movement.y);
 }
 
 - (id) init:(CGPoint) pos
-	   size:(CGSize) sz {
+	   size:(CGSize) sz 
+     sprite:(CCSprite *) spriteParam {
 	
 	if(self = [super init]) {
-		
 		self.position = pos;
 		self.size = sz;
+        self.sprite = spriteParam;
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
@@ -51,34 +79,16 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 									  ];
         
         self.healthGauge = [[Gauge alloc] init];
-		
-		//TODO: change to map?
-		cgPoints[NO_WHERE]   = CGPointMake( 0.00f,   0.00f);
-		cgPoints[RIGHT]      = CGPointMake( 1.00f,   0.00f); 
-		cgPoints[LEFT]       = CGPointMake(-1.00f,   0.00f); 
-		cgPoints[UP]         = CGPointMake( 0.00f,   1.00f); 
-		cgPoints[DOWN]       = CGPointMake( 0.00f,  -1.00f); 
-		cgPoints[UP_RIGHT]   = CGPointMake( 1.00f,   1.00f); 
-		cgPoints[UP_LEFT]    = CGPointMake(-1.00f,   1.00f); 
-		cgPoints[DOWN_RIGHT] = CGPointMake( 1.00f,  -1.00f); 
-		cgPoints[DOWN_LEFT]  = CGPointMake(-1.00f,  -1.00f); 
-		
 	}
+    
 	return self;
 	
 }
 
 - (void) update {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
-    [animator animate];
 	[currentState updateState];
     [effectsManager updateCurrentEffect];
-}
-
-
-- (void) draw {
-	/*[GraphicsEngine drawCharacter:self];
-	[GraphicsEngine drawParticleEffects:effectsManager];*/
 }
 
 - (void) runTo:(Direction) dir {
@@ -91,7 +101,6 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 }
 
 - (void) moveTowards:(Direction) dir {
-    [currentState transitionToState:[MoveState createWithCharacter:self]];
 	[self move:cgPoints[dir]];
 }
 
@@ -113,7 +122,7 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
 	/*if (currentState != ATTACKING_STATE) {
 	    currentState = ATTACKING_STATE;
 		currentAttack = 0;
-	} */
+	}*/
     [currentState transitionToState:[AttackState createWithCharacter:self]];
 }
 
@@ -121,6 +130,10 @@ static CGPoint cgPoints[MAX_DIRECTIONS];
     [self.currentState release];
     self.currentState = newState;
     [self.currentState start];
+}
+
++ (Direction) oppositeDirection:(Direction) direction {
+    return directionToOpposite[direction];
 }
 
 @end

@@ -11,10 +11,13 @@
 #import "cocos2d.h"
 #import "chipmunk.h"
 #import "SpriteSheet.h"
+#import "DpadButton.h"
 #import "LevelLoader.h"
 
 @interface HelloWorldLayer : CCLayer
 {
+    DpadButton *dpadButton;
+    Character *character;
 	CCTexture2D *spriteTexture_; // weak ref
 }
 

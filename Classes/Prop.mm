@@ -11,15 +11,10 @@
 @implementation Prop
 
 @synthesize position,
-            size;
-
-- (void) draw {
-}
+            size,
+            sprite;
 
 - (void) update {
-}
-
-- (void) animate {
 }
 
 - (void) resolveCollisions {

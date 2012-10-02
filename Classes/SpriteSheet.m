@@ -72,6 +72,13 @@
     return [CCSprite spriteWithTexture:texture rect:frame.rect];
 }
 
+- (void) changeSprite:(CCSprite *) sprite   
+                toKey:(NSString *) key 
+             frameNum:(NSUInteger) frameNum {
+    CCSpriteFrame *frame = [self getFrameForKey:key frameNum:frameNum];
+    [sprite setTextureRect:frame.rect];
+}
+
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
     NSString *frameKey = [NSString stringWithFormat:@"%@%d", key, frameNum];
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameKey];

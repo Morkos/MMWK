@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Character.h"
+#import "cocos2d.h"
 
 @interface CharacterBuilder : NSObject {
 
@@ -18,10 +19,11 @@
 
 @property (nonatomic, retain) Character * character;
 
-- (CharacterBuilder *) newBuilder:(CGPoint)position
-                             size:(CGSize)size;
++ (CharacterBuilder *) newBuilder:(CGPoint)position
+                             size:(CGSize)size
+                           sprite:(CCSprite *)sprite;
 
-- (CharacterBuilder *) buildAnimator:(SpriteSheetAnimator *) animator;
+- (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet;
 - (CharacterBuilder *) buildParticleEffectsManager:(ParticleEffectsManager *) manager;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;
 - (CharacterBuilder *) buildDefense:(NSUInteger) defense;

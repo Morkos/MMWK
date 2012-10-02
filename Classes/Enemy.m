@@ -11,7 +11,6 @@
 @implementation Enemy
 
 - (void) update {
-    [self.animator animate];
     [self.currentState updateState];
 }
 @end

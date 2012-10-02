@@ -12,7 +12,7 @@
 
 @synthesize character;
 
-+ (MoveState*) createWithCharacter:(Character *) character {
++ (MoveState *) createWithCharacter:(Character *) character {
     MoveState *state = [[MoveState alloc] init];
     state.character = character;
     
@@ -20,7 +20,9 @@
 }
 
 - (void) start {
-    [character.animator startAnimation:ANIMATOR_MOVE 
+    [SpriteSheetAnimator startAnimation:character.sprite
+                            spriteSheet:character.spriteSheet
+                               frameKey:ANIMATOR_MOVE
                                 replay:true];
 }
 

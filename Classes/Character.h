@@ -19,7 +19,7 @@
 #import "Gauge.h"
 
 @interface Character : Prop {
-    
+    SpriteSheet *spriteSheet;
 	PhysicsEngine *physicsEngine;
 	id<CharacterState> currentState;
 	Direction currentDirection;
@@ -28,7 +28,6 @@
 	NSArray *attackingRowIndexes;
 	
 	ParticleEffectsManager *effectsManager;
-    SpriteSheetAnimator * animator;
     
     NSUInteger strength;
     NSUInteger defense;
@@ -37,25 +36,25 @@
     
 }
 
+@property (nonatomic, retain) SpriteSheet *spriteSheet;
 @property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, retain) ParticleEffectsManager *effectsManager;
-@property (nonatomic, retain) SpriteSheetAnimator *animator;
 @property (nonatomic, assign) NSUInteger strength;
 @property (nonatomic, assign) NSUInteger defense;
 @property (nonatomic, retain) Gauge *healthGauge;
 
 - (id) init:(CGPoint) pos
-	   size:(CGSize) sz;
+	   size:(CGSize) sz
+     sprite:(CCSprite *) sprite;
 
 - (void) runTo:(Direction) dir;
 - (void) moveTowards:(Direction) dir;
 
-// from GraphicsContext protocol
-- (void) draw;
+// From Drawable
 - (void) update;
 
 // Actions
@@ -65,5 +64,10 @@
 - (void) attack;
 
 - (void) setState:(id<CharacterState>) newState;
+
+/**
+ * Returns the opposite direction of the given direction
+ */
++ (Direction) oppositeDirection:(Direction) direction;
 
 @end

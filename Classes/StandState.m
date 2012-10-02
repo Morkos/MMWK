@@ -20,11 +20,13 @@
 }
 
 - (void) start {
-    [character.animator startAnimation:ANIMATOR_STAND replay:true];
+    [SpriteSheetAnimator startAnimation:character.sprite
+                            spriteSheet:character.spriteSheet
+                               frameKey:ANIMATOR_STAND
+                                 replay:true];
 }
 
 - (void) updateState {
-    
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

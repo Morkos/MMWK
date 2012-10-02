@@ -8,76 +8,45 @@
 
 #import "SpritesheetAnimator.h"
 
+
 @implementation SpriteSheetAnimator
 
-@synthesize spSheet,
-            stringToRowMap,
-            timer,
-            spsheetRowInd,
-            spsheetColInd,
-            isReplay,
-            isAnimating,
-            currentKey;
++ (void) startAnimation:(CCSprite *) sprite
+            spriteSheet:(SpriteSheet *) spriteSheet
+               frameKey:(NSString *) key
+                 replay:(bool) isReplay { 
+    [SpriteSheetAnimator startAnimation:sprite
+                            spriteSheet:spriteSheet
+                               frameKey:key 
+                                 replay:isReplay 
+                          frameInterval:0.1f];
+}
 
-+ (SpriteSheetAnimator *) createWithSpsheet:(SpriteSheet *) spSheet
-                             stringToRowMap:(NSDictionary *) stringToRowMap 
-                                      timer:(id<AnimationTimer>) timer {
-    SpriteSheetAnimator *spriteSheetAnimator = [[SpriteSheetAnimator alloc] init];
-    spriteSheetAnimator.spSheet = spSheet;
-    spriteSheetAnimator.stringToRowMap = stringToRowMap;
-    spriteSheetAnimator.currentKey = nil;
-    spriteSheetAnimator.timer = timer;
++ (void) startAnimation:(CCSprite *) sprite
+            spriteSheet:(SpriteSheet *) spriteSheet
+               frameKey:(NSString *) key
+                 replay:(bool) isReplay
+          frameInterval:(float) frameInterval {
     
-    return spriteSheetAnimator;
-}
+    NSLog(@"Start animation for key %@, isReplay: %d, frameInterval: %f", 
+          key, isReplay, frameInterval);
+    NSArray *animFrames = [spriteSheet getSpriteFramesForKey:key];
+    CCAnimation *animationAction = [CCAnimation 
+                             animationWithSpriteFrames:animFrames];
+    animationAction.delayPerUnit = frameInterval;
+    
+    CCAction *action;
+    if (isReplay) {
+        action = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animationAction]];
+    } else {
+        //TODO
+    }
+    
+    action.tag = TAG_ANIMATION_ACTION;
+    
+    [sprite stopActionByTag:TAG_ANIMATION_ACTION];
+    [sprite runAction:action];
 
-- (void) startAnimation:(NSString *) key
-                 replay:(bool) isReplayParam { 
-    NSLog(@"Here...%@", key);
-    [self startAnimation:key 
-                  replay:isReplayParam 
-           frameInterval:[timer frameInterval]];
 }
-
-- (void) startAnimation:(NSString *) key 
-                 replay:(bool) isReplayParam
-          frameInterval:(ulong) frameInterval {
-    NSLog(@"Here starting animation for %@", key);
-    self.isReplay = isReplayParam;
-    self.currentKey = key;
-    self.spsheetRowInd = [[stringToRowMap objectForKey:key] intValue];
-    self.spsheetColInd = 0;
-    self.isAnimating = true;
-    [timer setFrameInterval:frameInterval];
-}
-
-- (void) stopAnimation {
-    isAnimating = false;
-}
-
-- (void) animate {
-    /*if ([self isAnimating] && [timer updateTimer]) {
-        uint lastIndex = [spSheet getNumOfColumnsInRow:spsheetRowInd] - 1;
-        if (spsheetColInd++ >= lastIndex) {
-            spsheetColInd = 0;
-            
-            if (!isReplay) {
-                [self stopAnimation];
-            }
-        }
-    }*/
-}
-
-- (bool) isLastAnimation {
-    //return spsheetColInd == [spSheet getNumOfColumnsInRow:spsheetRowInd] - 1;
-    return false;
-}
-
-/*- (TexCoords *) getCurrentTexCoords {
-    SpriteSheet *sprite = self.spSheet;
-	NSArray *texCoordsArray = [sprite getTextureCoords:self.spsheetRowInd];
-	
-	return [texCoordsArray objectAtIndex:self.spsheetColInd];
-}*/
 
 @end
