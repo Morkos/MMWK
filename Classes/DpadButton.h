@@ -22,5 +22,5 @@
 + (DpadButton *) buttonWithSprite:(CCSprite *) sprite;
 - (void) decideHowPlayerShouldMove:(Character *) player
                              point:(CGPoint) point;
-
+- (bool) isLocationInView:(CGPoint) location;
 @end

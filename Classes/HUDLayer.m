@@ -8,7 +8,12 @@
 
 #import "HUDLayer.h"
 
-@implementation HUDLayer
+@interface HUDLayer()
+    -(void) touchDpadButton:(CGPoint) location;
+@end
+
+@implementation HUDLayer 
+
 
 - (id) init {
     if (self = [super init]) {
@@ -33,22 +38,18 @@
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    Character *character = [[ObjectContainer sharedInstance] player];
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInView: [touch view]];
         
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		[dpadButton decideHowPlayerShouldMove:character point:location];
+        [self touchDpadButton:location];
     }
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    Character *character = [[ObjectContainer sharedInstance] player];
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInView: [touch view]];
         
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		[dpadButton decideHowPlayerShouldMove:character point:location];
+		[self touchDpadButton:location];
     }
 }
 
@@ -57,6 +58,15 @@
 	for(UITouch *touch in touches ) {
         [character stand];
 	}
+}
+
+- (void) touchDpadButton:(CGPoint) location {
+    Character *character = [[ObjectContainer sharedInstance] player];
+    location = [[CCDirector sharedDirector] convertToGL: location];
+    
+    if ([dpadButton isLocationInView:location]) {
+        [dpadButton decideHowPlayerShouldMove:character point:location];
+    }
 }
 
 

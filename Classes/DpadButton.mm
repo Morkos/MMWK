@@ -44,4 +44,10 @@ static BOOL flag = false;
 	}	    
 }
 
+- (bool) isLocationInView:(CGPoint) location {
+    NSLog(@"Dpad location %@ in view %@", 
+          NSStringFromCGPoint(location), NSStringFromCGRect(sprite.boundingBox));
+    return CGRectContainsPoint(sprite.boundingBox, location);
+}
+
 @end
