@@ -23,12 +23,13 @@
 + (void) startAnimation:(CCSprite *) sprite
             spriteSheet:(SpriteSheet *) spriteSheet
                frameKey:(NSString *) key
-                 replay:(bool) isReplay;
+          frameInterval:(float) frameInterval;
 
 + (void) startAnimation:(CCSprite *) sprite
             spriteSheet:(SpriteSheet *) spriteSheet
                frameKey:(NSString *) key
-                 replay:(bool) isReplay
-          frameInterval:(float) frameInterval;
+          frameInterval:(float) frameInterval
+                 target:(id) target
+               selector:(SEL) selector;
 
 @end

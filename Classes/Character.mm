@@ -53,9 +53,19 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 	
     //TODO comment out and use game position
     sprite.position = ccpAdd(sprite.position, ccpMult(movement, 2.0f));
-    
-    NSLog(@"sprite position: (%f, %f), movement: (%f, %f)", 
-          sprite.position.x, sprite.position.y, movement.x, movement.y);
+
+    switch (currentOrientation) {
+        case ORIENTATION_FORWARD:
+            sprite.flipX = false;
+            break;
+            
+        case ORIENTATION_BACKWARDS:
+            sprite.flipX = true;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (id) init:(CGPoint) pos

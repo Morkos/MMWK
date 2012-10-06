@@ -8,9 +8,11 @@
 
 #import "CCLayer.h"
 #import "DpadButton.h"
+#import "AttackButton.h"
 
 @interface HUDLayer : CCLayer {
     DpadButton *dpadButton;
+    AttackButton *attackButton;
 }
 
 @end

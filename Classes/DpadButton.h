@@ -10,17 +10,16 @@
 #import "ObjectContainer.h"
 #import "Player.h"
 #import "CoordinateSystem.h"
+#import "HUDControl.h"
 
-@interface DpadButton : UIImageView {
-    CCSprite *sprite;
+@interface DpadButton : HUDControl {
     CoordinateSystem *coordinateSystem;
 }
 
-@property(nonatomic, retain) CCSprite *sprite;
 @property(nonatomic, retain) CoordinateSystem *coordinateSystem;
 
 + (DpadButton *) buttonWithSprite:(CCSprite *) sprite;
 - (void) decideHowPlayerShouldMove:(Character *) player
                              point:(CGPoint) point;
-- (bool) isLocationInView:(CGPoint) location;
+
 @end

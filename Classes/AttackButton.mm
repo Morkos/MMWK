@@ -11,14 +11,21 @@
 static NSTimer * hitTimer;
 static NSTimer * liftOffFingerTimer = [[NSTimer alloc] init];
 static NSUInteger hitsInSequence = 0;
+static CGFloat TIME_EXPIRE_ON_HOLD_IN_SECONDS = 0.5;
+static CGFloat TIME_EXPIRE_ON_RELEASE_IN_SECONDS = 0.5;
 
 static BOOL isComboInitiated = false;
 
 @implementation AttackButton
 
-- (void)touchesBegan:(NSSet *)touches 
-		   withEvent:(UIEvent *)event {
-	
++ (AttackButton *) buttonWithSprite:(CCSprite *) sprite {
+    AttackButton *button = [[AttackButton alloc] init];
+    button.sprite = sprite;
+
+    return button;
+}
+
+- (void) buttonInitiated {
 	[[ObjectContainer sharedInstance].player attack];
     hitTimer = [NSTimer scheduledTimerWithTimeInterval:TIME_EXPIRE_ON_HOLD_IN_SECONDS
                                                 target:self 
@@ -35,8 +42,7 @@ static BOOL isComboInitiated = false;
     [hitTimer retain];
 }
 
-- (void) touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event
-{	
+- (void) buttonEnded {	
 	if ([hitTimer isValid]) {
 		[hitTimer invalidate];
 	}

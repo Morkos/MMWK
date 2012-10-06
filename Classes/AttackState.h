@@ -17,12 +17,12 @@
 @interface AttackState : NSObject<CharacterState> {
     Character *character;
     uint currentAttack;
-    bool isNextAttack;
+    bool isInDelay;
 }
 
 @property(nonatomic, retain) Character *character;
 @property(nonatomic, assign) uint currentAttack;
-@property(nonatomic, assign) bool isNextAttack;
+@property(nonatomic, assign) bool isInDelay;
 
 + (AttackState *) createWithCharacter:(Character *) character;
 

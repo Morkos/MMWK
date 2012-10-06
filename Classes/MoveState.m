@@ -23,7 +23,7 @@
     [SpriteSheetAnimator startAnimation:character.sprite
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE
-                                replay:true];
+                          frameInterval:0.1f];
 }
 
 - (void) updateState {
