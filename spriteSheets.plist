@@ -38,5 +38,50 @@
 		<key>numOfColumns</key>
 		<integer>7</integer>
 	</dict>
+	<key>megamanSpSheet.png</key>
+	<dict>
+		<key>numOfColumns</key>
+		<integer>8</integer>
+		<key>numOfRows</key>
+		<integer>6</integer>
+		<key>animationFrames</key>
+		<dict>
+			<key>stand</key>
+			<array>
+				<array>
+					<integer>0</integer>
+					<integer>0</integer>
+				</array>
+				<array>
+					<integer>0</integer>
+					<integer>1</integer>
+				</array>
+				<array>
+					<integer>0</integer>
+					<integer>2</integer>
+				</array>
+				<array>
+					<string>0</string>
+					<string>3</string>
+				</array>
+				<array>
+					<string>0</string>
+					<string>4</string>
+				</array>
+				<array>
+					<integer>0</integer>
+					<integer>5</integer>
+				</array>
+				<array>
+					<integer>0</integer>
+					<integer>6</integer>
+				</array>
+				<array>
+					<string>0</string>
+					<string>7</string>
+				</array>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>
