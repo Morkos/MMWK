@@ -8,26 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import "ObjectContainer.h"
+#import "HUDControl.h"
 
-static CGFloat TIME_EXPIRE_ON_HOLD_IN_SECONDS = 0.5;
-static CGFloat TIME_EXPIRE_ON_RELEASE_IN_SECONDS = 0.5;
-
-@interface AttackButton : UIImageView {
+@interface AttackButton : HUDControl {
 
 }
 
++ (AttackButton *) buttonWithSprite:(CCSprite *) sprite;
+
 /**
  * Every touch on the attack button (bottom-right corner),
- * this function will be called.
+ * this function should be called.
  */
-- (void)touchesBegan:(NSSet *)touches 
-		   withEvent:(UIEvent *)event;
+- (void) buttonInitiated;
 
 /**
  * Everytime a finger is lifted off the attack button,
- * this function will be called.
+ * this function should be called.
  */
-- (void) touchesEnded:(NSSet*)touches 
-            withEvent:(UIEvent*)event;
+- (void) buttonEnded;
 
 @end

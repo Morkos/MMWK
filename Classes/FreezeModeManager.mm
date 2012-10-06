@@ -66,7 +66,7 @@ static int nextValidNodetoTouch = 0;
                 if(nextValidNodetoTouch == 0) {
                     [nodesOnScreen removeAllObjects];
                     //TODO: play effect in disappearing the nodes.
-                    [[ObjectContainer singleton].player 
+                    [[ObjectContainer sharedInstance].player 
                      initiateComboAnimation:self.currentComboKey];
                 }
             } else {

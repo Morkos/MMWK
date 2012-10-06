@@ -12,7 +12,7 @@
 
 @synthesize character;
 
-+ (CharacterBuilder *) newBuilder:(CGPoint) position 
++ (id) newBuilder:(CGPoint) position 
                              size:(CGSize) size 
                            sprite:(CCSprite *)sprite{
     CharacterBuilder *builder = [[CharacterBuilder alloc] init];
@@ -24,27 +24,27 @@
     return builder;
 }
 
-- (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet {
+- (id) buildSpriteSheet:(SpriteSheet *) spriteSheet {
     self.character.spriteSheet = spriteSheet;
     return self;
 }
 
-- (CharacterBuilder *) buildParticleEffectsManager:(ParticleEffectsManager *)manager {
+- (id) buildParticleEffectsManager:(ParticleEffectsManager *)manager {
     self.character.effectsManager = manager;
     return self;
 }
 
-- (CharacterBuilder *) buildDefense:(NSUInteger)defense {
+- (id) buildDefense:(NSUInteger)defense {
     self.character.defense = defense;
     return self;
 }
 
-- (CharacterBuilder *) buildStrength:(NSUInteger)strength {
+- (id) buildStrength:(NSUInteger)strength {
     self.character.strength = strength;
     return self;
 }
 
-- (Character *) build {
+- (id) build {
     [self.character setState:
      [StandState createWithCharacter:self.character]];
     return self.character;

@@ -12,6 +12,7 @@
 #import "HelloWorldLayer.h"
 #import "PhysicsSprite.h"
 #import "BackgroundLayer.h"
+#import "HUDLayer.h"
 
 enum {
 	kTagParentNode = 1,
@@ -19,11 +20,6 @@ enum {
 
 
 #pragma mark - HelloWorldLayer
-
-@interface HelloWorldLayer ()
--(void) createMenu;
-@end
-
 
 @implementation HelloWorldLayer
 
@@ -45,34 +41,25 @@ enum {
 -(id) init
 {
 	if( (self=[super init])) {
-		
-		// enable events
-#ifdef __CC_PLATFORM_IOS
-		self.isTouchEnabled = YES;
-		//self.isAccelerometerEnabled = YES;
-#elif defined(__CC_PLATFORM_MAC)
-		self.isMouseEnabled = YES;
-#endif  
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 		spriteTexture_ = [parent texture];
 
 		[self addChild:parent z:1 tag:kTagParentNode];	
         
-        [[SpriteSheetManager getInstance] loadFromFile:[[NSBundle mainBundle] 
-                                                        pathForResource:@"spriteSheets"
-                                                        ofType:@"plist"]];
+        [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
-        CharacterBuilder *builder = [CharacterBuilder newBuilder:ccp(20,20) 
-                                                            size:CGSizeMake(10.0f, 10.0f)
-                                                          sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
+        PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(20,20) 
+                                                      size:CGSizeMake(10.0f, 10.0f)
+                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
                                      ];
-        character = [[builder buildSpriteSheet:spriteSheet] build];
+        Player *player = [[builder buildSpriteSheet:spriteSheet] build];
+        [[ObjectContainer sharedInstance] addObject:player];
         
-        [parent addChild:character.sprite];
+        [parent addChild:player.sprite];
         [self addChild:[BackgroundLayer node] z:-2];
+        [self addChild:[HUDLayer node] z:2];
 
-        [self createMenu];
 		[self scheduleUpdate];
 	}
 	
@@ -84,47 +71,8 @@ enum {
 }
 
 -(void) update:(ccTime) delta {
-    [character update];
+    [[[ObjectContainer sharedInstance] player] update];
 }
-
--(void) createMenu
-{	
-    CCSprite *sprite = [CCSprite spriteWithFile:@"dpadNintendo.png"];
-    sprite.position = ccp(50, 50);
-    sprite.scale = 0.75f;
-    
-    dpadButton = [DpadButton buttonWithSprite:sprite];
-    
-	[self addChild:dpadButton.sprite z:5];	
-}
-
-- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInView: [touch view]];
-        
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		[dpadButton decideHowPlayerShouldMove:character point:location];
-    }
-}
-
-- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInView: [touch view]];
-        
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		[dpadButton decideHowPlayerShouldMove:character point:location];
-    }
-}
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	for(UITouch *touch in touches ) {
-        
-        // TODO Migrate DPad to a different layer
-        [character stand];
-	}
-}
-
 
 #pragma mark GameKit delegate
 

@@ -27,7 +27,7 @@
 - (CharacterBuilder *) buildParticleEffectsManager:(ParticleEffectsManager *) manager;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;
 - (CharacterBuilder *) buildDefense:(NSUInteger) defense;
-- (Character *) build;
+- (id) build;
 
 
 @end

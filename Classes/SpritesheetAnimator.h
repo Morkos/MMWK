@@ -20,15 +20,37 @@
 @interface SpriteSheetAnimator : NSObject {
 }
 
+/**
+ * Start animation using a given sprite, and runs forever. 
+ *
+ *@param sprite The CCSprite object to run the animation on
+ *@param spriteSheet The sprite sheet where the images are stored
+ *@param frameKey The frameKey to use on the spriteSheet to get the CCSpriteFrames
+ *@param frameInterval The interval between each frame
+ */
 + (void) startAnimation:(CCSprite *) sprite
             spriteSheet:(SpriteSheet *) spriteSheet
-               frameKey:(NSString *) key
-                 replay:(bool) isReplay;
-
-+ (void) startAnimation:(CCSprite *) sprite
-            spriteSheet:(SpriteSheet *) spriteSheet
-               frameKey:(NSString *) key
-                 replay:(bool) isReplay
+               frameKey:(NSString *) frameKey
           frameInterval:(float) frameInterval;
+
+/**
+ * Start animation using a given sprite, by running the CCAction on the sprite 
+ * given by the selector.
+ *
+ *@param sprite The CCSprite object to run the animation on
+ *@param spriteSheet The sprite sheet where the images are stored
+ *@param frameKey The frameKey to use on the spriteSheet to get the CCSpriteFrames
+ *@param frameInterval The interval between each frame
+ *@param target The target for the selector
+ *@param selector The selector to create the CCAction to run on the sprite. 
+ *                The selector need to follow the following implementation: 
+ *                 -(CCAction *) selector:(CCAnimation *) animationAction
+ */
++ (void) startAnimation:(CCSprite *) sprite
+            spriteSheet:(SpriteSheet *) spriteSheet
+               frameKey:(NSString *) frameKey
+          frameInterval:(float) frameInterval
+                 target:(id) target
+               selector:(SEL) selector;
 
 @end

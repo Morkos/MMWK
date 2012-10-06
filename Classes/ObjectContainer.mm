@@ -19,7 +19,7 @@ static ObjectContainer *singleContainer;
 
 //don't worry -- we will need to change this.
 
-+ (ObjectContainer *) singleton {
++ (ObjectContainer *) sharedInstance {
 	if (!singleContainer) {
 		singleContainer = [[ObjectContainer alloc] init];
 	}

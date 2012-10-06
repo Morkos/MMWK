@@ -8,54 +8,64 @@
 
 #import "AttackState.h"
 
+@interface AttackState ()
+    -(CCAction *) createAction:(CCAnimation *) animationAction;
+    -(void) transitionToStand;
+    -(void) setIsDelayed;
+@end
 @implementation AttackState
 
 @synthesize character,
             currentAttack,
-            isNextAttack;
+            isInDelay;
 
 + (AttackState *) createWithCharacter:(Character *) character {
     AttackState *state = [[AttackState alloc] init];
     state.character = character;
     state.currentAttack = 0;
+    state.isInDelay = true;
     
     return state;
 }
 
 - (void) start {
-    isNextAttack = true;
-    currentAttack = 0;
+    isInDelay = false;
+    [SpriteSheetAnimator startAnimation:character.sprite
+                            spriteSheet:character.spriteSheet
+                               frameKey:NSSTRING_FORMAT(ANIMATOR_ATTACK, currentAttack)
+                          frameInterval:0.1f
+                                 target:self
+                               selector:@selector(createAction:)];
+}
+
+-(CCAction *) createAction:(CCAnimation *) animationAction {
+    animationAction.restoreOriginalFrame = false;
+    CCAction *action = [CCSequence actions:[CCAnimate actionWithAnimation:animationAction],
+                                           [CCCallFunc actionWithTarget:self selector:@selector(setIsDelayed)],
+                                           [CCDelayTime actionWithDuration:0.2f],
+                                           [CCCallFunc actionWithTarget:self selector:@selector(transitionToStand)],
+                                            nil];
+    
+    return action;
+}
+
+-(void) setIsDelayed {
+    isInDelay = true;
 }
 
 - (void) updateState {
-    /*if (isNextAttack && [character.animator isLastAnimation]) {
-        //NSString *key = [NSString stringWithFormat:ANIMATOR_ATTACK, currentAttack++];
-        
-        // Invoke sprite animation
-        //[character.animator startAnimation:key replay:false];
-        
-        // Invoke particle effect
-        [character.effectsManager invokeEffect:key 
-                                          prop:character];
-        
-        isNextAttack = false;
-    }*/
-    
-    /*if ([character.animator isLastAnimation]) {
-        if ((currentAttack >= [character.attackingRowIndexes count] - 1) || 
-            !isNextAttack) {
-            [character setState:[StandState createWithCharacter:character]];
-        }
-    }*/
-    
+}
+
+- (void) transitionToStand {
+    [character setState:[StandState createWithCharacter:character]];;
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {
-    if ([[newState class] isSubclassOfClass:[AttackState class]]) {
-        isNextAttack = true;
+    if ([[newState class] isSubclassOfClass:[AttackState class]] && 
+        isInDelay) {
+        currentAttack++;
+        [self start];
     }
-    
-    
 }
 
 @end

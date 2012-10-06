@@ -8,38 +8,36 @@
 
 #import "SpritesheetAnimator.h"
 
-
 @implementation SpriteSheetAnimator
 
 + (void) startAnimation:(CCSprite *) sprite
             spriteSheet:(SpriteSheet *) spriteSheet
-               frameKey:(NSString *) key
-                 replay:(bool) isReplay { 
+               frameKey:(NSString *) key 
+          frameInterval:(float)frameInterval { 
     [SpriteSheetAnimator startAnimation:sprite
                             spriteSheet:spriteSheet
                                frameKey:key 
-                                 replay:isReplay 
-                          frameInterval:0.1f];
+                          frameInterval:frameInterval
+                                 target:NULL
+                                 selector:NULL];
 }
 
 + (void) startAnimation:(CCSprite *) sprite
             spriteSheet:(SpriteSheet *) spriteSheet
                frameKey:(NSString *) key
-                 replay:(bool) isReplay
-          frameInterval:(float) frameInterval {
+          frameInterval:(float) frameInterval
+                 target:(id) target
+               selector:(SEL) selector {
     
-    NSLog(@"Start animation for key %@, isReplay: %d, frameInterval: %f", 
-          key, isReplay, frameInterval);
     NSArray *animFrames = [spriteSheet getSpriteFramesForKey:key];
-    CCAnimation *animationAction = [CCAnimation 
-                             animationWithSpriteFrames:animFrames];
+    CCAnimation *animationAction = [CCAnimation animationWithSpriteFrames:animFrames];
     animationAction.delayPerUnit = frameInterval;
-    
+
     CCAction *action;
-    if (isReplay) {
+    if (selector == NULL || target == NULL) {
         action = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animationAction]];
     } else {
-        //TODO
+        action = [target performSelector:selector withObject:animationAction];
     }
     
     action.tag = TAG_ANIMATION_ACTION;
