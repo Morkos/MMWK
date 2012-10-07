@@ -9,6 +9,9 @@
 #import "BackgroundLayer.h"
 #import "cocos2d.h"
 #import "NSPropertyUtil.h"
+#import "SpriteSheetManager.h"
+#import "EnemyBuilder.h"
+#import "Enemy.h"
 
 static CGFloat SCROLL_SPEED = 1.0f;
 static CGSize screenSize;
@@ -72,6 +75,17 @@ static int sqIndex = 0;
          */
         CCSprite * bg1 = [self.bgSprites objectAtIndex:0];        
         bg1.position = ccp(screenSize.width / 2, screenSize.height / 2);
+        SpriteSheet *spriteSheet2 = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
+
+        EnemyBuilder *builder2 = [EnemyBuilder newBuilder:ccp(220,220) 
+                                                     size:CGSizeMake(10.0f, 10.0f)
+                                                   sprite:[spriteSheet2 getSpriteForKey:ANIMATOR_STAND frameNum:0]
+                                  ];
+        
+        Enemy * enemy = [[builder2 buildSpriteSheet:spriteSheet2] build];
+
+        [self addChild:enemy.sprite];
+
 
         [self scheduleUpdate];
     }

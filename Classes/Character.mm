@@ -76,6 +76,8 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.position = pos;
 		self.size = sz;
         self.sprite = spriteParam;
+        //TODO: use game coordinates instead of screen coordinates
+        self.sprite.position = pos;
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];

@@ -13,7 +13,7 @@
 #import "PhysicsSprite.h"
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
-
+#import "Enemy.h"
 enum {
 	kTagParentNode = 1,
 };
@@ -26,14 +26,19 @@ enum {
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
 +(CCScene *) scene
 {
+    [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
-	HelloWorldLayer *layer = [HelloWorldLayer node];
 	
+    HelloWorldLayer *layer = [HelloWorldLayer node];
+    BackgroundLayer * bgLayer = [BackgroundLayer node];
+	HUDLayer *hudLayer = [HUDLayer node];
+    
 	// add layer as a child to scene
-	[scene addChild: layer];
-	
+    [scene addChild:bgLayer z:-2];
+	[scene addChild:layer];
+	[scene addChild:hudLayer z:2];
 	// return the scene
 	return scene;
 }
@@ -43,23 +48,21 @@ enum {
 	if( (self=[super init])) {
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
-		spriteTexture_ = [parent texture];
 
 		[self addChild:parent z:1 tag:kTagParentNode];	
         
-        [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
-        PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(20,20) 
+
+        PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(120,220) 
                                                       size:CGSizeMake(10.0f, 10.0f)
                                                     sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
                                      ];
+        
+        
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
         [[ObjectContainer sharedInstance] addObject:player];
         
         [parent addChild:player.sprite];
-        [self addChild:[BackgroundLayer node] z:-2];
-        [self addChild:[HUDLayer node] z:2];
-
 		[self scheduleUpdate];
 	}
 	
