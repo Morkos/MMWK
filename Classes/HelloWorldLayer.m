@@ -27,6 +27,7 @@ enum {
 +(CCScene *) scene
 {
     [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
+
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
@@ -46,23 +47,39 @@ enum {
 -(id) init
 {
 	if( (self=[super init])) {
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 
-		[self addChild:parent z:1 tag:kTagParentNode];	
+		[self addChild:parent 
+                     z:1 
+                   tag:kTagParentNode];	
         
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+        SpriteSheet *spriteSheet2 = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
         PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(120,220) 
                                                       size:CGSizeMake(10.0f, 10.0f)
                                                     sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
-                                     ];
-        
-        
+                                 ];
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
-        [[ObjectContainer sharedInstance] addObject:player];
         
+        EnemyBuilder *builder2 = [EnemyBuilder newBuilder:ccp(220,220) 
+                                                     size:CGSizeMake(20.0f, 20.0f)
+                                                   sprite:[spriteSheet2 getSpriteForKey:ANIMATOR_STAND frameNum:0]
+                                  ];
+        Enemy * enemy = [[builder2 buildSpriteSheet:spriteSheet2] build];
+        
+        [[ObjectContainer sharedInstance] addObject:player];
         [parent addChild:player.sprite];
+        [self addChild:enemy.sprite];
+
+        /**
+         * Every node on this layer will follow the main player
+         * TODO: calculate the correct width for the world boundary
+         */
+        [self runAction:[CCFollow actionWithTarget:player.sprite 
+                                     worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
 		[self scheduleUpdate];
 	}
 	

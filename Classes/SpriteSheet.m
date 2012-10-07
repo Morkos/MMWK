@@ -84,7 +84,6 @@
 
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
     NSString *frameKey = [NSString stringWithFormat:@"%d.%@%d", self.texture.name, key, frameNum];
-    NSLog(@"Grabbing sprite frame with: %@", frameKey);
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameKey];
     return frame;
 }

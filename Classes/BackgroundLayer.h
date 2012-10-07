@@ -10,11 +10,9 @@
 #import "cocos2d.h"
 
 @interface BackgroundLayer : CCLayer {
-    NSMutableArray * bgSprites;
     NSArray * sequences;
 }
 
-@property (nonatomic, retain) NSMutableArray * bgSprites;
 @property (nonatomic, retain) NSArray * sequences;
 
 @end
