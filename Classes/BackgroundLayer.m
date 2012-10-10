@@ -9,40 +9,30 @@
 #import "BackgroundLayer.h"
 #import "cocos2d.h"
 #import "NSPropertyUtil.h"
-
-static CGFloat SCROLL_SPEED = 1.0f;
-static CGSize screenSize;
-static int sqIndex = 0;
+#import "SpriteSheetManager.h"
+#import "EnemyBuilder.h"
+#import "Enemy.h"
+#import "ObjectContainer.h"
 
 @implementation BackgroundLayer
-@synthesize bgSprites,
-            sequences;
-
-/**
- * Private helper method to see if we are at the end of 
- * our level
- */
-- (BOOL) isBackgroundFinished {
-    NSInteger elementCount = [self.bgSprites count];
-    return ((sqIndex + 1) >= elementCount);
-}
+@synthesize sequences;
 
 - (id) init {
     
     if(self = [super init]) {
         NSLog(@"Initializing background...");
         
-        screenSize = [[CCDirector sharedDirector] winSize];
+        CGSize screenSize = [[CCDirector sharedDirector] winSize];
         NSDictionary * lvlProperties = [NSPropertyUtil loadProperties:@"level0.plist"];
         NSArray * bgImages = [lvlProperties objectForKey:@"backgroundImages"];
         
         self.sequences = [lvlProperties objectForKey:@"backgroundSequences"];
-        self.bgSprites = [NSMutableArray arrayWithCapacity:[self.sequences count]];
         
         /**
          * POTENTIAL OPTIMIZATION: We are adding a sprite for every sequence; however, sequences can be 
          * duplicated.
          */
+        int i = 0;
         for (NSNumber * sqIndex in self.sequences) {
             NSInteger imgIndex = [sqIndex integerValue];
             
@@ -55,52 +45,25 @@ static int sqIndex = 0;
             [fillerSprite initWithTexture:texture
                                       rect:CGRectMake(0, 0, textureSize.width, textureSize.height)];
             /**
-             * Adjust each BG position to be outside and 
-             * to the right of the current iphone's screen view
+             * Adjust each BG position to be side by side.
              */
-            fillerSprite.position = ccp(screenSize.width + (screenSize.width / 2), screenSize.height/2);
-            //fillerSprite.scaleY = 0.5;
-            [self.bgSprites addObject:fillerSprite];      
+            CGFloat newPositionX = ((screenSize.width * (i + 1)) + (screenSize.width * i)) / 2;
+            fillerSprite.position = ccp(newPositionX, screenSize.height/2);
             
             //add to scene 
             [self addChild:fillerSprite];
-            [fillerSprite release];
+            [fillerSprite release]; 
+            i++;
         }
         
-        /**
-         * Center the 1st bg sprite
-         */
-        CCSprite * bg1 = [self.bgSprites objectAtIndex:0];        
-        bg1.position = ccp(screenSize.width / 2, screenSize.height / 2);
-
-        [self scheduleUpdate];
+        Player * player = [[ObjectContainer sharedInstance] getObject:0];
+        
+        //TODO: calculate the correct width for the world boundary
+        [self runAction:[CCFollow actionWithTarget:player.sprite 
+                                     worldBoundary:CGRectMake(0, 0, 2000, screenSize.height)]];
     }
     
     return self;
-}
-
-- (void) update:(ccTime) dt {
-        
-    if ([self isBackgroundFinished]) {
-        NSLog(@"Descheduling background.");
-        [self unscheduleUpdate];
-        return;
-    }
-    
-    //NOTE: This assumes that we just need 1 bg image per scene.
-    NSMutableArray * scrollingBackgrounds = [NSMutableArray arrayWithObjects:
-                                             [self.bgSprites objectAtIndex:sqIndex],
-                                             [self.bgSprites objectAtIndex:sqIndex + 1],
-                                             nil
-                                            ];
-    
-    for (CCSprite * bg in scrollingBackgrounds) {
-        bg.position = ccp( bg.position.x - SCROLL_SPEED, bg.position.y );
-        //if bg is scrolld all th way to th lft, thn ftch th nxt bg imag
-        if (bg.position.x <= - (screenSize.width / 2 - 1)) {
-            sqIndex++;
-        }
-    }
 }
 
 @end

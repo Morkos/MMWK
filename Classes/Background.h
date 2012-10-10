@@ -45,7 +45,6 @@
 - (void) addBackgroundTexture:(Texture *)texture;
 
 // From Drawable protocol
-- (void) draw;
 - (void) update;
 
 @end

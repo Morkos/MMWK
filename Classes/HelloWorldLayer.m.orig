@@ -13,8 +13,15 @@
 #import "PhysicsSprite.h"
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
+<<<<<<< HEAD
 #import "OverlayLayer.h"
+=======
 #import "Enemy.h"
+enum {
+	kTagParentNode = 1,
+};
+
+>>>>>>> origin/Cocos2D
 
 #pragma mark - HelloWorldLayer
 
@@ -29,11 +36,22 @@
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
 	
-	[scene addChild:[HelloWorldLayer node]];
+    HelloWorldLayer *layer = [HelloWorldLayer node];
+    BackgroundLayer * bgLayer = [BackgroundLayer node];
+	HUDLayer *hudLayer = [HUDLayer node];
+    
+	// add layer as a child to scene
+<<<<<<< HEAD
+	[scene addChild: layer];
     [scene addChild:[BackgroundLayer node] z:-2];	
     [scene addChild:[HUDLayer node] z:2];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
     
+=======
+    [scene addChild:bgLayer z:-2];
+	[scene addChild:layer];
+	[scene addChild:hudLayer z:2];
+>>>>>>> origin/Cocos2D
 	// return the scene
 	return scene;
 }
@@ -45,14 +63,26 @@
 		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 
+<<<<<<< HEAD
 		[self addChild:parent z:1];	
+=======
+		[self addChild:parent 
+                     z:1 
+                   tag:kTagParentNode];	
+>>>>>>> origin/Cocos2D
         
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         SpriteSheet *spriteSheet2 = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
         PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(120,220) 
                                                       size:CGSizeMake(10.0f, 10.0f)
+<<<<<<< HEAD
                                                     sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]];
+        
+=======
+                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
+                                 ];
+>>>>>>> origin/Cocos2D
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
         
         EnemyBuilder *builder2 = [EnemyBuilder newBuilder:ccp(220,220) 
@@ -63,6 +93,9 @@
         
         [[ObjectContainer sharedInstance] addObject:player];
         [parent addChild:player.sprite];
+<<<<<<< HEAD
+
+=======
         [self addChild:enemy.sprite];
 
         /**
@@ -71,6 +104,7 @@
          */
         [self runAction:[CCFollow actionWithTarget:player.sprite 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
+>>>>>>> origin/Cocos2D
 		[self scheduleUpdate];
 	}
 	

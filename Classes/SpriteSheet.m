@@ -43,8 +43,11 @@
                 [CCSpriteFrame frameWithTexture:texture 
                                            rect:CGRectMake(topLeftX, topLeftY, spriteSheet.sizeX, spriteSheet.sizeY)];
             
+            NSString * frameKey = [NSString stringWithFormat:@"%d.%@%d", texture.name, key, i];
+            
+            NSLog(@"Adding frameKey: %@ to SpriteFrameCache.", frameKey);
             [[CCSpriteFrameCache sharedSpriteFrameCache] 
-                addSpriteFrame:frame name:[NSString stringWithFormat: @"%@%d", key, i]];
+                addSpriteFrame:frame name:[NSString stringWithFormat: @"%d.%@%d", texture.name, key, i]];
         }
     }
 	
@@ -69,7 +72,7 @@
 
 - (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
     CCSpriteFrame *frame = [self getFrameForKey:key frameNum:frameNum];
-    return [CCSprite spriteWithTexture:texture rect:frame.rect];
+    return [CCSprite spriteWithTexture:self.texture rect:frame.rect];
 }
 
 - (void) changeSprite:(CCSprite *) sprite   
@@ -80,7 +83,7 @@
 }
 
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
-    NSString *frameKey = [NSString stringWithFormat:@"%@%d", key, frameNum];
+    NSString *frameKey = [NSString stringWithFormat:@"%d.%@%d", self.texture.name, key, frameNum];
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameKey];
     return frame;
 }

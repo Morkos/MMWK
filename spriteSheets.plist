@@ -68,5 +68,26 @@
 			</array>
 		</dict>
 	</dict>
+	<key>megamanSpSheet.png</key>
+	<dict>
+		<key>numOfColumns</key>
+		<integer>8</integer>
+		<key>numOfRows</key>
+		<integer>6</integer>
+		<key>animationFrames</key>
+		<dict>
+			<key>stand</key>
+			<array>
+				<string>{0,0}</string>
+				<string>{0,1}</string>
+				<string>{0,2}</string>
+				<string>{0,3}</string>
+				<string>{0,4}</string>
+				<string>{0,5}</string>
+				<string>{0,6}</string>
+				<string>{0,7}</string>
+			</array>
+		</dict>
+	</dict>
 </dict>
 </plist>

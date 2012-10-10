@@ -12,10 +12,12 @@
 @implementation EnemyBuilder
 
 - (EnemyBuilder *) newBuilder:(CGPoint)position 
-                         size:(CGSize)size {
+                         size:(CGSize)size 
+                       sprite:(CCSprite *) sprite {
     [character autorelease];
     character = [[Enemy alloc] init:position 
-                               size:size];
+                               size:size
+                             sprite:sprite];
     
     return self;
 }
