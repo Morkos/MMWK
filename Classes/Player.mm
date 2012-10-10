@@ -12,6 +12,8 @@
 #import "ObjectContainer.h"
 #import "FreezeModeManager.h"
 #import "ComboState.h"
+#import "OverlayLayer.h"
+#import "cocos2d.h"
 
 @implementation Player
 
@@ -32,9 +34,10 @@
 }
 
 - (void) initiateComboAttempt:(NSUInteger) hits {
-    NSString * hitCount = [[[NSNumberFormatter alloc] init] stringFromNumber:[NSNumber numberWithInt:hits]];
+    NSString * hitCount = [NSString stringWithFormat:@"%d", hits, nil];
     NSLog(@"hit count: %@", hitCount);
-    [[FreezeModeManager getInstance] changeNodes:hitCount];
+    OverlayLayer *layer = (OverlayLayer *) [[[CCDirector sharedDirector] runningScene] getChildByTag:tagOverlayLayer]; 
+    [layer displayNodes:hitCount];
 }
 
 - (void) initiateComboAnimation:(NSString *)comboKey {

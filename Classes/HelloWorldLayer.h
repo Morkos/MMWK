@@ -13,6 +13,7 @@
 #import "SpriteSheet.h"
 #import "LevelLoader.h"
 #import "NSPropertyUtil.h"
+#import "MyConstants.h"
 
 @interface HelloWorldLayer : CCLayer
 {

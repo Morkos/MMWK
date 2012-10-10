@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <math.h>
+#import "cocos2d.h"
 #import "Overlay.h"
 #import "Loggers.h"
 #import "AnimatorConstants.h"
@@ -15,29 +16,25 @@
 @interface Node : Overlay<NSCopying> {
 @private
     NSString * nodeVisualState;
+    CCSprite *sprite;
 }
 
-@property (nonatomic, assign) NSString * nodeVisualState;
+@property (nonatomic, retain) NSString *nodeVisualState;
+@property (nonatomic, retain) CCSprite *sprite;
 
 /**
  * Factory method to create a node
  * 
  * @param position - open gl position of node
  * @param size - open gl size of node
- * @param spriteSheet animator
+ * @param spriteSheet SpriteSheet associated with the node
  * @return a new node
  */
 + (Node *) nodeAtPosition:(CGPoint)position 
 					 size:(CGSize)size 
-                 animator:(SpriteSheetAnimator *)spriteSheet;
+              spriteSheet:(SpriteSheet *)spriteSheet;
 
-/**
- * Has the node been touched?
- *
- * @param point - coordinates of where the touch is on the screen
- * @return true if node is touched; false otherwise
- */
-- (BOOL) isPressed:(CGPoint)point;
+- (bool) isLocationInView:(CGPoint) location;
 
 /**
  * Mark node as correctly touched (in order)

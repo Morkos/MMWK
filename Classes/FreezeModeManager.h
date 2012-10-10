@@ -7,40 +7,49 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "cocos2d.h"
 #import "Drawable.h"
 
 
 @interface FreezeModeManager : NSObject<Drawable> {
-    NSMutableDictionary * nodesDictionary;
-    NSString * currentComboKey;
+    /**
+     * Maps combo keys to a list of Nodes
+     */
+    @private
+    NSMutableDictionary *nodesDictionary;
+    NSUInteger nextValidNodetoTouch;
+    NSArray *currentComboNodes;
+    NSString *currentComboKey;
+    CCLayer *layer;
 }
 
-@property (nonatomic, retain) NSMutableDictionary * nodesDictionary;
-@property (nonatomic, retain) NSString * currentComboKey;
+@property(nonatomic, retain) NSMutableDictionary *nodesDictionary;
+@property(nonatomic, assign) NSUInteger nextValidNodetoTouch;
+@property(nonatomic, retain) NSArray *currentComboNodes;
+@property(nonatomic, retain) NSString *currentComboKey;
+@property(nonatomic, retain) CCLayer *layer; 
+          
++ (FreezeModeManager *) managerWithPlist:(NSString *) plistFilename
+                                   layer:(CCLayer *) layer;
+
+- (id) init:(NSString *) plistFilename
+      layer:(CCLayer *) layer; 
 
 /**
- * FreezeModeManager is in charge of drawing, storing
- * and processing touch events for nodes
+ * Initializes manager from a property list.
  *
- * @return a single instance of FreezeModeManager
+ * @param plistFilename filename of the property list
  */
-+ (id) getInstance;
+- (void) loadFromFile:(NSString *) plistFilename;
 
 /**
  * Given a combo key, display the nodes that are
  * affiliated
  *
- * @param NSString* - unique identifier for the combo
+ * @param comboKey - unique identifier for the combo
+ * @param layer - The CCLayer to draw the nodes on
  */
-- (void) changeNodes:(NSString *) comboKey;
-
-/**
- * Stores nodes in manager to be displayed and processed
- * in the future
- *
- * @param NSDictionary* - nodes to be stored
- */
-- (void) addNodes:(NSDictionary *) nodes;
+- (void) displayNodes:(NSString *)comboKey;
 
 /**
  * Every time the screen is touch, this method is called

@@ -16,7 +16,7 @@ static SpriteSheetManager *manager = nil;
 
 + (SpriteSheetManager *) getInstance {
     if(manager == nil) {
-		manager = [[SpriteSheetManager alloc] init];
+		manager = [[[SpriteSheetManager alloc] init] autorelease];
         manager.attributesStore = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	
@@ -26,7 +26,7 @@ static SpriteSheetManager *manager = nil;
 - (void) loadFromItems:(NSDictionary *) items {
     for(NSString *filename in [items allKeys]) {
         NSDictionary *attributes = [items objectForKey:filename];
-
+        
         [self.attributesStore setObject:attributes forKey:filename];
     }
 }
@@ -41,7 +41,7 @@ static SpriteSheetManager *manager = nil;
     SpriteSheet *spSheet = [SpriteSheet createWithTexture:texture
                                           animationFrames:animationFrames
                                                 numOfRows:[numOfRows intValue]
-                                               numOfColumns:[numOfColumns intValue]];
+                                             numOfColumns:[numOfColumns intValue]];
     
     return spSheet;
 }

@@ -7,34 +7,29 @@
 //
 
 #import "Overlay.h"
-#import "Node.h"
 
 @implementation Overlay
 
-@synthesize animator, 
+@synthesize spriteSheet, 
             currentState, 
             position, 
             size;
 
-+ (void) initialize:(Overlay *)overlay 
-		   position:(CGPoint)position 
-			   size:(CGSize)size 
-		spriteSheet:(SpriteSheetAnimator *)animator {
+- (id) initWithPosition:(CGPoint)positionParam 
+                   size:(CGSize)sizeParam 
+            spriteSheet:(SpriteSheet *)spriteSheetParam {
 	
-	overlay.position = position;
-	overlay.size = size;
-	overlay.animator = animator;
-	overlay.currentState = OVERLAY_SHOWN;
-}
-
-- (void) draw {
-	if (currentState == OVERLAY_SHOWN) {
-		//[GraphicsEngine drawOverlay:self];
-	}
+    if (self = [super init]) {
+        self.position = positionParam;
+        self.size = sizeParam;
+        self.spriteSheet = spriteSheetParam;
+        self.currentState = OVERLAY_SHOWN;
+    }
+    
+    return self;
 }
 
 - (void) update {
-    [animator animate];
 }
 
 - (void) hide {

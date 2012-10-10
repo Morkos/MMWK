@@ -9,7 +9,8 @@
 #import "Node.h"
 
 @implementation Node
-@synthesize nodeVisualState;
+@synthesize nodeVisualState,
+            sprite;
 
 - (CGFloat) distanceFrom:(CGPoint)point1 
                       to:(CGPoint)point2 {
@@ -25,38 +26,48 @@
 
 + (Node *) nodeAtPosition:(CGPoint)position 
 					 size:(CGSize)size 
-			  animator:(SpriteSheetAnimator *)animator {
+			  spriteSheet:(SpriteSheet *)spriteSheet {
 	
-	Node *node = [[Node alloc] init];
-	
-	[Overlay initialize:node 
-			   position:position 
-				   size:size 
-			spriteSheet:animator];
+	Node *node = [[Node alloc] initWithPosition:position
+                                           size:size
+                                    spriteSheet:spriteSheet];
     
+    node.sprite = [spriteSheet getSpriteForKey:ANIMATOR_NODE_NEUTRAL frameNum:0];
+    node.sprite.position = position;
+    node.sprite.scaleX = size.width;
+    node.sprite.scaleY = size.height;
     node.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
-    [animator startAnimation:ANIMATOR_NODE_NEUTRAL replay:true];
 	
 	return node;
 }
 
-- (BOOL) isPressed:(CGPoint)point {
-	DLOG("Touched (%f, %f), node position(%f, %f), height %f", point.x, point.y, self.position.x, self.position.y, size.height);
-	return [self distanceFrom:point to:self.position] < size.height;
+- (bool) isLocationInView:(CGPoint) location {
+    NSLog(@"Location %@ in box %@", 
+          NSStringFromCGPoint(location), NSStringFromCGRect(sprite.boundingBox));
+    return CGRectContainsPoint(sprite.boundingBox, location);
 }
 
 - (void) markValid {
     self.nodeVisualState = ANIMATOR_NODE_VALID;
-    [animator startAnimation:ANIMATOR_NODE_VALID replay:false];
+    [SpriteSheetAnimator startAnimation:sprite
+                            spriteSheet:spriteSheet
+                               frameKey:self.nodeVisualState
+                          frameInterval:1.0f];
 }
 - (void) markInvalid {
     self.nodeVisualState = ANIMATOR_NODE_INVALID;
-    [animator startAnimation:ANIMATOR_NODE_INVALID replay:false];
+    [SpriteSheetAnimator startAnimation:sprite
+                            spriteSheet:spriteSheet
+                               frameKey:self.nodeVisualState
+                          frameInterval:1.0f];
 }
 
 - (void) markNeutral {
     self.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
-    [animator startAnimation:ANIMATOR_NODE_NEUTRAL replay:false];
+    [SpriteSheetAnimator startAnimation:sprite
+                            spriteSheet:spriteSheet
+                               frameKey:self.nodeVisualState
+                          frameInterval:1.0f];
 }
 
 - (BOOL) isNeutral {
@@ -66,7 +77,7 @@
 - (id) copyWithZone:(NSZone *)zone {
     Node *nodeCopy = [Node nodeAtPosition:self.position 
                                      size:self.size
-                                 animator:self.animator];
+                              spriteSheet:self.spriteSheet];
     
     nodeCopy.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
     

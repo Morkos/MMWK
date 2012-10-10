@@ -33,9 +33,9 @@
     for (NSString *key in animationFrames) {
         NSArray *animationKeys = [animationFrames valueForKey:key];
         for (int i = 0; i < [animationKeys count]; i++) {
-            NSArray *rowColPair = [animationKeys objectAtIndex:i];
-            NSUInteger row = [[rowColPair objectAtIndex:0] intValue];
-            NSUInteger column = [[rowColPair objectAtIndex:1] intValue];
+            CGPoint rowColPair = CGPointFromString([animationKeys objectAtIndex:i]);
+            NSUInteger row = rowColPair.x;
+            NSUInteger column = rowColPair.y;
             CGFloat topLeftX = spriteSheet.sizeX * column;
             CGFloat topLeftY = spriteSheet.sizeY * row;
             

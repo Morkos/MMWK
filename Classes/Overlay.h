@@ -12,24 +12,22 @@
 #import "PropState.h"
 
 @interface Overlay : NSObject <Drawable> {
-	SpriteSheetAnimator *animator;
+	SpriteSheet *spriteSheet;
 	OverlayState currentState;
 	CGPoint position;
 	CGSize size;
 }
 
-@property (nonatomic, retain) SpriteSheetAnimator *animator;
+@property (nonatomic, retain) SpriteSheet *spriteSheet;
 @property (nonatomic, assign) OverlayState currentState;
 @property (nonatomic, assign) CGPoint position;
 @property (nonatomic, assign) CGSize size;
 
-+ (void) initialize:(Overlay *)overlay 
-		   position:(CGPoint)position 
-			   size:(CGSize)size 
-		spriteSheet:(SpriteSheetAnimator *)animator;
+- (id) initWithPosition:(CGPoint)position 
+                   size:(CGSize)size 
+            spriteSheet:(SpriteSheet *)spriteSheet;
 
 // From GraphicsContext protocol
-- (void) draw;
 - (void) update;
 
 - (void) show;

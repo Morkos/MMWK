@@ -13,6 +13,7 @@
 #import "SpriteSheet.h"
 #import "Character.h"
 #import "Gauge.h"
+#import "MyConstants.h"
 
 @interface Player : Character<Collidable> {
     Gauge * specialGauge;

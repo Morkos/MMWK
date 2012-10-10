@@ -16,10 +16,10 @@
                              size:(CGSize) size 
                            sprite:(CCSprite *)sprite{
     CharacterBuilder *builder = [[CharacterBuilder alloc] init];
-    [builder.character autorelease];
     builder.character = [[Character alloc] init:position 
                                            size:size
                                          sprite:sprite];
+    
     
     return builder;
 }

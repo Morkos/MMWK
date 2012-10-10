@@ -13,11 +13,7 @@
 #import "PhysicsSprite.h"
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
-
-enum {
-	kTagParentNode = 1,
-};
-
+#import "OverlayLayer.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -33,7 +29,10 @@ enum {
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
-	
+    [scene addChild:[BackgroundLayer node] z:-2];	
+    [scene addChild:[HUDLayer node] z:2];
+    [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
+    
 	// return the scene
 	return scene;
 }
@@ -45,20 +44,18 @@ enum {
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 		spriteTexture_ = [parent texture];
 
-		[self addChild:parent z:1 tag:kTagParentNode];	
+		[self addChild:parent z:1];	
         
         [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(20,20) 
                                                       size:CGSizeMake(10.0f, 10.0f)
-                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
-                                     ];
+                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]];
+        
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
         [[ObjectContainer sharedInstance] addObject:player];
         
         [parent addChild:player.sprite];
-        [self addChild:[BackgroundLayer node] z:-2];
-        [self addChild:[HUDLayer node] z:2];
 
 		[self scheduleUpdate];
 	}
