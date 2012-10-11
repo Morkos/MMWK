@@ -42,7 +42,6 @@
 {
 	if( (self=[super init])) {
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-		// Use batch node. Faster
 		CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"lancelotSpSheet.png" capacity:100];
 
 		[self addChild:parent z:1];	

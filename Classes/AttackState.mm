@@ -11,25 +11,25 @@
 @interface AttackState ()
     -(CCAction *) createAction:(CCAnimation *) animationAction;
     -(void) transitionToStand;
-    -(void) setIsDelayed;
+    -(void) setCurrentlyInBetweenAttacks;
 @end
 @implementation AttackState
 
 @synthesize character,
             currentAttack,
-            isInDelay;
+            isInBetweenAttacks;
 
 + (AttackState *) createWithCharacter:(Character *) character {
     AttackState *state = [[AttackState alloc] init];
     state.character = character;
     state.currentAttack = 0;
-    state.isInDelay = true;
+    state.isInBetweenAttacks = true;
     
     return state;
 }
 
 - (void) start {
-    isInDelay = false;
+    isInBetweenAttacks = false;
     [SpriteSheetAnimator startAnimation:character.sprite
                             spriteSheet:character.spriteSheet
                                frameKey:NSSTRING_FORMAT(ANIMATOR_ATTACK, currentAttack)
@@ -41,7 +41,7 @@
 -(CCAction *) createAction:(CCAnimation *) animationAction {
     animationAction.restoreOriginalFrame = false;
     CCAction *action = [CCSequence actions:[CCAnimate actionWithAnimation:animationAction],
-                                           [CCCallFunc actionWithTarget:self selector:@selector(setIsDelayed)],
+                                           [CCCallFunc actionWithTarget:self selector:@selector(setCurrentlyInBetweenAttacks)],
                                            [CCDelayTime actionWithDuration:0.2f],
                                            [CCCallFunc actionWithTarget:self selector:@selector(transitionToStand)],
                                             nil];
@@ -49,8 +49,8 @@
     return action;
 }
 
--(void) setIsDelayed {
-    isInDelay = true;
+-(void) setCurrentlyInBetweenAttacks {
+    isInBetweenAttacks = true;
 }
 
 - (void) updateState {
@@ -62,7 +62,7 @@
 
 - (void) transitionToState:(id<CharacterState>) newState {
     if ([[newState class] isSubclassOfClass:[AttackState class]] && 
-        isInDelay) {
+        isInBetweenAttacks) {
         currentAttack++;
         [self start];
     }

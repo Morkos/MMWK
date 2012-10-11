@@ -52,4 +52,26 @@
                  target:(id) target
                selector:(SEL) selector;
 
+/**
+ * Starts a series of animations using a given sprite, by running a series of CCAction on the sprite 
+ * given by the selector.
+ *
+ *@param sprite The CCSprite object to run the animation on
+ *@param spriteSheet The sprite sheet where the images are stored
+ *@param frameKeys An array of NSString objects to be used as frameKeys on the spriteSheet to get the CCSpriteFrames 
+ *                 for each animation action
+ *@param frameInterval The interval between each frame
+ *@param target The target for the selector
+ *@param selector The selector to create the CCAction to run on the sprite. 
+ *                The selector need to follow the following implementation: 
+ *                 -(CCAction *) selector:(NSArray *) animationActions
+ *                 where animationActions is an array of CCAnimationAction.
+ */
++ (void) startAnimationSeries:(CCSprite *) sprite
+                  spriteSheet:(SpriteSheet *) spriteSheet
+                    frameKeys:(NSArray *) frameKeys
+                frameInterval:(float) frameInterval
+                       target:(id) target
+                     selector:(SEL) selector;
+
 @end

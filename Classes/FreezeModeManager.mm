@@ -72,6 +72,11 @@
     
     for (NSInteger index = 0; index < [comboNodes count]; index++) {
         Node *node = [comboNodes objectAtIndex:index];
+        
+        // Mark all current nodes neutral
+        [node markNeutral];
+        
+        
         [self.layer addChild:node.sprite];
     }
     

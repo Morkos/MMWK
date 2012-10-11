@@ -16,6 +16,8 @@
     if (self = [super init]) {
         self.freezeModeManager = [FreezeModeManager managerWithPlist:@"combos.plist"
                                                                layer:self];
+        
+        self.isTouchEnabled = true;
     }
     
     return self;
@@ -23,6 +25,15 @@
 
 - (void) displayNodes:(NSString *) comboKey {
     [self.freezeModeManager displayNodes:comboKey];
+}
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInView: [touch view]];
+        location = [[CCDirector sharedDirector] convertToGL: location];
+        
+        [self.freezeModeManager processNodesTouches:location];
+    }
 }
 
 - (void) dealloc {

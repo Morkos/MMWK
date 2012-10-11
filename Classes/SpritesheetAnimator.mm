@@ -8,6 +8,11 @@
 
 #import "SpritesheetAnimator.h"
 
+@interface SpriteSheetAnimator ()
+    + (CCAnimation *) createAnimationAction:(NSString *) key
+                                spriteSheet:(SpriteSheet *) spriteSheet
+                              frameInterval:(float) frameInterval;
+@end
 @implementation SpriteSheetAnimator
 
 + (void) startAnimation:(CCSprite *) sprite
@@ -29,9 +34,10 @@
                  target:(id) target
                selector:(SEL) selector {
     
-    NSArray *animFrames = [spriteSheet getSpriteFramesForKey:key];
-    CCAnimation *animationAction = [CCAnimation animationWithSpriteFrames:animFrames];
-    animationAction.delayPerUnit = frameInterval;
+    CCAnimation *animationAction = 
+        [SpriteSheetAnimator createAnimationAction:key
+                                       spriteSheet:spriteSheet
+                                     frameInterval:frameInterval];
 
     CCAction *action;
     if (selector == NULL || target == NULL) {
@@ -45,6 +51,42 @@
     [sprite stopActionByTag:TAG_ANIMATION_ACTION];
     [sprite runAction:action];
 
+}
+
++ (void) startAnimationSeries:(CCSprite *) sprite
+                  spriteSheet:(SpriteSheet *) spriteSheet
+                    frameKeys:(NSArray *) frameKeys
+                frameInterval:(float) frameInterval
+                       target:(id) target
+                     selector:(SEL) selector {
+
+    NSMutableArray *animations = [NSMutableArray arrayWithCapacity:[frameKeys count]];
+    
+    for (NSString *key in frameKeys) {
+        CCAnimation *animationAction = 
+            [SpriteSheetAnimator createAnimationAction:key
+                                           spriteSheet:spriteSheet
+                                         frameInterval:frameInterval];
+        
+        [animations addObject:animationAction];
+    }
+    
+    CCAction *action = [target performSelector:selector withObject:animations];
+    
+    action.tag = TAG_ANIMATION_ACTION;
+    
+    [sprite stopActionByTag:TAG_ANIMATION_ACTION];
+    [sprite runAction:action];
+}   
+
++ (CCAnimation *) createAnimationAction:(NSString *) key
+                            spriteSheet:(SpriteSheet *) spriteSheet
+                          frameInterval:(float)frameInterval {
+    NSArray *animFrames = [spriteSheet getSpriteFramesForKey:key];
+    CCAnimation *animationAction = [CCAnimation animationWithSpriteFrames:animFrames];
+    animationAction.delayPerUnit = frameInterval;
+    
+    return animationAction;
 }
 
 @end

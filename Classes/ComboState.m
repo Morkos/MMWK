@@ -8,6 +8,9 @@
 
 #import "ComboState.h"
 
+@interface ComboState () 
+    -(void) transitionToStand;
+@end
 @implementation ComboState
 
 @synthesize character,
@@ -25,31 +28,50 @@
 }
 
 - (void) start {
+    // TODO For now, hardcode all 3 attacks. Will revisit when there is an actual combo
+    NSString *attack0 = NSSTRING_FORMAT(ANIMATOR_ATTACK, 0);
+    NSString *attack1 = NSSTRING_FORMAT(ANIMATOR_ATTACK, 1);
+    NSString *attack2 = NSSTRING_FORMAT(ANIMATOR_ATTACK, 2);
+    
+    [SpriteSheetAnimator startAnimationSeries:character.sprite
+                                  spriteSheet:character.spriteSheet
+                                    frameKeys:[NSArray arrayWithObjects:attack0, attack1, attack2, nil]
+                                frameInterval:0.1f
+                                       target:self
+                                     selector:@selector(createAction:)];
+
 }
 
-- (void) updateState {
+-(CCAction *) createAction:(NSArray *) animations {
+    CCAnimation *attack0 = [animations objectAtIndex:0];
+    CCAnimation *attack1 = [animations objectAtIndex:1];
+    CCAnimation *attack2 = [animations objectAtIndex:2];
     
-    /*if([character.animator isLastAnimation]) {
-        NSString * key = [NSString stringWithFormat:comboKey, currentAttack++];
-        [self.character.animator startAnimation:key
-                                         replay:false];
-        
-        // Invoke particle effect
-        [character.effectsManager invokeEffect:key 
-                                          prop:character];
-        
-        //TODO: abstract this when we have real combos.
-        if (currentAttack >= 4) {
-            NSLog(@"set to standing state...");
-            [character setState:[StandState createWithCharacter:character]];
-        }
-    }*/
+    attack0.restoreOriginalFrame = false;
+    attack1.restoreOriginalFrame = false;
+    attack2.restoreOriginalFrame = false;
+    CCAction *action = [CCSequence actions:[CCAnimate actionWithAnimation:attack0],
+                                           [CCDelayTime actionWithDuration:0.2f],
+                                           [CCAnimate actionWithAnimation:attack1],
+                                           [CCDelayTime actionWithDuration:0.2f],
+                                           [CCAnimate actionWithAnimation:attack2],
+                                           [CCDelayTime actionWithDuration:0.2f],
+                                           [CCCallFunc actionWithTarget:self selector:@selector(transitionToStand)],
+                                           nil];
+    
+    return action;
+}
+
+
+- (void) updateState {
+}
+
+- (void) transitionToStand {
+    [character setState:[StandState createWithCharacter:character]];;
 }
 
 - (void) transitionToState:(id<CharacterState>)newState {
-    if ([[newState class] isSubclassOfClass:[StandState class]]) {
-        [character setState:newState];
-    }
+    // Can't transition to anything in combo mode
 }
 
 @end
