@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Player.h"
-#import "Background.h"
 #import "Node.h"
 #import "Queue.h"
 
@@ -19,13 +18,11 @@
 	NSMutableArray *objArray;
 	Player *player;
 	NSMutableArray *nodes;
-	Background *background;
 }
 
 @property (nonatomic, retain) NSMutableArray *objArray;
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) NSMutableArray *nodes;
-@property (nonatomic, readonly, retain) Background *background;
 
 + (ObjectContainer *) sharedInstance;
 - (id) init;

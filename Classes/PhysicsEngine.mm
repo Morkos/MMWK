@@ -12,11 +12,10 @@
 #import "ObjectContainer.h"
 #import "Typedefs.h"
 #import "RunTimeWrapper.h"
-#import "Camera.h"
 
 
 static PhysicsEngine * physicsEngine = nil;
-static Camera * camera = [Camera getInstance];
+//static Camera * camera = [Camera getInstance];
 
 @implementation PhysicsEngine
 
@@ -56,7 +55,7 @@ static Camera * camera = [Camera getInstance];
  */
 - (void) detectScreenCollision:(Prop *)prop {
 	
-	CGFloat radius = PYTHAG(prop.size.width / 2.0f,
+	/*CGFloat radius = PYTHAG(prop.size.width / 2.0f,
 							prop.size.height / 2.0f);
 				 
 	BOOL isWithinLevelBoundary = 
@@ -69,7 +68,7 @@ static Camera * camera = [Camera getInstance];
 	if (!isWithinLevelBoundary) {
 		SEL backgroundCallback = NSSelectorFromString(@"collidesWithScreen");
 		[prop performSelector:backgroundCallback];
-	}
+	}*/
 }
 	
 /**

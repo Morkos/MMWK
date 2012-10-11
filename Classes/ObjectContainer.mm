@@ -12,8 +12,7 @@
 
 @synthesize objArray,
 			player,
-			nodes,
-			background;
+			nodes;
 
 static ObjectContainer *singleContainer;
 
@@ -43,15 +42,6 @@ static ObjectContainer *singleContainer;
 			player = (Player *) object;
 		} else {
 			DLOG("ERROR! More than one player!");
-		}
-	}
-	
-	// Store background in a singleton background object
-	if ([[object class] isSubclassOfClass:[Background class]]) {
-		if (!background) {
-			background = (Background *) object;
-		} else {
-			DLOG("ERROR! More than one background!");
 		}
 	}
 }
