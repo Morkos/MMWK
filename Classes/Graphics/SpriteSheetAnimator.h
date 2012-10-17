@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SpriteSheet.h"
 #import "Typedefs.h"
-#import "TexCoords.h"
 #import "AnimatorConstants.h"
 
 /**

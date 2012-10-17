@@ -11,7 +11,6 @@
 #import "cocos2d.h"
 #import "chipmunk.h"
 #import "SpriteSheet.h"
-#import "LevelLoader.h"
 #import "NSPropertyUtil.h"
 #import "MyConstants.h"
 

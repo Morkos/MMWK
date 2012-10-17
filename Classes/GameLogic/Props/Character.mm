@@ -40,7 +40,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 			physicsEngine,
 			currentDirection,
 			currentOrientation,
-			effectsManager,
             strength,
             defense,
             healthGauge;
@@ -100,7 +99,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 - (void) update {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
 	[currentState updateState];
-    [effectsManager updateCurrentEffect];
 }
 
 - (void) runTo:(Direction) dir {

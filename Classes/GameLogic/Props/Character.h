@@ -10,7 +10,6 @@
 #import "PropState.h"
 #import "PhysicsEngine.h"
 #import "SpriteSheet.h"
-#import "ParticleEffectsManager.h"
 #import "SpritesheetAnimator.h"
 #import "CharacterState.h"
 #import "MoveState.h"
@@ -26,8 +25,6 @@
 	Orientation currentOrientation;
 	
 	NSArray *attackingRowIndexes;
-	
-	ParticleEffectsManager *effectsManager;
     
     NSUInteger strength;
     NSUInteger defense;
@@ -42,7 +39,6 @@
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
-@property (nonatomic, retain) ParticleEffectsManager *effectsManager;
 @property (nonatomic, assign) NSUInteger strength;
 @property (nonatomic, assign) NSUInteger defense;
 @property (nonatomic, retain) Gauge *healthGauge;

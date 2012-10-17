@@ -29,11 +29,6 @@
     return self;
 }
 
-- (id) buildParticleEffectsManager:(ParticleEffectsManager *)manager {
-    self.character.effectsManager = manager;
-    return self;
-}
-
 - (id) buildDefense:(NSUInteger)defense {
     self.character.defense = defense;
     return self;

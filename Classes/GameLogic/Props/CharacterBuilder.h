@@ -24,7 +24,6 @@
                            sprite:(CCSprite *)sprite;
 
 - (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet;
-- (CharacterBuilder *) buildParticleEffectsManager:(ParticleEffectsManager *) manager;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;
 - (CharacterBuilder *) buildDefense:(NSUInteger) defense;
 - (id) build;
