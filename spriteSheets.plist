@@ -60,11 +60,11 @@
 			</array>
 			<key>node_invalid</key>
 			<array>
-				<string>{1,0}</string>
+				<string>{0,0}</string>
 			</array>
 			<key>node_valid</key>
 			<array>
-				<string>{0,0}</string>
+				<string>{1,0}</string>
 			</array>
 		</dict>
 	</dict>

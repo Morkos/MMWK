@@ -27,7 +27,7 @@
     [self.freezeModeManager displayNodes:comboKey];
 }
 
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
