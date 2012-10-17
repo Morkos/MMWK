@@ -43,7 +43,8 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 			effectsManager,
             strength,
             defense,
-            healthGauge;
+            healthGauge,
+            speed;
 
 
 //Private method
@@ -77,7 +78,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.size = sz;
         self.sprite = spriteParam;
         //TODO: use game coordinates instead of screen coordinates
-        self.sprite.position = pos;
+        self.sprite.position  = pos;
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
@@ -91,6 +92,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 									  ];
         
         self.healthGauge = [[Gauge alloc] init];
+        self.speed = 1.0;
 	}
     
 	return self;
@@ -104,6 +106,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) runTo:(Direction) dir {
+    NSLog(@"character...%@", self);
     [currentState transitionToState:[MoveState createWithCharacter:self]];
 	currentDirection = dir;
 	
@@ -113,7 +116,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) moveTowards:(Direction) dir {
-	[self move:cgPoints[dir]];
+	[self move:ccpMult(cgPoints[dir], self.speed)];
 }
 
 - (void) stand {
@@ -139,6 +142,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) setState:(id<CharacterState>) newState {
+    NSLog(@"Transitioning from %@ to %@", self.currentState, newState);
     [self.currentState release];
     self.currentState = newState;
     [self.currentState start];

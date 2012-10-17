@@ -20,7 +20,7 @@
 - (id) init {
     
     if(self = [super init]) {
-        NSLog(@"Initializing background...");
+        CCLOG(@"Initializing background...");
         
         CGSize screenSize = [[CCDirector sharedDirector] winSize];
         NSDictionary * lvlProperties = [NSPropertyUtil loadProperties:@"level0.plist"];

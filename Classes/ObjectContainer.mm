@@ -13,7 +13,6 @@
 @synthesize objArray,
 			player,
 			nodes;
-
 static ObjectContainer *singleContainer;
 
 //don't worry -- we will need to change this.

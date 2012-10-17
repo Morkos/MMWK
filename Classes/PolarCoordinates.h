@@ -16,3 +16,4 @@
 #define TO_RADIANS(degrees) ((degrees) * M_PI / HALF_CYCLE_IN_DEGREES)
 
 #define PYTHAG(x, y) sqrt(pow((x), 2) + pow((y), 2))
+#define DISTANCE(pt1, pt2) fabsf(sqrt(pow(((pt1.x)-(pt2.x)), 2) + pow(((pt1.y) - (pt2.y)), 2)));

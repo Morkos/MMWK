@@ -87,6 +87,17 @@
 				<string>{0,6}</string>
 				<string>{0,7}</string>
 			</array>
+			<key>move</key>
+			<array>
+				<string>{3,0}</string>
+				<string>{3,1}</string>
+				<string>{3,2}</string>
+				<string>{3,3}</string>
+				<string>{3,4}</string>
+				<string>{3,5}</string>
+				<string>{3,6}</string>
+				<string>{3,7}</string>
+			</array>
 		</dict>
 	</dict>
 </dict>

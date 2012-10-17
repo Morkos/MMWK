@@ -31,7 +31,7 @@
     
     NSUInteger strength;
     NSUInteger defense;
-    
+    CGFloat speed;
     Gauge *healthGauge;
     
 }
@@ -45,6 +45,7 @@
 @property (nonatomic, retain) ParticleEffectsManager *effectsManager;
 @property (nonatomic, assign) NSUInteger strength;
 @property (nonatomic, assign) NSUInteger defense;
+@property (nonatomic, assign) CGFloat speed;
 @property (nonatomic, retain) Gauge *healthGauge;
 
 - (id) init:(CGPoint) pos

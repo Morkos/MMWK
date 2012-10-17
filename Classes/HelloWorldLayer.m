@@ -15,6 +15,8 @@
 #import "HUDLayer.h"
 #import "OverlayLayer.h"
 #import "Enemy.h"
+#import "PlayerBuilder.h"
+#import "EnemyBuilder.h"
 
 #pragma mark - HelloWorldLayer
 
@@ -58,11 +60,15 @@
                                                      size:CGSizeMake(20.0f, 20.0f)
                                                    sprite:[spriteSheet2 getSpriteForKey:ANIMATOR_STAND frameNum:0]
                                   ];
-        Enemy * enemy = [[builder2 buildSpriteSheet:spriteSheet2] build];
+        Enemy * enemy = [[[builder2 buildSpriteSheet:spriteSheet2] 
+                                         buildSpeed:0.50f]
+                            build];
         
         [[ObjectContainer sharedInstance] addObject:player];
         [parent addChild:player.sprite];
         [self addChild:enemy.sprite];
+        
+        [[ObjectContainer sharedInstance] addObject:enemy];
 
         /**
          * Every node on this layer will follow the main player
@@ -82,6 +88,10 @@
 
 -(void) update:(ccTime) delta {
     [[[ObjectContainer sharedInstance] player] update];
+    
+    Enemy * enemy = [[ObjectContainer sharedInstance] getObject:1];
+    
+    [enemy update];
 }
 
 #pragma mark GameKit delegate

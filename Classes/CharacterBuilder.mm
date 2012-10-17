@@ -44,6 +44,11 @@
     return self;
 }
 
+- (id) buildSpeed:(CGFloat)speed {
+    self.character.speed = speed;
+    return self;
+}
+
 - (id) build {
     [self.character setState:
      [StandState createWithCharacter:self.character]];

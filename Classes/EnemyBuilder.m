@@ -11,15 +11,16 @@
 
 @implementation EnemyBuilder
 
-- (EnemyBuilder *) newBuilder:(CGPoint)position 
++ (EnemyBuilder *) newBuilder:(CGPoint)position 
                          size:(CGSize)size 
-                       sprite:(CCSprite *) sprite {
-    [character autorelease];
-    character = [[Enemy alloc] init:position 
-                               size:size
-                             sprite:sprite];
-    
-    return self;
+                       sprite:(CCSprite*)sprite {
+    EnemyBuilder * builder = [[EnemyBuilder alloc] init];
+    builder.character = [[Enemy alloc] init:position 
+                                       size:size
+                                     sprite:sprite];
+   
+    NSLog(@"Created an Enemy.");
+    return builder;
 }
 
 @end

@@ -44,7 +44,7 @@
 
 - (void) draw {
 	if (isAlive) {
-		GLPosition glPosition = {position.x, position.y, 0.0f};
+		//GLPosition glPosition = {position.x, position.y, 0.0f};
 		/*[GraphicsEngine drawTexture:image
 						  texCoords:[TexCoords defaultTexCoords]
 						   position:glPosition 

@@ -20,6 +20,7 @@
 }
 
 - (void) start {
+    NSLog(@"Starting MoveState for %@", self.character);
     [SpriteSheetAnimator startAnimation:character.sprite
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE
@@ -27,6 +28,7 @@
 }
 
 - (void) updateState {
+    NSLog(@"here....?");
     [character moveTowards:character.currentDirection];
 }
 

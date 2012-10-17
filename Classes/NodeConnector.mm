@@ -41,8 +41,8 @@
 
 -(void) draw {
     for (NSValue *val in line.points) {
-        CGPoint point = [val CGPointValue];
-        GLPosition gamePosition = {point.x, point.y, 0.0f};
+        //CGPoint point = [val CGPointValue];
+        //GLPosition gamePosition = {point.x, point.y, 0.0f};
         /*[GraphicsEngine drawTexture:image
                           texCoords:[TexCoords defaultTexCoords] 
                            position:gamePosition 
