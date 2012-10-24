@@ -60,15 +60,11 @@
                                                      size:CGSizeMake(20.0f, 20.0f)
                                                    sprite:[spriteSheet2 getSpriteForKey:ANIMATOR_STAND frameNum:0]
                                   ];
-<<<<<<< HEAD
         
         Enemy * enemy = [[[builder2 buildSpriteSheet:spriteSheet2] 
                                          buildSpeed:0.50f]
                             build];
 
-=======
-        Enemy *enemy = [[builder2 buildSpriteSheet:spriteSheet2] build];
->>>>>>> origin/Cocos2D
         
         [[ObjectContainer sharedInstance] addObject:player];
         [[ObjectContainer sharedInstance] addObject:enemy];
@@ -99,53 +95,6 @@
     Enemy * enemy = [[ObjectContainer sharedInstance] getObject:1];
     
     [enemy update];
-}
-
--(void) visit
-{
-	if(!visible_)
-	{
-		return;
-	}
-    
-	[self sortChildrenByYPosition];
-    
-	for(CCNode *child in children_)
-	{
-		[child visit];
-	}
-}
-
-// Sorts the children based on their Y position (lower Y = rendered later)
--(void) sortChildrenByYPosition
-{
-	// Sprites will always be partially ordered after the first sort, so use insert sort.
-	CCNode *testValue;
-	int length = children_.count;
-	int i;
-    
-	for(int j = 1; j < length; j++)
-	{
-		testValue = [[children_ objectAtIndex:j] retain];
-		for(i = j-1; i >= 0; i--)
-		{
-            CCNode * node = [children_ objectAtIndex:i];
-            
-            // Have to use the bottom of the sprite instead of the center so that it
-            // looks more realistic.
-            CGFloat nodeY = node.position.y - (node.boundingBox.size.height/2.0f);
-            CGFloat testValueY = testValue.position.y - (testValue.boundingBox.size.height/2.0f);
-            
-            if (nodeY >= testValueY) {
-                break;
-            }
-            
-			[children_ replaceObjectAtIndex:i+1 withObject:[children_ objectAtIndex:i]];
-		}
-        
-		[children_ replaceObjectAtIndex:i+1 withObject:testValue];
-        [testValue release];
-	}
 }
 
 -(void) visit
