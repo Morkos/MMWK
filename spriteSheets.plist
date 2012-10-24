@@ -60,11 +60,11 @@
 			</array>
 			<key>node_invalid</key>
 			<array>
-				<string>{1,0}</string>
+				<string>{0,0}</string>
 			</array>
 			<key>node_valid</key>
 			<array>
-				<string>{0,0}</string>
+				<string>{1,0}</string>
 			</array>
 		</dict>
 	</dict>
@@ -97,6 +97,17 @@
 				<string>{3,5}</string>
 				<string>{3,6}</string>
 				<string>{3,7}</string>
+			</array>
+			<key>attack0</key>
+			<array>
+				<string>{5,0}</string>
+				<string>{5,1}</string>
+				<string>{5,2}</string>
+				<string>{5,3}</string>
+				<string>{5,4}</string>
+				<string>{5,5}</string>
+				<string>{5,6}</string>
+				<string>{5,7}</string>
 			</array>
 		</dict>
 	</dict>
