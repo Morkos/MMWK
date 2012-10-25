@@ -7,6 +7,8 @@
 //
 
 #import "Character.h"
+#import "MyConstants.h"
+#import "WorldLayer.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS] = {
     /*NO_WHERE*/   CGPointMake( 0.00f,   0.00f),
@@ -35,7 +37,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 @implementation Character
 
 @synthesize spriteSheet,
-            attackingRowIndexes,
 			currentState, 
 			physicsEngine,
 			currentDirection,
@@ -80,15 +81,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
-        
-		// TODO: Put in configuration file passed in as parameter
-		self.attackingRowIndexes = [NSArray arrayWithObjects:
-									  [NSNumber numberWithInt:2],
-									  [NSNumber numberWithInt:3],
-									  [NSNumber numberWithInt:4],
-									  nil 
-									  ];
-        
         self.healthGauge = [[Gauge alloc] init];
 	}
     
@@ -118,22 +110,26 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     [currentState transitionToState:[StandState createWithCharacter:self]];
 }
 
-
-- (uint) getNumberOfAttacks {
-	return [attackingRowIndexes count];
-}
-
-- (uint) getRowForAttack:(uint) attackIndex {
-	return [[attackingRowIndexes objectAtIndex:attackIndex] intValue];
-}
-
 - (void) attack {
-	// Begin attack if player isn't attacking already
-	/*if (currentState != ATTACKING_STATE) {
-	    currentState = ATTACKING_STATE;
-		currentAttack = 0;
-	}*/
     [currentState transitionToState:[AttackState createWithCharacter:self]];
+    
+    WorldLayer *worldLayer = (WorldLayer *) [[[CCDirector sharedDirector] runningScene] getChildByTag:tagWorldLayer]; 
+    
+    //for (int i = 0; i < 50; i++) {
+    CCParticleFlower *explosion = [[CCParticleFlower alloc] initWithTotalParticles:500];
+    explosion.autoRemoveOnFinish = true;
+    explosion.startSize = 10;
+    explosion.emissionRate = 500;
+    explosion.life = 0.5f;
+    explosion.gravity = ccp(0, -90);
+    explosion.position = ccp(sprite.position.x + 10, sprite.position.y);
+    explosion.speed = 100;
+    ccColor4F color = {1.0f, 0.5f, 0.0f, 1.0f};
+    explosion.startColor = color;
+    explosion.radialAccel = 100;
+        
+        [worldLayer addChild:explosion];
+    //}
 }
 
 - (void) setState:(id<CharacterState>) newState {

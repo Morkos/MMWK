@@ -12,7 +12,8 @@
 
 enum CCNodeTag 
 {
-    tagOverlayLayer = 1
+    tagOverlayLayer = 1,
+    tagWorldLayer = 2
 }; 
 
 #endif

@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.m
+//  WorldLayer.m
 //  DragonEye-Cocos2D
 //
 //  Created by mac on 9/17/12.
@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "WorldLayer.h"
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
 #import "OverlayLayer.h"
@@ -17,13 +17,13 @@
 #import "EnemyBuilder.h"
 #import "Enemy.h"
 
-#pragma mark - HelloWorldLayer
-@interface HelloWorldLayer ()
+#pragma mark - WorldLayer
+@interface WorldLayer ()
     -(void) sortChildrenByYPosition;
 @end
-@implementation HelloWorldLayer
+@implementation WorldLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
+// Helper class method that creates a Scene with the WorldLayer as the only child.
 +(CCScene *) scene
 {
     [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
@@ -32,7 +32,7 @@
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
 	
-	[scene addChild:[HelloWorldLayer node]];
+	[scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
     [scene addChild:[BackgroundLayer node] z:-2];	
     [scene addChild:[HUDLayer node] z:2];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
@@ -71,6 +71,7 @@
          */
         [self runAction:[CCFollow actionWithTarget:player.sprite 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
+        
 		[self scheduleUpdate];
 	}
 	

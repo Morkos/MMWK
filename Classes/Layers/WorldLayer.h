@@ -14,7 +14,7 @@
 #import "NSPropertyUtil.h"
 #import "MyConstants.h"
 
-@interface HelloWorldLayer : CCLayer
+@interface WorldLayer : CCLayer
 {
 	CCTexture2D *spriteTexture_; // weak ref
 }

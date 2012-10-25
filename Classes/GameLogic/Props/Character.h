@@ -23,8 +23,6 @@
 	id<CharacterState> currentState;
 	Direction currentDirection;
 	Orientation currentOrientation;
-	
-	NSArray *attackingRowIndexes;
     
     NSUInteger strength;
     NSUInteger defense;
@@ -35,7 +33,6 @@
 
 @property (nonatomic, retain) SpriteSheet *spriteSheet;
 @property (nonatomic, retain) id<CharacterState> currentState;
-@property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
@@ -55,8 +52,6 @@
 
 // Actions
 - (void) stand;
-- (uint) getNumberOfAttacks;
-- (uint) getRowForAttack:(uint) attackIndex;
 - (void) attack;
 
 - (void) setState:(id<CharacterState>) newState;
