@@ -9,6 +9,7 @@
 #import "Character.h"
 #import "MyConstants.h"
 #import "WorldLayer.h"
+#import "CCBlade.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS] = {
     /*NO_WHERE*/   CGPointMake( 0.00f,   0.00f),
@@ -115,8 +116,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     
     WorldLayer *worldLayer = (WorldLayer *) [[[CCDirector sharedDirector] runningScene] getChildByTag:tagWorldLayer]; 
     
-    //for (int i = 0; i < 50; i++) {
-    CCParticleFlower *explosion = [[CCParticleFlower alloc] initWithTotalParticles:500];
+    /*CCParticleFlower *explosion = [[CCParticleFlower alloc] initWithTotalParticles:500];
     explosion.autoRemoveOnFinish = true;
     explosion.startSize = 10;
     explosion.emissionRate = 500;
@@ -128,8 +128,20 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     explosion.startColor = color;
     explosion.radialAccel = 100;
         
-        [worldLayer addChild:explosion];
-    //}
+        [worldLayer addChild:explosion];*/
+    CCBlade *w = [CCBlade bladeWithMaximumPoint:50];
+    w.autoDim = YES;
+    w.texture = [[CCTextureCache sharedTextureCache] addImage:@"streak1.png"];
+    
+    [worldLayer addChild:w];
+        
+    ccBezierConfig bezierConfig;
+    bezierConfig.controlPoint_1 = ccp(sprite.position.x, sprite.position.y);
+    bezierConfig.controlPoint_2 = ccp(sprite.position.x, sprite.position.y);
+    bezierConfig.endPosition = ccp(sprite.position.x + 40, sprite.position.y - 20);
+    CCBezierTo *action = [CCBezierTo actionWithDuration:2.0f bezier:bezierConfig];
+    [w setPosition: ccp(sprite.position.x + 40, sprite.position.y + 20)];
+    [w runAction:action];
 }
 
 - (void) setState:(id<CharacterState>) newState {

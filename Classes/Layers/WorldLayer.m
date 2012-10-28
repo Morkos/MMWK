@@ -13,6 +13,7 @@
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
 #import "OverlayLayer.h"
+#import "TouchTrailLayer.h"
 #import "PlayerBuilder.h"
 #import "EnemyBuilder.h"
 #import "Enemy.h"
@@ -36,6 +37,7 @@
     [scene addChild:[BackgroundLayer node] z:-2];	
     [scene addChild:[HUDLayer node] z:2];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
+    [scene addChild:[TouchTrailLayer node] z:0];
     
 	// return the scene
 	return scene;
