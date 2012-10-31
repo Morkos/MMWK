@@ -23,8 +23,8 @@
 
 + (FreezeModeManager *) managerWithPlist:(NSString *) plistFilename 
                                    layer:(CCLayer *) layer {
-    FreezeModeManager *manager = [[FreezeModeManager alloc] init:plistFilename
-                                                           layer:layer];
+    FreezeModeManager *manager = [[[FreezeModeManager alloc] init:plistFilename
+                                                            layer:layer] autorelease];
     return manager;
 }
 

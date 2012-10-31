@@ -10,10 +10,13 @@
 #define MYCONSTANTS_H
 #import <Foundation/Foundation.h>
 
-enum CCNodeTag 
-{
+typedef enum {
     tagOverlayLayer = 1,
     tagWorldLayer = 2
-}; 
+} CCNodeTag; 
+
+typedef enum {
+    slashEffect = 1
+} ParticleEffectId;
 
 #endif

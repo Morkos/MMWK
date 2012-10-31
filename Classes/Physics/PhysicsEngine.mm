@@ -104,36 +104,20 @@ static PhysicsEngine * physicsEngine = nil;
 	}
 }
 
-/**b
+/**
  * Rectangle 2 Rectangle Collision detection
  */
 
-- (void) detectRectangleCollision:(Prop *)prop 
+- (bool) detectRectangleCollision:(Prop *)prop 
 					    otherProp:(Prop *)otherProp {
 	
-	Rectangle rectA, rectB;
+    return CGRectIntersectsRect(prop.sprite.boundingBox, otherProp.sprite.boundingBox);
 	
-	rectA.topLeft.x = prop.position.x - prop.size.width;
-	rectA.topLeft.y = prop.position.y + prop.size.height; 
-	
-	rectA.bottomRight.x = prop.position.x + prop.size.width;
-	rectA.bottomRight.y = prop.position.y - prop.size.height;
-	
-	rectB.topLeft.x = otherProp.position.x - otherProp.size.width;
-	rectB.topLeft.y = otherProp.position.y + otherProp.size.height;
-	
-	rectB.bottomRight.x = otherProp.position.x + otherProp.size.width;
-	rectB.bottomRight.y = otherProp.position.y - otherProp.size.height;
-	
-	BOOL notColliding = rectA.topLeft.x >= rectB.bottomRight.x ||
-						rectA.topLeft.y <= rectB.bottomRight.y ||
-						rectB.topLeft.x >= rectA.bottomRight.x ||
-						rectB.topLeft.y <= rectA.bottomRight.y;
-	
-	if(!notColliding) {		
+	/*if(!notColliding) {		
 		[RunTimeWrapper callWithNoArgs:@"collidesWith" 
 								object:prop];
-	}
+	}*/
+    
 }
 
 /**

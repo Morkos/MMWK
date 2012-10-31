@@ -7,6 +7,9 @@
 //
 
 #import "AttackState.h"
+#import "ObjectContainer.h"
+#import "Enemy.h"
+#import "ParticleInvoker.h"
 
 @interface AttackState ()
     -(CCAction *) createAction:(CCAnimation *) animationAction;
@@ -51,6 +54,16 @@
 
 -(void) setCurrentlyInBetweenAttacks {
     isInBetweenAttacks = true;
+    
+    //TODO: Find closest enemy instead of hard code
+    Enemy *closestEnemy = [[ObjectContainer sharedInstance] getObject:1];
+    bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:character 
+                                                                otherProp:closestEnemy];
+    
+    if (collided) {
+        [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
+                                                   prop:closestEnemy];
+    }
 }
 
 - (void) updateState {

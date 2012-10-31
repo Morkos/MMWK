@@ -76,7 +76,7 @@ inline void CGPointSet(CGPoint *v, float x, float y){
     self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
     
     pointLimit = limit;
-	self.width = 5;
+	self.width = 4;
 	
     vertices = (CGPoint *)calloc(2*limit+5, sizeof(vertices[0]));
     coordinates = (CGPoint *)calloc(2*limit+5, sizeof(coordinates[0]));
@@ -142,7 +142,7 @@ inline void CGPointSet(CGPoint *v, float x, float y){
 		return;
 	}
     if (CC_CONTENT_SCALE_FACTOR() != 1.0f) {
-        //v = ccpMult(v, CC_CONTENT_SCALE_FACTOR());
+        v = ccpMult(v, CC_CONTENT_SCALE_FACTOR());
     }
     
 #if USE_LAGRANGE
@@ -182,6 +182,10 @@ inline void CGPointSet(CGPoint *v, float x, float y){
 
 - (void) setPosition:(CGPoint)position {
     [self push:position];
+}
+
+- (CGPoint) position {
+    return [[path lastObject] CGPointValue];
 }
 
 - (void) pop:(int) n{

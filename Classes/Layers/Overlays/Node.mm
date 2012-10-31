@@ -42,8 +42,6 @@
 }
 
 - (bool) isLocationInView:(CGPoint) location {
-    NSLog(@"Location %@ in box %@", 
-          NSStringFromCGPoint(location), NSStringFromCGRect(sprite.boundingBox));
     return CGRectContainsPoint(sprite.boundingBox, location);
 }
 
