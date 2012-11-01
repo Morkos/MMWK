@@ -18,6 +18,10 @@
 @end
 @implementation AttackState
 
+// Maximum number of basic attacks for player
+// TODO: Might have to be put in parameter instead.
+const uint maxAttacks = 3;
+
 @synthesize character,
             currentAttack,
             isInBetweenAttacks;
@@ -53,7 +57,9 @@
 }
 
 -(void) setCurrentlyInBetweenAttacks {
-    isInBetweenAttacks = true;
+    if (++currentAttack < maxAttacks) {
+        isInBetweenAttacks = true;
+    }
     
     //TODO: Find closest enemy instead of hard code
     Enemy *closestEnemy = [[ObjectContainer sharedInstance] getObject:1];
@@ -76,9 +82,13 @@
 - (void) transitionToState:(id<CharacterState>) newState {
     if ([[newState class] isSubclassOfClass:[AttackState class]] && 
         isInBetweenAttacks) {
-        currentAttack++;
         [self start];
     }
+}
+
+- (void) dealloc {
+    [character release];
+    [super dealloc];
 }
 
 @end
