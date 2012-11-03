@@ -9,8 +9,6 @@
 #import "Node.h"
 
 @implementation Node
-@synthesize nodeVisualState,
-            sprite;
 
 - (CGFloat) distanceFrom:(CGPoint)point1 
                       to:(CGPoint)point2 {
@@ -24,6 +22,21 @@
 	return distance;
 }
 
+- (id) initWithPosition:(CGPoint)positionParam 
+                   size:(CGSize)size 
+            spriteSheet:(SpriteSheet *)spriteSheetParam {
+    if (self = [super initWithPosition:positionParam 
+                                  size:size 
+                           spriteSheet:spriteSheetParam]) {
+        CCSpriteFrame *frame = [spriteSheet getFrameForKey:ANIMATOR_NODE_NEUTRAL frameNum:0];
+        [self setTexture:frame.texture];
+        [self setTextureRect:frame.rect];
+        nodeVisualState = ANIMATOR_NODE_NEUTRAL;
+    }
+    
+    return self;
+}
+
 + (Node *) nodeAtPosition:(CGPoint)position 
 					 size:(CGSize)size 
 			  spriteSheet:(SpriteSheet *)spriteSheet {
@@ -32,54 +45,50 @@
                                            size:size
                                     spriteSheet:spriteSheet];
     
-    node.sprite = [spriteSheet getSpriteForKey:ANIMATOR_NODE_NEUTRAL frameNum:0];
-    node.sprite.position = position;
-    node.sprite.scaleX = size.width;
-    node.sprite.scaleY = size.height;
-    node.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
-	
+    
 	return node;
 }
 
 - (bool) isLocationInView:(CGPoint) location {
-    return CGRectContainsPoint(sprite.boundingBox, location);
+    return CGRectContainsPoint(self.boundingBox, location);
 }
 
 - (void) markValid {
-    self.nodeVisualState = ANIMATOR_NODE_VALID;
-    [SpriteSheetAnimator startAnimation:sprite
+    nodeVisualState = ANIMATOR_NODE_VALID;
+    [SpriteSheetAnimator startAnimation:self
                             spriteSheet:spriteSheet
-                               frameKey:self.nodeVisualState
+                               frameKey:nodeVisualState
                           frameInterval:1.0f];
 }
 - (void) markInvalid {
-    self.nodeVisualState = ANIMATOR_NODE_INVALID;
-    [SpriteSheetAnimator startAnimation:sprite
+    nodeVisualState = ANIMATOR_NODE_INVALID;
+    [SpriteSheetAnimator startAnimation:self
                             spriteSheet:spriteSheet
-                               frameKey:self.nodeVisualState
+                               frameKey:nodeVisualState
                           frameInterval:1.0f];
 }
 
 - (void) markNeutral {
-    self.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
-    [SpriteSheetAnimator startAnimation:sprite
+    nodeVisualState = ANIMATOR_NODE_NEUTRAL;
+    [SpriteSheetAnimator startAnimation:self
                             spriteSheet:spriteSheet
-                               frameKey:self.nodeVisualState
+                               frameKey:nodeVisualState
                           frameInterval:1.0f];
 }
 
 - (BOOL) isNeutral {
-    return [self.nodeVisualState isEqual:ANIMATOR_NODE_NEUTRAL];
+    return [nodeVisualState isEqual:ANIMATOR_NODE_NEUTRAL];
 }
 
-- (id) copyWithZone:(NSZone *)zone {
+/*- (id) copyWithZone:(NSZone *)zone {
+    CGSize size = {scaleX_, scaleY_};
     Node *nodeCopy = [Node nodeAtPosition:self.position 
-                                     size:self.size
+                                     size:size
                               spriteSheet:self.spriteSheet];
     
     nodeCopy.nodeVisualState = ANIMATOR_NODE_NEUTRAL;
     
     return nodeCopy;
     
-}
+}*/
 @end

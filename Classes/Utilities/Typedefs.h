@@ -59,6 +59,21 @@ typedef struct {
 	CGFloat x,y,z; 
 } GLPosition;
 
+typedef enum {
+    tagOverlayLayer = 1,
+    tagWorldLayer = 2
+} CCNodeTag; 
+
+typedef enum {
+    slashEffect = 1
+} ParticleEffectId;
+
+/*** Constants for ObjectContainer ***/
+extern NSString *CONTAINER_ENEMIES;
+
+//Shortcut macro for checking if an object of a class
+#define IS_SUBCLASS(object, className) ([[object class] isSubclassOfClass:[className class]])
+
 // Shortcut macro for format NSStrings
 #define NSSTRING_FORMAT(str, ...) [NSString stringWithFormat:(str), ##__VA_ARGS__]
 

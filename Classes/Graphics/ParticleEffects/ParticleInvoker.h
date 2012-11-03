@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MyConstants.h"
 #import "cocos2d.h"
 #import "Prop.h"
 

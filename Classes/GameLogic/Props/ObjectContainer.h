@@ -15,19 +15,16 @@
 @class Player, Background;
 
 @interface ObjectContainer : NSObject {
-	NSMutableArray *objArray;
+    NSMutableDictionary *objDictionary;
 	Player *player;
-	NSMutableArray *nodes;
 }
-
-@property (nonatomic, retain) NSMutableArray *objArray;
-@property (nonatomic, retain) Player *player;
-@property (nonatomic, retain) NSMutableArray *nodes;
 
 + (ObjectContainer *) sharedInstance;
 - (id) init;
-- (void) addObject:(id)object;
-- (id) getObject:(NSUInteger) index;
+- (Player *) player;
+- (void) addObject:(CCNode *)object;
+
+- (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *)containerKey;
 
 
 @end

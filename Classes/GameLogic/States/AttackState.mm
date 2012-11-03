@@ -10,8 +10,10 @@
 #import "ObjectContainer.h"
 #import "Enemy.h"
 #import "ParticleInvoker.h"
+#import "SimpleAudioEngine.h"
 
 @interface AttackState ()
+-(id) initWithCharacter:(Character *) characterParam;
     -(CCAction *) createAction:(CCAnimation *) animationAction;
     -(void) transitionToStand;
     -(void) setCurrentlyInBetweenAttacks;
@@ -22,22 +24,22 @@
 // TODO: Might have to be put in parameter instead.
 const uint maxAttacks = 3;
 
-@synthesize character,
-            currentAttack,
-            isInBetweenAttacks;
-
 + (AttackState *) createWithCharacter:(Character *) character {
-    AttackState *state = [[AttackState alloc] init];
-    state.character = character;
-    state.currentAttack = 0;
-    state.isInBetweenAttacks = true;
-    
-    return state;
+    return [[AttackState alloc] initWithCharacter:character];
 }
 
+- (id) initWithCharacter:(Character *) characterParam {
+    if (self = [super init]) {
+        character = [characterParam retain];
+        currentAttack = 0;
+        isInBetweenAttacks = true;
+    }
+    
+    return self;
+}
 - (void) start {
     isInBetweenAttacks = false;
-    [SpriteSheetAnimator startAnimation:character.sprite
+    [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:NSSTRING_FORMAT(ANIMATOR_ATTACK, currentAttack)
                           frameInterval:0.1f
@@ -61,14 +63,15 @@ const uint maxAttacks = 3;
         isInBetweenAttacks = true;
     }
     
-    //TODO: Find closest enemy instead of hard code
-    Enemy *closestEnemy = [[ObjectContainer sharedInstance] getObject:1];
-    bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:character 
-                                                                otherProp:closestEnemy];
-    
-    if (collided) {
+    NSArray *enemies = 
+        [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ENEMIES];
+
+    for (Enemy *enemy in enemies) {
+        // TODO: Use pixel collision here
         [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
-                                                   prop:closestEnemy];
+                                                   prop:enemy];
+    
+        [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
     }
 }
 
@@ -80,8 +83,7 @@ const uint maxAttacks = 3;
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {
-    if ([[newState class] isSubclassOfClass:[AttackState class]] && 
-        isInBetweenAttacks) {
+    if (IS_SUBCLASS(newState, AttackState) && isInBetweenAttacks) {
         [self start];
     }
 }

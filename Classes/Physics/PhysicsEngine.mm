@@ -86,11 +86,11 @@ static PhysicsEngine * physicsEngine = nil;
 	CGFloat distance = PYTHAG(center.origin.x - center2.origin.x,
 							  center.origin.y - center2.origin.y);
 
-	CGFloat radius1  = PYTHAG(prop.size.width / 2.0,
-							  prop.size.height / 2.0);
+	CGFloat radius1  = PYTHAG(prop.boundingBox.size.width / 2.0,
+							  prop.boundingBox.size.height / 2.0);
 							 
-	CGFloat radius2  = PYTHAG(otherProp.size.width / 2.0,
-							  otherProp.size.height / 2.0);
+	CGFloat radius2  = PYTHAG(otherProp.boundingBox.size.width / 2.0,
+							  otherProp.boundingBox.size.height / 2.0);
 		
 	/*[PhysicsEngine debug:prop
 				   prop2:otherProp 
@@ -111,7 +111,7 @@ static PhysicsEngine * physicsEngine = nil;
 - (bool) detectRectangleCollision:(Prop *)prop 
 					    otherProp:(Prop *)otherProp {
 	
-    return CGRectIntersectsRect(prop.sprite.boundingBox, otherProp.sprite.boundingBox);
+    return CGRectIntersectsRect(prop.boundingBox, otherProp.boundingBox);
 	
 	/*if(!notColliding) {		
 		[RunTimeWrapper callWithNoArgs:@"collidesWith" 

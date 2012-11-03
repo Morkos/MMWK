@@ -11,15 +11,15 @@
 
 @implementation EnemyBuilder
 
-- (EnemyBuilder *) newBuilder:(CGPoint)position 
++ (EnemyBuilder *) newBuilder:(CGPoint)position 
                          size:(CGSize)size 
-                       sprite:(CCSprite *) sprite {
-    [character autorelease];
-    character = [[Enemy alloc] init:position 
+                  spriteFrame:(CCSpriteFrame *) spriteFrame {
+    EnemyBuilder *builder = [[EnemyBuilder alloc] init];
+    builder.character = [[Enemy alloc] init:position 
                                size:size
-                             sprite:sprite];
+                             spriteFrame:spriteFrame];
     
-    return self;
+    return builder;
 }
 
 @end

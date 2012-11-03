@@ -48,7 +48,7 @@ static ParticleInvoker * invoker = nil;
 
 /*** Methods for various particle effects ***/
 - (void) doSlashEffect:(Prop *) prop {
-    CGPoint position = prop.sprite.position;
+    CGPoint position = prop.position;
     CCBlade *blade = [CCBlade bladeWithMaximumPoint:50];
     blade.autoDim = NO;
     blade.texture = [[CCTextureCache sharedTextureCache] addImage:@"streak1.png"];

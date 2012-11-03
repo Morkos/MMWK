@@ -10,7 +10,7 @@
 // Import the interfaces
 #import "IntroLayer.h"
 #import "WorldLayer.h"
-
+#import "SimpleAudioEngine.h"
 
 #pragma mark - IntroLayer
 
@@ -48,6 +48,9 @@
 	}
     
 	background.position = ccp(size.width/2, size.height/2);
+    
+    // Pre load music 
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordSwing.wav"];
 
 	// add the label as a child to this Layer
 	[self addChild: background];

@@ -42,7 +42,7 @@
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
-     sprite:(CCSprite *) sprite;
+     spriteFrame:(CCSpriteFrame *) spriteFrame;
 
 - (void) runTo:(Direction) dir;
 - (void) moveTowards:(Direction) dir;

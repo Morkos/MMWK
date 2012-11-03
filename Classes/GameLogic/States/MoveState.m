@@ -20,7 +20,7 @@
 }
 
 - (void) start {
-    [SpriteSheetAnimator startAnimation:character.sprite
+    [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE
                           frameInterval:0.1f];

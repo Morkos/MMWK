@@ -11,17 +11,16 @@
 @implementation Overlay
 
 @synthesize spriteSheet, 
-            currentState, 
-            position, 
-            size;
+            currentState;
 
-- (id) initWithPosition:(CGPoint)positionParam 
-                   size:(CGSize)sizeParam 
+- (id) initWithPosition:(CGPoint)position 
+                   size:(CGSize)size 
             spriteSheet:(SpriteSheet *)spriteSheetParam {
 	
     if (self = [super init]) {
-        self.position = positionParam;
-        self.size = sizeParam;
+        self.position = position;
+        self.scaleX = size.width;
+        self.scaleY = size.height;
         self.spriteSheet = spriteSheetParam;
         self.currentState = OVERLAY_SHOWN;
     }

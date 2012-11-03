@@ -7,7 +7,6 @@
 //
 
 #import "Character.h"
-#import "MyConstants.h"
 #import "OverlayLayer.h"
 #import "CCBlade.h"
 #import "ParticleInvoker.h"
@@ -50,19 +49,14 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 //Private method
 - (void) move:(CGPoint)movement {
-	position.x += movement.x;
-	position.y += movement.y;
-	
-    //TODO comment out and use game position
-    sprite.position = ccpAdd(sprite.position, ccpMult(movement, 2.0f));
-
+    self.position = ccpAdd(position_, ccpMult(movement, 2.0f));
     switch (currentOrientation) {
         case ORIENTATION_FORWARD:
-            sprite.flipX = false;
+            self.flipX = false;
             break;
             
         case ORIENTATION_BACKWARDS:
-            sprite.flipX = true;
+            self.flipX = true;
             break;
             
         default:
@@ -71,15 +65,14 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (id) init:(CGPoint) pos
-	   size:(CGSize) sz 
-     sprite:(CCSprite *) spriteParam {
+	   size:(CGSize) size 
+     spriteFrame:(CCSpriteFrame *) spriteFrame {
 	
-	if(self = [super init]) {
+	if(self = [super initWithTexture:spriteFrame.texture 
+                                rect:spriteFrame.rect]) {
 		self.position = pos;
-		self.size = sz;
-        self.sprite = spriteParam;
-        //TODO: use game coordinates instead of screen coordinates
-        self.sprite.position = pos;
+        self.scaleX = size.width;
+        self.scaleY = size.height;
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];

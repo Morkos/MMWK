@@ -70,11 +70,6 @@
     return spriteFrames;
 }
 
-- (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
-    CCSpriteFrame *frame = [self getFrameForKey:key frameNum:frameNum];
-    return [CCSprite spriteWithTexture:self.texture rect:frame.rect];
-}
-
 - (void) changeSprite:(CCSprite *) sprite   
                 toKey:(NSString *) key 
              frameNum:(NSUInteger) frameNum {

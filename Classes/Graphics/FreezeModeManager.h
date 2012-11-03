@@ -36,13 +36,6 @@
       layer:(CCLayer *) layer; 
 
 /**
- * Initializes manager from a property list.
- *
- * @param plistFilename filename of the property list
- */
-- (void) loadFromFile:(NSString *) plistFilename;
-
-/**
  * Given a combo key, display the nodes that are
  * affiliated
  *

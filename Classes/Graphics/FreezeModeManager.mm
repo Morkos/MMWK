@@ -13,6 +13,14 @@
 #import "NSPropertyUtil.h"
 #import "SpriteSheetManager.h"
 
+@interface FreezeModeManager() 
+    /**
+     * Initializes manager from a property list.
+     *
+     * @param plistFilename filename of the property list
+     */
+    - (void) loadFromFile:(NSString *) plistFilename;
+@end
 @implementation FreezeModeManager
 
 @synthesize nodesDictionary,
@@ -68,7 +76,7 @@
 
 - (void) displayNodes:(NSString *)comboKey {
     NSMutableArray * comboNodes = [nodesDictionary objectForKey:comboKey];
-    [self.layer removeAllChildrenWithCleanup:true];
+    [self.layer removeAllChildrenWithCleanup:false];
     
     for (NSInteger index = 0; index < [comboNodes count]; index++) {
         Node *node = [comboNodes objectAtIndex:index];
@@ -77,7 +85,7 @@
         [node markNeutral];
         
         
-        [self.layer addChild:node.sprite];
+        [self.layer addChild:node];
     }
     
     self.nextValidNodetoTouch = 0;

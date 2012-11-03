@@ -13,14 +13,10 @@
 #import "Loggers.h"
 #import "AnimatorConstants.h"
 
-@interface Node : Overlay<NSCopying> {
+@interface Node : Overlay/*<NSCopying>*/ {
 @private
     NSString * nodeVisualState;
-    CCSprite *sprite;
 }
-
-@property (nonatomic, retain) NSString *nodeVisualState;
-@property (nonatomic, retain) CCSprite *sprite;
 
 /**
  * Factory method to create a node
@@ -53,12 +49,12 @@
 
 /**
  * Creates a deep copy of each node except that it does not
- * copy over the nodeVisualStatue. This gets reset to neutral
+ * copy over the nodeVisualState. This gets reset to neutral
  * state.
  *
  * @return deep copy of node
  */
-- (id) copyWithZone:(NSZone *)zone;
+//- (id) copyWithZone:(NSZone *)zone;
 
 /**
  * Is the node not touched?

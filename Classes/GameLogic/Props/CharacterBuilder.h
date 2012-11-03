@@ -21,7 +21,7 @@
 
 + (CharacterBuilder *) newBuilder:(CGPoint)position
                              size:(CGSize)size
-                           sprite:(CCSprite *)sprite;
+                           spriteFrame:(CCSpriteFrame *)spriteFrame;
 
 - (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;

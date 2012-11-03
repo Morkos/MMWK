@@ -7,12 +7,10 @@
 //
 
 #import "ObjectContainer.h"
+#import "Enemy.h"
+#import "NSDictionaryExtensions.h"
 
 @implementation ObjectContainer
-
-@synthesize objArray,
-			player,
-			nodes;
 
 static ObjectContainer *singleContainer;
 
@@ -28,26 +26,52 @@ static ObjectContainer *singleContainer;
 						   
 - (id) init {
 	if (self = [super init]) {
-		self.objArray = [NSMutableArray arrayWithCapacity:10];
+		objDictionary = [[NSMutableDictionary dictionaryWithCapacity:3] retain];
 	}
 	return self;
 }
 
-- (void) addObject:(id)object {
-	[objArray addObject:object];
-        
+- (void) addObject:(CCNode *) object {
+    if (!IS_SUBCLASS(object, Prop)) {
+        return;
+    }
+    
 	// Store player in a singleton player object
-	if ([[object class] isSubclassOfClass:[Player class]]) {
+	if (IS_SUBCLASS(object, Player)) {
 		if (!player) {
 			player = (Player *) object;
 		} else {
 			DLOG("ERROR! More than one player!");
 		}
-	}
+	} else if (IS_SUBCLASS(object, Enemy)) {
+        [objDictionary addObjectToArray:object forKey:@"enemies"];
+    }
 }
 
-- (id) getObject:(NSUInteger)index {
-	return [objArray objectAtIndex:index];
+- (Player *) player {
+    return player;
+}
+
+- (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *) containerKey {
+    NSArray *props = [objDictionary objectForKey:containerKey];
+    NSMutableArray *collidingProps = [NSMutableArray arrayWithCapacity:[props count]];
+    
+    for (Prop *checkedProp in props) {
+        bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:prop 
+                                                                    otherProp:checkedProp];
+        
+        if (collided) {
+            [collidingProps addObject:checkedProp];
+        }
+    }
+    
+    return collidingProps;
+}
+
+- (void) dealloc {
+    [player release];
+    [objDictionary release];
+    [super dealloc];
 }
 
 @end

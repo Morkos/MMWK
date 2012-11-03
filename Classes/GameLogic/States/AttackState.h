@@ -20,10 +20,6 @@
     bool isInBetweenAttacks;
 }
 
-@property(nonatomic, retain) Character *character;
-@property(nonatomic, assign) uint currentAttack;
-@property(nonatomic, assign) bool isInBetweenAttacks;
-
 + (AttackState *) createWithCharacter:(Character *) character;
 
 - (void) start;

@@ -12,7 +12,6 @@
 #import "chipmunk.h"
 #import "SpriteSheet.h"
 #import "NSPropertyUtil.h"
-#import "MyConstants.h"
 
 @interface WorldLayer : CCLayer
 {

@@ -50,29 +50,29 @@
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         SpriteSheet *enemySpriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
-        PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(120,220) 
-                                                      size:CGSizeMake(10.0f, 10.0f)
-                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]];
+        PlayerBuilder *builder = 
+            [PlayerBuilder newBuilder:ccp(120,220) 
+                                 size:CGSizeMake(1.0f, 1.0f)
+                          spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
         
-        EnemyBuilder *enemyBuilder = [EnemyBuilder newBuilder:ccp(220,220) 
-                                                     size:CGSizeMake(20.0f, 20.0f)
-                                                   sprite:[enemySpriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]
-                                  ];
+        EnemyBuilder *enemyBuilder = 
+            [EnemyBuilder newBuilder:ccp(220,220) 
+                                size:CGSizeMake(1.0f, 1.0f)
+                         spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         Enemy *enemy = [[enemyBuilder buildSpriteSheet:enemySpriteSheet] build];
         
-        [[ObjectContainer sharedInstance] addObject:player];
-        [[ObjectContainer sharedInstance] addObject:enemy];
-        [self addChild:player.sprite];
-        [self addChild:enemy.sprite];
+        [self addChild:player];
+        [self addChild:enemy];
 
+        // FOR DEBUGGING ONLY
         map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);
         
         /**
          * Every node on this layer will follow the main player
          * TODO: calculate the correct width for the world boundary
          */
-        [self runAction:[CCFollow actionWithTarget:player.sprite 
+        [self runAction:[CCFollow actionWithTarget:player 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
         
 		[self scheduleUpdate];
@@ -134,6 +134,11 @@
 		[children_ replaceObjectAtIndex:i+1 withObject:testValue];
         [testValue release];
 	}
+}
+
+- (void) addChild:(CCNode *)node z:(NSInteger)z tag:(NSInteger)tag {
+    [[ObjectContainer sharedInstance] addObject:node];
+    [super addChild:node z:z tag:tag];
 }
 
 #pragma mark GameKit delegate

@@ -11,17 +11,13 @@
 #import "SpriteSheetAnimator.h"
 #import "PropState.h"
 
-@interface Overlay : NSObject <Drawable> {
+@interface Overlay : CCSprite <Drawable> {
 	SpriteSheet *spriteSheet;
 	OverlayState currentState;
-	CGPoint position;
-	CGSize size;
 }
 
 @property (nonatomic, retain) SpriteSheet *spriteSheet;
 @property (nonatomic, assign) OverlayState currentState;
-@property (nonatomic, assign) CGPoint position;
-@property (nonatomic, assign) CGSize size;
 
 - (id) initWithPosition:(CGPoint)position 
                    size:(CGSize)size 
