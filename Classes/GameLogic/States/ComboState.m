@@ -33,7 +33,7 @@
     NSString *attack1 = NSSTRING_FORMAT(ANIMATOR_ATTACK, 1);
     NSString *attack2 = NSSTRING_FORMAT(ANIMATOR_ATTACK, 2);
     
-    [SpriteSheetAnimator startAnimationSeries:character.sprite
+    [SpriteSheetAnimator startAnimationSeries:character
                                   spriteSheet:character.spriteSheet
                                     frameKeys:[NSArray arrayWithObjects:attack0, attack1, attack2, nil]
                                 frameInterval:0.1f

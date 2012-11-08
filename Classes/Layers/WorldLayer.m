@@ -1,5 +1,5 @@
 //
-//  HelloWorldLayer.m
+//  WorldLayer.m
 //  DragonEye-Cocos2D
 //
 //  Created by mac on 9/17/12.
@@ -9,23 +9,22 @@
 #import "AppDelegate.h"
 
 // Import the interfaces
-#import "HelloWorldLayer.h"
+#import "WorldLayer.h"
 #import "BackgroundLayer.h"
 #import "HUDLayer.h"
 #import "OverlayLayer.h"
 #import "PlayerBuilder.h"
 #import "EnemyBuilder.h"
 #import "Enemy.h"
-#import "PlayerBuilder.h"
-#import "EnemyBuilder.h"
+#import "CCBlade.h"
 
-#pragma mark - HelloWorldLayer
-@interface HelloWorldLayer ()
+#pragma mark - WorldLayer
+@interface WorldLayer ()
     -(void) sortChildrenByYPosition;
 @end
-@implementation HelloWorldLayer
+@implementation WorldLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
+// Helper class method that creates a Scene with the WorldLayer as the only child.
 +(CCScene *) scene
 {
     [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
@@ -34,7 +33,7 @@
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
 	
-	[scene addChild:[HelloWorldLayer node]];
+	[scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
     [scene addChild:[BackgroundLayer node] z:-2];	
     [scene addChild:[HUDLayer node] z:2];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
@@ -49,36 +48,33 @@
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
-        SpriteSheet *spriteSheet2 = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
+        SpriteSheet *enemySpriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
-        PlayerBuilder *builder = [PlayerBuilder newBuilder:ccp(120,220) 
-                                                      size:CGSizeMake(10.0f, 10.0f)
-                                                    sprite:[spriteSheet getSpriteForKey:ANIMATOR_STAND frameNum:0]];
+        PlayerBuilder *builder = 
+            [PlayerBuilder newBuilder:ccp(120,220) 
+                                 size:CGSizeMake(1.0f, 1.0f)
+                          spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         Player *player = [[builder buildSpriteSheet:spriteSheet] build];
         
-        EnemyBuilder *builder2 = [EnemyBuilder newBuilder:ccp(220,220) 
-                                                     size:CGSizeMake(20.0f, 20.0f)
-                                                   sprite:[spriteSheet2 getSpriteForKey:ANIMATOR_STAND frameNum:0]
-                                  ];
+        EnemyBuilder *enemyBuilder = 
+            [EnemyBuilder newBuilder:ccp(220,220) 
+                                size:CGSizeMake(1.0f, 1.0f)
+                         spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
+        Enemy *enemy = [[enemyBuilder buildSpriteSheet:enemySpriteSheet] build];
         
-        Enemy * enemy = [[[builder2 buildSpriteSheet:spriteSheet2] 
-                                         buildSpeed:0.50f]
-                            build];
+        [self addChild:player];
+        [self addChild:enemy];
 
+        // FOR DEBUGGING ONLY
+        map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);
         
-        [[ObjectContainer sharedInstance] addObject:player];
-        [[ObjectContainer sharedInstance] addObject:enemy];
-        [self addChild:player.sprite];
-        [self addChild:enemy.sprite];
-        
-        [[ObjectContainer sharedInstance] addObject:enemy];
-
         /**
          * Every node on this layer will follow the main player
          * TODO: calculate the correct width for the world boundary
          */
-        [self runAction:[CCFollow actionWithTarget:player.sprite 
-                                     worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
+        //[self runAction:[CCFollow actionWithTarget:player 
+        //                             worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
+        
 		[self scheduleUpdate];
 	}
 	
@@ -90,11 +86,8 @@
 }
 
 -(void) update:(ccTime) delta {
-    [[[ObjectContainer sharedInstance] player] update];
-    
-    Enemy * enemy = [[ObjectContainer sharedInstance] getObject:1];
-    
-    [enemy update];
+    NSLog(@"calling update");
+    [[ObjectContainer sharedInstance] update];
 }
 
 -(void) visit
@@ -144,7 +137,47 @@
 	}
 }
 
+- (void) addChild:(CCNode *)node z:(NSInteger)z tag:(NSInteger)tag {
+    [[ObjectContainer sharedInstance] addObject:node];
+    [super addChild:node z:z tag:tag];
+}
+
 #pragma mark GameKit delegate
+
+- (void) ccTouchesBegan:(NSSet *) touches withEvent:(UIEvent *) event{
+	for (UITouch *touch in touches) {
+		CCBlade *w = [CCBlade bladeWithMaximumPoint:50];
+        w.autoDim = YES;
+        int rand = arc4random() % 3 + 1;
+		w.texture = [[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"streak%d.png",rand]];
+        
+        CFDictionaryAddValue(map,touch,w);
+        
+		[self addChild:w];
+		CGPoint pos = [touch locationInView:touch.view];
+		pos = [[CCDirector sharedDirector] convertToGL:pos];
+        NSLog(@"Touch position: %@", NSStringFromCGPoint(pos));
+		[w push:pos];
+	}
+}
+
+- (void) ccTouchesMoved:(NSSet *) touches withEvent:(UIEvent *) event{
+	for (UITouch *touch in touches) {
+		CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
+		CGPoint pos = [touch locationInView:touch.view];
+		pos = [[CCDirector sharedDirector] convertToGL:pos];
+		[w push:pos];
+	}
+}
+
+- (void) ccTouchesEnded:(NSSet *) touches withEvent:(UIEvent *) event{
+	for (UITouch *touch in touches) {
+		CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
+        [w finish];
+        CFDictionaryRemoveValue(map,touch);
+	}
+}
+
 
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
 	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];

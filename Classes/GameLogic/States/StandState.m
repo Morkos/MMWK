@@ -26,7 +26,7 @@
 }
 
 - (void) start {
-    [SpriteSheetAnimator startAnimation:character.sprite
+    [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_STAND
                           frameInterval:0.1f];
@@ -39,7 +39,7 @@
         //player is close to enemy
         
         CGFloat distanceToPlayer = DISTANCE(player.position, self.character.position);
-        if(CGRectIntersectsRect(player.sprite.boundingBox, self.character.sprite.boundingBox))
+        if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox))
         {
             NSLog(@"Collision detected.");
             [self.character setState:[AttackState createWithCharacter:self.character]];

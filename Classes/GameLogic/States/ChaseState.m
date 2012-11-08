@@ -18,8 +18,8 @@
     ChaseState * chaseState = [[ChaseState alloc] init];
     chaseState.character = character;
     chaseState.coordinateSystem =
-        [CoordinateSystem  createWithCenter:character.sprite.contentSize.width 
-                                  imgHeight:character.sprite.contentSize.height];
+        [CoordinateSystem  createWithCenter:character.contentSize.width 
+                                  imgHeight:character.contentSize.height];
     
     return chaseState;
 }
@@ -36,7 +36,7 @@
 -(void) updateState {
     Player * player = [ObjectContainer sharedInstance].player;	
     Direction directionToChase = 
-    [self.coordinateSystem decideDirectionFromSrcToTarget:self.character.sprite.position
+    [self.coordinateSystem decideDirectionFromSrcToTarget:self.character.position
                                               targetPoint:player.position]; 
     //CGFloat distanceFromPlayer = DISTANCE(player.position, self.character.position);
 
@@ -44,7 +44,7 @@
     
     [self.character moveTowards:directionToChase];
     
-    if(CGRectIntersectsRect(player.sprite.boundingBox, self.character.sprite.boundingBox)) {
+    if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
         [self.character setState:[AttackState createWithCharacter:self.character]];   
     } 
     //else if(distanceFromPlayer > 150) {

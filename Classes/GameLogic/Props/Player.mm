@@ -21,7 +21,7 @@
 
 // physics
 - (void) resolveCollisions {
-	[physicsEngine detectScreenCollision:[ObjectContainer sharedInstance].player];
+	[physicsEngine detectScreenCollision:[[ObjectContainer sharedInstance] player]] ;
     
 }
 							

@@ -7,30 +7,39 @@
 //
 
 #import "AttackState.h"
+#import "ObjectContainer.h"
+#import "Enemy.h"
+#import "ParticleInvoker.h"
+#import "SimpleAudioEngine.h"
 
 @interface AttackState ()
+-(id) initWithCharacter:(Character *) characterParam;
     -(CCAction *) createAction:(CCAnimation *) animationAction;
     -(void) transitionToStand;
     -(void) setCurrentlyInBetweenAttacks;
 @end
 @implementation AttackState
 
-@synthesize character,
-            currentAttack,
-            isInBetweenAttacks;
+// Maximum number of basic attacks for player
+// TODO: Might have to be put in parameter instead.
+const uint maxAttacks = 3;
 
 + (AttackState *) createWithCharacter:(Character *) character {
-    AttackState *state = [[AttackState alloc] init];
-    state.character = character;
-    state.currentAttack = 0;
-    state.isInBetweenAttacks = true;
-    
-    return state;
+    return [[AttackState alloc] initWithCharacter:character];
 }
 
+- (id) initWithCharacter:(Character *) characterParam {
+    if (self = [super init]) {
+        character = [characterParam retain];
+        currentAttack = 0;
+        isInBetweenAttacks = true;
+    }
+    
+    return self;
+}
 - (void) start {
     isInBetweenAttacks = false;
-    [SpriteSheetAnimator startAnimation:character.sprite
+    [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:NSSTRING_FORMAT(ANIMATOR_ATTACK, currentAttack)
                           frameInterval:0.1f
@@ -50,7 +59,20 @@
 }
 
 -(void) setCurrentlyInBetweenAttacks {
-    isInBetweenAttacks = true;
+    if (++currentAttack < maxAttacks) {
+        isInBetweenAttacks = true;
+    }
+    
+    NSArray *enemies = 
+        [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ENEMIES];
+
+    for (Enemy *enemy in enemies) {
+        // TODO: Use pixel collision here
+        [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
+                                                   prop:enemy];
+    
+        [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
+    }
 }
 
 - (void) updateState {
@@ -61,11 +83,14 @@
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {
-    if ([[newState class] isSubclassOfClass:[AttackState class]] && 
-        isInBetweenAttacks) {
-        currentAttack++;
+    if (IS_SUBCLASS(newState, AttackState) && isInBetweenAttacks) {
         [self start];
     }
+}
+
+- (void) dealloc {
+    [character release];
+    [super dealloc];
 }
 
 @end

@@ -13,12 +13,12 @@
 @synthesize character;
 
 + (id) newBuilder:(CGPoint) position 
-                             size:(CGSize) size 
-                           sprite:(CCSprite *)sprite{
+             size:(CGSize) size 
+           spriteFrame:(CCSpriteFrame *) spriteFrame{
     CharacterBuilder *builder = [[CharacterBuilder alloc] init];
     builder.character = [[Character alloc] init:position 
                                            size:size
-                                         sprite:sprite];
+                                         spriteFrame:spriteFrame];
     
     
     return builder;

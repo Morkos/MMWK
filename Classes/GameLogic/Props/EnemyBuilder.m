@@ -13,13 +13,13 @@
 
 + (EnemyBuilder *) newBuilder:(CGPoint)position 
                          size:(CGSize)size 
-                       sprite:(CCSprite*)sprite {
-    EnemyBuilder * builder = [[EnemyBuilder alloc] init];
+                  spriteFrame:(CCSpriteFrame *) spriteFrame {
+    
+    EnemyBuilder *builder = [[EnemyBuilder alloc] init];
     builder.character = [[Enemy alloc] init:position 
-                                       size:size
-                                     sprite:sprite];
-   
-    NSLog(@"Created an Enemy.");
+                               size:size
+                             spriteFrame:spriteFrame];
+    
     return builder;
 }
 

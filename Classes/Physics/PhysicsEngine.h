@@ -39,7 +39,7 @@
  * @param otherProp - the prop we are colliding with.
  * @return void
  */
-- (void) detectRectangleCollision:(Prop *) prop
+- (bool) detectRectangleCollision:(Prop *) prop
 						otherProp:(Prop *) otherProp;
 
 /**

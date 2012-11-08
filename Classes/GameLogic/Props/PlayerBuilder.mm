@@ -13,14 +13,13 @@
 
 + (PlayerBuilder *) newBuilder:(CGPoint)position
                           size:(CGSize)size 
-                        sprite:(CCSprite *) sprite {
+                   spriteFrame:(CCSpriteFrame *) spriteFrame {
     PlayerBuilder *builder = [[PlayerBuilder alloc] init];
     [builder.character autorelease];
     builder.character = [[Player alloc] init:position 
                                         size:size
-                                      sprite:sprite];
-    
-    NSLog(@"Created main player.");
+                                 spriteFrame:spriteFrame];
+
     return builder;
 }
 

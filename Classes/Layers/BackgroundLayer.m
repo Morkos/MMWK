@@ -56,10 +56,10 @@
             i++;
         }
         
-        Player * player = [[ObjectContainer sharedInstance] getObject:0];
+        Player * player = [[ObjectContainer sharedInstance] player];
         
         //TODO: calculate the correct width for the world boundary
-        [self runAction:[CCFollow actionWithTarget:player.sprite 
+        [self runAction:[CCFollow actionWithTarget:player 
                                      worldBoundary:CGRectMake(0, 0, 2000, screenSize.height)]];
     }
     

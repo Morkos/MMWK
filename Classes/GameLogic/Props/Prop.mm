@@ -10,10 +10,6 @@
 
 @implementation Prop
 
-@synthesize position,
-            size,
-            sprite;
-
 - (void) update {
 }
 

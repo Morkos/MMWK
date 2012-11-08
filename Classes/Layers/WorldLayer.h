@@ -12,13 +12,14 @@
 #import "chipmunk.h"
 #import "SpriteSheet.h"
 #import "NSPropertyUtil.h"
-#import "MyConstants.h"
 
-@interface HelloWorldLayer : CCLayer {
+@interface WorldLayer : CCLayer
+{
 	CCTexture2D *spriteTexture_; // weak ref
+    CFMutableDictionaryRef map;
 }
 
-// returns a CCScene that contains the HelloWorldLayer as the only child
+// returns a CCScene that contains all the layers 
 +(CCScene *) scene;
 
 @end
