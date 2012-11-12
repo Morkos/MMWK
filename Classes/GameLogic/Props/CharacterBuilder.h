@@ -24,6 +24,7 @@
                            spriteFrame:(CCSpriteFrame *)spriteFrame;
 
 - (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet;
+- (CharacterBuilder *) buildHealth:(NSUInteger) health;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;
 - (CharacterBuilder *) buildDefense:(NSUInteger) defense;
 - (id) build;

@@ -24,10 +24,7 @@
 	Direction currentDirection;
 	Orientation currentOrientation;
     
-    NSUInteger strength;
-    NSUInteger defense;
-    
-    Gauge *healthGauge;
+    NSUInteger health, strength, defense;
     
 }
 
@@ -36,9 +33,7 @@
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
-@property (nonatomic, assign) NSUInteger strength;
-@property (nonatomic, assign) NSUInteger defense;
-@property (nonatomic, retain) Gauge *healthGauge;
+@property (nonatomic, assign) NSUInteger health, strength, defense;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz

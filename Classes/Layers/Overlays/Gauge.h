@@ -9,22 +9,36 @@
 #import <Foundation/Foundation.h>
 
 @interface Gauge : NSObject {
-    @private
-    NSUInteger gauge;    
+    CGFloat capacity, maxCapacity;
+    CCSprite *containerSprite;
+    CCSprite *barSprite;
 }
 
-@property (nonatomic, assign) NSUInteger gauge;
++ (Gauge *) gaugeWithMaxCapacity:(CGFloat) maxCapacity
+                containerTexture:(NSString *) containerTexture
+                     barTextures:(NSArray *) barTextures
+                        position:(CGPoint) position
+                           scale:(CGSize) scale;
+
+-(id) initWithMaxCapacity:(CGFloat) maxCapacity
+         containerTexture:(NSString *) containerTexture
+              barTextures:(NSArray *) barTextures
+                 position:(CGPoint) position
+                    scale:(CGSize) scale;
+
 
 /**
  * Increase the guage's capacity.
  * @param quantity the amount to increase 
  */
-- (void) increase:(NSUInteger) quantity;
+- (void) increase:(CGFloat) quantity;
 
 /**
  * Decrease the guage's capacity.
  * @param quantity the amount to decrease 
  */
-- (void) decrease:(NSUInteger) quantity;
+- (void) decrease:(CGFloat) quantity;
+
+- (void) addToLayer:(CCLayer *) layer;
 
 @end

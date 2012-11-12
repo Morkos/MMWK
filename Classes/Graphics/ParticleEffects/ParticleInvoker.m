@@ -9,6 +9,7 @@
 #import "ParticleInvoker.h"
 #import "OverlayLayer.h"
 #import "CCBlade.h"
+#import "CCUtil.h"
 
 @interface ParticleInvoker()
 -(void) doSlashEffect:(Prop *) prop;
@@ -29,16 +30,16 @@ static ParticleInvoker * invoker = nil;
 
 - (id) init {
     if (self = [super init]) {
-        layer = (CCLayer *) [[[[CCDirector sharedDirector] runningScene] getChildByTag:tagOverlayLayer] retain]; 
+        layer = [[CCUtil getLayer:tagOverlayLayer] retain]; 
     }
     return self;
 }
 
 - (void) invokeParticleEffect:(ParticleEffectId) idTag 
-                         prop:(Prop *) prop {
+                         prop:(Prop *) target {
     switch (idTag) {
         case slashEffect:
-            [self doSlashEffect:prop];
+            [self doSlashEffect:target];
             break;
             
         default:

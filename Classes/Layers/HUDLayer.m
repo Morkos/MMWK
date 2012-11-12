@@ -41,6 +41,15 @@
         
         attackButton = [AttackButton buttonWithSprite:sprite];
         
+        [ObjectContainer sharedInstance].enemyHealthGauge = 
+                [Gauge gaugeWithMaxCapacity:100 
+                           containerTexture:@"healthBar-back.png" 
+                                barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]
+                                   position:ccp(460, 300) 
+                                      scale:CGSizeMake(1.0f, 1.0f)];
+        
+        [[ObjectContainer sharedInstance].enemyHealthGauge addToLayer:self];
+        
         [self addChild:dpadButton.sprite];
         [self addChild:attackButton.sprite];
     }

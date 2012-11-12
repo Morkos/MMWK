@@ -42,9 +42,9 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 			physicsEngine,
 			currentDirection,
 			currentOrientation,
+            health, 
             strength,
-            defense,
-            healthGauge;
+            defense;
 
 
 //Private method
@@ -76,7 +76,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
-        self.healthGauge = [[Gauge alloc] init];
 	}
     
 	return self;

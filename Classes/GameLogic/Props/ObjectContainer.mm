@@ -11,6 +11,8 @@
 #import "NSDictionaryExtensions.h"
 
 @implementation ObjectContainer
+@synthesize player, 
+            enemyHealthGauge;
 
 static ObjectContainer *singleContainer;
 
@@ -44,20 +46,17 @@ static ObjectContainer *singleContainer;
 			DLOG("ERROR! More than one player!");
 		}
 	} else if (IS_SUBCLASS(object, Enemy)) {
-        [objDictionary addObjectToArray:object forKey:@"enemies"];
+        [objDictionary addObjectToArray:object forKey:CONTAINER_ENEMIES];
     }
 }
 
-- (Player *) player {
-    return player;
-}
-
-- (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *) containerKey {
+- (NSArray *) findCollidingProps:(Prop *) target 
+                   fromContainer:(NSString *) containerKey {
     NSArray *props = [objDictionary objectForKey:containerKey];
     NSMutableArray *collidingProps = [NSMutableArray arrayWithCapacity:[props count]];
     
     for (Prop *checkedProp in props) {
-        bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:prop 
+        bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:target 
                                                                     otherProp:checkedProp];
         
         if (collided) {

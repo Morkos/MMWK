@@ -33,10 +33,10 @@
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
 	
-	[scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
     [scene addChild:[BackgroundLayer node] z:-2];	
-    [scene addChild:[HUDLayer node] z:2];
+    [scene addChild:[HUDLayer node] z:2 tag:tagHudLayer];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
+    [scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
     
 	// return the scene
 	return scene;
@@ -60,7 +60,9 @@
             [EnemyBuilder newBuilder:ccp(220,220) 
                                 size:CGSizeMake(1.0f, 1.0f)
                          spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
-        Enemy *enemy = [[enemyBuilder buildSpriteSheet:enemySpriteSheet] build];
+        
+        Enemy *enemy = [[[enemyBuilder buildSpriteSheet:enemySpriteSheet] 
+                                            buildHealth:100] build];
         
         [self addChild:player];
         [self addChild:enemy];

@@ -17,14 +17,17 @@
 @interface ObjectContainer : NSObject {
     NSMutableDictionary *objDictionary;
 	Player *player;
+    Gauge *enemyHealthGauge;
 }
 
+@property(nonatomic, retain) Player *player;
+@property(nonatomic, retain) Gauge *enemyHealthGauge;
+
 + (ObjectContainer *) sharedInstance;
-- (id) init;
-- (Player *) player;
 - (void) addObject:(CCNode *)object;
 
-- (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *)containerKey;
+- (NSArray *) findCollidingProps:(Prop *) target 
+                   fromContainer:(NSString *)containerKey;
 
 
 @end
