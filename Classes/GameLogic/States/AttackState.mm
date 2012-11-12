@@ -13,7 +13,7 @@
 #import "SimpleAudioEngine.h"
 
 @interface AttackState ()
--(id) initWithCharacter:(Character *) characterParam;
+    -(id) initWithCharacter:(Character *) characterParam;
     -(CCAction *) createAction:(CCAnimation *) animationAction;
     -(void) transitionToStand;
     -(void) setCurrentlyInBetweenAttacks;
@@ -63,18 +63,20 @@ const uint maxAttacks = 3;
         isInBetweenAttacks = true;
     }
     
-    NSArray *enemies = 
-        [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ENEMIES];
+    if (IS_SUBCLASS(character, Player)) {
+        NSArray *enemies = 
+            [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ENEMIES];
 
-    for (Enemy *enemy in enemies) {
-        // TODO: Use pixel collision here
-        [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
-                                                   prop:enemy];
-    
-        // TODO: Take out of for loop so it doesn't play this more than once
-        [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
+        for (Enemy *enemy in enemies) {
+            // TODO: Use pixel collision here
+            [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
+                                                       prop:enemy];
         
-        [[ObjectContainer sharedInstance].enemyHealthGauge decrease:10.f];
+            // TODO: Take out of for loop so it doesn't play this more than once
+            [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
+            
+            [[ObjectContainer sharedInstance].enemyHealthGauge decrease:10.f];
+        }
     }
 }
 

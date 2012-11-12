@@ -38,7 +38,6 @@
         containerSprite.position = position;
         containerSprite.scaleX = scale.width;
         containerSprite.scaleY = scale.height;
-        containerSprite.rotation = 90;
         containerSprite.anchorPoint = ccp(0, 0);
         
         //TODO: Support multiple bar texture layers
@@ -48,10 +47,6 @@
         barSprite.scaleX = scale.width;
         barSprite.scaleY = scale.height;
         barSprite.anchorPoint = ccp(0, 0);
-        
-        // Vertical bar
-        barSprite.rotation = 90;
-        [self setBarPercentage:1.0f];
     }
     
     return self;
@@ -70,19 +65,17 @@
 - (void) addToLayer:(CCLayer *) layer {
     [layer addChild:containerSprite z:1];
     [layer addChild:barSprite z:2];
+    
+    [self setBarPercentage:1.0f];
 }
 
 - (void) setBarPercentage:(CGFloat) percentage {
     percentage = min(percentage, 1.0f);
-    percentage = max(percentage, 0);
+    percentage = max(percentage, 0.0f);
 
-    if (percentage <= 0) {
-        barSprite.visible = NO;
-    } else {
-        [barSprite setTextureRect:CGRectMake(0, 0, 
-                                             barSprite.texture.pixelsWide * percentage, 
-                                             barSprite.texture.pixelsHigh)];
-    }
+    CGFloat scaleXBy = percentage / barSprite.scaleX;
+    [barSprite runAction:[CCScaleBy actionWithDuration:0.25f scaleX:scaleXBy scaleY:1.0f]];
+    
 }
 
 @end

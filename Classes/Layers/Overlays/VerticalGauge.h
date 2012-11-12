@@ -8,7 +8,7 @@
 
 #import "Gauge.h"
 
-@interface EnemyHealthGauge : Gauge {
+@interface VerticalGauge : Gauge {
     
 }
 
