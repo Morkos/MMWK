@@ -75,7 +75,7 @@ const uint maxAttacks = 3;
             // TODO: Take out of for loop so it doesn't play this more than once
             [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
             
-            [[ObjectContainer sharedInstance].enemyHealthGauge decrease:10.f];
+            [character attacksTarget:enemy];
         }
     }
 }

@@ -20,20 +20,21 @@
 @interface Character : Prop {
     SpriteSheet *spriteSheet;
 	PhysicsEngine *physicsEngine;
+    Gauge *healthGauge;
 	id<CharacterState> currentState;
 	Direction currentDirection;
 	Orientation currentOrientation;
     
-    NSUInteger health, strength, defense;
-    
+    NSUInteger maxHp, currentHp, strength, defense;
 }
 
 @property (nonatomic, retain) SpriteSheet *spriteSheet;
-@property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
+@property (nonatomic, retain) Gauge *healthGauge;
+@property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
-@property (nonatomic, assign) NSUInteger health, strength, defense;
+@property (nonatomic, assign) NSUInteger maxHp, currentHp, strength, defense;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
@@ -50,6 +51,11 @@
 - (void) attack;
 
 - (void) setState:(id<CharacterState>) newState;
+
+/**
+ * Perform an attack on target character
+ */
+- (void) attacksTarget:(Character *) target;
 
 /**
  * Returns the opposite direction of the given direction

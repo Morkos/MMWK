@@ -40,9 +40,11 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 @synthesize spriteSheet,
 			currentState, 
 			physicsEngine,
+            healthGauge,
 			currentDirection,
 			currentOrientation,
-            health, 
+            maxHp,
+            currentHp,
             strength,
             defense;
 
@@ -76,6 +78,11 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
+        
+        // Set default values
+        self.strength = 1;
+        self.maxHp = 10;
+        self.currentHp = 10;
 	}
     
 	return self;
@@ -112,6 +119,15 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     [self.currentState release];
     self.currentState = newState;
     [self.currentState start];
+}
+
+- (void) attacksTarget:(Character *) target {
+    NSUInteger previousHp = target.currentHp;
+    target.currentHp -= strength;
+    
+    [target.healthGauge animateBarFromStartCapacity:previousHp
+                                        endCapacity:target.currentHp 
+                                        maxCapacity:target.maxHp];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {

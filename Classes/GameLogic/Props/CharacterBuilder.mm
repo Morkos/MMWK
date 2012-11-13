@@ -30,7 +30,8 @@
 }
 
 - (CharacterBuilder *) buildHealth:(NSUInteger) health {
-    self.character.health = health;
+    self.character.maxHp = health;
+    self.character.currentHp = health;
     return self;
 }
 
@@ -41,6 +42,11 @@
 
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength {
     self.character.strength = strength;
+    return self;
+}
+
+- (CharacterBuilder *) buildHealthGauge:(Gauge *) healthGauge {
+    self.character.healthGauge = healthGauge;
     return self;
 }
 

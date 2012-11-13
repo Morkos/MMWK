@@ -50,6 +50,10 @@ static ObjectContainer *singleContainer;
     }
 }
 
+- (NSArray *) getAllPropsFromContainer:(NSString *) containerKey {
+    return [objDictionary objectForKey:containerKey];
+}
+
 - (NSArray *) findCollidingProps:(Prop *) target 
                    fromContainer:(NSString *) containerKey {
     NSArray *props = [objDictionary objectForKey:containerKey];

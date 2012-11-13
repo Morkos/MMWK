@@ -8,6 +8,7 @@
 
 #import "HUDLayer.h"
 #import "VerticalGauge.h"
+#import "Enemy.h"
 
 @interface HUDLayer()
     -(void) touchDpadButton:(CGPoint) location;
@@ -43,13 +44,17 @@
         attackButton = [AttackButton buttonWithSprite:sprite];
         
         [ObjectContainer sharedInstance].enemyHealthGauge = 
-                [VerticalGauge gaugeWithMaxCapacity:100 
-                                   containerTexture:@"healthBar-back.png" 
-                                        barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]
-                                           position:ccp(460, 300) 
-                                              scale:CGSizeMake(1.0f, 1.0f)];
+                [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
+                                             barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]
+                                                position:ccp(460, 300) 
+                                                   scale:CGSizeMake(1.0f, 1.0f)];
         
         [[ObjectContainer sharedInstance].enemyHealthGauge addToLayer:self];
+        
+        // Link all enemies with the health gauge
+        for (Enemy *enemy in [[ObjectContainer sharedInstance] getAllPropsFromContainer:CONTAINER_ENEMIES]) {
+            enemy.healthGauge = [ObjectContainer sharedInstance].enemyHealthGauge;
+        }
         
         [self addChild:dpadButton.sprite];
         [self addChild:attackButton.sprite];

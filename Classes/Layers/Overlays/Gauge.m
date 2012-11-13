@@ -14,26 +14,21 @@
 @end
 @implementation Gauge
 
-+ (Gauge *) gaugeWithMaxCapacity:(CGFloat) maxCapacity
-                containerTexture:(NSString *) containerTexture
-                     barTextures:(NSArray *) barTextures
-                        position:(CGPoint) position
-                           scale:(CGSize)scale {
-    return [[[Gauge alloc] initWithMaxCapacity:maxCapacity
-                              containerTexture:containerTexture 
-                                   barTextures:barTextures
-                                      position: position
-                                         scale:scale] autorelease];
++ (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
+                          barTextures:(NSArray *) barTextures
+                             position:(CGPoint) position
+                                scale:(CGSize)scale {
+    return [[[Gauge alloc] initWithContainerTexture:containerTexture 
+                                        barTextures:barTextures
+                                           position: position
+                                              scale:scale] autorelease];
 }
 
--(id) initWithMaxCapacity:(CGFloat) maxCapacityParam
-         containerTexture:(NSString *) containerTexture
-              barTextures:(NSArray *) barTextures
-                 position:(CGPoint) position
-                    scale:(CGSize) scale {
+-(id) initWithContainerTexture:(NSString *) containerTexture
+                   barTextures:(NSArray *) barTextures
+                      position:(CGPoint) position
+                         scale:(CGSize) scale {
     if (self = [super init]) {
-        capacity = maxCapacityParam;
-        maxCapacity = maxCapacityParam;
         containerSprite = [CCSprite spriteWithFile:containerTexture];
         containerSprite.position = position;
         containerSprite.scaleX = scale.width;
@@ -52,21 +47,22 @@
     return self;
 }
 
-- (void) increase:(CGFloat) quantity {
-    capacity += quantity;
-    [self setBarPercentage:(capacity/maxCapacity)];
-}
-
-- (void) decrease:(CGFloat) quantity {
-    capacity -= quantity;
-    [self setBarPercentage:(capacity/maxCapacity)];
-}
-
 - (void) addToLayer:(CCLayer *) layer {
     [layer addChild:containerSprite z:1];
     [layer addChild:barSprite z:2];
     
     [self setBarPercentage:1.0f];
+}
+
+- (void) animateBarFromStartCapacity:(CGFloat) startCapacity
+                         endCapacity:(CGFloat) endCapacity
+                         maxCapacity:(CGFloat) maxCapacity {
+    CGFloat startingPercentage = startCapacity / maxCapacity;
+    CGFloat endPercentage = endCapacity / maxCapacity;
+    [barSprite runAction:[CCSequence actions:
+         [CCScaleTo actionWithDuration:0.0f scaleX:startingPercentage scaleY:barSprite.scaleY],
+         [CCScaleTo actionWithDuration:0.25f scaleX:endPercentage scaleY:barSprite.scaleY],
+          nil]];
 }
 
 - (void) setBarPercentage:(CGFloat) percentage {

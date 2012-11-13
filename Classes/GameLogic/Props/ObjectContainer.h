@@ -26,6 +26,21 @@
 + (ObjectContainer *) sharedInstance;
 - (void) addObject:(CCNode *)object;
 
+/**
+ * Get all the props from a target container 
+ *
+ * @param containerKey The key for the container
+ * @return Array of props.
+ */
+- (NSArray *) getAllPropsFromContainer:(NSString *) containerKey; 
+
+/**
+ * Get all the props from a target container that are colliding with the given target
+ *
+ * @param target The target to check with
+ * @param containerKey The key for the container
+ * @return Array of props.
+ */
 - (NSArray *) findCollidingProps:(Prop *) target 
                    fromContainer:(NSString *)containerKey;
 
