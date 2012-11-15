@@ -55,6 +55,7 @@ static ParticleInvoker * invoker = nil;
     
     [layer addChild:blade];
     
+    NSLog(@"Prop position: %lf, %lf", position.x, position.y);
     CCFiniteTimeAction *action = [CCMoveTo actionWithDuration:0.15f position:ccpAdd(position, ccp(0, -50.f))];
     
     /*ccBezierConfig bezierConfig;

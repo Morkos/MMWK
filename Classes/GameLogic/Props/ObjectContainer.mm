@@ -53,6 +53,11 @@ static ObjectContainer *singleContainer;
     return player;
 }
 
+- (Enemy *) getEnemy {
+    NSMutableArray * enemies = [objDictionary objectForKey:@"enemies"];
+    return [enemies objectAtIndex:0];
+}
+
 - (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *) containerKey {
     NSArray *props = [objDictionary objectForKey:containerKey];
     NSMutableArray *collidingProps = [NSMutableArray arrayWithCapacity:[props count]];
@@ -72,7 +77,6 @@ static ObjectContainer *singleContainer;
 - (void) update {
     [objDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * key, NSMutableArray * objs, BOOL *stop) {
         for(id obj in objs) {
-            NSLog(@"calling update on %@", obj);
             [obj update];
             
         }

@@ -16,11 +16,13 @@
 #import "AttackState.h"
 #import "StandState.h"
 #import "Gauge.h"
+#import "StateMachine.h"
 
 @interface Character : Prop {
-    SpriteSheet *spriteSheet;
-	PhysicsEngine *physicsEngine;
-	id<CharacterState> currentState;
+    SpriteSheet * spriteSheet;
+	PhysicsEngine * physicsEngine;
+	StateMachine * fsm;
+    
 	Direction currentDirection;
 	Orientation currentOrientation;
     
@@ -31,15 +33,16 @@
     
 }
 
-@property (nonatomic, retain) SpriteSheet *spriteSheet;
-@property (nonatomic, retain) id<CharacterState> currentState;
+@property (nonatomic, retain) SpriteSheet * spriteSheet;
+@property (nonatomic, retain) StateMachine * fsm;
+@property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, assign) NSUInteger strength;
 @property (nonatomic, assign) NSUInteger defense;
 @property (nonatomic, assign) CGFloat speed;
-@property (nonatomic, retain) Gauge *healthGauge;
+@property (nonatomic, retain) Gauge * healthGauge;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz

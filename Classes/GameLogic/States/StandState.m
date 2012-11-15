@@ -39,14 +39,14 @@
         //player is close to enemy
         
         CGFloat distanceToPlayer = DISTANCE(player.position, self.character.position);
-        if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox))
-        {
-            NSLog(@"Collision detected.");
+
+        if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
             [self.character setState:[AttackState createWithCharacter:self.character]];
-        } else if( distanceToPlayer > 100 ) {
+            
+        } else if( distanceToPlayer > 75 ) {
             
             NSLog(@"Begin chasing the player.");
-            [self.character setState:[ChaseState createWithCharacter:self.character]];
+            //[self.character setState:[ChaseState createWithCharacter:self.character]];
             /*
              * If player "x" distance away then chase player.
              */

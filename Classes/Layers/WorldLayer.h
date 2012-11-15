@@ -18,8 +18,4 @@
 	CCTexture2D *spriteTexture_; // weak ref
     CFMutableDictionaryRef map;
 }
-
-// returns a CCScene that contains all the layers 
-+(CCScene *) scene;
-
 @end

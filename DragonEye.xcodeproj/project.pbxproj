@@ -7,51 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0483E1BB160D6AF100203CB4 /* spriteSheets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0483E1BA160D6AF100203CB4 /* spriteSheets.plist */; };
-		0484736E160C1A990042965F /* level0.json in Resources */ = {isa = PBXBuildFile; fileRef = 0484736D160C1A990042965F /* level0.json */; };
-		04847373160C1D1B0042965F /* megamanSpSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 04847370160C1D1B0042965F /* megamanSpSheet.png */; };
-		04847374160C1D1B0042965F /* node.png in Resources */ = {isa = PBXBuildFile; fileRef = 04847371160C1D1B0042965F /* node.png */; };
-		04847375160C1D1B0042965F /* spriteSheets.json in Resources */ = {isa = PBXBuildFile; fileRef = 04847372160C1D1B0042965F /* spriteSheets.json */; };
-		04A440B4160AD6EE0055927E /* Character.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440B3160AD6EE0055927E /* Character.mm */; };
-		04A440BA160ADA310055927E /* MyMath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440B9160ADA300055927E /* MyMath.mm */; };
-		04A440C0160AE3210055927E /* LevelLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440BF160AE3210055927E /* LevelLoader.mm */; };
-		04A440D4160AE9930055927E /* AnimatorConstants.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440C3160AE9910055927E /* AnimatorConstants.mm */; };
-		04A440D5160AE9930055927E /* AttackButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440C5160AE9910055927E /* AttackButton.mm */; };
-		04A440D6160AE9930055927E /* AttackState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440C7160AE9910055927E /* AttackState.mm */; };
-		04A440D8160AE9930055927E /* BezierCurve.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440CB160AE9920055927E /* BezierCurve.mm */; };
-		04A440D9160AE9930055927E /* CharacterBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440CD160AE9920055927E /* CharacterBuilder.mm */; };
-		04A440DA160AE9930055927E /* ComboState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A440D1160AE9930055927E /* ComboState.m */; };
-		04A440DB160AE9930055927E /* CoordinateSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440D3160AE9930055927E /* CoordinateSystem.mm */; };
-		04A440F4160AE9D80055927E /* DpadButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440DD160AE9D50055927E /* DpadButton.mm */; };
-		04A440F7160AE9D80055927E /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A440E4160AE9D60055927E /* Enemy.m */; };
-		04A440F8160AE9D80055927E /* EnemyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A440E6160AE9D60055927E /* EnemyBuilder.m */; };
-		04A440F9160AE9D80055927E /* FrameBasedTimer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440E8160AE9D60055927E /* FrameBasedTimer.mm */; };
-		04A440FA160AE9D80055927E /* FreezeMode.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440EA160AE9D70055927E /* FreezeMode.mm */; };
-		04A440FB160AE9D80055927E /* FreezeModeManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440EC160AE9D70055927E /* FreezeModeManager.mm */; };
-		04A440FD160AE9D80055927E /* Gauge.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A440F0160AE9D70055927E /* Gauge.m */; };
-		04A440FE160AE9D80055927E /* JSONKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A440F2160AE9D80055927E /* JSONKit.mm */; };
-		04A44104160AE9F90055927E /* LinePoints.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44100160AE9F90055927E /* LinePoints.mm */; };
-		04A44105160AE9F90055927E /* MoveState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A44103160AE9F90055927E /* MoveState.m */; };
-		04A44132160AEB6C0055927E /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4410A160AEB5E0055927E /* Node.mm */; };
-		04A44133160AEB6C0055927E /* NodeConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4410C160AEB5E0055927E /* NodeConnector.mm */; };
-		04A44134160AEB6C0055927E /* ObjectContainer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4410E160AEB5F0055927E /* ObjectContainer.mm */; };
-		04A44135160AEB6C0055927E /* Overlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44110160AEB5F0055927E /* Overlay.mm */; };
-		04A44136160AEB6C0055927E /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44112160AEB5F0055927E /* Particle.mm */; };
-		04A44137160AEB6C0055927E /* ParticleEffectsManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44115160AEB600055927E /* ParticleEffectsManager.mm */; };
-		04A44138160AEB6C0055927E /* PhysicsEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44117160AEB600055927E /* PhysicsEngine.mm */; };
-		04A44139160AEB6C0055927E /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44119160AEB600055927E /* Player.mm */; };
-		04A4413A160AEB6C0055927E /* PlayerBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4411B160AEB610055927E /* PlayerBuilder.mm */; };
-		04A4413B160AEB6C0055927E /* Program.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4411E160AEB610055927E /* Program.mm */; };
-		04A4413C160AEB6C0055927E /* Prop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44120160AEB620055927E /* Prop.mm */; };
-		04A4413D160AEB6C0055927E /* PropState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44122160AEB620055927E /* PropState.mm */; };
-		04A4413E160AEB6C0055927E /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A44124160AEB630055927E /* Queue.m */; };
-		04A4413F160AEB6C0055927E /* RunTimeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A44126160AEB630055927E /* RunTimeWrapper.m */; };
-		04A44140160AEB6C0055927E /* Sprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44128160AEB640055927E /* Sprite.mm */; };
-		04A44141160AEB6C0055927E /* SpritesheetAnimator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4412A160AEB640055927E /* SpritesheetAnimator.mm */; };
-		04A44142160AEB6C0055927E /* SpriteSheetManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A4412C160AEB650055927E /* SpriteSheetManager.mm */; };
-		04A44143160AEB6C0055927E /* StandState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4412E160AEB660055927E /* StandState.m */; };
-		04A44144160AEB6C0055927E /* WoundedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A44131160AEB680055927E /* WoundedState.m */; };
-		04A44147160AF0BE0055927E /* Background.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A44146160AF0BE0055927E /* Background.mm */; };
 		04AB1136160817C8006BCA2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1135160817C8006BCA2F /* QuartzCore.framework */; };
 		04AB1138160817C8006BCA2F /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1137160817C8006BCA2F /* OpenGLES.framework */; };
 		04AB113A160817C8006BCA2F /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1139160817C8006BCA2F /* OpenAL.framework */; };
@@ -61,26 +16,7 @@
 		04AB1142160817C8006BCA2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1141160817C8006BCA2F /* Foundation.framework */; };
 		04AB1144160817C8006BCA2F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1143160817C8006BCA2F /* CoreGraphics.framework */; };
 		04AB1146160817C8006BCA2F /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AB1145160817C8006BCA2F /* GameKit.framework */; };
-		04AB114A160817C9006BCA2F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1149160817C9006BCA2F /* Default.png */; };
-		04AB114C160817C9006BCA2F /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB114B160817C9006BCA2F /* Default-Landscape~ipad.png */; };
-		04AB114E160817CA006BCA2F /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB114D160817CA006BCA2F /* fps_images.png */; };
-		04AB1150160817CA006BCA2F /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB114F160817CA006BCA2F /* fps_images-hd.png */; };
-		04AB1152160817CA006BCA2F /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1151160817CA006BCA2F /* fps_images-ipadhd.png */; };
-		04AB1154160817CA006BCA2F /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1153160817CA006BCA2F /* Icon-72.png */; };
-		04AB1156160817CA006BCA2F /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1155160817CA006BCA2F /* Icon-Small-50.png */; };
-		04AB1158160817CA006BCA2F /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1157160817CA006BCA2F /* Icon-Small.png */; };
-		04AB115A160817CA006BCA2F /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1159160817CA006BCA2F /* Icon-Small@2x.png */; };
-		04AB115C160817CA006BCA2F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB115B160817CA006BCA2F /* Icon.png */; };
-		04AB115E160817CA006BCA2F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB115D160817CA006BCA2F /* Icon@2x.png */; };
-		04AB1161160817CB006BCA2F /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 04AB1160160817CB006BCA2F /* iTunesArtwork */; };
-		04AB132B160817DA006BCA2F /* grossini_dance_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB132A160817DA006BCA2F /* grossini_dance_atlas.png */; };
-		04AB13361608296E006BCA2F /* lancelotSpSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB13351608296E006BCA2F /* lancelotSpSheet.png */; };
 		04BACB5D1611621200ED2792 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BACB5B1611621200ED2792 /* main.m */; };
-		04D4CCA5160F9374006F7E23 /* Camera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCA2160F9374006F7E23 /* Camera.mm */; };
-		04D4CCA6160F9374006F7E23 /* SpriteSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCA4160F9374006F7E23 /* SpriteSheet.m */; };
-		04D4CCAD160F938F006F7E23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCA8160F938F006F7E23 /* AppDelegate.m */; };
-		04D4CCAE160F938F006F7E23 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCAA160F938F006F7E23 /* HelloWorldLayer.m */; };
-		04D4CCAF160F938F006F7E23 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCAC160F938F006F7E23 /* IntroLayer.m */; };
 		04D4CDEA16115A8F006F7E23 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CCD316115A8E006F7E23 /* LICENSE.txt */; };
 		04D4CDEB16115A8F006F7E23 /* README.textile in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CCD416115A8F006F7E23 /* README.textile */; };
 		04D4CDEC16115A8F006F7E23 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = 04D4CCD616115A8F006F7E23 /* chipmunk.c */; };
@@ -219,103 +155,91 @@
 		04D4CE7116115A8F006F7E23 /* LICENSE_cocos2d.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE716115A8F006F7E23 /* LICENSE_cocos2d.txt */; };
 		04D4CE7216115A8F006F7E23 /* LICENSE_CocosDenshion.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE816115A8F006F7E23 /* LICENSE_CocosDenshion.txt */; };
 		04D4CE7316115A8F006F7E23 /* LICENSE_Kazmath.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE916115A8F006F7E23 /* LICENSE_Kazmath.txt */; };
+		305EC8651654C71D00D45881 /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7F81654C71D00D45881 /* BackgroundLayer.m */; };
+		305EC8671654C71D00D45881 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7FB1654C71D00D45881 /* HUDLayer.m */; };
+		305EC8681654C71D00D45881 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7FD1654C71D00D45881 /* IntroLayer.m */; };
+		305EC8691654C71D00D45881 /* OverlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7FF1654C71D00D45881 /* OverlayLayer.m */; };
+		305EC86A1654C71D00D45881 /* AttackButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8021654C71D00D45881 /* AttackButton.mm */; };
+		305EC86B1654C71D00D45881 /* DpadButton.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8041654C71D00D45881 /* DpadButton.mm */; };
+		305EC86C1654C71D00D45881 /* Gauge.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8061654C71D00D45881 /* Gauge.m */; };
+		305EC86D1654C71D00D45881 /* HUDControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8081654C71D00D45881 /* HUDControl.m */; };
+		305EC86E1654C71D00D45881 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC80A1654C71D00D45881 /* Node.mm */; };
+		305EC86F1654C71D00D45881 /* Overlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC80C1654C71D00D45881 /* Overlay.mm */; };
+		305EC8701654C71D00D45881 /* WorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC80E1654C71D00D45881 /* WorldLayer.m */; };
+		305EC8711654C71D00D45881 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8111654C71D00D45881 /* Level1.m */; };
+		305EC8721654C71D00D45881 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8121654C71D00D45881 /* AppDelegate.m */; };
+		305EC8731654C71D00D45881 /* NSDictionaryExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8161654C71D00D45881 /* NSDictionaryExtensions.m */; };
+		305EC8741654C71D00D45881 /* MyMath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC81A1654C71D00D45881 /* MyMath.mm */; };
+		305EC8751654C71D00D45881 /* NSPropertyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC81C1654C71D00D45881 /* NSPropertyUtil.m */; };
+		305EC8761654C71D00D45881 /* Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC81E1654C71D00D45881 /* Queue.m */; };
+		305EC8771654C71D00D45881 /* RunTimeWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8201654C71D00D45881 /* RunTimeWrapper.m */; };
+		305EC8781654C71D00D45881 /* Typedefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8221654C71D00D45881 /* Typedefs.m */; };
+		305EC8791654C71D00D45881 /* PhysicsEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8251654C71D00D45881 /* PhysicsEngine.mm */; };
+		305EC87A1654C71D00D45881 /* AnimatorConstants.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8291654C71D00D45881 /* AnimatorConstants.mm */; };
+		305EC87B1654C71D00D45881 /* FreezeModeManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC82B1654C71D00D45881 /* FreezeModeManager.mm */; };
+		305EC87C1654C71D00D45881 /* CCBlade.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC82E1654C71D00D45881 /* CCBlade.mm */; };
+		305EC87D1654C71D00D45881 /* ParticleInvoker.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8301654C71D00D45881 /* ParticleInvoker.m */; };
+		305EC87E1654C71D00D45881 /* SpriteSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8321654C71D00D45881 /* SpriteSheet.m */; };
+		305EC87F1654C71D00D45881 /* SpriteSheetAnimator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8341654C71D00D45881 /* SpriteSheetAnimator.mm */; };
+		305EC8801654C71D00D45881 /* SpriteSheetManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8361654C71D00D45881 /* SpriteSheetManager.mm */; };
+		305EC8811654C71D00D45881 /* CoordinateSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8391654C71D00D45881 /* CoordinateSystem.mm */; };
+		305EC8821654C71D00D45881 /* Character.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC83E1654C71D00D45881 /* Character.mm */; };
+		305EC8831654C71D00D45881 /* CharacterBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8401654C71D00D45881 /* CharacterBuilder.mm */; };
+		305EC8841654C71D00D45881 /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8441654C71D00D45881 /* Enemy.m */; };
+		305EC8851654C71D00D45881 /* EnemyBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8461654C71D00D45881 /* EnemyBuilder.m */; };
+		305EC8861654C71D00D45881 /* ObjectContainer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8481654C71D00D45881 /* ObjectContainer.mm */; };
+		305EC8871654C71D00D45881 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC84A1654C71D00D45881 /* Player.mm */; };
+		305EC8881654C71D00D45881 /* PlayerBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC84C1654C71D00D45881 /* PlayerBuilder.mm */; };
+		305EC8891654C71D00D45881 /* Prop.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC84E1654C71D00D45881 /* Prop.mm */; };
+		305EC88A1654C71D00D45881 /* AttackState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8511654C71D00D45881 /* AttackState.mm */; };
+		305EC88B1654C71D00D45881 /* ChaseState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8541654C71D00D45881 /* ChaseState.m */; };
+		305EC88C1654C71D00D45881 /* ComboState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8561654C71D00D45881 /* ComboState.m */; };
+		305EC88D1654C71D00D45881 /* FleeState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8581654C71D00D45881 /* FleeState.m */; };
+		305EC88E1654C71D00D45881 /* MoveState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC85A1654C71D00D45881 /* MoveState.m */; };
+		305EC88F1654C71D00D45881 /* PropState.mm in Sources */ = {isa = PBXBuildFile; fileRef = 305EC85C1654C71D00D45881 /* PropState.mm */; };
+		305EC8901654C71D00D45881 /* StandState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC85E1654C71D00D45881 /* StandState.m */; };
+		305EC8911654C71D00D45881 /* StateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8601654C71D00D45881 /* StateMachine.m */; };
+		305EC8921654C71D00D45881 /* WoundedState.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC8621654C71D00D45881 /* WoundedState.m */; };
+		305EC8BA1654C80D00D45881 /* attackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8941654C80D00D45881 /* attackButton.png */; };
+		305EC8BB1654C80D00D45881 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8951654C80D00D45881 /* background.jpg */; };
+		305EC8BC1654C80D00D45881 /* cabban.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8961654C80D00D45881 /* cabban.png */; };
+		305EC8BD1654C80D00D45881 /* cabban1.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8971654C80D00D45881 /* cabban1.png */; };
+		305EC8BE1654C80D00D45881 /* cabban2.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8981654C80D00D45881 /* cabban2.png */; };
+		305EC8BF1654C80D00D45881 /* circlespritesheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8991654C80D00D45881 /* circlespritesheet.png */; };
+		305EC8C01654C80D00D45881 /* combos.plist in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89A1654C80D00D45881 /* combos.plist */; };
+		305EC8C11654C80D00D45881 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89B1654C80D00D45881 /* Default-Landscape~ipad.png */; };
+		305EC8C21654C80D00D45881 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89C1654C80D00D45881 /* Default.png */; };
+		305EC8C31654C80D00D45881 /* dpadNintendo.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89D1654C80D00D45881 /* dpadNintendo.png */; };
+		305EC8C41654C80D00D45881 /* DragonEye-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89E1654C80D00D45881 /* DragonEye-Info.plist */; };
+		305EC8C51654C80D00D45881 /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC89F1654C80D00D45881 /* fire.png */; };
+		305EC8C61654C80D00D45881 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A01654C80D00D45881 /* fps_images-hd.png */; };
+		305EC8C71654C80D00D45881 /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A11654C80D00D45881 /* fps_images-ipadhd.png */; };
+		305EC8C81654C80D00D45881 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A21654C80D00D45881 /* fps_images.png */; };
+		305EC8C91654C80D00D45881 /* grossini_dance_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A31654C80D00D45881 /* grossini_dance_atlas.png */; };
+		305EC8CA1654C80D00D45881 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A41654C80D00D45881 /* Icon-72.png */; };
+		305EC8CB1654C80D00D45881 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A51654C80D00D45881 /* Icon-Small-50.png */; };
+		305EC8CC1654C80D00D45881 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A61654C80D00D45881 /* Icon-Small.png */; };
+		305EC8CD1654C80D00D45881 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A71654C80D00D45881 /* Icon-Small@2x.png */; };
+		305EC8CE1654C80D00D45881 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A81654C80D00D45881 /* Icon.png */; };
+		305EC8CF1654C80D00D45881 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8A91654C80D00D45881 /* Icon@2x.png */; };
+		305EC8D01654C80D00D45881 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AA1654C80D00D45881 /* iTunesArtwork */; };
+		305EC8D11654C80D00D45881 /* lancelotSpSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AB1654C80D00D45881 /* lancelotSpSheet.png */; };
+		305EC8D21654C80D00D45881 /* level0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AC1654C80D00D45881 /* level0.plist */; };
+		305EC8D31654C80D00D45881 /* megamanSpSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AD1654C80D00D45881 /* megamanSpSheet.png */; };
+		305EC8D41654C80D00D45881 /* node.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AE1654C80D00D45881 /* node.png */; };
+		305EC8D51654C80D00D45881 /* nodeConnector.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8AF1654C80D00D45881 /* nodeConnector.png */; };
+		305EC8D61654C80D00D45881 /* slash.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B01654C80D00D45881 /* slash.png */; };
+		305EC8D71654C80D00D45881 /* swordSwing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B21654C80D00D45881 /* swordSwing.wav */; };
+		305EC8D81654C80D00D45881 /* spriteSheets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B31654C80D00D45881 /* spriteSheets.plist */; };
+		305EC8D91654C80D00D45881 /* streak1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B41654C80D00D45881 /* streak1-hd.png */; };
+		305EC8DA1654C80D00D45881 /* streak1.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B51654C80D00D45881 /* streak1.png */; };
+		305EC8DB1654C80D00D45881 /* streak2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B61654C80D00D45881 /* streak2-hd.png */; };
+		305EC8DC1654C80D00D45881 /* streak2.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B71654C80D00D45881 /* streak2.png */; };
+		305EC8DD1654C80D00D45881 /* streak3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B81654C80D00D45881 /* streak3-hd.png */; };
+		305EC8DE1654C80D00D45881 /* streak3.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B91654C80D00D45881 /* streak3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0483E1BA160D6AF100203CB4 /* spriteSheets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spriteSheets.plist; path = /Users/mac/Documents/DragonEye/spriteSheets.plist; sourceTree = "<absolute>"; };
-		0484736D160C1A990042965F /* level0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = level0.json; path = /Users/mac/Documents/DragonEye/level0.json; sourceTree = "<absolute>"; };
-		04847370160C1D1B0042965F /* megamanSpSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = megamanSpSheet.png; path = /Users/mac/Documents/DragonEye/megamanSpSheet.png; sourceTree = "<absolute>"; };
-		04847371160C1D1B0042965F /* node.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = node.png; path = /Users/mac/Documents/DragonEye/node.png; sourceTree = "<absolute>"; };
-		04847372160C1D1B0042965F /* spriteSheets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = spriteSheets.json; path = /Users/mac/Documents/DragonEye/spriteSheets.json; sourceTree = "<absolute>"; };
-		04A440B2160AD6EE0055927E /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Character.h; path = /Users/mac/Documents/DragonEye/Classes/Character.h; sourceTree = "<absolute>"; };
-		04A440B3160AD6EE0055927E /* Character.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Character.mm; path = /Users/mac/Documents/DragonEye/Classes/Character.mm; sourceTree = "<absolute>"; };
-		04A440B8160ADA300055927E /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMath.h; path = /Users/mac/Documents/DragonEye/Classes/MyMath.h; sourceTree = "<absolute>"; };
-		04A440B9160ADA300055927E /* MyMath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MyMath.mm; path = /Users/mac/Documents/DragonEye/Classes/MyMath.mm; sourceTree = "<absolute>"; };
-		04A440BE160AE3210055927E /* LevelLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelLoader.h; path = /Users/mac/Documents/DragonEye/Classes/LevelLoader.h; sourceTree = "<absolute>"; };
-		04A440BF160AE3210055927E /* LevelLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LevelLoader.mm; path = /Users/mac/Documents/DragonEye/Classes/LevelLoader.mm; sourceTree = "<absolute>"; };
-		04A440C1160AE9900055927E /* AnimationTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationTimer.h; path = /Users/mac/Documents/DragonEye/Classes/AnimationTimer.h; sourceTree = "<absolute>"; };
-		04A440C2160AE9910055927E /* AnimatorConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimatorConstants.h; path = /Users/mac/Documents/DragonEye/Classes/AnimatorConstants.h; sourceTree = "<absolute>"; };
-		04A440C3160AE9910055927E /* AnimatorConstants.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AnimatorConstants.mm; path = /Users/mac/Documents/DragonEye/Classes/AnimatorConstants.mm; sourceTree = "<absolute>"; };
-		04A440C4160AE9910055927E /* AttackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttackButton.h; path = /Users/mac/Documents/DragonEye/Classes/AttackButton.h; sourceTree = "<absolute>"; };
-		04A440C5160AE9910055927E /* AttackButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AttackButton.mm; path = /Users/mac/Documents/DragonEye/Classes/AttackButton.mm; sourceTree = "<absolute>"; };
-		04A440C6160AE9910055927E /* AttackState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttackState.h; path = /Users/mac/Documents/DragonEye/Classes/AttackState.h; sourceTree = "<absolute>"; };
-		04A440C7160AE9910055927E /* AttackState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AttackState.mm; path = /Users/mac/Documents/DragonEye/Classes/AttackState.mm; sourceTree = "<absolute>"; };
-		04A440CA160AE9920055927E /* BezierCurve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BezierCurve.h; path = /Users/mac/Documents/DragonEye/Classes/BezierCurve.h; sourceTree = "<absolute>"; };
-		04A440CB160AE9920055927E /* BezierCurve.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = BezierCurve.mm; path = /Users/mac/Documents/DragonEye/Classes/BezierCurve.mm; sourceTree = "<absolute>"; };
-		04A440CC160AE9920055927E /* CharacterBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CharacterBuilder.h; path = /Users/mac/Documents/DragonEye/Classes/CharacterBuilder.h; sourceTree = "<absolute>"; };
-		04A440CD160AE9920055927E /* CharacterBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CharacterBuilder.mm; path = /Users/mac/Documents/DragonEye/Classes/CharacterBuilder.mm; sourceTree = "<absolute>"; };
-		04A440CE160AE9920055927E /* CharacterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CharacterState.h; path = /Users/mac/Documents/DragonEye/Classes/CharacterState.h; sourceTree = "<absolute>"; };
-		04A440CF160AE9920055927E /* Collidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Collidable.h; path = /Users/mac/Documents/DragonEye/Classes/Collidable.h; sourceTree = "<absolute>"; };
-		04A440D0160AE9920055927E /* ComboState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComboState.h; path = /Users/mac/Documents/DragonEye/Classes/ComboState.h; sourceTree = "<absolute>"; };
-		04A440D1160AE9930055927E /* ComboState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComboState.m; path = /Users/mac/Documents/DragonEye/Classes/ComboState.m; sourceTree = "<absolute>"; };
-		04A440D2160AE9930055927E /* CoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoordinateSystem.h; path = /Users/mac/Documents/DragonEye/Classes/CoordinateSystem.h; sourceTree = "<absolute>"; };
-		04A440D3160AE9930055927E /* CoordinateSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CoordinateSystem.mm; path = /Users/mac/Documents/DragonEye/Classes/CoordinateSystem.mm; sourceTree = "<absolute>"; };
-		04A440DC160AE9D50055927E /* DpadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DpadButton.h; path = /Users/mac/Documents/DragonEye/Classes/DpadButton.h; sourceTree = "<absolute>"; };
-		04A440DD160AE9D50055927E /* DpadButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DpadButton.mm; path = /Users/mac/Documents/DragonEye/Classes/DpadButton.mm; sourceTree = "<absolute>"; };
-		04A440E0160AE9D50055927E /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Drawable.h; path = /Users/mac/Documents/DragonEye/Classes/Drawable.h; sourceTree = "<absolute>"; };
-		04A440E3160AE9D60055927E /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Enemy.h; path = /Users/mac/Documents/DragonEye/Classes/Enemy.h; sourceTree = "<absolute>"; };
-		04A440E4160AE9D60055927E /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Enemy.m; path = /Users/mac/Documents/DragonEye/Classes/Enemy.m; sourceTree = "<absolute>"; };
-		04A440E5160AE9D60055927E /* EnemyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EnemyBuilder.h; path = /Users/mac/Documents/DragonEye/Classes/EnemyBuilder.h; sourceTree = "<absolute>"; };
-		04A440E6160AE9D60055927E /* EnemyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EnemyBuilder.m; path = /Users/mac/Documents/DragonEye/Classes/EnemyBuilder.m; sourceTree = "<absolute>"; };
-		04A440E7160AE9D60055927E /* FrameBasedTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FrameBasedTimer.h; path = /Users/mac/Documents/DragonEye/Classes/FrameBasedTimer.h; sourceTree = "<absolute>"; };
-		04A440E8160AE9D60055927E /* FrameBasedTimer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FrameBasedTimer.mm; path = /Users/mac/Documents/DragonEye/Classes/FrameBasedTimer.mm; sourceTree = "<absolute>"; };
-		04A440E9160AE9D70055927E /* FreezeMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreezeMode.h; path = /Users/mac/Documents/DragonEye/Classes/FreezeMode.h; sourceTree = "<absolute>"; };
-		04A440EA160AE9D70055927E /* FreezeMode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FreezeMode.mm; path = /Users/mac/Documents/DragonEye/Classes/FreezeMode.mm; sourceTree = "<absolute>"; };
-		04A440EB160AE9D70055927E /* FreezeModeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FreezeModeManager.h; path = /Users/mac/Documents/DragonEye/Classes/FreezeModeManager.h; sourceTree = "<absolute>"; };
-		04A440EC160AE9D70055927E /* FreezeModeManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FreezeModeManager.mm; path = /Users/mac/Documents/DragonEye/Classes/FreezeModeManager.mm; sourceTree = "<absolute>"; };
-		04A440EF160AE9D70055927E /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gauge.h; path = /Users/mac/Documents/DragonEye/Classes/Gauge.h; sourceTree = "<absolute>"; };
-		04A440F0160AE9D70055927E /* Gauge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gauge.m; path = /Users/mac/Documents/DragonEye/Classes/Gauge.m; sourceTree = "<absolute>"; };
-		04A440F1160AE9D70055927E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = /Users/mac/Documents/DragonEye/Classes/JSONKit.h; sourceTree = "<absolute>"; };
-		04A440F2160AE9D80055927E /* JSONKit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = JSONKit.mm; path = /Users/mac/Documents/DragonEye/Classes/JSONKit.mm; sourceTree = "<absolute>"; };
-		04A440F3160AE9D80055927E /* LevelEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelEnum.h; path = /Users/mac/Documents/DragonEye/Classes/LevelEnum.h; sourceTree = "<absolute>"; };
-		04A440FF160AE9F90055927E /* LinePoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LinePoints.h; path = /Users/mac/Documents/DragonEye/Classes/LinePoints.h; sourceTree = "<absolute>"; };
-		04A44100160AE9F90055927E /* LinePoints.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LinePoints.mm; path = /Users/mac/Documents/DragonEye/Classes/LinePoints.mm; sourceTree = "<absolute>"; };
-		04A44101160AE9F90055927E /* Loggers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Loggers.h; path = /Users/mac/Documents/DragonEye/Classes/Loggers.h; sourceTree = "<absolute>"; };
-		04A44102160AE9F90055927E /* MoveState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoveState.h; path = /Users/mac/Documents/DragonEye/Classes/MoveState.h; sourceTree = "<absolute>"; };
-		04A44103160AE9F90055927E /* MoveState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MoveState.m; path = /Users/mac/Documents/DragonEye/Classes/MoveState.m; sourceTree = "<absolute>"; };
-		04A44109160AEB5E0055927E /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = /Users/mac/Documents/DragonEye/Classes/Node.h; sourceTree = "<absolute>"; };
-		04A4410A160AEB5E0055927E /* Node.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Node.mm; path = /Users/mac/Documents/DragonEye/Classes/Node.mm; sourceTree = "<absolute>"; };
-		04A4410B160AEB5E0055927E /* NodeConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NodeConnector.h; path = /Users/mac/Documents/DragonEye/Classes/NodeConnector.h; sourceTree = "<absolute>"; };
-		04A4410C160AEB5E0055927E /* NodeConnector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = NodeConnector.mm; path = /Users/mac/Documents/DragonEye/Classes/NodeConnector.mm; sourceTree = "<absolute>"; };
-		04A4410D160AEB5E0055927E /* ObjectContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjectContainer.h; path = /Users/mac/Documents/DragonEye/Classes/ObjectContainer.h; sourceTree = "<absolute>"; };
-		04A4410E160AEB5F0055927E /* ObjectContainer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ObjectContainer.mm; path = /Users/mac/Documents/DragonEye/Classes/ObjectContainer.mm; sourceTree = "<absolute>"; };
-		04A4410F160AEB5F0055927E /* Overlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Overlay.h; path = /Users/mac/Documents/DragonEye/Classes/Overlay.h; sourceTree = "<absolute>"; };
-		04A44110160AEB5F0055927E /* Overlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Overlay.mm; path = /Users/mac/Documents/DragonEye/Classes/Overlay.mm; sourceTree = "<absolute>"; };
-		04A44111160AEB5F0055927E /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Particle.h; path = /Users/mac/Documents/DragonEye/Classes/Particle.h; sourceTree = "<absolute>"; };
-		04A44112160AEB5F0055927E /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Particle.mm; path = /Users/mac/Documents/DragonEye/Classes/Particle.mm; sourceTree = "<absolute>"; };
-		04A44113160AEB5F0055927E /* ParticleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleEffect.h; path = /Users/mac/Documents/DragonEye/Classes/ParticleEffect.h; sourceTree = "<absolute>"; };
-		04A44114160AEB600055927E /* ParticleEffectsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParticleEffectsManager.h; path = /Users/mac/Documents/DragonEye/Classes/ParticleEffectsManager.h; sourceTree = "<absolute>"; };
-		04A44115160AEB600055927E /* ParticleEffectsManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ParticleEffectsManager.mm; path = /Users/mac/Documents/DragonEye/Classes/ParticleEffectsManager.mm; sourceTree = "<absolute>"; };
-		04A44116160AEB600055927E /* PhysicsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhysicsEngine.h; path = /Users/mac/Documents/DragonEye/Classes/PhysicsEngine.h; sourceTree = "<absolute>"; };
-		04A44117160AEB600055927E /* PhysicsEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PhysicsEngine.mm; path = /Users/mac/Documents/DragonEye/Classes/PhysicsEngine.mm; sourceTree = "<absolute>"; };
-		04A44118160AEB600055927E /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = /Users/mac/Documents/DragonEye/Classes/Player.h; sourceTree = "<absolute>"; };
-		04A44119160AEB600055927E /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Player.mm; path = /Users/mac/Documents/DragonEye/Classes/Player.mm; sourceTree = "<absolute>"; };
-		04A4411A160AEB610055927E /* PlayerBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerBuilder.h; path = /Users/mac/Documents/DragonEye/Classes/PlayerBuilder.h; sourceTree = "<absolute>"; };
-		04A4411B160AEB610055927E /* PlayerBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PlayerBuilder.mm; path = /Users/mac/Documents/DragonEye/Classes/PlayerBuilder.mm; sourceTree = "<absolute>"; };
-		04A4411C160AEB610055927E /* PolarCoordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PolarCoordinates.h; path = /Users/mac/Documents/DragonEye/Classes/PolarCoordinates.h; sourceTree = "<absolute>"; };
-		04A4411D160AEB610055927E /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Program.h; path = /Users/mac/Documents/DragonEye/Classes/Program.h; sourceTree = "<absolute>"; };
-		04A4411E160AEB610055927E /* Program.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Program.mm; path = /Users/mac/Documents/DragonEye/Classes/Program.mm; sourceTree = "<absolute>"; };
-		04A4411F160AEB610055927E /* Prop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prop.h; path = /Users/mac/Documents/DragonEye/Classes/Prop.h; sourceTree = "<absolute>"; };
-		04A44120160AEB620055927E /* Prop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Prop.mm; path = /Users/mac/Documents/DragonEye/Classes/Prop.mm; sourceTree = "<absolute>"; };
-		04A44121160AEB620055927E /* PropState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropState.h; path = /Users/mac/Documents/DragonEye/Classes/PropState.h; sourceTree = "<absolute>"; };
-		04A44122160AEB620055927E /* PropState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PropState.mm; path = /Users/mac/Documents/DragonEye/Classes/PropState.mm; sourceTree = "<absolute>"; };
-		04A44123160AEB620055927E /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Queue.h; path = /Users/mac/Documents/DragonEye/Classes/Queue.h; sourceTree = "<absolute>"; };
-		04A44124160AEB630055927E /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Queue.m; path = /Users/mac/Documents/DragonEye/Classes/Queue.m; sourceTree = "<absolute>"; };
-		04A44125160AEB630055927E /* RunTimeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RunTimeWrapper.h; path = /Users/mac/Documents/DragonEye/Classes/RunTimeWrapper.h; sourceTree = "<absolute>"; };
-		04A44126160AEB630055927E /* RunTimeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RunTimeWrapper.m; path = /Users/mac/Documents/DragonEye/Classes/RunTimeWrapper.m; sourceTree = "<absolute>"; };
-		04A44127160AEB630055927E /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sprite.h; path = /Users/mac/Documents/DragonEye/Classes/Sprite.h; sourceTree = "<absolute>"; };
-		04A44128160AEB640055927E /* Sprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Sprite.mm; path = /Users/mac/Documents/DragonEye/Classes/Sprite.mm; sourceTree = "<absolute>"; };
-		04A44129160AEB640055927E /* SpriteSheetAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteSheetAnimator.h; path = /Users/mac/Documents/DragonEye/Classes/SpriteSheetAnimator.h; sourceTree = "<absolute>"; };
-		04A4412A160AEB640055927E /* SpritesheetAnimator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SpritesheetAnimator.mm; path = /Users/mac/Documents/DragonEye/Classes/SpritesheetAnimator.mm; sourceTree = "<absolute>"; };
-		04A4412B160AEB650055927E /* SpriteSheetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteSheetManager.h; path = /Users/mac/Documents/DragonEye/Classes/SpriteSheetManager.h; sourceTree = "<absolute>"; };
-		04A4412C160AEB650055927E /* SpriteSheetManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SpriteSheetManager.mm; path = /Users/mac/Documents/DragonEye/Classes/SpriteSheetManager.mm; sourceTree = "<absolute>"; };
-		04A4412D160AEB660055927E /* StandState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StandState.h; path = /Users/mac/Documents/DragonEye/Classes/StandState.h; sourceTree = "<absolute>"; };
-		04A4412E160AEB660055927E /* StandState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StandState.m; path = /Users/mac/Documents/DragonEye/Classes/StandState.m; sourceTree = "<absolute>"; };
-		04A4412F160AEB670055927E /* Typedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Typedefs.h; path = /Users/mac/Documents/DragonEye/Classes/Typedefs.h; sourceTree = "<absolute>"; };
-		04A44130160AEB670055927E /* WoundedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WoundedState.h; path = /Users/mac/Documents/DragonEye/Classes/WoundedState.h; sourceTree = "<absolute>"; };
-		04A44131160AEB680055927E /* WoundedState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WoundedState.m; path = /Users/mac/Documents/DragonEye/Classes/WoundedState.m; sourceTree = "<absolute>"; };
-		04A44145160AF0BD0055927E /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Background.h; path = /Users/mac/Documents/DragonEye/Classes/Background.h; sourceTree = "<absolute>"; };
-		04A44146160AF0BE0055927E /* Background.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Background.mm; path = /Users/mac/Documents/DragonEye/Classes/Background.mm; sourceTree = "<absolute>"; };
 		04AB1131160817C8006BCA2F /* DragonEye-Cocos2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DragonEye-Cocos2D.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AB1135160817C8006BCA2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		04AB1137160817C8006BCA2F /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -326,33 +250,8 @@
 		04AB1141160817C8006BCA2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		04AB1143160817C8006BCA2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		04AB1145160817C8006BCA2F /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		04AB1149160817C9006BCA2F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = /Users/mac/Documents/DragonEye/Default.png; sourceTree = "<absolute>"; };
-		04AB114B160817C9006BCA2F /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "/Users/mac/Documents/DragonEye/Default-Landscape~ipad.png"; sourceTree = "<absolute>"; };
-		04AB114D160817CA006BCA2F /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = /Users/mac/Documents/DragonEye/fps_images.png; sourceTree = "<absolute>"; };
-		04AB114F160817CA006BCA2F /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "/Users/mac/Documents/DragonEye/fps_images-hd.png"; sourceTree = "<absolute>"; };
-		04AB1151160817CA006BCA2F /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "/Users/mac/Documents/DragonEye/fps_images-ipadhd.png"; sourceTree = "<absolute>"; };
-		04AB1153160817CA006BCA2F /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "/Users/mac/Documents/DragonEye/Icon-72.png"; sourceTree = "<absolute>"; };
-		04AB1155160817CA006BCA2F /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "/Users/mac/Documents/DragonEye/Icon-Small-50.png"; sourceTree = "<absolute>"; };
-		04AB1157160817CA006BCA2F /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "/Users/mac/Documents/DragonEye/Icon-Small.png"; sourceTree = "<absolute>"; };
-		04AB1159160817CA006BCA2F /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "/Users/mac/Documents/DragonEye/Icon-Small@2x.png"; sourceTree = "<absolute>"; };
-		04AB115B160817CA006BCA2F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = /Users/mac/Documents/DragonEye/Icon.png; sourceTree = "<absolute>"; };
-		04AB115D160817CA006BCA2F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "/Users/mac/Documents/DragonEye/Icon@2x.png"; sourceTree = "<absolute>"; };
-		04AB115F160817CA006BCA2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = /Users/mac/Documents/DragonEye/Info.plist; sourceTree = "<absolute>"; };
-		04AB1160160817CB006BCA2F /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; name = iTunesArtwork; path = /Users/mac/Documents/DragonEye/iTunesArtwork; sourceTree = "<absolute>"; };
-		04AB132A160817DA006BCA2F /* grossini_dance_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = grossini_dance_atlas.png; path = /Users/mac/Documents/DragonEye/grossini_dance_atlas.png; sourceTree = "<absolute>"; };
-		04AB13351608296E006BCA2F /* lancelotSpSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lancelotSpSheet.png; path = /Users/mac/Documents/DragonEye/lancelotSpSheet.png; sourceTree = "<absolute>"; };
 		04BACB5B1611621200ED2792 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Classes/main.m; sourceTree = SOURCE_ROOT; };
 		04BACB5C1611621200ED2792 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Classes/Prefix.pch; sourceTree = SOURCE_ROOT; };
-		04D4CCA1160F9374006F7E23 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = /Users/mac/Documents/DragonEye/Classes/Camera.h; sourceTree = "<absolute>"; };
-		04D4CCA2160F9374006F7E23 /* Camera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Camera.mm; path = /Users/mac/Documents/DragonEye/Classes/Camera.mm; sourceTree = "<absolute>"; };
-		04D4CCA3160F9374006F7E23 /* SpriteSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteSheet.h; path = /Users/mac/Documents/DragonEye/Classes/SpriteSheet.h; sourceTree = "<absolute>"; };
-		04D4CCA4160F9374006F7E23 /* SpriteSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpriteSheet.m; path = /Users/mac/Documents/DragonEye/Classes/SpriteSheet.m; sourceTree = "<absolute>"; };
-		04D4CCA7160F938F006F7E23 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = /Users/mac/Documents/DragonEye/Classes/AppDelegate.h; sourceTree = "<absolute>"; };
-		04D4CCA8160F938F006F7E23 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = /Users/mac/Documents/DragonEye/Classes/AppDelegate.m; sourceTree = "<absolute>"; };
-		04D4CCA9160F938F006F7E23 /* HelloWorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelloWorldLayer.h; path = /Users/mac/Documents/DragonEye/Classes/HelloWorldLayer.h; sourceTree = "<absolute>"; };
-		04D4CCAA160F938F006F7E23 /* HelloWorldLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HelloWorldLayer.m; path = /Users/mac/Documents/DragonEye/Classes/HelloWorldLayer.m; sourceTree = "<absolute>"; };
-		04D4CCAB160F938F006F7E23 /* IntroLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroLayer.h; path = /Users/mac/Documents/DragonEye/Classes/IntroLayer.h; sourceTree = "<absolute>"; };
-		04D4CCAC160F938F006F7E23 /* IntroLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroLayer.m; path = /Users/mac/Documents/DragonEye/Classes/IntroLayer.m; sourceTree = "<absolute>"; };
 		04D4CCB916115A8E006F7E23 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		04D4CCBA16115A8E006F7E23 /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
 		04D4CCBB16115A8E006F7E23 /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_private.h; sourceTree = "<group>"; };
@@ -643,6 +542,140 @@
 		04D4CDE716115A8F006F7E23 /* LICENSE_cocos2d.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_cocos2d.txt; sourceTree = "<group>"; };
 		04D4CDE816115A8F006F7E23 /* LICENSE_CocosDenshion.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_CocosDenshion.txt; sourceTree = "<group>"; };
 		04D4CDE916115A8F006F7E23 /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_Kazmath.txt; sourceTree = "<group>"; };
+		305EC7F71654C71D00D45881 /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
+		305EC7F81654C71D00D45881 /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
+		305EC7FA1654C71D00D45881 /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
+		305EC7FB1654C71D00D45881 /* HUDLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDLayer.m; sourceTree = "<group>"; };
+		305EC7FC1654C71D00D45881 /* IntroLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
+		305EC7FD1654C71D00D45881 /* IntroLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		305EC7FE1654C71D00D45881 /* OverlayLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayLayer.h; sourceTree = "<group>"; };
+		305EC7FF1654C71D00D45881 /* OverlayLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverlayLayer.m; sourceTree = "<group>"; };
+		305EC8011654C71D00D45881 /* AttackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackButton.h; sourceTree = "<group>"; };
+		305EC8021654C71D00D45881 /* AttackButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AttackButton.mm; sourceTree = "<group>"; };
+		305EC8031654C71D00D45881 /* DpadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DpadButton.h; sourceTree = "<group>"; };
+		305EC8041654C71D00D45881 /* DpadButton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DpadButton.mm; sourceTree = "<group>"; };
+		305EC8051654C71D00D45881 /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gauge.h; sourceTree = "<group>"; };
+		305EC8061654C71D00D45881 /* Gauge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Gauge.m; sourceTree = "<group>"; };
+		305EC8071654C71D00D45881 /* HUDControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDControl.h; sourceTree = "<group>"; };
+		305EC8081654C71D00D45881 /* HUDControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDControl.m; sourceTree = "<group>"; };
+		305EC8091654C71D00D45881 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		305EC80A1654C71D00D45881 /* Node.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Node.mm; sourceTree = "<group>"; };
+		305EC80B1654C71D00D45881 /* Overlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Overlay.h; sourceTree = "<group>"; };
+		305EC80C1654C71D00D45881 /* Overlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Overlay.mm; sourceTree = "<group>"; };
+		305EC80D1654C71D00D45881 /* WorldLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldLayer.h; sourceTree = "<group>"; };
+		305EC80E1654C71D00D45881 /* WorldLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldLayer.m; sourceTree = "<group>"; };
+		305EC8101654C71D00D45881 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
+		305EC8111654C71D00D45881 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
+		305EC8121654C71D00D45881 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		305EC8151654C71D00D45881 /* NSDictionaryExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryExtensions.h; sourceTree = "<group>"; };
+		305EC8161654C71D00D45881 /* NSDictionaryExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryExtensions.m; sourceTree = "<group>"; };
+		305EC8171654C71D00D45881 /* LevelEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelEnum.h; sourceTree = "<group>"; };
+		305EC8181654C71D00D45881 /* Loggers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loggers.h; sourceTree = "<group>"; };
+		305EC8191654C71D00D45881 /* MyMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMath.h; sourceTree = "<group>"; };
+		305EC81A1654C71D00D45881 /* MyMath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyMath.mm; sourceTree = "<group>"; };
+		305EC81B1654C71D00D45881 /* NSPropertyUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPropertyUtil.h; sourceTree = "<group>"; };
+		305EC81C1654C71D00D45881 /* NSPropertyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPropertyUtil.m; sourceTree = "<group>"; };
+		305EC81D1654C71D00D45881 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		305EC81E1654C71D00D45881 /* Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Queue.m; sourceTree = "<group>"; };
+		305EC81F1654C71D00D45881 /* RunTimeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunTimeWrapper.h; sourceTree = "<group>"; };
+		305EC8201654C71D00D45881 /* RunTimeWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunTimeWrapper.m; sourceTree = "<group>"; };
+		305EC8211654C71D00D45881 /* Typedefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Typedefs.h; sourceTree = "<group>"; };
+		305EC8221654C71D00D45881 /* Typedefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Typedefs.m; sourceTree = "<group>"; };
+		305EC8241654C71D00D45881 /* PhysicsEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsEngine.h; sourceTree = "<group>"; };
+		305EC8251654C71D00D45881 /* PhysicsEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsEngine.mm; sourceTree = "<group>"; };
+		305EC8281654C71D00D45881 /* AnimatorConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatorConstants.h; sourceTree = "<group>"; };
+		305EC8291654C71D00D45881 /* AnimatorConstants.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnimatorConstants.mm; sourceTree = "<group>"; };
+		305EC82A1654C71D00D45881 /* FreezeModeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreezeModeManager.h; sourceTree = "<group>"; };
+		305EC82B1654C71D00D45881 /* FreezeModeManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FreezeModeManager.mm; sourceTree = "<group>"; };
+		305EC82D1654C71D00D45881 /* CCBlade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBlade.h; sourceTree = "<group>"; };
+		305EC82E1654C71D00D45881 /* CCBlade.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCBlade.mm; sourceTree = "<group>"; };
+		305EC82F1654C71D00D45881 /* ParticleInvoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleInvoker.h; sourceTree = "<group>"; };
+		305EC8301654C71D00D45881 /* ParticleInvoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParticleInvoker.m; sourceTree = "<group>"; };
+		305EC8311654C71D00D45881 /* SpriteSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteSheet.h; sourceTree = "<group>"; };
+		305EC8321654C71D00D45881 /* SpriteSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteSheet.m; sourceTree = "<group>"; };
+		305EC8331654C71D00D45881 /* SpriteSheetAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteSheetAnimator.h; sourceTree = "<group>"; };
+		305EC8341654C71D00D45881 /* SpriteSheetAnimator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpriteSheetAnimator.mm; sourceTree = "<group>"; };
+		305EC8351654C71D00D45881 /* SpriteSheetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteSheetManager.h; sourceTree = "<group>"; };
+		305EC8361654C71D00D45881 /* SpriteSheetManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SpriteSheetManager.mm; sourceTree = "<group>"; };
+		305EC8381654C71D00D45881 /* CoordinateSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateSystem.h; sourceTree = "<group>"; };
+		305EC8391654C71D00D45881 /* CoordinateSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CoordinateSystem.mm; sourceTree = "<group>"; };
+		305EC83A1654C71D00D45881 /* PolarCoordinates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolarCoordinates.h; sourceTree = "<group>"; };
+		305EC83D1654C71D00D45881 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		305EC83E1654C71D00D45881 /* Character.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Character.mm; sourceTree = "<group>"; };
+		305EC83F1654C71D00D45881 /* CharacterBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterBuilder.h; sourceTree = "<group>"; };
+		305EC8401654C71D00D45881 /* CharacterBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CharacterBuilder.mm; sourceTree = "<group>"; };
+		305EC8411654C71D00D45881 /* Collidable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collidable.h; sourceTree = "<group>"; };
+		305EC8421654C71D00D45881 /* Drawable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawable.h; sourceTree = "<group>"; };
+		305EC8431654C71D00D45881 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		305EC8441654C71D00D45881 /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		305EC8451654C71D00D45881 /* EnemyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyBuilder.h; sourceTree = "<group>"; };
+		305EC8461654C71D00D45881 /* EnemyBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyBuilder.m; sourceTree = "<group>"; };
+		305EC8471654C71D00D45881 /* ObjectContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectContainer.h; sourceTree = "<group>"; };
+		305EC8481654C71D00D45881 /* ObjectContainer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectContainer.mm; sourceTree = "<group>"; };
+		305EC8491654C71D00D45881 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		305EC84A1654C71D00D45881 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
+		305EC84B1654C71D00D45881 /* PlayerBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerBuilder.h; sourceTree = "<group>"; };
+		305EC84C1654C71D00D45881 /* PlayerBuilder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PlayerBuilder.mm; sourceTree = "<group>"; };
+		305EC84D1654C71D00D45881 /* Prop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prop.h; sourceTree = "<group>"; };
+		305EC84E1654C71D00D45881 /* Prop.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Prop.mm; sourceTree = "<group>"; };
+		305EC8501654C71D00D45881 /* AttackState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttackState.h; sourceTree = "<group>"; };
+		305EC8511654C71D00D45881 /* AttackState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AttackState.mm; sourceTree = "<group>"; };
+		305EC8521654C71D00D45881 /* CharacterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterState.h; sourceTree = "<group>"; };
+		305EC8531654C71D00D45881 /* ChaseState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaseState.h; sourceTree = "<group>"; };
+		305EC8541654C71D00D45881 /* ChaseState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaseState.m; sourceTree = "<group>"; };
+		305EC8551654C71D00D45881 /* ComboState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboState.h; sourceTree = "<group>"; };
+		305EC8561654C71D00D45881 /* ComboState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboState.m; sourceTree = "<group>"; };
+		305EC8571654C71D00D45881 /* FleeState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FleeState.h; sourceTree = "<group>"; };
+		305EC8581654C71D00D45881 /* FleeState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FleeState.m; sourceTree = "<group>"; };
+		305EC8591654C71D00D45881 /* MoveState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveState.h; sourceTree = "<group>"; };
+		305EC85A1654C71D00D45881 /* MoveState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveState.m; sourceTree = "<group>"; };
+		305EC85B1654C71D00D45881 /* PropState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropState.h; sourceTree = "<group>"; };
+		305EC85C1654C71D00D45881 /* PropState.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PropState.mm; sourceTree = "<group>"; };
+		305EC85D1654C71D00D45881 /* StandState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandState.h; sourceTree = "<group>"; };
+		305EC85E1654C71D00D45881 /* StandState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandState.m; sourceTree = "<group>"; };
+		305EC85F1654C71D00D45881 /* StateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StateMachine.h; sourceTree = "<group>"; };
+		305EC8601654C71D00D45881 /* StateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StateMachine.m; sourceTree = "<group>"; };
+		305EC8611654C71D00D45881 /* WoundedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WoundedState.h; sourceTree = "<group>"; };
+		305EC8621654C71D00D45881 /* WoundedState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WoundedState.m; sourceTree = "<group>"; };
+		305EC8631654C71D00D45881 /* MacroHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroHelpers.h; path = Classes/MacroHelpers.h; sourceTree = SOURCE_ROOT; };
+		305EC8641654C71D00D45881 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		305EC8941654C80D00D45881 /* attackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attackButton.png; sourceTree = "<group>"; };
+		305EC8951654C80D00D45881 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		305EC8961654C80D00D45881 /* cabban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabban.png; sourceTree = "<group>"; };
+		305EC8971654C80D00D45881 /* cabban1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabban1.png; sourceTree = "<group>"; };
+		305EC8981654C80D00D45881 /* cabban2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cabban2.png; sourceTree = "<group>"; };
+		305EC8991654C80D00D45881 /* circlespritesheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circlespritesheet.png; sourceTree = "<group>"; };
+		305EC89A1654C80D00D45881 /* combos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = combos.plist; sourceTree = "<group>"; };
+		305EC89B1654C80D00D45881 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		305EC89C1654C80D00D45881 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		305EC89D1654C80D00D45881 /* dpadNintendo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dpadNintendo.png; sourceTree = "<group>"; };
+		305EC89E1654C80D00D45881 /* DragonEye-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DragonEye-Info.plist"; sourceTree = "<group>"; };
+		305EC89F1654C80D00D45881 /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		305EC8A01654C80D00D45881 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-hd.png"; sourceTree = "<group>"; };
+		305EC8A11654C80D00D45881 /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fps_images-ipadhd.png"; sourceTree = "<group>"; };
+		305EC8A21654C80D00D45881 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fps_images.png; sourceTree = "<group>"; };
+		305EC8A31654C80D00D45881 /* grossini_dance_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grossini_dance_atlas.png; sourceTree = "<group>"; };
+		305EC8A41654C80D00D45881 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		305EC8A51654C80D00D45881 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		305EC8A61654C80D00D45881 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		305EC8A71654C80D00D45881 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		305EC8A81654C80D00D45881 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		305EC8A91654C80D00D45881 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		305EC8AA1654C80D00D45881 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		305EC8AB1654C80D00D45881 /* lancelotSpSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lancelotSpSheet.png; sourceTree = "<group>"; };
+		305EC8AC1654C80D00D45881 /* level0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = level0.plist; sourceTree = "<group>"; };
+		305EC8AD1654C80D00D45881 /* megamanSpSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = megamanSpSheet.png; sourceTree = "<group>"; };
+		305EC8AE1654C80D00D45881 /* node.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = node.png; sourceTree = "<group>"; };
+		305EC8AF1654C80D00D45881 /* nodeConnector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nodeConnector.png; sourceTree = "<group>"; };
+		305EC8B01654C80D00D45881 /* slash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slash.png; sourceTree = "<group>"; };
+		305EC8B21654C80D00D45881 /* swordSwing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = swordSwing.wav; sourceTree = "<group>"; };
+		305EC8B31654C80D00D45881 /* spriteSheets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = spriteSheets.plist; sourceTree = "<group>"; };
+		305EC8B41654C80D00D45881 /* streak1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "streak1-hd.png"; sourceTree = "<group>"; };
+		305EC8B51654C80D00D45881 /* streak1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak1.png; sourceTree = "<group>"; };
+		305EC8B61654C80D00D45881 /* streak2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "streak2-hd.png"; sourceTree = "<group>"; };
+		305EC8B71654C80D00D45881 /* streak2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak2.png; sourceTree = "<group>"; };
+		305EC8B81654C80D00D45881 /* streak3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "streak3-hd.png"; sourceTree = "<group>"; };
+		305EC8B91654C80D00D45881 /* streak3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -668,9 +701,9 @@
 		04AB1126160817C1006BCA2F = {
 			isa = PBXGroup;
 			children = (
+				305EC8931654C80D00D45881 /* Resources */,
 				04AB13EC16083E56006BCA2F /* Classes */,
 				04D4CCB516115A8E006F7E23 /* libs */,
-				04AB1148160817C9006BCA2F /* Resources */,
 				04AB1134160817C8006BCA2F /* Frameworks */,
 				04AB1132160817C8006BCA2F /* Products */,
 			);
@@ -700,138 +733,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		04AB1148160817C9006BCA2F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				04847370160C1D1B0042965F /* megamanSpSheet.png */,
-				04847371160C1D1B0042965F /* node.png */,
-				04847372160C1D1B0042965F /* spriteSheets.json */,
-				0483E1BA160D6AF100203CB4 /* spriteSheets.plist */,
-				0484736D160C1A990042965F /* level0.json */,
-				04AB13351608296E006BCA2F /* lancelotSpSheet.png */,
-				04AB1149160817C9006BCA2F /* Default.png */,
-				04AB114B160817C9006BCA2F /* Default-Landscape~ipad.png */,
-				04AB114D160817CA006BCA2F /* fps_images.png */,
-				04AB114F160817CA006BCA2F /* fps_images-hd.png */,
-				04AB1151160817CA006BCA2F /* fps_images-ipadhd.png */,
-				04AB1153160817CA006BCA2F /* Icon-72.png */,
-				04AB1155160817CA006BCA2F /* Icon-Small-50.png */,
-				04AB1157160817CA006BCA2F /* Icon-Small.png */,
-				04AB1159160817CA006BCA2F /* Icon-Small@2x.png */,
-				04AB115B160817CA006BCA2F /* Icon.png */,
-				04AB115D160817CA006BCA2F /* Icon@2x.png */,
-				04AB115F160817CA006BCA2F /* Info.plist */,
-				04AB1160160817CB006BCA2F /* iTunesArtwork */,
-				04AB132A160817DA006BCA2F /* grossini_dance_atlas.png */,
-			);
-			name = Resources;
-			path = "DragonEye-Cocos2D";
-			sourceTree = "<group>";
-		};
 		04AB13EC16083E56006BCA2F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				305EC7F61654C71D00D45881 /* Layers */,
+				305EC80F1654C71D00D45881 /* Scenes */,
+				305EC8121654C71D00D45881 /* AppDelegate.m */,
+				305EC8131654C71D00D45881 /* Utilities */,
+				305EC8231654C71D00D45881 /* Physics */,
+				305EC8261654C71D00D45881 /* Graphics */,
+				305EC83B1654C71D00D45881 /* GameLogic */,
+				305EC8631654C71D00D45881 /* MacroHelpers.h */,
+				305EC8641654C71D00D45881 /* AppDelegate.h */,
 				04BACB5B1611621200ED2792 /* main.m */,
 				04BACB5C1611621200ED2792 /* Prefix.pch */,
-				04D4CCA7160F938F006F7E23 /* AppDelegate.h */,
-				04D4CCA8160F938F006F7E23 /* AppDelegate.m */,
-				04D4CCA9160F938F006F7E23 /* HelloWorldLayer.h */,
-				04D4CCAA160F938F006F7E23 /* HelloWorldLayer.m */,
-				04D4CCAB160F938F006F7E23 /* IntroLayer.h */,
-				04D4CCAC160F938F006F7E23 /* IntroLayer.m */,
-				04D4CCA1160F9374006F7E23 /* Camera.h */,
-				04D4CCA2160F9374006F7E23 /* Camera.mm */,
-				04D4CCA3160F9374006F7E23 /* SpriteSheet.h */,
-				04D4CCA4160F9374006F7E23 /* SpriteSheet.m */,
-				04A44145160AF0BD0055927E /* Background.h */,
-				04A44146160AF0BE0055927E /* Background.mm */,
-				04A44109160AEB5E0055927E /* Node.h */,
-				04A4410A160AEB5E0055927E /* Node.mm */,
-				04A4410B160AEB5E0055927E /* NodeConnector.h */,
-				04A4410C160AEB5E0055927E /* NodeConnector.mm */,
-				04A4410D160AEB5E0055927E /* ObjectContainer.h */,
-				04A4410E160AEB5F0055927E /* ObjectContainer.mm */,
-				04A4410F160AEB5F0055927E /* Overlay.h */,
-				04A44110160AEB5F0055927E /* Overlay.mm */,
-				04A44111160AEB5F0055927E /* Particle.h */,
-				04A44112160AEB5F0055927E /* Particle.mm */,
-				04A44113160AEB5F0055927E /* ParticleEffect.h */,
-				04A44114160AEB600055927E /* ParticleEffectsManager.h */,
-				04A44115160AEB600055927E /* ParticleEffectsManager.mm */,
-				04A44116160AEB600055927E /* PhysicsEngine.h */,
-				04A44117160AEB600055927E /* PhysicsEngine.mm */,
-				04A44118160AEB600055927E /* Player.h */,
-				04A44119160AEB600055927E /* Player.mm */,
-				04A4411A160AEB610055927E /* PlayerBuilder.h */,
-				04A4411B160AEB610055927E /* PlayerBuilder.mm */,
-				04A4411C160AEB610055927E /* PolarCoordinates.h */,
-				04A4411D160AEB610055927E /* Program.h */,
-				04A4411E160AEB610055927E /* Program.mm */,
-				04A4411F160AEB610055927E /* Prop.h */,
-				04A44120160AEB620055927E /* Prop.mm */,
-				04A44121160AEB620055927E /* PropState.h */,
-				04A44122160AEB620055927E /* PropState.mm */,
-				04A44123160AEB620055927E /* Queue.h */,
-				04A44124160AEB630055927E /* Queue.m */,
-				04A44125160AEB630055927E /* RunTimeWrapper.h */,
-				04A44126160AEB630055927E /* RunTimeWrapper.m */,
-				04A44127160AEB630055927E /* Sprite.h */,
-				04A44128160AEB640055927E /* Sprite.mm */,
-				04A44129160AEB640055927E /* SpriteSheetAnimator.h */,
-				04A4412A160AEB640055927E /* SpritesheetAnimator.mm */,
-				04A4412B160AEB650055927E /* SpriteSheetManager.h */,
-				04A4412C160AEB650055927E /* SpriteSheetManager.mm */,
-				04A4412D160AEB660055927E /* StandState.h */,
-				04A4412E160AEB660055927E /* StandState.m */,
-				04A4412F160AEB670055927E /* Typedefs.h */,
-				04A44130160AEB670055927E /* WoundedState.h */,
-				04A44131160AEB680055927E /* WoundedState.m */,
-				04A440FF160AE9F90055927E /* LinePoints.h */,
-				04A44100160AE9F90055927E /* LinePoints.mm */,
-				04A44101160AE9F90055927E /* Loggers.h */,
-				04A44102160AE9F90055927E /* MoveState.h */,
-				04A44103160AE9F90055927E /* MoveState.m */,
-				04A440DC160AE9D50055927E /* DpadButton.h */,
-				04A440DD160AE9D50055927E /* DpadButton.mm */,
-				04A440E0160AE9D50055927E /* Drawable.h */,
-				04A440E3160AE9D60055927E /* Enemy.h */,
-				04A440E4160AE9D60055927E /* Enemy.m */,
-				04A440E5160AE9D60055927E /* EnemyBuilder.h */,
-				04A440E6160AE9D60055927E /* EnemyBuilder.m */,
-				04A440E7160AE9D60055927E /* FrameBasedTimer.h */,
-				04A440E8160AE9D60055927E /* FrameBasedTimer.mm */,
-				04A440E9160AE9D70055927E /* FreezeMode.h */,
-				04A440EA160AE9D70055927E /* FreezeMode.mm */,
-				04A440EB160AE9D70055927E /* FreezeModeManager.h */,
-				04A440EC160AE9D70055927E /* FreezeModeManager.mm */,
-				04A440EF160AE9D70055927E /* Gauge.h */,
-				04A440F0160AE9D70055927E /* Gauge.m */,
-				04A440F1160AE9D70055927E /* JSONKit.h */,
-				04A440F2160AE9D80055927E /* JSONKit.mm */,
-				04A440F3160AE9D80055927E /* LevelEnum.h */,
-				04A440C1160AE9900055927E /* AnimationTimer.h */,
-				04A440C2160AE9910055927E /* AnimatorConstants.h */,
-				04A440C3160AE9910055927E /* AnimatorConstants.mm */,
-				04A440C4160AE9910055927E /* AttackButton.h */,
-				04A440C5160AE9910055927E /* AttackButton.mm */,
-				04A440C6160AE9910055927E /* AttackState.h */,
-				04A440C7160AE9910055927E /* AttackState.mm */,
-				04A440CA160AE9920055927E /* BezierCurve.h */,
-				04A440CB160AE9920055927E /* BezierCurve.mm */,
-				04A440CC160AE9920055927E /* CharacterBuilder.h */,
-				04A440CD160AE9920055927E /* CharacterBuilder.mm */,
-				04A440CE160AE9920055927E /* CharacterState.h */,
-				04A440CF160AE9920055927E /* Collidable.h */,
-				04A440D0160AE9920055927E /* ComboState.h */,
-				04A440D1160AE9930055927E /* ComboState.m */,
-				04A440D2160AE9930055927E /* CoordinateSystem.h */,
-				04A440D3160AE9930055927E /* CoordinateSystem.mm */,
-				04A440BE160AE3210055927E /* LevelLoader.h */,
-				04A440BF160AE3210055927E /* LevelLoader.mm */,
-				04A440B8160ADA300055927E /* MyMath.h */,
-				04A440B9160ADA300055927E /* MyMath.mm */,
-				04A440B2160AD6EE0055927E /* Character.h */,
-				04A440B3160AD6EE0055927E /* Character.mm */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -1278,6 +1193,256 @@
 			path = GL;
 			sourceTree = "<group>";
 		};
+		305EC7F61654C71D00D45881 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				305EC7F71654C71D00D45881 /* BackgroundLayer.h */,
+				305EC7F81654C71D00D45881 /* BackgroundLayer.m */,
+				305EC7FA1654C71D00D45881 /* HUDLayer.h */,
+				305EC7FB1654C71D00D45881 /* HUDLayer.m */,
+				305EC7FC1654C71D00D45881 /* IntroLayer.h */,
+				305EC7FD1654C71D00D45881 /* IntroLayer.m */,
+				305EC7FE1654C71D00D45881 /* OverlayLayer.h */,
+				305EC7FF1654C71D00D45881 /* OverlayLayer.m */,
+				305EC8001654C71D00D45881 /* Overlays */,
+				305EC80D1654C71D00D45881 /* WorldLayer.h */,
+				305EC80E1654C71D00D45881 /* WorldLayer.m */,
+			);
+			name = Layers;
+			path = Classes/Layers;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC8001654C71D00D45881 /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8011654C71D00D45881 /* AttackButton.h */,
+				305EC8021654C71D00D45881 /* AttackButton.mm */,
+				305EC8031654C71D00D45881 /* DpadButton.h */,
+				305EC8041654C71D00D45881 /* DpadButton.mm */,
+				305EC8051654C71D00D45881 /* Gauge.h */,
+				305EC8061654C71D00D45881 /* Gauge.m */,
+				305EC8071654C71D00D45881 /* HUDControl.h */,
+				305EC8081654C71D00D45881 /* HUDControl.m */,
+				305EC8091654C71D00D45881 /* Node.h */,
+				305EC80A1654C71D00D45881 /* Node.mm */,
+				305EC80B1654C71D00D45881 /* Overlay.h */,
+				305EC80C1654C71D00D45881 /* Overlay.mm */,
+			);
+			path = Overlays;
+			sourceTree = "<group>";
+		};
+		305EC80F1654C71D00D45881 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8101654C71D00D45881 /* Level1.h */,
+				305EC8111654C71D00D45881 /* Level1.m */,
+			);
+			name = Scenes;
+			path = Classes/Scenes;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC8131654C71D00D45881 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8141654C71D00D45881 /* Categories */,
+				305EC8171654C71D00D45881 /* LevelEnum.h */,
+				305EC8181654C71D00D45881 /* Loggers.h */,
+				305EC8191654C71D00D45881 /* MyMath.h */,
+				305EC81A1654C71D00D45881 /* MyMath.mm */,
+				305EC81B1654C71D00D45881 /* NSPropertyUtil.h */,
+				305EC81C1654C71D00D45881 /* NSPropertyUtil.m */,
+				305EC81D1654C71D00D45881 /* Queue.h */,
+				305EC81E1654C71D00D45881 /* Queue.m */,
+				305EC81F1654C71D00D45881 /* RunTimeWrapper.h */,
+				305EC8201654C71D00D45881 /* RunTimeWrapper.m */,
+				305EC8211654C71D00D45881 /* Typedefs.h */,
+				305EC8221654C71D00D45881 /* Typedefs.m */,
+			);
+			name = Utilities;
+			path = Classes/Utilities;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC8141654C71D00D45881 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8151654C71D00D45881 /* NSDictionaryExtensions.h */,
+				305EC8161654C71D00D45881 /* NSDictionaryExtensions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		305EC8231654C71D00D45881 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8241654C71D00D45881 /* PhysicsEngine.h */,
+				305EC8251654C71D00D45881 /* PhysicsEngine.mm */,
+			);
+			name = Physics;
+			path = Classes/Physics;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC8261654C71D00D45881 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8271654C71D00D45881 /* Constants */,
+				305EC82A1654C71D00D45881 /* FreezeModeManager.h */,
+				305EC82B1654C71D00D45881 /* FreezeModeManager.mm */,
+				305EC82C1654C71D00D45881 /* ParticleEffects */,
+				305EC8311654C71D00D45881 /* SpriteSheet.h */,
+				305EC8321654C71D00D45881 /* SpriteSheet.m */,
+				305EC8331654C71D00D45881 /* SpriteSheetAnimator.h */,
+				305EC8341654C71D00D45881 /* SpriteSheetAnimator.mm */,
+				305EC8351654C71D00D45881 /* SpriteSheetManager.h */,
+				305EC8361654C71D00D45881 /* SpriteSheetManager.mm */,
+				305EC8371654C71D00D45881 /* Utilities */,
+			);
+			name = Graphics;
+			path = Classes/Graphics;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC8271654C71D00D45881 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8281654C71D00D45881 /* AnimatorConstants.h */,
+				305EC8291654C71D00D45881 /* AnimatorConstants.mm */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		305EC82C1654C71D00D45881 /* ParticleEffects */ = {
+			isa = PBXGroup;
+			children = (
+				305EC82D1654C71D00D45881 /* CCBlade.h */,
+				305EC82E1654C71D00D45881 /* CCBlade.mm */,
+				305EC82F1654C71D00D45881 /* ParticleInvoker.h */,
+				305EC8301654C71D00D45881 /* ParticleInvoker.m */,
+			);
+			path = ParticleEffects;
+			sourceTree = "<group>";
+		};
+		305EC8371654C71D00D45881 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8381654C71D00D45881 /* CoordinateSystem.h */,
+				305EC8391654C71D00D45881 /* CoordinateSystem.mm */,
+				305EC83A1654C71D00D45881 /* PolarCoordinates.h */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		305EC83B1654C71D00D45881 /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				305EC83C1654C71D00D45881 /* Props */,
+				305EC84F1654C71D00D45881 /* States */,
+			);
+			name = GameLogic;
+			path = Classes/GameLogic;
+			sourceTree = SOURCE_ROOT;
+		};
+		305EC83C1654C71D00D45881 /* Props */ = {
+			isa = PBXGroup;
+			children = (
+				305EC83D1654C71D00D45881 /* Character.h */,
+				305EC83E1654C71D00D45881 /* Character.mm */,
+				305EC83F1654C71D00D45881 /* CharacterBuilder.h */,
+				305EC8401654C71D00D45881 /* CharacterBuilder.mm */,
+				305EC8411654C71D00D45881 /* Collidable.h */,
+				305EC8421654C71D00D45881 /* Drawable.h */,
+				305EC8431654C71D00D45881 /* Enemy.h */,
+				305EC8441654C71D00D45881 /* Enemy.m */,
+				305EC8451654C71D00D45881 /* EnemyBuilder.h */,
+				305EC8461654C71D00D45881 /* EnemyBuilder.m */,
+				305EC8471654C71D00D45881 /* ObjectContainer.h */,
+				305EC8481654C71D00D45881 /* ObjectContainer.mm */,
+				305EC8491654C71D00D45881 /* Player.h */,
+				305EC84A1654C71D00D45881 /* Player.mm */,
+				305EC84B1654C71D00D45881 /* PlayerBuilder.h */,
+				305EC84C1654C71D00D45881 /* PlayerBuilder.mm */,
+				305EC84D1654C71D00D45881 /* Prop.h */,
+				305EC84E1654C71D00D45881 /* Prop.mm */,
+			);
+			path = Props;
+			sourceTree = "<group>";
+		};
+		305EC84F1654C71D00D45881 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8501654C71D00D45881 /* AttackState.h */,
+				305EC8511654C71D00D45881 /* AttackState.mm */,
+				305EC8521654C71D00D45881 /* CharacterState.h */,
+				305EC8531654C71D00D45881 /* ChaseState.h */,
+				305EC8541654C71D00D45881 /* ChaseState.m */,
+				305EC8551654C71D00D45881 /* ComboState.h */,
+				305EC8561654C71D00D45881 /* ComboState.m */,
+				305EC8571654C71D00D45881 /* FleeState.h */,
+				305EC8581654C71D00D45881 /* FleeState.m */,
+				305EC8591654C71D00D45881 /* MoveState.h */,
+				305EC85A1654C71D00D45881 /* MoveState.m */,
+				305EC85B1654C71D00D45881 /* PropState.h */,
+				305EC85C1654C71D00D45881 /* PropState.mm */,
+				305EC85D1654C71D00D45881 /* StandState.h */,
+				305EC85E1654C71D00D45881 /* StandState.m */,
+				305EC85F1654C71D00D45881 /* StateMachine.h */,
+				305EC8601654C71D00D45881 /* StateMachine.m */,
+				305EC8611654C71D00D45881 /* WoundedState.h */,
+				305EC8621654C71D00D45881 /* WoundedState.m */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		305EC8931654C80D00D45881 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8941654C80D00D45881 /* attackButton.png */,
+				305EC8951654C80D00D45881 /* background.jpg */,
+				305EC8961654C80D00D45881 /* cabban.png */,
+				305EC8971654C80D00D45881 /* cabban1.png */,
+				305EC8981654C80D00D45881 /* cabban2.png */,
+				305EC8991654C80D00D45881 /* circlespritesheet.png */,
+				305EC89A1654C80D00D45881 /* combos.plist */,
+				305EC89B1654C80D00D45881 /* Default-Landscape~ipad.png */,
+				305EC89C1654C80D00D45881 /* Default.png */,
+				305EC89D1654C80D00D45881 /* dpadNintendo.png */,
+				305EC89E1654C80D00D45881 /* DragonEye-Info.plist */,
+				305EC89F1654C80D00D45881 /* fire.png */,
+				305EC8A01654C80D00D45881 /* fps_images-hd.png */,
+				305EC8A11654C80D00D45881 /* fps_images-ipadhd.png */,
+				305EC8A21654C80D00D45881 /* fps_images.png */,
+				305EC8A31654C80D00D45881 /* grossini_dance_atlas.png */,
+				305EC8A41654C80D00D45881 /* Icon-72.png */,
+				305EC8A51654C80D00D45881 /* Icon-Small-50.png */,
+				305EC8A61654C80D00D45881 /* Icon-Small.png */,
+				305EC8A71654C80D00D45881 /* Icon-Small@2x.png */,
+				305EC8A81654C80D00D45881 /* Icon.png */,
+				305EC8A91654C80D00D45881 /* Icon@2x.png */,
+				305EC8AA1654C80D00D45881 /* iTunesArtwork */,
+				305EC8AB1654C80D00D45881 /* lancelotSpSheet.png */,
+				305EC8AC1654C80D00D45881 /* level0.plist */,
+				305EC8AD1654C80D00D45881 /* megamanSpSheet.png */,
+				305EC8AE1654C80D00D45881 /* node.png */,
+				305EC8AF1654C80D00D45881 /* nodeConnector.png */,
+				305EC8B01654C80D00D45881 /* slash.png */,
+				305EC8B11654C80D00D45881 /* Sounds */,
+				305EC8B31654C80D00D45881 /* spriteSheets.plist */,
+				305EC8B41654C80D00D45881 /* streak1-hd.png */,
+				305EC8B51654C80D00D45881 /* streak1.png */,
+				305EC8B61654C80D00D45881 /* streak2-hd.png */,
+				305EC8B71654C80D00D45881 /* streak2.png */,
+				305EC8B81654C80D00D45881 /* streak3-hd.png */,
+				305EC8B91654C80D00D45881 /* streak3.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		305EC8B11654C80D00D45881 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				305EC8B21654C80D00D45881 /* swordSwing.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1328,25 +1493,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AB114A160817C9006BCA2F /* Default.png in Resources */,
-				04AB114C160817C9006BCA2F /* Default-Landscape~ipad.png in Resources */,
-				04AB114E160817CA006BCA2F /* fps_images.png in Resources */,
-				04AB1150160817CA006BCA2F /* fps_images-hd.png in Resources */,
-				04AB1152160817CA006BCA2F /* fps_images-ipadhd.png in Resources */,
-				04AB1154160817CA006BCA2F /* Icon-72.png in Resources */,
-				04AB1156160817CA006BCA2F /* Icon-Small-50.png in Resources */,
-				04AB1158160817CA006BCA2F /* Icon-Small.png in Resources */,
-				04AB115A160817CA006BCA2F /* Icon-Small@2x.png in Resources */,
-				04AB115C160817CA006BCA2F /* Icon.png in Resources */,
-				04AB115E160817CA006BCA2F /* Icon@2x.png in Resources */,
-				04AB1161160817CB006BCA2F /* iTunesArtwork in Resources */,
-				04AB132B160817DA006BCA2F /* grossini_dance_atlas.png in Resources */,
-				04AB13361608296E006BCA2F /* lancelotSpSheet.png in Resources */,
-				0484736E160C1A990042965F /* level0.json in Resources */,
-				04847373160C1D1B0042965F /* megamanSpSheet.png in Resources */,
-				04847374160C1D1B0042965F /* node.png in Resources */,
-				04847375160C1D1B0042965F /* spriteSheets.json in Resources */,
-				0483E1BB160D6AF100203CB4 /* spriteSheets.plist in Resources */,
 				04D4CDEA16115A8F006F7E23 /* LICENSE.txt in Resources */,
 				04D4CDEB16115A8F006F7E23 /* README.textile in Resources */,
 				04D4CDED16115A8F006F7E23 /* CMakeLists.txt in Resources */,
@@ -1356,6 +1502,43 @@
 				04D4CE7116115A8F006F7E23 /* LICENSE_cocos2d.txt in Resources */,
 				04D4CE7216115A8F006F7E23 /* LICENSE_CocosDenshion.txt in Resources */,
 				04D4CE7316115A8F006F7E23 /* LICENSE_Kazmath.txt in Resources */,
+				305EC8BA1654C80D00D45881 /* attackButton.png in Resources */,
+				305EC8BB1654C80D00D45881 /* background.jpg in Resources */,
+				305EC8BC1654C80D00D45881 /* cabban.png in Resources */,
+				305EC8BD1654C80D00D45881 /* cabban1.png in Resources */,
+				305EC8BE1654C80D00D45881 /* cabban2.png in Resources */,
+				305EC8BF1654C80D00D45881 /* circlespritesheet.png in Resources */,
+				305EC8C01654C80D00D45881 /* combos.plist in Resources */,
+				305EC8C11654C80D00D45881 /* Default-Landscape~ipad.png in Resources */,
+				305EC8C21654C80D00D45881 /* Default.png in Resources */,
+				305EC8C31654C80D00D45881 /* dpadNintendo.png in Resources */,
+				305EC8C41654C80D00D45881 /* DragonEye-Info.plist in Resources */,
+				305EC8C51654C80D00D45881 /* fire.png in Resources */,
+				305EC8C61654C80D00D45881 /* fps_images-hd.png in Resources */,
+				305EC8C71654C80D00D45881 /* fps_images-ipadhd.png in Resources */,
+				305EC8C81654C80D00D45881 /* fps_images.png in Resources */,
+				305EC8C91654C80D00D45881 /* grossini_dance_atlas.png in Resources */,
+				305EC8CA1654C80D00D45881 /* Icon-72.png in Resources */,
+				305EC8CB1654C80D00D45881 /* Icon-Small-50.png in Resources */,
+				305EC8CC1654C80D00D45881 /* Icon-Small.png in Resources */,
+				305EC8CD1654C80D00D45881 /* Icon-Small@2x.png in Resources */,
+				305EC8CE1654C80D00D45881 /* Icon.png in Resources */,
+				305EC8CF1654C80D00D45881 /* Icon@2x.png in Resources */,
+				305EC8D01654C80D00D45881 /* iTunesArtwork in Resources */,
+				305EC8D11654C80D00D45881 /* lancelotSpSheet.png in Resources */,
+				305EC8D21654C80D00D45881 /* level0.plist in Resources */,
+				305EC8D31654C80D00D45881 /* megamanSpSheet.png in Resources */,
+				305EC8D41654C80D00D45881 /* node.png in Resources */,
+				305EC8D51654C80D00D45881 /* nodeConnector.png in Resources */,
+				305EC8D61654C80D00D45881 /* slash.png in Resources */,
+				305EC8D71654C80D00D45881 /* swordSwing.wav in Resources */,
+				305EC8D81654C80D00D45881 /* spriteSheets.plist in Resources */,
+				305EC8D91654C80D00D45881 /* streak1-hd.png in Resources */,
+				305EC8DA1654C80D00D45881 /* streak1.png in Resources */,
+				305EC8DB1654C80D00D45881 /* streak2-hd.png in Resources */,
+				305EC8DC1654C80D00D45881 /* streak2.png in Resources */,
+				305EC8DD1654C80D00D45881 /* streak3-hd.png in Resources */,
+				305EC8DE1654C80D00D45881 /* streak3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1366,51 +1549,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A440B4160AD6EE0055927E /* Character.mm in Sources */,
-				04A440BA160ADA310055927E /* MyMath.mm in Sources */,
-				04A440C0160AE3210055927E /* LevelLoader.mm in Sources */,
-				04A440D4160AE9930055927E /* AnimatorConstants.mm in Sources */,
-				04A440D5160AE9930055927E /* AttackButton.mm in Sources */,
-				04A440D6160AE9930055927E /* AttackState.mm in Sources */,
-				04A440D8160AE9930055927E /* BezierCurve.mm in Sources */,
-				04A440D9160AE9930055927E /* CharacterBuilder.mm in Sources */,
-				04A440DA160AE9930055927E /* ComboState.m in Sources */,
-				04A440DB160AE9930055927E /* CoordinateSystem.mm in Sources */,
-				04A440F4160AE9D80055927E /* DpadButton.mm in Sources */,
-				04A440F7160AE9D80055927E /* Enemy.m in Sources */,
-				04A440F8160AE9D80055927E /* EnemyBuilder.m in Sources */,
-				04A440F9160AE9D80055927E /* FrameBasedTimer.mm in Sources */,
-				04A440FA160AE9D80055927E /* FreezeMode.mm in Sources */,
-				04A440FB160AE9D80055927E /* FreezeModeManager.mm in Sources */,
-				04A440FD160AE9D80055927E /* Gauge.m in Sources */,
-				04A440FE160AE9D80055927E /* JSONKit.mm in Sources */,
-				04A44104160AE9F90055927E /* LinePoints.mm in Sources */,
-				04A44105160AE9F90055927E /* MoveState.m in Sources */,
-				04A44132160AEB6C0055927E /* Node.mm in Sources */,
-				04A44133160AEB6C0055927E /* NodeConnector.mm in Sources */,
-				04A44134160AEB6C0055927E /* ObjectContainer.mm in Sources */,
-				04A44135160AEB6C0055927E /* Overlay.mm in Sources */,
-				04A44136160AEB6C0055927E /* Particle.mm in Sources */,
-				04A44137160AEB6C0055927E /* ParticleEffectsManager.mm in Sources */,
-				04A44138160AEB6C0055927E /* PhysicsEngine.mm in Sources */,
-				04A44139160AEB6C0055927E /* Player.mm in Sources */,
-				04A4413A160AEB6C0055927E /* PlayerBuilder.mm in Sources */,
-				04A4413B160AEB6C0055927E /* Program.mm in Sources */,
-				04A4413C160AEB6C0055927E /* Prop.mm in Sources */,
-				04A4413D160AEB6C0055927E /* PropState.mm in Sources */,
-				04A4413E160AEB6C0055927E /* Queue.m in Sources */,
-				04A4413F160AEB6C0055927E /* RunTimeWrapper.m in Sources */,
-				04A44140160AEB6C0055927E /* Sprite.mm in Sources */,
-				04A44141160AEB6C0055927E /* SpritesheetAnimator.mm in Sources */,
-				04A44142160AEB6C0055927E /* SpriteSheetManager.mm in Sources */,
-				04A44143160AEB6C0055927E /* StandState.m in Sources */,
-				04A44144160AEB6C0055927E /* WoundedState.m in Sources */,
-				04A44147160AF0BE0055927E /* Background.mm in Sources */,
-				04D4CCA5160F9374006F7E23 /* Camera.mm in Sources */,
-				04D4CCA6160F9374006F7E23 /* SpriteSheet.m in Sources */,
-				04D4CCAD160F938F006F7E23 /* AppDelegate.m in Sources */,
-				04D4CCAE160F938F006F7E23 /* HelloWorldLayer.m in Sources */,
-				04D4CCAF160F938F006F7E23 /* IntroLayer.m in Sources */,
 				04D4CDEC16115A8F006F7E23 /* chipmunk.c in Sources */,
 				04D4CDEE16115A8F006F7E23 /* cpConstraint.c in Sources */,
 				04D4CDEF16115A8F006F7E23 /* cpDampedRotarySpring.c in Sources */,
@@ -1541,6 +1679,51 @@
 				04D4CE6E16115A8F006F7E23 /* vec3.c in Sources */,
 				04D4CE6F16115A8F006F7E23 /* vec4.c in Sources */,
 				04BACB5D1611621200ED2792 /* main.m in Sources */,
+				305EC8651654C71D00D45881 /* BackgroundLayer.m in Sources */,
+				305EC8671654C71D00D45881 /* HUDLayer.m in Sources */,
+				305EC8681654C71D00D45881 /* IntroLayer.m in Sources */,
+				305EC8691654C71D00D45881 /* OverlayLayer.m in Sources */,
+				305EC86A1654C71D00D45881 /* AttackButton.mm in Sources */,
+				305EC86B1654C71D00D45881 /* DpadButton.mm in Sources */,
+				305EC86C1654C71D00D45881 /* Gauge.m in Sources */,
+				305EC86D1654C71D00D45881 /* HUDControl.m in Sources */,
+				305EC86E1654C71D00D45881 /* Node.mm in Sources */,
+				305EC86F1654C71D00D45881 /* Overlay.mm in Sources */,
+				305EC8701654C71D00D45881 /* WorldLayer.m in Sources */,
+				305EC8711654C71D00D45881 /* Level1.m in Sources */,
+				305EC8721654C71D00D45881 /* AppDelegate.m in Sources */,
+				305EC8731654C71D00D45881 /* NSDictionaryExtensions.m in Sources */,
+				305EC8741654C71D00D45881 /* MyMath.mm in Sources */,
+				305EC8751654C71D00D45881 /* NSPropertyUtil.m in Sources */,
+				305EC8761654C71D00D45881 /* Queue.m in Sources */,
+				305EC8771654C71D00D45881 /* RunTimeWrapper.m in Sources */,
+				305EC8781654C71D00D45881 /* Typedefs.m in Sources */,
+				305EC8791654C71D00D45881 /* PhysicsEngine.mm in Sources */,
+				305EC87A1654C71D00D45881 /* AnimatorConstants.mm in Sources */,
+				305EC87B1654C71D00D45881 /* FreezeModeManager.mm in Sources */,
+				305EC87C1654C71D00D45881 /* CCBlade.mm in Sources */,
+				305EC87D1654C71D00D45881 /* ParticleInvoker.m in Sources */,
+				305EC87E1654C71D00D45881 /* SpriteSheet.m in Sources */,
+				305EC87F1654C71D00D45881 /* SpriteSheetAnimator.mm in Sources */,
+				305EC8801654C71D00D45881 /* SpriteSheetManager.mm in Sources */,
+				305EC8811654C71D00D45881 /* CoordinateSystem.mm in Sources */,
+				305EC8821654C71D00D45881 /* Character.mm in Sources */,
+				305EC8831654C71D00D45881 /* CharacterBuilder.mm in Sources */,
+				305EC8841654C71D00D45881 /* Enemy.m in Sources */,
+				305EC8851654C71D00D45881 /* EnemyBuilder.m in Sources */,
+				305EC8861654C71D00D45881 /* ObjectContainer.mm in Sources */,
+				305EC8871654C71D00D45881 /* Player.mm in Sources */,
+				305EC8881654C71D00D45881 /* PlayerBuilder.mm in Sources */,
+				305EC8891654C71D00D45881 /* Prop.mm in Sources */,
+				305EC88A1654C71D00D45881 /* AttackState.mm in Sources */,
+				305EC88B1654C71D00D45881 /* ChaseState.m in Sources */,
+				305EC88C1654C71D00D45881 /* ComboState.m in Sources */,
+				305EC88D1654C71D00D45881 /* FleeState.m in Sources */,
+				305EC88E1654C71D00D45881 /* MoveState.m in Sources */,
+				305EC88F1654C71D00D45881 /* PropState.mm in Sources */,
+				305EC8901654C71D00D45881 /* StandState.m in Sources */,
+				305EC8911654C71D00D45881 /* StateMachine.m in Sources */,
+				305EC8921654C71D00D45881 /* WoundedState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1594,7 +1777,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"libs/kazmath/include\"";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
@@ -1613,7 +1796,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Prefix.pch;
+				GCC_PREFIX_HEADER = Classes/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"libs/kazmath/include\"";
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (

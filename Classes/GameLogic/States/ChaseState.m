@@ -36,20 +36,28 @@
 -(void) updateState {
     Player * player = [ObjectContainer sharedInstance].player;	
     Direction directionToChase = 
-    [self.coordinateSystem decideDirectionFromSrcToTarget:self.character.position
-                                              targetPoint:player.position]; 
-    //CGFloat distanceFromPlayer = DISTANCE(player.position, self.character.position);
+        [self.coordinateSystem decideDirectionFromSrcToTarget:self.character.position
+                                                  targetPoint:player.position]; 
+    
+    CGFloat pct = 0.7f;
+    CGRect adjustedRect = CGRectMake(pct * player.position.x, 
+                                     pct * player.position.y, 
+                                     pct * player.contentSize.width,
+                                     pct * player.contentSize.height);
+    
+    if(CGRectIntersectsRect(adjustedRect, self.character.boundingBox)) {
+        CGFloat newX = self.character.position.x - player.position.x;
+        if(newX > 0) {
+            [self.character setCurrentOrientation:ORIENTATION_BACKWARDS];
+        } else {
+            [self.character setCurrentOrientation:ORIENTATION_FORWARD];
+        }
+        [self.character setState:[AttackState createWithCharacter:self.character]];   
 
-    NSLog(@"Direction to chase is %d", directionToChase);
+    } 
     
     [self.character moveTowards:directionToChase];
-    
-    if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
-        [self.character setState:[AttackState createWithCharacter:self.character]];   
-    } 
-    //else if(distanceFromPlayer > 150) {
-    //    self.character setState:<#(id<CharacterState>)#>
-    //}
+
 }
 
 @end

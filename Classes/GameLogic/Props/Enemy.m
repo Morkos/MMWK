@@ -10,8 +10,4 @@
 
 @implementation Enemy
 
-- (void) update {
-    //NSLog(@"hr...");
-    [self.currentState updateState];
-}
 @end

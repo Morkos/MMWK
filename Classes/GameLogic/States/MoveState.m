@@ -28,7 +28,6 @@
 }
 
 - (void) updateState {
-    NSLog(@"here....?");
     [character moveTowards:character.currentDirection];
 }
 

@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "NSPropertyUtil.h"
 #import "SpriteSheetManager.h"
-#import "EnemyBuilder.h"
+#import "PlayerBuilder.h"
 #import "Enemy.h"
 #import "ObjectContainer.h"
 
@@ -43,7 +43,7 @@
             CGSize textureSize = CGSizeMake(texture.contentSize.width, texture.contentSize.height);
 
             [fillerSprite initWithTexture:texture
-                                      rect:CGRectMake(0, 0, textureSize.width, textureSize.height)];
+                                     rect:CGRectMake(0, 0, textureSize.width, textureSize.height)];
             /**
              * Adjust each BG position to be side by side.
              */
@@ -55,12 +55,6 @@
             [fillerSprite release]; 
             i++;
         }
-        
-        Player * player = [[ObjectContainer sharedInstance] player];
-        
-        //TODO: calculate the correct width for the world boundary
-        [self runAction:[CCFollow actionWithTarget:player 
-                                     worldBoundary:CGRectMake(0, 0, 2000, screenSize.height)]];
     }
     
     return self;

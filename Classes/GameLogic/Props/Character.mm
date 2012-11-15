@@ -8,7 +8,7 @@
 
 #import "Character.h"
 #import "OverlayLayer.h"
-#import "CCBlade.h"
+#import "CCBlade.h"	
 #import "ParticleInvoker.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS] = {
@@ -38,8 +38,9 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 @implementation Character
 
 @synthesize spriteSheet,
-			currentState, 
-			physicsEngine,
+            physicsEngine,
+            attackingRowIndexes,
+			fsm, 
 			currentDirection,
 			currentOrientation,
             strength,
@@ -47,10 +48,12 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
             healthGauge,
             speed;
 
-
+#import "Player.h"
+#import "Enemy.h"
 //Private method
 - (void) move:(CGPoint)movement {
-    self.position = ccpAdd(position_, ccpMult(movement, 2.0f));
+    self.position = ccpAdd(position_, ccpMult(movement, self.speed + 1.0f));
+    
     switch (currentOrientation) {
         case ORIENTATION_FORWARD:
             self.flipX = false;
@@ -80,6 +83,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 		self.physicsEngine = [PhysicsEngine getInstance];
         self.healthGauge = [[Gauge alloc] init];
         self.speed = 1.0;
+        self.fsm = [[StateMachine alloc] init];
 	}
     
 	return self;
@@ -88,7 +92,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 - (void) update {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
-	[currentState updateState];
+    [fsm update];
 }
 
 - (void) setDirectionAndOrientation:(Direction) dir {
@@ -100,7 +104,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 - (void) runTo:(Direction) dir {
     NSLog(@"character...%@", self);
-    [currentState transitionToState:[MoveState createWithCharacter:self]];
+    [fsm.currentState transitionToState:[MoveState createWithCharacter:self]];
 	[self setDirectionAndOrientation:dir];
 }
 
@@ -110,18 +114,27 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) stand {
-    [currentState transitionToState:[StandState createWithCharacter:self]];
+    [fsm.currentState transitionToState:[StandState createWithCharacter:self]];
 }
 
 - (void) attack {
-    [currentState transitionToState:[AttackState createWithCharacter:self]];
+    [fsm.currentState transitionToState:[AttackState createWithCharacter:self]];
+}
+
+
+- (uint) getNumberOfAttacks {
+	return [attackingRowIndexes count];
+}
+
+- (uint) getRowForAttack:(uint) attackIndex {
+	return [[attackingRowIndexes objectAtIndex:attackIndex] intValue];
 }
 
 - (void) setState:(id<CharacterState>) newState {
-    NSLog(@"Transitioning from %@ to %@", self.currentState, newState);
-    [self.currentState release];
-    self.currentState = newState;
-    [self.currentState start];
+    NSLog(@"Transitioning from %@ to %@", fsm.currentState, newState);
+    [fsm.currentState release];
+    fsm.currentState = newState;
+    [fsm.currentState start];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {

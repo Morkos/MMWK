@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-
+/**
+ * Chang this us a singlton pattrn 
+ *
+ */
 @protocol CharacterState <NSObject>
 
 @required

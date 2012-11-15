@@ -72,8 +72,8 @@ static BOOL withinCenterOfRadius(CGPoint, CGFloat);
     //find radius using pythag. d thm
 	CGFloat radius = PYTHAG(self.width, self.height);
     
-    NSLog(@"SrcPoint: (%f, %f), TargetPoint: (%f, %f), degrees: %f, radius: %f", srcPoint.x, 
-          srcPoint.y, targetPoint.x, targetPoint.y, degrees, radius);
+    //NSLog(@"SrcPoint: (%f, %f), TargetPoint: (%f, %f), degrees: %f, radius: %f", srcPoint.x, 
+    //      srcPoint.y, targetPoint.x, targetPoint.y, degrees, radius);
     
     // Shift point so that it is relative to origin
 	if (withinCenterOfRadius(CGPointMake(targetPoint.x - (self.width/2), 
