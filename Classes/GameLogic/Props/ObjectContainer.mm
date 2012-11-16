@@ -11,8 +11,7 @@
 #import "NSDictionaryExtensions.h"
 
 @implementation ObjectContainer
-@synthesize player, 
-            enemyHealthGauge;
+@synthesize player, enemyHealthGauge;
 
 static ObjectContainer *singleContainer;
 

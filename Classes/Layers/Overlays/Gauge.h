@@ -8,26 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Gauge : NSObject {
+@interface Gauge : CCNode {
     CCSprite *containerSprite;
-    CCSprite *barSprite;
+    CCProgressTimer *barProgressTimer;
 }
 
 + (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
-                          barTextures:(NSArray *) barTextures
-                             position:(CGPoint) position
-                                scale:(CGSize) scale;
+                          barTextures:(NSArray *) barTextures;
 
 -(id) initWithContainerTexture:(NSString *) containerTexture
-                   barTextures:(NSArray *) barTextures
-                      position:(CGPoint) position
-                         scale:(CGSize) scale;
-
-
-- (void) addToLayer:(CCLayer *) layer;
+                   barTextures:(NSArray *) barTextures;
 
 - (void) animateBarFromStartCapacity:(CGFloat) startCapacity
                          endCapacity:(CGFloat) endCapacity
                          maxCapacity:(CGFloat) maxCapacity;
 
+- (CCFiniteTimeAction *) createAnimationActionFromStartCapacity:(CGFloat) startCapacity
+                                          endCapacity:(CGFloat) endCapacity
+                                          maxCapacity:(CGFloat) maxCapacity;
 @end

@@ -21,7 +21,7 @@
 }
 
 @property(nonatomic, retain) Player *player;
-@property(nonatomic, retain) Gauge *enemyHealthGauge;
+@property(nonatomic, retain)     Gauge *enemyHealthGauge;
 
 + (ObjectContainer *) sharedInstance;
 - (void) addObject:(CCNode *)object;

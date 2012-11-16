@@ -9,69 +9,55 @@
 #import "Gauge.h"
 #import "CCUtil.h"
 
-@interface Gauge()
-    -(void) setBarPercentage:(CGFloat) width;
-@end
 @implementation Gauge
 
 + (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
-                          barTextures:(NSArray *) barTextures
-                             position:(CGPoint) position
-                                scale:(CGSize)scale {
+                          barTextures:(NSArray *) barTextures{
     return [[[Gauge alloc] initWithContainerTexture:containerTexture 
-                                        barTextures:barTextures
-                                           position: position
-                                              scale:scale] autorelease];
+                                        barTextures:barTextures] autorelease];
 }
 
 -(id) initWithContainerTexture:(NSString *) containerTexture
-                   barTextures:(NSArray *) barTextures
-                      position:(CGPoint) position
-                         scale:(CGSize) scale {
+                   barTextures:(NSArray *) barTextures{
     if (self = [super init]) {
         containerSprite = [CCSprite spriteWithFile:containerTexture];
-        containerSprite.position = position;
-        containerSprite.scaleX = scale.width;
-        containerSprite.scaleY = scale.height;
         containerSprite.anchorPoint = ccp(0, 0);
         
         //TODO: Support multiple bar texture layers
         assert([barTextures count] == 1);
-        barSprite = [CCSprite spriteWithFile:[barTextures objectAtIndex:0]];
-        barSprite.position = position;
-        barSprite.scaleX = scale.width;
-        barSprite.scaleY = scale.height;
-        barSprite.anchorPoint = ccp(0, 0);
+        barProgressTimer = [CCProgressTimer progressWithSprite:[CCSprite spriteWithFile:[barTextures objectAtIndex:0]]];
+        barProgressTimer.anchorPoint = ccp(0, 0);
+        barProgressTimer.midpoint = ccp(0, 0);
+        barProgressTimer.type = kCCProgressTimerTypeBar;
+        barProgressTimer.barChangeRate = ccp(1, 0);
     }
     
-    return self;
-}
-
-- (void) addToLayer:(CCLayer *) layer {
-    [layer addChild:containerSprite z:1];
-    [layer addChild:barSprite z:2];
+    [self addChild:containerSprite z:1];
+    [self addChild:barProgressTimer z:2];
     
-    [self setBarPercentage:1.0f];
+    return self;
 }
 
 - (void) animateBarFromStartCapacity:(CGFloat) startCapacity
                          endCapacity:(CGFloat) endCapacity
                          maxCapacity:(CGFloat) maxCapacity {
-    CGFloat startingPercentage = startCapacity / maxCapacity;
-    CGFloat endPercentage = endCapacity / maxCapacity;
-    [barSprite runAction:[CCSequence actions:
-         [CCScaleTo actionWithDuration:0.0f scaleX:startingPercentage scaleY:barSprite.scaleY],
-         [CCScaleTo actionWithDuration:0.25f scaleX:endPercentage scaleY:barSprite.scaleY],
-          nil]];
+    CCAction * action = 
+        [self createAnimationActionFromStartCapacity:startCapacity 
+                                         endCapacity:endCapacity 
+                                         maxCapacity:maxCapacity];
+    
+    [barProgressTimer runAction:action];
 }
 
-- (void) setBarPercentage:(CGFloat) percentage {
-    percentage = min(percentage, 1.0f);
-    percentage = max(percentage, 0.0f);
-
-    CGFloat scaleXBy = percentage / barSprite.scaleX;
-    [barSprite runAction:[CCScaleBy actionWithDuration:0.25f scaleX:scaleXBy scaleY:1.0f]];
+- (CCFiniteTimeAction *) createAnimationActionFromStartCapacity:(CGFloat) startCapacity
+                                          endCapacity:(CGFloat) endCapacity
+                                          maxCapacity:(CGFloat) maxCapacity {
+    CGFloat startingPercentage = (startCapacity / maxCapacity) * 100;
+    CGFloat endPercentage = (endCapacity / maxCapacity) * 100;
     
+    return [CCProgressFromTo actionWithDuration:0.25f
+                                           from:startingPercentage 
+                                             to:endPercentage];
 }
 
 @end

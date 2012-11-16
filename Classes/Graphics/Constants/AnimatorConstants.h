@@ -30,7 +30,8 @@ extern NSString *ANIMATOR_WOUNDED;
  * Enums for tags used for marking action
  */
 enum Tag {
-    TAG_ANIMATION_ACTION = 1
+    TAG_ANIMATION_ACTION = 1,
+    TAG_GAUGE_ACTION = 2
 };
 
 #endif

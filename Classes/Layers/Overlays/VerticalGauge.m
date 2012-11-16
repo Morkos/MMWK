@@ -11,27 +11,19 @@
 @implementation VerticalGauge
 
 + (VerticalGauge *) gaugeWithContainerTexture:(NSString *) containerTexture
-                                  barTextures:(NSArray *) barTextures
-                                     position:(CGPoint) position
-                                        scale:(CGSize)scale {
+                                  barTextures:(NSArray *) barTextures {
     return [[[VerticalGauge alloc] initWithContainerTexture:containerTexture 
-                                                barTextures:barTextures
-                                                   position:position
-                                                      scale:scale] autorelease];
+                                                barTextures:barTextures] autorelease];
 }
 
 // Override
 -(id) initWithContainerTexture:(NSString *) containerTexture
-                   barTextures:(NSArray *) barTextures
-                      position:(CGPoint) position
-                         scale:(CGSize) scale {
+                   barTextures:(NSArray *) barTextures {
     
     if (self = [super initWithContainerTexture:containerTexture
-                                   barTextures:barTextures 
-                                      position:position 
-                                         scale:scale]) {
+                                   barTextures:barTextures]) {
         containerSprite.rotation = 90;
-        barSprite.rotation = 90;
+        barProgressTimer.rotation = 90;
     }
     
     return self;
