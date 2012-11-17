@@ -16,15 +16,36 @@
 @interface ObjectContainer : NSObject {
     NSMutableDictionary *objDictionary;
 	Player *player;
+    Gauge *enemyHealthGauge;
 }
+
+@property(nonatomic, retain) Player *player;
+@property(nonatomic, retain) Gauge *enemyHealthGauge;
 
 + (ObjectContainer *) sharedInstance;
 - (id) init;
 - (Player *) player;
-- (Enemy *) getEnemy;
 - (void) addObject:(CCNode *)object;
 - (void) update;
 - (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *)containerKey;
+
+/**
+ * Get all the props from a target container 
+ *
+ * @param containerKey The key for the container
+ * @return Array of props.
+ */
+- (NSArray *) getAllPropsFromContainer:(NSString *) containerKey; 
+
+/**
+ * Get all the props from a target container that are colliding with the given target
+ *
+ * @param target The target to check with
+ * @param containerKey The key for the container
+ * @return Array of props.
+ */
+- (NSArray *) findCollidingProps:(Prop *) target 
+                   fromContainer:(NSString *)containerKey;
 
 
 @end

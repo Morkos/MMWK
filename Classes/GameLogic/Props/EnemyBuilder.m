@@ -17,8 +17,8 @@
     
     EnemyBuilder *builder = [[EnemyBuilder alloc] init];
     builder.character = [[Enemy alloc] init:position 
-                               size:size
-                             spriteFrame:spriteFrame];
+                                       size:size
+                                spriteFrame:spriteFrame];
     
     return builder;
 }

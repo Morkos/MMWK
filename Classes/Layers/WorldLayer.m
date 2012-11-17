@@ -24,24 +24,6 @@
 @end
 @implementation WorldLayer
 
-
-// Helper class method that creates a Scene with the WorldLayer as the only child.
-+(CCScene *) scene
-{
-    [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
-
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-    // 'layer' is an autorelease object.
-	
-	[scene addChild:[WorldLayer node] z:-1 tag:tagWorldLayer];
-    [scene addChild:[HUDLayer node] z:2];
-    [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
-    
-	// return the scene
-	return scene;
-}
-
 -(id) init
 {
 	if( (self=[super init])) {
@@ -49,24 +31,29 @@
 
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         
-        PlayerBuilder *builder =				
-        [PlayerBuilder newBuilder:ccp(120,220) 
-                             size:CGSizeMake(1.0f, 1.0f)
-                      spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
-        
-        Player *player = [[[builder buildSpriteSheet:spriteSheet] buildSpeed:2.0] build];
-        [self addChild:player z:1];
-        
         SpriteSheet *enemySpriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
+
+        PlayerBuilder *builder = 
+            [PlayerBuilder newBuilder:ccp(120,220) 
+                                 size:CGSizeMake(1.0f, 1.0f)
+                          spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
+        
+        Player *player = [[[[builder buildSpriteSheet:spriteSheet] 
+                                       buildStrength:5] 
+                                       buildSpeed:2]
+                                       build];
         
         EnemyBuilder *enemyBuilder = 
             [EnemyBuilder newBuilder:ccp(220,220) 
                                 size:CGSizeMake(1.0f, 1.0f)
                          spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
-        Enemy *enemy = [[enemyBuilder buildSpriteSheet:enemySpriteSheet] build];
+        
+        Enemy *enemy = [[[enemyBuilder buildSpriteSheet:enemySpriteSheet] 
+                                            buildHealth:100]
+                                            build];
         
         [self addChild:enemy z:1];
-
+        [self addChild:player z:1];
         
         // FOR DEBUGGING ONLY
         map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);

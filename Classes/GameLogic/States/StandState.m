@@ -46,7 +46,7 @@
         } else if( distanceToPlayer > 75 ) {
             
             NSLog(@"Begin chasing the player.");
-            //[self.character setState:[ChaseState createWithCharacter:self.character]];
+            [self.character setState:[ChaseState createWithCharacter:self.character]];
             /*
              * If player "x" distance away then chase player.
              */

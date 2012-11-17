@@ -16,8 +16,9 @@
     self.currentState = [[StandState alloc] init];
     return self;
 }
+
 -(void) update {
-    
     [currentState updateState];
 }
+
 @end

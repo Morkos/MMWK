@@ -41,12 +41,15 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
             physicsEngine,
             attackingRowIndexes,
 			fsm, 
+            healthGauge,
 			currentDirection,
 			currentOrientation,
+            maxHp,
+            currentHp,
             strength,
             defense,
-            healthGauge,
             speed;
+
 
 #import "Player.h"
 #import "Enemy.h"
@@ -84,6 +87,11 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
         self.healthGauge = [[Gauge alloc] init];
         self.speed = 1.0;
         self.fsm = [[StateMachine alloc] init];
+        
+        // Set default values
+        self.strength = 1;
+        self.maxHp = 10;
+        self.currentHp = 10;
 	}
     
 	return self;
@@ -135,6 +143,15 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     [fsm.currentState release];
     fsm.currentState = newState;
     [fsm.currentState start];
+}
+
+- (void) attacksTarget:(Character *) target {
+    NSUInteger previousHp = target.currentHp;
+    target.currentHp -= strength;
+    
+    [target.healthGauge animateBarFromStartCapacity:previousHp
+                                        endCapacity:target.currentHp 
+                                        maxCapacity:target.maxHp];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {

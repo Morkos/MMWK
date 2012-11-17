@@ -8,23 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Gauge : NSObject {
-    @private
-    NSUInteger gauge;    
+@interface Gauge : CCNode {
+    CCSprite *containerSprite;
+    CCProgressTimer *barProgressTimer;
 }
 
-@property (nonatomic, assign) NSUInteger gauge;
++ (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
+                          barTextures:(NSArray *) barTextures;
 
-/**
- * Increase the guage's capacity.
- * @param quantity the amount to increase 
- */
-- (void) increase:(NSUInteger) quantity;
+-(id) initWithContainerTexture:(NSString *) containerTexture
+                   barTextures:(NSArray *) barTextures;
 
-/**
- * Decrease the guage's capacity.
- * @param quantity the amount to decrease 
- */
-- (void) decrease:(NSUInteger) quantity;
+- (void) animateBarFromStartCapacity:(CGFloat) startCapacity
+                         endCapacity:(CGFloat) endCapacity
+                         maxCapacity:(CGFloat) maxCapacity;
 
+- (CCFiniteTimeAction *) createAnimationActionFromStartCapacity:(CGFloat) startCapacity
+                                          endCapacity:(CGFloat) endCapacity
+                                          maxCapacity:(CGFloat) maxCapacity;
 @end

@@ -52,11 +52,11 @@
         } else {
             [self.character setCurrentOrientation:ORIENTATION_FORWARD];
         }
-        [self.character setState:[AttackState createWithCharacter:self.character]];   
+        [self.character setState:[StandState createWithCharacter:self.character]];   
 
-    } 
-    
-    [self.character moveTowards:directionToChase];
+    } else {
+        [self.character moveTowards:directionToChase];
+    }
 
 }
 

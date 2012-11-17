@@ -25,11 +25,10 @@
     
 	Direction currentDirection;
 	Orientation currentOrientation;
-    
-    NSUInteger strength;
-    NSUInteger defense;
+
     CGFloat speed;
     Gauge *healthGauge;
+    NSUInteger maxHp, currentHp, strength, defense;
     
 }
 
@@ -37,12 +36,11 @@
 @property (nonatomic, retain) StateMachine * fsm;
 @property (nonatomic, retain) NSArray *attackingRowIndexes;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
+@property (nonatomic, retain) Gauge *healthGauge;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
-@property (nonatomic, assign) NSUInteger strength;
-@property (nonatomic, assign) NSUInteger defense;
 @property (nonatomic, assign) CGFloat speed;
-@property (nonatomic, retain) Gauge * healthGauge;
+@property (nonatomic, assign) NSUInteger maxHp, currentHp, strength, defense;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
@@ -59,6 +57,11 @@
 - (void) attack;
 
 - (void) setState:(id<CharacterState>) newState;
+
+/**
+ * Perform an attack on target character
+ */
+- (void) attacksTarget:(Character *) target;
 
 /**
  * Returns the opposite direction of the given direction

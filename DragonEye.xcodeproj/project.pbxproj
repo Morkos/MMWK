@@ -155,6 +155,11 @@
 		04D4CE7116115A8F006F7E23 /* LICENSE_cocos2d.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE716115A8F006F7E23 /* LICENSE_cocos2d.txt */; };
 		04D4CE7216115A8F006F7E23 /* LICENSE_CocosDenshion.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE816115A8F006F7E23 /* LICENSE_CocosDenshion.txt */; };
 		04D4CE7316115A8F006F7E23 /* LICENSE_Kazmath.txt in Resources */ = {isa = PBXBuildFile; fileRef = 04D4CDE916115A8F006F7E23 /* LICENSE_Kazmath.txt */; };
+		3020EE34165857CC0004EA5D /* VerticalGauge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3020EE30165857CC0004EA5D /* VerticalGauge.m */; };
+		3020EE35165857CC0004EA5D /* EnemyHealthGauge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3020EE32165857CC0004EA5D /* EnemyHealthGauge.m */; };
+		3020EE39165857EC0004EA5D /* CCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3020EE37165857EC0004EA5D /* CCUtil.m */; };
+		3020EE3C1658591A0004EA5D /* healthBar-front.png in Resources */ = {isa = PBXBuildFile; fileRef = 3020EE3A1658591A0004EA5D /* healthBar-front.png */; };
+		3020EE3D1658591A0004EA5D /* healthBar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3020EE3B1658591A0004EA5D /* healthBar-back.png */; };
 		305EC8651654C71D00D45881 /* BackgroundLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7F81654C71D00D45881 /* BackgroundLayer.m */; };
 		305EC8671654C71D00D45881 /* HUDLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7FB1654C71D00D45881 /* HUDLayer.m */; };
 		305EC8681654C71D00D45881 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 305EC7FD1654C71D00D45881 /* IntroLayer.m */; };
@@ -542,6 +547,14 @@
 		04D4CDE716115A8F006F7E23 /* LICENSE_cocos2d.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_cocos2d.txt; sourceTree = "<group>"; };
 		04D4CDE816115A8F006F7E23 /* LICENSE_CocosDenshion.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_CocosDenshion.txt; sourceTree = "<group>"; };
 		04D4CDE916115A8F006F7E23 /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_Kazmath.txt; sourceTree = "<group>"; };
+		3020EE30165857CC0004EA5D /* VerticalGauge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalGauge.m; sourceTree = "<group>"; };
+		3020EE31165857CC0004EA5D /* VerticalGauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalGauge.h; sourceTree = "<group>"; };
+		3020EE32165857CC0004EA5D /* EnemyHealthGauge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyHealthGauge.m; sourceTree = "<group>"; };
+		3020EE33165857CC0004EA5D /* EnemyHealthGauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyHealthGauge.h; sourceTree = "<group>"; };
+		3020EE37165857EC0004EA5D /* CCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUtil.m; sourceTree = "<group>"; };
+		3020EE38165857EC0004EA5D /* CCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUtil.h; sourceTree = "<group>"; };
+		3020EE3A1658591A0004EA5D /* healthBar-front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "healthBar-front.png"; sourceTree = "<group>"; };
+		3020EE3B1658591A0004EA5D /* healthBar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "healthBar-back.png"; sourceTree = "<group>"; };
 		305EC7F71654C71D00D45881 /* BackgroundLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundLayer.h; sourceTree = "<group>"; };
 		305EC7F81654C71D00D45881 /* BackgroundLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundLayer.m; sourceTree = "<group>"; };
 		305EC7FA1654C71D00D45881 /* HUDLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDLayer.h; sourceTree = "<group>"; };
@@ -1215,6 +1228,10 @@
 		305EC8001654C71D00D45881 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
+				3020EE30165857CC0004EA5D /* VerticalGauge.m */,
+				3020EE31165857CC0004EA5D /* VerticalGauge.h */,
+				3020EE32165857CC0004EA5D /* EnemyHealthGauge.m */,
+				3020EE33165857CC0004EA5D /* EnemyHealthGauge.h */,
 				305EC8011654C71D00D45881 /* AttackButton.h */,
 				305EC8021654C71D00D45881 /* AttackButton.mm */,
 				305EC8031654C71D00D45881 /* DpadButton.h */,
@@ -1244,6 +1261,8 @@
 		305EC8131654C71D00D45881 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3020EE37165857EC0004EA5D /* CCUtil.m */,
+				3020EE38165857EC0004EA5D /* CCUtil.h */,
 				305EC8141654C71D00D45881 /* Categories */,
 				305EC8171654C71D00D45881 /* LevelEnum.h */,
 				305EC8181654C71D00D45881 /* Loggers.h */,
@@ -1394,6 +1413,8 @@
 		305EC8931654C80D00D45881 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3020EE3A1658591A0004EA5D /* healthBar-front.png */,
+				3020EE3B1658591A0004EA5D /* healthBar-back.png */,
 				305EC8941654C80D00D45881 /* attackButton.png */,
 				305EC8951654C80D00D45881 /* background.jpg */,
 				305EC8961654C80D00D45881 /* cabban.png */,
@@ -1539,6 +1560,8 @@
 				305EC8DC1654C80D00D45881 /* streak2.png in Resources */,
 				305EC8DD1654C80D00D45881 /* streak3-hd.png in Resources */,
 				305EC8DE1654C80D00D45881 /* streak3.png in Resources */,
+				3020EE3C1658591A0004EA5D /* healthBar-front.png in Resources */,
+				3020EE3D1658591A0004EA5D /* healthBar-back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1724,6 +1747,9 @@
 				305EC8901654C71D00D45881 /* StandState.m in Sources */,
 				305EC8911654C71D00D45881 /* StateMachine.m in Sources */,
 				305EC8921654C71D00D45881 /* WoundedState.m in Sources */,
+				3020EE34165857CC0004EA5D /* VerticalGauge.m in Sources */,
+				3020EE35165857CC0004EA5D /* EnemyHealthGauge.m in Sources */,
+				3020EE39165857EC0004EA5D /* CCUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

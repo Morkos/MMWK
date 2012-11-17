@@ -23,7 +23,6 @@
 	SEL callback = NSSelectorFromString(runTimeMethod);
 	
 	[object performSelector:callback];
-	
 }
 
 @end

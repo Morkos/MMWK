@@ -22,10 +22,10 @@
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
     // 'layer' is an autorelease object.
-	
-	[scene addChild:[WorldLayer node]];
+    
+    [scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
     [scene addChild:[BackgroundLayer node] z:-2];	
-    [scene addChild:[HUDLayer node] z:2];
+    [scene addChild:[HUDLayer node] z:2 tag:tagHudLayer];
     [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
     
 	// return the scene

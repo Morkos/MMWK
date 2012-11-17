@@ -12,7 +12,7 @@
 
 @synthesize character;
 
-+ (id) newBuilder:(CGPoint) position 
++ (CharacterBuilder *) newBuilder:(CGPoint) position 
              size:(CGSize) size 
            spriteFrame:(CCSpriteFrame *) spriteFrame{
     CharacterBuilder *builder = [[CharacterBuilder alloc] init];
@@ -24,23 +24,34 @@
     return builder;
 }
 
-- (id) buildSpriteSheet:(SpriteSheet *) spriteSheet {
+- (CharacterBuilder *) buildSpriteSheet:(SpriteSheet *) spriteSheet {
     self.character.spriteSheet = spriteSheet;
     return self;
 }
 
-- (id) buildDefense:(NSUInteger)defense {
+- (CharacterBuilder *) buildHealth:(NSUInteger) health {
+    self.character.maxHp = health;
+    self.character.currentHp = health;
+    return self;
+}
+
+- (CharacterBuilder *) buildDefense:(NSUInteger) defense {
     self.character.defense = defense;
     return self;
 }
 
-- (id) buildStrength:(NSUInteger)strength {
+- (CharacterBuilder *) buildStrength:(NSUInteger) strength {
     self.character.strength = strength;
     return self;
 }
 
-- (id) buildSpeed:(CGFloat)speed {
+- (CharacterBuilder *) buildSpeed:(CGFloat)speed {
     self.character.speed = speed;
+    return self;
+}
+
+- (CharacterBuilder *) buildHealthGauge:(Gauge *) healthGauge {
+    self.character.healthGauge = healthGauge;
     return self;
 }
 
