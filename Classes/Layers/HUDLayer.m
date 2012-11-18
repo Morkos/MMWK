@@ -50,7 +50,6 @@
         enemyHealthGauge.scaleX = 1.0f;
         enemyHealthGauge.scaleY = 1.0f;
         
-        [ObjectContainer sharedInstance].enemyHealthGauge = enemyHealthGauge;
         [self addChild:enemyHealthGauge];
         
         // Link all enemies with the health gauge
@@ -58,7 +57,14 @@
             enemy.healthGauge = enemyHealthGauge;
         }
         
-        [enemyHealthGauge release];
+        
+        Gauge *playerHealthGauge = 
+            [Gauge gaugeWithContainerTexture:@"healthBar-back.png" 
+                                 barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
+        playerHealthGauge.position = ccp(20, 300);
+        
+        [ObjectContainer sharedInstance].player.healthGauge = playerHealthGauge;
+        [self addChild:playerHealthGauge];
         
         [self addChild:dpadButton.sprite];
         [self addChild:attackButton.sprite];

@@ -70,7 +70,7 @@ typedef enum {
 } ParticleEffectId;
 
 /*** Constants for ObjectContainer ***/
-extern NSString *CONTAINER_ENEMIES;
+extern NSString *CONTAINER_ENEMIES, *CONTAINER_ITEMS;
 
 //Shortcut macro for checking if an object of a class
 #define IS_SUBCLASS(object, className) ([[object class] isSubclassOfClass:[className class]])

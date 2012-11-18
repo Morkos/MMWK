@@ -25,7 +25,7 @@
 	Direction currentDirection;
 	Orientation currentOrientation;
     
-    NSUInteger maxHp, currentHp, strength, defense;
+    CGFloat maxHp, currentHp, strength, defense;
 }
 
 @property (nonatomic, retain) SpriteSheet *spriteSheet;
@@ -34,7 +34,7 @@
 @property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
-@property (nonatomic, assign) NSUInteger maxHp, currentHp, strength, defense;
+@property (nonatomic, assign) CGFloat maxHp, currentHp, strength, defense;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz
@@ -56,6 +56,16 @@
  * Perform an attack on target character
  */
 - (void) attacksTarget:(Character *) target;
+
+/**
+ * Increases character's hp
+ */
+- (void) increaseHp:(CGFloat) hpIncrease;
+
+/**
+ * Decreases character's hp
+ */
+- (void) decreaseHp:(CGFloat) hpDecrease;
 
 /**
  * Returns the opposite direction of the given direction

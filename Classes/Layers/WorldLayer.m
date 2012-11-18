@@ -17,6 +17,7 @@
 #import "EnemyBuilder.h"
 #import "Enemy.h"
 #import "CCBlade.h"
+#import "HealthPotion.h"
 
 #pragma mark - WorldLayer
 @interface WorldLayer ()
@@ -67,8 +68,12 @@
                                             buildHealth:100]
                                             build];
         
+        HealthPotion *healthPotion = [HealthPotion itemWithTexture:@"healthPotion.png"];
+        healthPotion.position = ccp(300, 100);
+        
         [self addChild:player];
         [self addChild:enemy];
+        [self addChild:healthPotion];
 
         // FOR DEBUGGING ONLY
         map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);

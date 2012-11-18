@@ -8,6 +8,7 @@
 
 #import "ObjectContainer.h"
 #import "Enemy.h"
+#import "Item.h"
 #import "NSDictionaryExtensions.h"
 
 @implementation ObjectContainer
@@ -33,19 +34,21 @@ static ObjectContainer *singleContainer;
 }
 
 - (void) addObject:(CCNode *) object {
-    if (!IS_SUBCLASS(object, Prop)) {
+    if(!IS_SUBCLASS(object, Prop)) {
         return;
     }
     
 	// Store player in a singleton player object
-	if (IS_SUBCLASS(object, Player)) {
+	if(IS_SUBCLASS(object, Player)) {
 		if (!player) {
 			player = (Player *) object;
 		} else {
 			DLOG("ERROR! More than one player!");
 		}
-	} else if (IS_SUBCLASS(object, Enemy)) {
+	} else if(IS_SUBCLASS(object, Enemy)) {
         [objDictionary addObjectToArray:object forKey:CONTAINER_ENEMIES];
+    } else if(IS_SUBCLASS(object, Item)) {
+        [objDictionary addObjectToArray:object forKey:CONTAINER_ITEMS];
     }
 }
 
@@ -58,7 +61,7 @@ static ObjectContainer *singleContainer;
     NSArray *props = [objDictionary objectForKey:containerKey];
     NSMutableArray *collidingProps = [NSMutableArray arrayWithCapacity:[props count]];
     
-    for (Prop *checkedProp in props) {
+    for(Prop *checkedProp in props) {
         bool collided = [[PhysicsEngine getInstance] detectRectangleCollision:target 
                                                                     otherProp:checkedProp];
         

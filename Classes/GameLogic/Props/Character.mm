@@ -123,20 +123,47 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) attacksTarget:(Character *) target {
-    NSUInteger previousHp = target.currentHp;
-    
-    // TODO: If zero hp, the target should die
-    target.currentHp = max(0, target.currentHp - strength);
-    
-    [target.healthGauge animateBarFromStartCapacity:previousHp
-                                        endCapacity:target.currentHp 
-                                        maxCapacity:target.maxHp];
-    
+    [target decreaseHp:strength];
     [target setState:[WoundedState createWithCharacter:target]];
+}
+
+- (void) increaseHp:(CGFloat) hpIncrease {
+    CGFloat previousHp = currentHp;
+    currentHp = min(maxHp, currentHp + hpIncrease);
+    
+    [healthGauge animateBarFromStartCapacity:previousHp
+                                 endCapacity:currentHp 
+                                 maxCapacity:maxHp];
+
+}
+
+- (void) decreaseHp:(CGFloat) hpDecrease {
+    CGFloat previousHp = currentHp;
+    // TODO: If zero hp, the target should die
+    currentHp = max(0, currentHp - hpDecrease);
+    
+    [healthGauge animateBarFromStartCapacity:previousHp
+                                 endCapacity:currentHp 
+                                 maxCapacity:maxHp];
+}
+
+- (void) setHealthGauge:(Gauge *) healthGaugeParam {
+    healthGauge = [healthGaugeParam retain];
+    [healthGauge animateBarFromStartCapacity:currentHp 
+                                 endCapacity:currentHp 
+                                 maxCapacity:maxHp];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {
     return directionToOpposite[direction];
+}
+
+- (void) dealloc {
+    [spriteSheet release];
+    [physicsEngine release];
+    [healthGauge release];
+    [currentState release];
+    [super dealloc];
 }
 
 @end

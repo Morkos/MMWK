@@ -9,3 +9,4 @@
 #import "Typedefs.h"
 
 NSString *CONTAINER_ENEMIES = @"enemies";
+NSString *CONTAINER_ITEMS = @"items";
