@@ -8,6 +8,9 @@
 
 #import "WoundedState.h"
 
+@interface WoundedState()
+    -(CCAction *) createAction:(CCAnimation *) animationAction;
+@end
 @implementation WoundedState
 
 @synthesize character;
@@ -20,12 +23,31 @@
 }
 
 - (void) start {
-    /*[character.animator startAnimation:ANIMATOR_WOUNDED
-                                replay:false];*/
+    [SpriteSheetAnimator startAnimation:character
+                            spriteSheet:character.spriteSheet
+                               frameKey:ANIMATOR_WOUNDED
+                          frameInterval:0.1f
+                                 target:self
+                               selector:@selector(createAction:)];
 }
 
 - (void) updateState {
     
+}
+
+-(CCAction *) createAction:(CCAnimation *) animationAction {
+    animationAction.restoreOriginalFrame = false;
+    CCAction *action = [CCSequence actions:
+                        [CCAnimate actionWithAnimation:animationAction],
+                        [CCDelayTime actionWithDuration:0.2f],
+                        [CCCallFunc actionWithTarget:self selector:@selector(transitionToStand)],
+                        nil];
+    
+    return action;
+}
+
+- (void) transitionToStand {
+    [character setState:[StandState createWithCharacter:character]];
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

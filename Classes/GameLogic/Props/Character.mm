@@ -10,6 +10,7 @@
 #import "OverlayLayer.h"
 #import "CCBlade.h"	
 #import "ParticleInvoker.h"
+#import "WoundedState.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS] = {
     /*NO_WHERE*/   CGPointMake( 0.00f,   0.00f),
@@ -158,11 +159,15 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 - (void) attacksTarget:(Character *) target {
     NSUInteger previousHp = target.currentHp;
-    target.currentHp -= strength;
+    
+    // TODO: If zero hp, the target should die
+    target.currentHp = max(0, target.currentHp - strength);
     
     [target.healthGauge animateBarFromStartCapacity:previousHp
                                         endCapacity:target.currentHp 
                                         maxCapacity:target.maxHp];
+    
+    [target setState:[WoundedState createWithCharacter:target]];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {

@@ -50,8 +50,8 @@
 }
 
 - (CCFiniteTimeAction *) createAnimationActionFromStartCapacity:(CGFloat) startCapacity
-                                          endCapacity:(CGFloat) endCapacity
-                                          maxCapacity:(CGFloat) maxCapacity {
+                                                    endCapacity:(CGFloat) endCapacity
+                                                    maxCapacity:(CGFloat) maxCapacity {
     CGFloat startingPercentage = (startCapacity / maxCapacity) * 100;
     CGFloat endPercentage = (endCapacity / maxCapacity) * 100;
     
