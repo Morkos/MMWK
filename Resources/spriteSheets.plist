@@ -76,6 +76,11 @@
 		<integer>6</integer>
 		<key>animationFrames</key>
 		<dict>
+			<key>wounded</key>
+			<array>
+				<string>{2,3}</string>
+				<string>{2,4}</string>
+			</array>
 			<key>stand</key>
 			<array>
 				<string>{0,0}</string>

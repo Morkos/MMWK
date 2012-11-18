@@ -10,6 +10,7 @@
 #import "OverlayLayer.h"
 #import "CCBlade.h"
 #import "ParticleInvoker.h"
+#import "WoundedState.h"
 
 static CGPoint cgPoints[MAX_DIRECTIONS] = {
     /*NO_WHERE*/   CGPointMake( 0.00f,   0.00f),
@@ -128,6 +129,8 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     [target.healthGauge animateBarFromStartCapacity:previousHp
                                         endCapacity:target.currentHp 
                                         maxCapacity:target.maxHp];
+    
+    [target setState:[WoundedState createWithCharacter:target]];
 }
 
 + (Direction) oppositeDirection:(Direction) direction {
