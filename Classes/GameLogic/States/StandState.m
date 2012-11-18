@@ -37,8 +37,6 @@
     if ([self.character isMemberOfClass:[Enemy class]]) {
         Player * player = [[ObjectContainer sharedInstance] player];
         
-        CGFloat distanceToPlayer = DISTANCE(player.position, self.character.position);
-
         if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
             [self.character setState:[AttackState createWithCharacter:self.character]];
             

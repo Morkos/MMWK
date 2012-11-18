@@ -22,7 +22,6 @@
 }
 -(void) start {
     [super start];
-    Player * player = [ObjectContainer sharedInstance].player;
 }
 
 -(void) updateState {    
