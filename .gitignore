@@ -16,3 +16,5 @@ profile
 *.swp
 *.swo
 *.pbxproj
+DragonEye.xcodeproj/*
+DragonEye.xcodeproj/project.pbxproj

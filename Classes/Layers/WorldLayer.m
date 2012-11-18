@@ -21,46 +21,31 @@
 
 #pragma mark - WorldLayer
 @interface WorldLayer ()
-    -(void) sortChildrenByYPosition;
+    - (void) sortChildrenByYPosition;
 @end
 @implementation WorldLayer
-
-// Helper class method that creates a Scene with the WorldLayer as the only child.
-+(CCScene *) scene
-{
-    [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
-
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-    // 'layer' is an autorelease object.
-	
-    [scene addChild:[WorldLayer node] z:1 tag:tagWorldLayer];
-    [scene addChild:[BackgroundLayer node] z:-2];	
-    [scene addChild:[HUDLayer node] z:2 tag:tagHudLayer];
-    [scene addChild:[OverlayLayer node] z:3 tag:tagOverlayLayer];
-    
-	// return the scene
-	return scene;
-}
 
 -(id) init
 {
 	if( (self=[super init])) {
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        
+
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+        
         SpriteSheet *enemySpriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
         PlayerBuilder *builder = 
-            [PlayerBuilder newBuilder:ccp(120,220) 
+            [PlayerBuilder newBuilder:ccp(50,220) 
                                  size:CGSizeMake(1.0f, 1.0f)
                           spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
-        Player *player = [[[builder buildSpriteSheet:spriteSheet] 
+        
+        Player *player = [[[[builder buildSpriteSheet:spriteSheet] 
                                        buildStrength:5] 
+                                       buildSpeed:2]
                                        build];
         
         EnemyBuilder *enemyBuilder = 
-            [EnemyBuilder newBuilder:ccp(220,220) 
+            [EnemyBuilder newBuilder:ccp(300,220) 
                                 size:CGSizeMake(1.0f, 1.0f)
                          spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         
@@ -71,17 +56,14 @@
         HealthPotion *healthPotion = [HealthPotion itemWithTexture:@"healthPotion.png"];
         healthPotion.position = ccp(300, 100);
         
-        [self addChild:player];
-        [self addChild:enemy];
-        [self addChild:healthPotion];
+        [self addChild:player z:1];
+        [self addChild:enemy z:1];
+        [self addChild:healthPotion z:1];
 
         // FOR DEBUGGING ONLY
         map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);
-        
-        /**
-         * Every node on this layer will follow the main player
-         * TODO: calculate the correct width for the world boundary
-         */
+        [self addChild:[BackgroundLayer node] z:0 tag:tagBackgroundLayer];
+
         [self runAction:[CCFollow actionWithTarget:player 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
         
@@ -95,28 +77,29 @@
 	[super dealloc];
 }
 
+BOOL didWeMove = FALSE;
 -(void) update:(ccTime) delta {
-    [[[ObjectContainer sharedInstance] player] update];
+
+    [[ObjectContainer sharedInstance] update];
+    
 }
 
--(void) visit
-{
-	if(!visible_)
-	{
+/*
+-(void) visit {
+    NSLog(@"calling visit");
+	if(!visible_) {
 		return;
 	}
     
-	[self sortChildrenByYPosition];
+	//[self sortChildrenByYPosition];
     
-	for(CCNode *child in children_)
-	{
-		[child visit];
-	}
+	//for(CCNode *child in children_) {
+	//	[child visit];
+	//}
 }
-
+*/
 // Sorts the children based on their Y position (lower Y = rendered later)
--(void) sortChildrenByYPosition
-{
+-(void) sortChildrenByYPosition {
 	// Sprites will always be partially ordered after the first sort, so use insert sort.
 	CCNode *testValue;
 	int length = children_.count;
@@ -125,10 +108,21 @@
 	for(int j = 1; j < length; j++)
 	{
 		testValue = [[children_ objectAtIndex:j] retain];
+        NSLog(@"lngth is %d, and tst valu is %@ and j is %d", length, testValue, j);
+        if([testValue isMemberOfClass:[BackgroundLayer class]]) {
+            NSLog(@"continue: %d", j);
+            continue;
+        }
+        CCNode * node;
 		for(i = j-1; i >= 0; i--)
 		{
-            CCNode * node = [children_ objectAtIndex:i];
-            
+            node = [children_ objectAtIndex:i];	
+            NSLog(@"checking other nodes: %@", node);
+
+            if([node isMemberOfClass:[BackgroundLayer class]]) {
+                NSLog(@"continue2");
+                continue;
+            }
             // Have to use the bottom of the sprite instead of the center so that it
             // looks more realistic.
             CGFloat nodeY = node.position.y - (node.boundingBox.size.height/2.0f);
@@ -140,7 +134,6 @@
             
 			[children_ replaceObjectAtIndex:i+1 withObject:[children_ objectAtIndex:i]];
 		}
-        
 		[children_ replaceObjectAtIndex:i+1 withObject:testValue];
         [testValue release];
 	}

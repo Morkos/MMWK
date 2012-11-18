@@ -10,10 +10,9 @@
 #import "Player.h"
 #import "Node.h"
 #import "Queue.h"
-
+#import "Enemy.h"
 // TODO: Sometimes adding this fixes errors, and then removing them doesn cause errors anymore
 @class Player, Background;
-
 @interface ObjectContainer : NSObject {
     NSMutableDictionary *objDictionary;
 	Player *player;
@@ -21,10 +20,14 @@
 }
 
 @property(nonatomic, retain) Player *player;
-@property(nonatomic, retain)     Gauge *enemyHealthGauge;
+@property(nonatomic, retain) Gauge *enemyHealthGauge;
 
 + (ObjectContainer *) sharedInstance;
+- (id) init;
+- (Player *) player;
 - (void) addObject:(CCNode *)object;
+- (void) update;
+- (NSArray *) findCollidingProps:(Prop *) prop fromContainer:(NSString *)containerKey;
 
 /**
  * Get all the props from a target container 

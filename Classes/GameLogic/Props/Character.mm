@@ -8,7 +8,7 @@
 
 #import "Character.h"
 #import "OverlayLayer.h"
-#import "CCBlade.h"
+#import "CCBlade.h"	
 #import "ParticleInvoker.h"
 #import "WoundedState.h"
 
@@ -39,20 +39,22 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 @implementation Character
 
 @synthesize spriteSheet,
-			currentState, 
-			physicsEngine,
+            physicsEngine,
+			fsm, 
             healthGauge,
 			currentDirection,
 			currentOrientation,
             maxHp,
             currentHp,
             strength,
-            defense;
+            defense,
+            speed,
+            behavior;
 
 
 //Private method
-- (void) move:(CGPoint)movement {
-    self.position = ccpAdd(position_, ccpMult(movement, 2.0f));
+//TODO: Mig
+- (void) isOrientationAdjustmentNeeded {
     switch (currentOrientation) {
         case ORIENTATION_FORWARD:
             self.flipX = false;
@@ -66,6 +68,10 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
             break;
     }
 }
+- (void) move:(CGPoint)movement {
+    self.position = ccpAdd(position_, ccpMult(movement, self.speed + 1.0f));
+    [self isOrientationAdjustmentNeeded];
+}
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) size 
@@ -73,17 +79,23 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 	
 	if(self = [super initWithTexture:spriteFrame.texture 
                                 rect:spriteFrame.rect]) {
-		self.position = pos;
+        self.position = pos;
         self.scaleX = size.width;
         self.scaleY = size.height;
+        
 		self.currentDirection = RIGHT;
 		self.currentOrientation = ORIENTATION_FORWARD;
 		self.physicsEngine = [PhysicsEngine getInstance];
+        self.healthGauge = [[Gauge alloc] init];
+        self.speed = 1.0;
+        self.fsm = [[StateMachine alloc] init];
         
         // Set default values
         self.strength = 1;
         self.maxHp = 10;
         self.currentHp = 10;
+        
+        self.behavior = [[SteeringBehavior alloc] init];
 	}
     
 	return self;
@@ -92,34 +104,47 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 - (void) update {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
-	[currentState updateState];
+    [fsm update];
 }
 
-- (void) runTo:(Direction) dir {
-    [currentState transitionToState:[MoveState createWithCharacter:self]];
-	currentDirection = dir;
-	
+- (void) setDirectionAndOrientation:(Direction) dir {
+    currentDirection = dir;
 	if (currentDirection != UP && currentDirection != DOWN) {
 		currentOrientation = getOrientationFromDirection(currentDirection);
 	}
 }
 
+- (void) runTo:(Direction) dir {
+    NSLog(@"character...%@", self);
+    [fsm.currentState transitionToState:[MoveState createWithCharacter:self]];
+	[self setDirectionAndOrientation:dir];
+}
+
 - (void) moveTowards:(Direction) dir {
 	[self move:cgPoints[dir]];
+    [self setDirectionAndOrientation:dir];
+}
+
+//TODO: take out?
+
+- (void) setPosition:(CGPoint) pt {
+    [super setPosition:pt];
+    [self isOrientationAdjustmentNeeded];
 }
 
 - (void) stand {
-    [currentState transitionToState:[StandState createWithCharacter:self]];
+    [fsm.currentState transitionToState:[StandState createWithCharacter:self]];
 }
 
 - (void) attack {
-    [currentState transitionToState:[AttackState createWithCharacter:self]];
+    [fsm.currentState transitionToState:[AttackState createWithCharacter:self]];
 }
 
 - (void) setState:(id<CharacterState>) newState {
-    [self.currentState release];
-    self.currentState = newState;
-    [self.currentState start];
+    NSLog(@"Transitioning from %@ to %@", fsm.currentState, newState);
+    [fsm.currentState release];
+    fsm.currentState = newState;
+    [fsm.currentState start];
 }
 
 - (void) attacksTarget:(Character *) target {
@@ -162,7 +187,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
     [spriteSheet release];
     [physicsEngine release];
     [healthGauge release];
-    [currentState release];
+    [fsm release];
     [super dealloc];
 }
 

@@ -62,7 +62,8 @@ typedef struct {
 typedef enum {
     tagOverlayLayer = 1,
     tagWorldLayer = 2,
-    tagHudLayer = 3
+    tagBackgroundLayer = 3,
+    tagHudLayer = 4
 } CCNodeTag; 
 
 typedef enum {

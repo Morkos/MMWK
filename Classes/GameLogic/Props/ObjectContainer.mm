@@ -42,6 +42,7 @@ static ObjectContainer *singleContainer;
 	if(IS_SUBCLASS(object, Player)) {
 		if (!player) {
 			player = (Player *) object;
+            [objDictionary addObjectToArray:object forKey:@"player"];
 		} else {
 			DLOG("ERROR! More than one player!");
 		}
@@ -56,8 +57,10 @@ static ObjectContainer *singleContainer;
     return [objDictionary objectForKey:containerKey];
 }
 
+
 - (NSArray *) findCollidingProps:(Prop *) target 
                    fromContainer:(NSString *) containerKey {
+
     NSArray *props = [objDictionary objectForKey:containerKey];
     NSMutableArray *collidingProps = [NSMutableArray arrayWithCapacity:[props count]];
     
@@ -71,6 +74,15 @@ static ObjectContainer *singleContainer;
     }
     
     return collidingProps;
+}
+
+- (void) update {
+    [objDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * key, NSMutableArray * objs, BOOL *stop) {
+        for(id obj in objs) {
+            [obj update];
+            
+        }
+    }];
 }
 
 - (void) dealloc {

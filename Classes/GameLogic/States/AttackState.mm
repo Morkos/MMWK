@@ -11,6 +11,8 @@
 #import "Enemy.h"
 #import "ParticleInvoker.h"
 #import "SimpleAudioEngine.h"
+#import "FleeState.h"
+
 
 @interface AttackState ()
     -(id) initWithCharacter:(Character *) characterParam;
@@ -84,7 +86,11 @@ const uint maxAttacks = 3;
 }
 
 - (void) transitionToStand {
-    [character setState:[StandState createWithCharacter:character]];;
+    if (IS_SUBCLASS(character, [Enemy class])) {
+        [character setState:[FleeState createWithCharacter:character]];
+    } else {
+        [character setState:[StandState createWithCharacter:character]];;
+    }
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

@@ -15,9 +15,11 @@
                           size:(CGSize)size 
                    spriteFrame:(CCSpriteFrame *) spriteFrame {
     PlayerBuilder *builder = [[PlayerBuilder alloc] init];
+    [builder.character autorelease];
     builder.character = [[Player alloc] init:position 
-                                     size:size
-                                   spriteFrame:spriteFrame];
+                                        size:size
+                                 spriteFrame:spriteFrame];
+
     return builder;
 }
 

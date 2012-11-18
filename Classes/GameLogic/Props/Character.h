@@ -16,25 +16,34 @@
 #import "AttackState.h"
 #import "StandState.h"
 #import "Gauge.h"
+#import "StateMachine.h"
+#import "SteeringBehavior.h"
 
+@class SteeringBehavior;
 @interface Character : Prop {
-    SpriteSheet *spriteSheet;
-	PhysicsEngine *physicsEngine;
-    Gauge *healthGauge;
-	id<CharacterState> currentState;
-	Direction currentDirection;
-	Orientation currentOrientation;
+    SpriteSheet * spriteSheet;
+    PhysicsEngine * physicsEngine;
+    StateMachine * fsm;
+    SteeringBehavior * behavior;
+
+    Direction currentDirection;
+    Orientation currentOrientation;
     
     CGFloat maxHp, currentHp, strength, defense;
+    CGFloat speed;
+    Gauge *healthGauge;
+    
 }
 
-@property (nonatomic, retain) SpriteSheet *spriteSheet;
+@property (nonatomic, retain) SpriteSheet * spriteSheet;
+@property (nonatomic, retain) StateMachine * fsm;
 @property (nonatomic, retain) PhysicsEngine *physicsEngine;
 @property (nonatomic, retain) Gauge *healthGauge;
-@property (nonatomic, retain) id<CharacterState> currentState;
 @property (nonatomic, assign) Direction currentDirection;
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, assign) CGFloat maxHp, currentHp, strength, defense;
+@property (nonatomic, assign) CGFloat speed;
+@property (nonatomic, retain) SteeringBehavior * behavior;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz

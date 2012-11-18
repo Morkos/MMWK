@@ -27,6 +27,7 @@
 - (CharacterBuilder *) buildHealth:(NSUInteger) health;
 - (CharacterBuilder *) buildStrength:(NSUInteger) strength;
 - (CharacterBuilder *) buildDefense:(NSUInteger) defense;
+- (CharacterBuilder *) buildSpeed:(CGFloat) speed;
 - (CharacterBuilder *) buildHealthGauge:(Gauge *) healthGauge; 
 - (id) build;
 

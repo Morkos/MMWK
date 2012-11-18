@@ -14,6 +14,7 @@
 + (EnemyBuilder *) newBuilder:(CGPoint)position 
                          size:(CGSize)size 
                   spriteFrame:(CCSpriteFrame *) spriteFrame {
+    
     EnemyBuilder *builder = [[EnemyBuilder alloc] init];
     builder.character = [[Enemy alloc] init:position 
                                        size:size

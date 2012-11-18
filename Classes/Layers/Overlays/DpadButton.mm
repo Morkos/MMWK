@@ -21,8 +21,7 @@
     CGFloat width = sprite.contentSize.width * sprite.scaleX;
     CGFloat height = sprite.contentSize.height * sprite.scaleY;
     
-    CoordinateSystem * coordinateSystem = [CoordinateSystem createWithCenter:sprite.position
-                                                                    imgWidth:width 
+    CoordinateSystem * coordinateSystem = [CoordinateSystem createWithCenter:width 
                                                                    imgHeight:height];
     
     button.coordinateSystem = coordinateSystem;
@@ -32,7 +31,8 @@
 - (void) decideHowPlayerShouldMove:(Character *) player
                              point:(CGPoint) point {
     
-    Direction direction = [self.coordinateSystem decideDirectionFromPoint:point];
+    Direction direction = [self.coordinateSystem decideDirectionFromSrcToTarget:sprite.position
+                                                                    targetPoint:point];
 	if (direction == NO_WHERE) {
 		[player stand];
 	} else {

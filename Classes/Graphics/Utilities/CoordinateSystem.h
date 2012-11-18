@@ -18,27 +18,23 @@ static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.10f;
 @interface CoordinateSystem : NSObject {
 	CGFloat width;
 	CGFloat height;
-    CGPoint center;
 }
 
 @property (nonatomic, assign) CGFloat width;
 @property (nonatomic, assign) CGFloat height;
-@property (nonatomic, assign) CGPoint center;
 
 /**
  * Sets up a simple 2D coordinate system.
  * NOTE: this mainly used by the dpad/joystick, but could possibly 
  * be used for A.I.
  *
- * @param center - center position of the object
  * @param imgWidth - width of object
  * @param imgHeight - height of object
  * @return CoordinateSystem
  *
  */
-+ (CoordinateSystem *) createWithCenter:(CGPoint) center
-                               imgWidth:(CGFloat)imgWidth 
-                              imgHeight:(CGFloat)imgHeight;
++ (CoordinateSystem *) createWithCenter:(CGFloat) imgWidth 
+                              imgHeight:(CGFloat) imgHeight;
 
 + (CGFloat) calculateDegreesFromPoint:(CGPoint) fromPoint
                               toPoint:(CGPoint) toPoint;
@@ -54,7 +50,8 @@ static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.10f;
  * @param point - coordinates of the point
  * @return Direction 
  */
-- (Direction) decideDirectionFromPoint:(CGPoint) point;
+- (Direction) decideDirectionFromSrcToTarget:(CGPoint) srcPoint
+                                 targetPoint:(CGPoint) targetPoint;
 
 
 @end

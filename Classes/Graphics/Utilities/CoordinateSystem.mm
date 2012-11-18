@@ -11,7 +11,8 @@
 #import "Loggers.h"
 
 @implementation CoordinateSystem
-@synthesize width, height, center;
+@synthesize width, 
+            height;
 
 //Data-driven technique to get direction from degrees
 //start counter-clock wise, and have the 0th index be the RIGHT direction
@@ -29,14 +30,12 @@ static Direction indexToDirection[MAX_DIRECTIONS + 1] = {
 };
 static BOOL withinCenterOfRadius(CGPoint, CGFloat);
 
-+ (CoordinateSystem *) createWithCenter:(CGPoint) center
-                               imgWidth:(CGFloat) imgWidth 
++ (CoordinateSystem *) createWithCenter:(CGFloat) imgWidth 
                               imgHeight:(CGFloat) imgHeight {
 	
     CoordinateSystem *coordinateSystem = [[CoordinateSystem alloc] init];
     coordinateSystem.width = imgWidth;
     coordinateSystem.height = imgHeight;
-    coordinateSystem.center = center;
     
 	return coordinateSystem;
 	
@@ -63,21 +62,22 @@ static BOOL withinCenterOfRadius(CGPoint, CGFloat);
     return degrees;
 }
 
-- (Direction) decideDirectionFromPoint:(CGPoint) point {
-	CGFloat degrees = [CoordinateSystem calculateDegreesFromPoint:self.center 
-                                        toPoint:point];
+- (Direction) decideDirectionFromSrcToTarget:(CGPoint) srcPoint
+                                 targetPoint:(CGPoint) targetPoint {
+	CGFloat degrees = [CoordinateSystem calculateDegreesFromPoint:srcPoint
+                                                          toPoint:targetPoint];
     
     degrees += UP_RIGHT_DIRECTION_STARTS_AT_DEGREE;
 	
     //find radius using pythag. d thm
 	CGFloat radius = PYTHAG(self.width, self.height);
     
-    NSLog(@"Center: (%f, %f), Point (%f, %f), degrees: %f, radius: %f", center.x, 
-          center.y, point.x, point.y, degrees, radius);
+    //NSLog(@"SrcPoint: (%f, %f), TargetPoint: (%f, %f), degrees: %f, radius: %f", srcPoint.x, 
+    //      srcPoint.y, targetPoint.x, targetPoint.y, degrees, radius);
     
     // Shift point so that it is relative to origin
-	if (withinCenterOfRadius(CGPointMake(point.x - (self.width/2), 
-                                         point.y - (self.height/2)), 
+	if (withinCenterOfRadius(CGPointMake(targetPoint.x - (self.width/2), 
+                                         targetPoint.y - (self.height/2)), 
                              radius)) {
 		return NO_WHERE;
 		

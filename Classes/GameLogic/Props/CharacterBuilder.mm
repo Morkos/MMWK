@@ -45,6 +45,11 @@
     return self;
 }
 
+- (CharacterBuilder *) buildSpeed:(CGFloat)speed {
+    self.character.speed = speed;
+    return self;
+}
+
 - (CharacterBuilder *) buildHealthGauge:(Gauge *) healthGauge {
     self.character.healthGauge = healthGauge;
     return self;

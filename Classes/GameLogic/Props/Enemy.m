@@ -10,7 +10,11 @@
 
 @implementation Enemy
 
-- (void) update {
-    [self.currentState updateState];
+/*
+-(void) update {
+    cpVect newVect = [self.behavior calculate:self];
+    
+    self.position = newVect;
 }
+ */
 @end

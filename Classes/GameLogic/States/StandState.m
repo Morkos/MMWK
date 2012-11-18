@@ -7,6 +7,12 @@
 //
 
 #import "StandState.h"
+#import "ChaseState.h"
+#import "Enemy.h"
+#import "Player.h"
+#import "ObjectContainer.h"
+#import "FleeState.h"
+#import "PolarCoordinates.h"
 
 @implementation StandState
 
@@ -27,6 +33,17 @@
 }
 
 - (void) updateState {
+    //NSLog(@"updating state...%@", self.character);
+    if ([self.character isMemberOfClass:[Enemy class]]) {
+        Player * player = [[ObjectContainer sharedInstance] player];
+        
+        CGFloat distanceToPlayer = DISTANCE(player.position, self.character.position);
+
+        if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
+            [self.character setState:[AttackState createWithCharacter:self.character]];
+            
+        }
+    }
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

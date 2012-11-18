@@ -20,6 +20,7 @@
 }
 
 - (void) start {
+    NSLog(@"Starting MoveState for %@", self.character);
     [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE

@@ -11,6 +11,7 @@
 #import "IntroLayer.h"
 #import "WorldLayer.h"
 #import "SimpleAudioEngine.h"
+#import "Level1.h"
 
 #pragma mark - IntroLayer
 
@@ -61,6 +62,6 @@
 
 -(void) makeTransition:(ccTime)dt
 {
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[WorldLayer scene] withColor:ccWHITE]];
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Level1 scene] withColor:ccWHITE]];
 }
 @end
