@@ -11,9 +11,18 @@
 #import "Player.h"
 
 @interface Item : Prop {
-    
+    bool isPickedUp;
 }
 
+/**
+ * This gets called when a player picks up an item
+ * @player The player that picks up this item
+ */
 - (void) isPickedUpBy:(Player *) player;
 
+/**
+ * Override this method in subclass
+ * @player The player that picks up this item
+ */
+- (void) actionOnPickup:(Player *) player;
 @end

@@ -46,4 +46,11 @@
                                           comboKey:ANIMATOR_ATTACK]];
 }
 
+- (void) setHealthGauge:(Gauge *) healthGaugeParam {
+    healthGauge = [healthGaugeParam retain];
+    [healthGauge animateBarFromStartCapacity:currentHp 
+                                 endCapacity:currentHp 
+                                 maxCapacity:maxHp];
+}
+
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "MoveState.h"
+#import "Player.h"
+#import "Item.h"
+#import "ObjectContainer.h"
 
 @implementation MoveState
 
@@ -20,7 +23,7 @@
 }
 
 - (void) start {
-    NSLog(@"Starting MoveState for %@", self.character);
+    CCLOGINFO(@"Starting MoveState for %@", self.character);
     [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE
@@ -29,10 +32,20 @@
 
 - (void) updateState {
     [character moveTowards:character.currentDirection];
+    
+    if (IS_SUBCLASS(character, Player)) {
+        Player *player = (Player *) character;
+        NSArray *items = 
+            [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ITEMS];
+        
+        for (Item *item in items) {
+            [item isPickedUpBy:player];
+        }
+    }
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {
-    if (![[newState class] isSubclassOfClass:[MoveState class]]) {
+    if (!IS_SUBCLASS(newState, MoveState)) {
         [character setState:newState];
     }
 }

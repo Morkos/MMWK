@@ -12,5 +12,7 @@
     CGFloat hpIncrease;
 }
 
+@property(nonatomic, assign) CGFloat hpIncrease;
+
 + (HealthPotion *) itemWithTexture:(NSString *) textureFilename;
 @end

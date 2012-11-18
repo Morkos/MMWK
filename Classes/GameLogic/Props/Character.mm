@@ -172,13 +172,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
                                  maxCapacity:maxHp];
 }
 
-- (void) setHealthGauge:(Gauge *) healthGaugeParam {
-    healthGauge = [healthGaugeParam retain];
-    [healthGauge animateBarFromStartCapacity:currentHp 
-                                 endCapacity:currentHp 
-                                 maxCapacity:maxHp];
-}
-
 + (Direction) oppositeDirection:(Direction) direction {
     return directionToOpposite[direction];
 }

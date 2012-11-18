@@ -7,16 +7,27 @@
 //
 
 #import "HealthPotion.h"
+#import "SimpleAudioEngine.h"
 
 @implementation HealthPotion
+
+@synthesize hpIncrease;
 
 + (HealthPotion *) itemWithTexture:(NSString *) textureFilename {
     return [[[HealthPotion alloc] initWithFile:textureFilename] autorelease];
 }
 
-- (void) isPickedUpBy:(Player *)player {
+- (id) initWithFile:(NSString *) filename {
+    if (self = [super initWithFile:filename]) {
+        hpIncrease = 0;
+    }
+    
+    return self;
+}
+
+- (void) actionOnPickup:(Player *)player {
     [player increaseHp:hpIncrease];
-    [super isPickedUpBy:player];
+    [[SimpleAudioEngine sharedEngine] playEffect:@"pickupItem.wav"];
 }
 
 @end

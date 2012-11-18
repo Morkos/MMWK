@@ -11,7 +11,15 @@
 @implementation Item
 
 - (void) isPickedUpBy:(Player *) player {
-    [self removeFromParentAndCleanup:false];
+    if (!isPickedUp) {
+        isPickedUp = true;
+        [self actionOnPickup:player];
+        [self removeFromParentAndCleanup:false];
+    }
+}
+
+- (void) actionOnPickup:(Player *) player {
+    // To be overridden
 }
 
 @end

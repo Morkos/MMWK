@@ -25,7 +25,8 @@
         
         //TODO: Support multiple bar texture layers
         assert([barTextures count] == 1);
-        barProgressTimer = [CCProgressTimer progressWithSprite:[CCSprite spriteWithFile:[barTextures objectAtIndex:0]]];
+        barProgressTimer = 
+            [CCProgressTimer progressWithSprite:[CCSprite spriteWithFile:[barTextures objectAtIndex:0]]];
         barProgressTimer.anchorPoint = ccp(0, 0);
         barProgressTimer.midpoint = ccp(0, 0);
         barProgressTimer.type = kCCProgressTimerTypeBar;

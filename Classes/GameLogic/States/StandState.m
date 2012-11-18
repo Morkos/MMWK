@@ -39,7 +39,6 @@
         
         if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
             [self.character setState:[AttackState createWithCharacter:self.character]];
-            
         }
     }
 }

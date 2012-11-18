@@ -27,7 +27,7 @@
 
 -(id) init
 {
-	if( (self=[super init])) {
+    if( (self=[super init])) {
         CGSize winSize = [[CCDirector sharedDirector] winSize];
 
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
@@ -43,6 +43,8 @@
                                        buildStrength:5] 
                                        buildSpeed:2]
                                        build];
+        player.currentHp = 80;
+        player.maxHp = 100;
         
         EnemyBuilder *enemyBuilder = 
             [EnemyBuilder newBuilder:ccp(300,220) 
@@ -55,88 +57,74 @@
         
         HealthPotion *healthPotion = [HealthPotion itemWithTexture:@"healthPotion.png"];
         healthPotion.position = ccp(300, 100);
+        healthPotion.hpIncrease = 20;
         
-        [self addChild:player z:1];
-        [self addChild:enemy z:1];
-        [self addChild:healthPotion z:1];
+        [self addChild:player];
+        [self addChild:enemy];
+        [self addChild:healthPotion];
 
         // FOR DEBUGGING ONLY
         map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);
-        [self addChild:[BackgroundLayer node] z:0 tag:tagBackgroundLayer];
+        [self addChild:[BackgroundLayer node]];
 
         [self runAction:[CCFollow actionWithTarget:player 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
         
-		[self scheduleUpdate];
-	}
-	
-	return self;
+        [self scheduleUpdate];
+    }
+    
+    return self;
 }
 
 - (void)dealloc {
-	[super dealloc];
+    [super dealloc];
 }
 
-BOOL didWeMove = FALSE;
 -(void) update:(ccTime) delta {
-
     [[ObjectContainer sharedInstance] update];
-    
 }
 
-/*
 -(void) visit {
-    NSLog(@"calling visit");
-	if(!visible_) {
-		return;
-	}
+    if(!visible_) {
+        return;
+    }
     
-	//[self sortChildrenByYPosition];
+    [self sortChildrenByYPosition];
     
-	//for(CCNode *child in children_) {
-	//	[child visit];
-	//}
+    for(CCNode *child in children_) {
+      [child visit];
+    }
 }
-*/
+
 // Sorts the children based on their Y position (lower Y = rendered later)
 -(void) sortChildrenByYPosition {
-	// Sprites will always be partially ordered after the first sort, so use insert sort.
-	CCNode *testValue;
-	int length = children_.count;
-	int i;
+    // Sprites will always be partially ordered after the first sort, so use insert sort.
+    CCNode *testValue;
+    int length = children_.count;
+    int i;
     
-	for(int j = 1; j < length; j++)
-	{
-		testValue = [[children_ objectAtIndex:j] retain];
-        NSLog(@"lngth is %d, and tst valu is %@ and j is %d", length, testValue, j);
-        if([testValue isMemberOfClass:[BackgroundLayer class]]) {
-            NSLog(@"continue: %d", j);
-            continue;
-        }
-        CCNode * node;
-		for(i = j-1; i >= 0; i--)
-		{
-            node = [children_ objectAtIndex:i];	
-            NSLog(@"checking other nodes: %@", node);
-
-            if([node isMemberOfClass:[BackgroundLayer class]]) {
-                NSLog(@"continue2");
-                continue;
-            }
+    for(int j = 1; j < length; j++)
+    {
+        testValue = [[children_ objectAtIndex:j] retain];
+        CGFloat testValueY = testValue.position.y - (testValue.boundingBox.size.height/2.0f);
+        for(i = j-1; i >= 0; i--)
+        {
+            CCNode *node = [children_ objectAtIndex:i]; 
             // Have to use the bottom of the sprite instead of the center so that it
             // looks more realistic.
             CGFloat nodeY = node.position.y - (node.boundingBox.size.height/2.0f);
-            CGFloat testValueY = testValue.position.y - (testValue.boundingBox.size.height/2.0f);
             
-            if (nodeY >= testValueY) {
+            if (IS_SUBCLASS(node, BackgroundLayer) || 
+                (!IS_SUBCLASS(testValue, BackgroundLayer) && nodeY >= testValueY)) {
                 break;
             }
             
-			[children_ replaceObjectAtIndex:i+1 withObject:[children_ objectAtIndex:i]];
-		}
-		[children_ replaceObjectAtIndex:i+1 withObject:testValue];
+            [children_ replaceObjectAtIndex:i+1 withObject:[children_ objectAtIndex:i]];
+        }
+        [children_ replaceObjectAtIndex:i+1 withObject:testValue];
         [testValue release];
-	}
+    }
+    
 }
 
 - (void) addChild:(CCNode *)node z:(NSInteger)z tag:(NSInteger)tag {
@@ -147,48 +135,48 @@ BOOL didWeMove = FALSE;
 #pragma mark GameKit delegate
 
 - (void) ccTouchesBegan:(NSSet *) touches withEvent:(UIEvent *) event{
-	for (UITouch *touch in touches) {
-		CCBlade *w = [CCBlade bladeWithMaximumPoint:50];
+    for (UITouch *touch in touches) {
+        CCBlade *w = [CCBlade bladeWithMaximumPoint:50];
         w.autoDim = YES;
         int rand = arc4random() % 3 + 1;
-		w.texture = [[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"streak%d.png",rand]];
+        w.texture = [[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"streak%d.png",rand]];
         
         CFDictionaryAddValue(map,touch,w);
         
-		[self addChild:w];
-		CGPoint pos = [touch locationInView:touch.view];
-		pos = [[CCDirector sharedDirector] convertToGL:pos];
+        [self addChild:w];
+        CGPoint pos = [touch locationInView:touch.view];
+        pos = [[CCDirector sharedDirector] convertToGL:pos];
         NSLog(@"Touch position: %@", NSStringFromCGPoint(pos));
-		[w push:pos];
-	}
+        [w push:pos];
+    }
 }
 
 - (void) ccTouchesMoved:(NSSet *) touches withEvent:(UIEvent *) event{
-	for (UITouch *touch in touches) {
-		CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
-		CGPoint pos = [touch locationInView:touch.view];
-		pos = [[CCDirector sharedDirector] convertToGL:pos];
-		[w push:pos];
-	}
+    for (UITouch *touch in touches) {
+        CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
+        CGPoint pos = [touch locationInView:touch.view];
+        pos = [[CCDirector sharedDirector] convertToGL:pos];
+        [w push:pos];
+    }
 }
 
 - (void) ccTouchesEnded:(NSSet *) touches withEvent:(UIEvent *) event{
-	for (UITouch *touch in touches) {
-		CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
+    for (UITouch *touch in touches) {
+        CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
         [w finish];
         CFDictionaryRemoveValue(map,touch);
-	}
+    }
 }
 
 
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app navController] dismissModalViewControllerAnimated:YES];
 }
 
 -(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app navController] dismissModalViewControllerAnimated:YES];
 }
 
 @end
