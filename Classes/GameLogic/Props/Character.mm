@@ -124,7 +124,9 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 
 - (void) attacksTarget:(Character *) target {
     NSUInteger previousHp = target.currentHp;
-    target.currentHp -= strength;
+    
+    // TODO: If zero hp, the target should die
+    target.currentHp = max(0, target.currentHp - strength);
     
     [target.healthGauge animateBarFromStartCapacity:previousHp
                                         endCapacity:target.currentHp 
