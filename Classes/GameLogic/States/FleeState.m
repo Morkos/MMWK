@@ -10,12 +10,9 @@
 #import "Character.h"
 #import "Player.h"
 #import "ObjectContainer.h"
-//#import "MacroHelpers.h"
 #import "PolarCoordinates.h"
 
 @implementation FleeState
-
-static Direction directionToFlee;
 
 + (FleeState *) createWithCharacter:(Character *) character {
     FleeState *state = [[FleeState alloc] init];
@@ -25,17 +22,16 @@ static Direction directionToFlee;
 }
 -(void) start {
     [super start];
-    
-    NSLog(@"Enemy is in harm's way...");
     Player * player = [ObjectContainer sharedInstance].player;
-
-    directionToFlee = player.currentDirection;
 }
 
 -(void) updateState {    
+    cpVect result = [character.behavior flee:character];
+    character.position = result;
+    
     Player * player = [ObjectContainer sharedInstance].player;
-    [character moveTowards:directionToFlee];
-    CGFloat distanceFromPlayer = DISTANCE(player.position, self.character.position);
+    
+    CGFloat distanceFromPlayer = cpvdist(player.position, character.position);
     
     if(distanceFromPlayer > 150) {
         [character setState:[StandState createWithCharacter:self.character]];

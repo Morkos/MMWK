@@ -39,20 +39,26 @@
         [self.coordinateSystem decideDirectionFromSrcToTarget:self.character.position
                                                   targetPoint:player.position]; 
     
-    CGFloat pct = 0.7f;
-    CGRect adjustedRect = CGRectMake(pct * player.position.x, 
-                                     pct * player.position.y, 
-                                     pct * player.contentSize.width,
-                                     pct * player.contentSize.height);
+    CGFloat pct = 0.9f;
+    CGRect playerRect = CGRectMake(pct * player.position.x, 
+                                   pct * player.position.y, 
+                                   pct * player.contentSize.width,
+                                   pct * player.contentSize.height);
     
-    if(CGRectIntersectsRect(adjustedRect, self.character.boundingBox)) {
+    CGRect enemyRect = CGRectMake(pct * self.character.position.x, 
+                                  pct * self.character.position.y, 
+                                  pct * self.character.contentSize.width, 
+                                  pct * self.character.contentSize.height);
+    
+    if(CGRectIntersectsRect(playerRect, enemyRect)) {
+        NSLog(@"player position %lf, %lf, and enemy %lf, %lf", player.position.x, player.position.y, self.character.position.x, self.character.position.y);
         CGFloat newX = self.character.position.x - player.position.x;
         if(newX > 0) {
-            [self.character setCurrentOrientation:ORIENTATION_BACKWARDS];
-        } else {
             [self.character setCurrentOrientation:ORIENTATION_FORWARD];
+        } else {
+            [self.character setCurrentOrientation:ORIENTATION_BACKWARDS];
         }
-        [self.character setState:[StandState createWithCharacter:self.character]];   
+        [self.character setState:[AttackState createWithCharacter:self.character]];   
 
     } else {
         [self.character moveTowards:directionToChase];

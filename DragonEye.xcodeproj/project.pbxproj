@@ -242,6 +242,7 @@
 		305EC8DC1654C80D00D45881 /* streak2.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B71654C80D00D45881 /* streak2.png */; };
 		305EC8DD1654C80D00D45881 /* streak3-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B81654C80D00D45881 /* streak3-hd.png */; };
 		305EC8DE1654C80D00D45881 /* streak3.png in Resources */ = {isa = PBXBuildFile; fileRef = 305EC8B91654C80D00D45881 /* streak3.png */; };
+		30BAA0CC1658829800DB97BA /* SteeringBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BAA0CB1658829800DB97BA /* SteeringBehavior.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -689,6 +690,8 @@
 		305EC8B71654C80D00D45881 /* streak2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak2.png; sourceTree = "<group>"; };
 		305EC8B81654C80D00D45881 /* streak3-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "streak3-hd.png"; sourceTree = "<group>"; };
 		305EC8B91654C80D00D45881 /* streak3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = streak3.png; sourceTree = "<group>"; };
+		30BAA0CA1658829800DB97BA /* SteeringBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SteeringBehavior.h; sourceTree = "<group>"; };
+		30BAA0CB1658829800DB97BA /* SteeringBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SteeringBehavior.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1293,6 +1296,7 @@
 		305EC8231654C71D00D45881 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
+				30BAA0C81658828800DB97BA /* AI */,
 				305EC8241654C71D00D45881 /* PhysicsEngine.h */,
 				305EC8251654C71D00D45881 /* PhysicsEngine.mm */,
 			);
@@ -1462,6 +1466,15 @@
 				305EC8B21654C80D00D45881 /* swordSwing.wav */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		30BAA0C81658828800DB97BA /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				30BAA0CA1658829800DB97BA /* SteeringBehavior.h */,
+				30BAA0CB1658829800DB97BA /* SteeringBehavior.m */,
+			);
+			path = AI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1750,6 +1763,7 @@
 				3020EE34165857CC0004EA5D /* VerticalGauge.m in Sources */,
 				3020EE35165857CC0004EA5D /* EnemyHealthGauge.m in Sources */,
 				3020EE39165857EC0004EA5D /* CCUtil.m in Sources */,
+				30BAA0CC1658829800DB97BA /* SteeringBehavior.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

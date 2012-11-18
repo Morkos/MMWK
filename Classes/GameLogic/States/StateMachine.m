@@ -9,6 +9,7 @@
 #import "StateMachine.h"
 #import "StandState.h"
 
+//TODO: migrate other state management logic to here
 @implementation StateMachine
 @synthesize currentState;
 

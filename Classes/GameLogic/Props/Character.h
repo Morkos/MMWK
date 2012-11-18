@@ -17,12 +17,15 @@
 #import "StandState.h"
 #import "Gauge.h"
 #import "StateMachine.h"
+#import "SteeringBehavior.h"
 
+@class SteeringBehavior;
 @interface Character : Prop {
     SpriteSheet * spriteSheet;
 	PhysicsEngine * physicsEngine;
 	StateMachine * fsm;
-    
+    SteeringBehavior * behavior;
+
 	Direction currentDirection;
 	Orientation currentOrientation;
 
@@ -41,6 +44,7 @@
 @property (nonatomic, assign) Orientation currentOrientation;
 @property (nonatomic, assign) CGFloat speed;
 @property (nonatomic, assign) NSUInteger maxHp, currentHp, strength, defense;
+@property (nonatomic, retain) SteeringBehavior * behavior;
 
 - (id) init:(CGPoint) pos
 	   size:(CGSize) sz

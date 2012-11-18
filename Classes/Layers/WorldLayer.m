@@ -34,7 +34,7 @@
         SpriteSheet *enemySpriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
 
         PlayerBuilder *builder = 
-            [PlayerBuilder newBuilder:ccp(120,220) 
+            [PlayerBuilder newBuilder:ccp(50,220) 
                                  size:CGSizeMake(1.0f, 1.0f)
                           spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         
@@ -44,7 +44,7 @@
                                        build];
         
         EnemyBuilder *enemyBuilder = 
-            [EnemyBuilder newBuilder:ccp(220,220) 
+            [EnemyBuilder newBuilder:ccp(300,220) 
                                 size:CGSizeMake(1.0f, 1.0f)
                          spriteFrame:[enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         

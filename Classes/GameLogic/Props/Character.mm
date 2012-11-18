@@ -48,15 +48,13 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
             currentHp,
             strength,
             defense,
-            speed;
+            speed,
+            behavior;
 
 
-#import "Player.h"
-#import "Enemy.h"
 //Private method
-- (void) move:(CGPoint)movement {
-    self.position = ccpAdd(position_, ccpMult(movement, self.speed + 1.0f));
-    
+//TODO: Mig
+- (void) isOrientationAdjustmentNeeded {
     switch (currentOrientation) {
         case ORIENTATION_FORWARD:
             self.flipX = false;
@@ -69,6 +67,10 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
         default:
             break;
     }
+}
+- (void) move:(CGPoint)movement {
+    self.position = ccpAdd(position_, ccpMult(movement, self.speed + 1.0f));
+    [self isOrientationAdjustmentNeeded];
 }
 
 - (id) init:(CGPoint) pos
@@ -92,6 +94,8 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
         self.strength = 1;
         self.maxHp = 10;
         self.currentHp = 10;
+        
+        self.behavior = [[SteeringBehavior alloc] init];
 	}
     
 	return self;
@@ -119,6 +123,13 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 - (void) moveTowards:(Direction) dir {
 	[self move:cgPoints[dir]];
     [self setDirectionAndOrientation:dir];
+}
+
+//TODO: take out?
+
+- (void) setPosition:(CGPoint) pt {
+    [super setPosition:pt];
+    [self isOrientationAdjustmentNeeded];
 }
 
 - (void) stand {
