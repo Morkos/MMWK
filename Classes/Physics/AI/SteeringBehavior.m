@@ -23,6 +23,7 @@ static double randomClamp() {
 
 - (cpVect) seek:(Character *) character {
     //Player * player = [ObjectContainer sharedInstance].player;
+    return CGPointZero;
 }
 
 - (id) init {
@@ -63,6 +64,7 @@ static double randomClamp() {
     
     return pt;
 }
+
 - (cpVect) calculate:(Character *) character {
     return [self flee:character];
 }
