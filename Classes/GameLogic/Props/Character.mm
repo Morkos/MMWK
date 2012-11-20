@@ -105,6 +105,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 - (void) update {
 	//TLOG("Character position: (%lf, %lf)", self.position.x, self.position.y);
     [fsm update];
+    [super update];
 }
 
 - (void) setDirectionAndOrientation:(Direction) dir {
@@ -115,7 +116,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) runTo:(Direction) dir {
-    NSLog(@"character...%@", self);
+    CCLOGINFO(@"character...%@", self);
     [fsm.currentState transitionToState:[MoveState createWithCharacter:self]];
 	[self setDirectionAndOrientation:dir];
 }
@@ -126,7 +127,6 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 //TODO: take out?
-
 - (void) setPosition:(CGPoint) pt {
     [super setPosition:pt];
     [self isOrientationAdjustmentNeeded];
@@ -141,7 +141,7 @@ static Direction directionToOpposite[MAX_DIRECTIONS] = {
 }
 
 - (void) setState:(id<CharacterState>) newState {
-    NSLog(@"Transitioning from %@ to %@", fsm.currentState, newState);
+    CCLOG(@"Transitioning from %@ to %@", fsm.currentState, newState);
     [fsm.currentState release];
     fsm.currentState = newState;
     [fsm.currentState start];

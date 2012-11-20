@@ -59,13 +59,11 @@
         healthPotion.position = ccp(300, 100);
         healthPotion.hpIncrease = 20;
         
-        [self addChild:player];
-        [self addChild:enemy];
-        [self addChild:healthPotion];
+        [self addChild:player z:1];
+        [self addChild:enemy z:1];
+        [self addChild:healthPotion z:1];
 
-        // FOR DEBUGGING ONLY
-        map = CFDictionaryCreateMutable(NULL,0,NULL,NULL);
-        [self addChild:[BackgroundLayer node]];
+        [self addChild:[BackgroundLayer node] z:0];
 
         [self runAction:[CCFollow actionWithTarget:player 
                                      worldBoundary:CGRectMake(0, 0, 2000, winSize.height)]];
@@ -84,7 +82,7 @@
     [[ObjectContainer sharedInstance] update];
 }
 
--(void) visit {
+/*-(void) visit {
     if(!visible_) {
         return;
     }
@@ -94,7 +92,7 @@
     for(CCNode *child in children_) {
       [child visit];
     }
-}
+}*/
 
 // Sorts the children based on their Y position (lower Y = rendered later)
 -(void) sortChildrenByYPosition {
@@ -133,41 +131,6 @@
 }
 
 #pragma mark GameKit delegate
-
-- (void) ccTouchesBegan:(NSSet *) touches withEvent:(UIEvent *) event{
-    for (UITouch *touch in touches) {
-        CCBlade *w = [CCBlade bladeWithMaximumPoint:50];
-        w.autoDim = YES;
-        int rand = arc4random() % 3 + 1;
-        w.texture = [[CCTextureCache sharedTextureCache] addImage:[NSString stringWithFormat:@"streak%d.png",rand]];
-        
-        CFDictionaryAddValue(map,touch,w);
-        
-        [self addChild:w];
-        CGPoint pos = [touch locationInView:touch.view];
-        pos = [[CCDirector sharedDirector] convertToGL:pos];
-        NSLog(@"Touch position: %@", NSStringFromCGPoint(pos));
-        [w push:pos];
-    }
-}
-
-- (void) ccTouchesMoved:(NSSet *) touches withEvent:(UIEvent *) event{
-    for (UITouch *touch in touches) {
-        CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
-        CGPoint pos = [touch locationInView:touch.view];
-        pos = [[CCDirector sharedDirector] convertToGL:pos];
-        [w push:pos];
-    }
-}
-
-- (void) ccTouchesEnded:(NSSet *) touches withEvent:(UIEvent *) event{
-    for (UITouch *touch in touches) {
-        CCBlade *w = (CCBlade *)CFDictionaryGetValue(map, touch);
-        [w finish];
-        CFDictionaryRemoveValue(map,touch);
-    }
-}
-
 
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];

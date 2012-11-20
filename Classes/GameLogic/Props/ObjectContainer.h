@@ -16,11 +16,9 @@
 @interface ObjectContainer : NSObject {
     NSMutableDictionary *objDictionary;
 	Player *player;
-    Gauge *enemyHealthGauge;
 }
 
 @property(nonatomic, retain) Player *player;
-@property(nonatomic, retain) Gauge *enemyHealthGauge;
 
 + (ObjectContainer *) sharedInstance;
 - (id) init;

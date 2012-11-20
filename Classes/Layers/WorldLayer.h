@@ -16,6 +16,5 @@
 @interface WorldLayer : CCLayer
 {
 	CCTexture2D *spriteTexture_; // weak ref
-    CFMutableDictionaryRef map;
 }
 @end

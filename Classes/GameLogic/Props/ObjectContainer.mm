@@ -12,7 +12,7 @@
 #import "NSDictionaryExtensions.h"
 
 @implementation ObjectContainer
-@synthesize player, enemyHealthGauge;
+@synthesize player;
 
 static ObjectContainer *singleContainer;
 
@@ -77,12 +77,37 @@ static ObjectContainer *singleContainer;
 }
 
 - (void) update {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:20];
     [objDictionary enumerateKeysAndObjectsUsingBlock:^(NSString * key, NSMutableArray * objs, BOOL *stop) {
-        for(id obj in objs) {
+        for(Prop *obj in objs) {
             [obj update];
-            
+            [array addObject:obj];
         }
     }];
+    
+    //TODO (PERFORMANCE HIT): 
+    // This whole sorting operation on each update might be really expensive 
+    // when there are a lot of objects
+    NSArray *sortedArray = [array sortedArrayUsingComparator: ^(Prop *obj1, Prop *obj2) {
+        CGFloat y1 = obj1.position.y;
+        CGFloat y2 = obj2.position.y;
+        
+        if (y1 > y2) {
+            return (NSComparisonResult)NSOrderedAscending;   
+        }
+        
+        if (y1 < y2) {
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        return (NSComparisonResult)NSOrderedSame;
+        
+    }];
+    
+    NSInteger z = 1;
+    for (Prop *prop in sortedArray) {
+        [[prop parent] reorderChild:prop z:z++];
+    }
 }
 
 - (void) dealloc {

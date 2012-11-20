@@ -30,8 +30,9 @@ static ParticleInvoker * invoker = nil;
 
 - (id) init {
     if (self = [super init]) {
-        layer = [[CCUtil getLayer:tagOverlayLayer] retain]; 
+        layer = [[CCUtil getLayer:tagWorldLayer] retain]; 
     }
+    
     return self;
 }
 
@@ -49,15 +50,9 @@ static ParticleInvoker * invoker = nil;
 
 /*** Methods for various particle effects ***/
 - (void) doSlashEffect:(Prop *) prop {
-    CGPoint position = prop.position;
     CCBlade *blade = [CCBlade bladeWithMaximumPoint:50];
     blade.autoDim = NO;
     blade.texture = [[CCTextureCache sharedTextureCache] addImage:@"streak1.png"];
-    
-    [layer addChild:blade];
-    
-    NSLog(@"Prop position: %lf, %lf", position.x, position.y);
-    CCFiniteTimeAction *action = [CCMoveTo actionWithDuration:0.15f position:ccpAdd(position, ccp(0, -50.f))];
     
     /*ccBezierConfig bezierConfig;
      bezierConfig.controlPoint_1 = ccp(10, -10);
@@ -65,11 +60,16 @@ static ParticleInvoker * invoker = nil;
      bezierConfig.endPosition = ccp(0, -50);
      CCBezierBy *action = [CCBezierBy actionWithDuration:0.2f bezier:bezierConfig];*/
     
-    [blade setPosition:position];
-    
+    //TODO: Make random slashing effects
+    CGFloat slashHeight = prop.boundingBox.size.height/2;
+    CGFloat slashXPos = prop.boundingBox.size.width/2;
+    CCFiniteTimeAction *action = 
+        [CCMoveTo actionWithDuration:0.15f position:ccp(slashXPos, -slashHeight)];
     CCAction *bladeAction = 
         [CCSequence actions:action, [CCCallFunc actionWithTarget:blade selector:@selector(finish)], nil];
     
+    [prop addChild:blade];
+    [blade setPosition:ccp(slashXPos, slashHeight)];
     [blade runAction:bladeAction];
 }
 

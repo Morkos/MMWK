@@ -7,6 +7,7 @@
 //
 
 #import "Prop.h"
+#import "CCUtil.h"
 
 @implementation Prop
 
