@@ -9,9 +9,6 @@
 #import "SpritesheetAnimator.h"
 
 @interface SpriteSheetAnimator ()
-    + (CCAnimation *) createAnimationAction:(NSString *) key
-                                spriteSheet:(SpriteSheet *) spriteSheet
-                              frameInterval:(float) frameInterval;
 @end
 @implementation SpriteSheetAnimator
 
@@ -41,7 +38,7 @@
 
     CCAction *action;
     if (selector == NULL || target == NULL) {
-        action = [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:animationAction]];
+        action = [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:animationAction]];
     } else {
         action = [target performSelector:selector withObject:animationAction];
     }
@@ -88,5 +85,6 @@
     
     return animationAction;
 }
+
 
 @end

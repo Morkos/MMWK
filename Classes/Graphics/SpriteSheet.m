@@ -83,4 +83,8 @@
     return frame;
 }
 
+- (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
+    return [CCSprite spriteWithSpriteFrame:[self getFrameForKey:key frameNum:frameNum]];
+}
+
 @end

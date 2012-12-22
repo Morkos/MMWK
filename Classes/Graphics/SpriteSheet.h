@@ -62,6 +62,14 @@
  */
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
 
+/**
+ * Returns a single sprite from a specific frame from an animation sequence.
+ * @param key A key identifying the animation sequence
+ * @param frameNum The frame number in the sequence to grab
+ * @return The specific sprite in the sequence
+ */
+- (CCSprite *) getSpriteForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
+
 - (void) changeSprite:(CCSprite *) sprite   
                 toKey:(NSString *) key 
              frameNum:(NSUInteger) frameNum;

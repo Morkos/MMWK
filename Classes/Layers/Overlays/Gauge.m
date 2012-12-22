@@ -11,8 +11,11 @@
 
 @implementation Gauge
 
+@synthesize barProgressTimer,
+            barChangeDuration;
+
 + (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
-                          barTextures:(NSArray *) barTextures{
+                          barTextures:(NSArray *) barTextures {
     return [[[Gauge alloc] initWithContainerTexture:containerTexture 
                                         barTextures:barTextures] autorelease];
 }
@@ -31,6 +34,7 @@
         barProgressTimer.midpoint = ccp(0, 0);
         barProgressTimer.type = kCCProgressTimerTypeBar;
         barProgressTimer.barChangeRate = ccp(1, 0);
+        barChangeDuration = 0.25f;
     }
     
     [self addChild:containerSprite z:1];
@@ -56,7 +60,7 @@
     CGFloat startingPercentage = (startCapacity / maxCapacity) * 100;
     CGFloat endPercentage = (endCapacity / maxCapacity) * 100;
     
-    return [CCProgressFromTo actionWithDuration:0.25f
+    return [CCProgressFromTo actionWithDuration:barChangeDuration
                                            from:startingPercentage 
                                              to:endPercentage];
 }

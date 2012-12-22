@@ -17,4 +17,8 @@
 - (void) resolveCollisions {
 }
 
+- (bool) isLocationInBoundingBox:(CGPoint) location {
+    return CGRectContainsPoint(self.boundingBox, location);
+}
+
 @end
