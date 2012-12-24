@@ -10,17 +10,28 @@
 #import "SpriteSheet.h"
 #import "CharacterAttributes.h"
 
+@class BattleLayer;
 @interface BattleCharacter : Prop {
+    BattleLayer *parentLayer;
     SpriteSheet * spriteSheet;
     CharacterAttributes *attributes;
     CGFloat waitTimeDelay;
+    bool isWaiting;
 }
 
+@property(nonatomic, retain) BattleLayer *parentLayer;
 @property(nonatomic, retain) SpriteSheet *spriteSheet;
 @property(nonatomic, retain) CharacterAttributes *attributes;
 @property(nonatomic, assign) CGFloat waitTimeDelay;
+@property(nonatomic, readonly) bool isWaiting;
 
 -(void) isAttackedBy:(BattleCharacter *) target;
--(void) startBattleTimer:(CCFiniteTimeAction *) targetAction;
+-(void) startBattleTimer;
+-(void) resumeBattleTimer;
+-(void) pauseBattleTimer;
+
+// Private methods. Do not call directly
+-(void) startOfWaitTime;
+-(void) endOfWaitTime;
 
 @end

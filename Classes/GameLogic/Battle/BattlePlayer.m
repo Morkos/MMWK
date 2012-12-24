@@ -9,26 +9,28 @@
 #import "BattlePlayer.h"
 #import "SimpleAudioEngine.h"
 
-@interface BattlePlayer ()
-    -(void) endOfBattleTimerAction;
-@end
-
 @implementation BattlePlayer
 
 @synthesize waitTimeGauge;
 
--(void) startBattleTimer:(CCFiniteTimeAction *) targetAction {
-    [super startBattleTimer:
-        [CCSequence actions:
-            [CCCallFunc actionWithTarget:self selector:@selector(endOfBattleTimerAction)],
-            targetAction, 
-            nil]];
-    
+-(void) startBattleTimer {
+    [super startBattleTimer];
     [waitTimeGauge animateBarFromStartCapacity:0 endCapacity:100 maxCapacity:100];
 }
 
--(void) endOfBattleTimerAction {
+-(void) endOfWaitTime {
+    [super endOfWaitTime];
     [[SimpleAudioEngine sharedEngine] playEffect:@"pickupItem.wav"];
+}
+
+-(void) resumeBattleTimer {
+    [super resumeBattleTimer];
+    [waitTimeGauge resumeSchedulerAndActions];
+}
+
+-(void) pauseBattleTimer {
+    [super pauseBattleTimer];
+    [waitTimeGauge pauseSchedulerAndActions];
 }
 
 @end

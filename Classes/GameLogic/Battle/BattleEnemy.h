@@ -9,6 +9,9 @@
 #import "BattleCharacter.h"
 
 @interface BattleEnemy : BattleCharacter {
+    CCLabelTTF *debugLabel;
 }
+
+@property(nonatomic, retain) CCLabelTTF *debugLabel;
 
 @end

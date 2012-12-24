@@ -13,9 +13,11 @@
 
 @implementation BattleCharacter
 
-@synthesize spriteSheet,
+@synthesize parentLayer,
+            spriteSheet,
             attributes,
-            waitTimeDelay;
+            waitTimeDelay,
+            isWaiting;
 
 -(void) isAttackedBy:(BattleCharacter *) target {
     // TODO: To distinguish between basic vs advanced attacks
@@ -37,11 +39,36 @@
     [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
 }
 
--(void) startBattleTimer:(CCFiniteTimeAction *) targetAction {
+-(void) startBattleTimer {
     [self runAction:[CCSequence actions:
-                     [CCDelayTime actionWithDuration:waitTimeDelay], 
-                     targetAction,
+                     [CCCallFunc actionWithTarget:self selector:@selector(startOfWaitTime)],
+                     [CCDelayTime actionWithDuration:waitTimeDelay],
+                     [CCCallFunc actionWithTarget:self selector:@selector(endOfWaitTime)],
                      nil]];
+}
+
+-(void) startOfWaitTime {
+    isWaiting = true;
+}
+
+-(void) endOfWaitTime {
+    isWaiting = false;
+    [parentLayer pauseBattleTimer];
+}
+
+-(void) resumeBattleTimer {
+    [self resumeSchedulerAndActions];
+}
+
+-(void) pauseBattleTimer {
+    [self pauseSchedulerAndActions];
+}
+
+-(void) dealloc {
+    [parentLayer release];
+    [spriteSheet release];
+    [attributes release];
+    [super dealloc];
 }
 
 @end

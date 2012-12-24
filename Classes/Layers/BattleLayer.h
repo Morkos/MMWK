@@ -15,4 +15,10 @@
     bool isBattleTimerOn;
 }
 
+@property(nonatomic, readonly) BattlePlayer *player;
+
+-(void) resetBattleTimer;
+-(void) resumeBattleTimer;
+-(void) pauseBattleTimer;
+
 @end

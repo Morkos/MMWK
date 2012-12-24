@@ -65,4 +65,15 @@
                                              to:endPercentage];
 }
 
+// Override
+-(void) pauseSchedulerAndActions {
+    [barProgressTimer pauseSchedulerAndActions];
+    [super pauseSchedulerAndActions];
+}
+
+-(void) resumeSchedulerAndActions {
+    [barProgressTimer resumeSchedulerAndActions];
+    [super resumeSchedulerAndActions];
+}
+
 @end

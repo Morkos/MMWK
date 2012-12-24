@@ -14,12 +14,9 @@
 #import "ParticleInvoker.h"
 #import "VerticalGauge.h"
 
-@interface BattleLayer ()
-    - (void) resetBattleTimer;
-@end
-
 @implementation BattleLayer
 
+@synthesize player;
 
 -(id) init
 {
@@ -27,29 +24,35 @@
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         
         SpriteSheet *playerSpriteSheet = 
-            [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+            [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
         SpriteSheet *enemySpriteSheet = 
             [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
+        Gauge * waitTimeGauge = 
+        [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
+                                     barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
+        waitTimeGauge.position = ccp(20, 10);
+        waitTimeGauge.barChangeDuration = 5;
         
         player = 
             [[[BattlePlayer alloc] initWithSpriteFrame:
               [playerSpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]] autorelease];
+        player.parentLayer = self;
         player.position = ccp(winSize.width/2.0, 0);
-        
-        Gauge * waitTimeGauge = 
-            [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
-                                         barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
-        waitTimeGauge.position = ccp(20, 10);
-        waitTimeGauge.barChangeDuration = 5;
+        player.spriteSheet = playerSpriteSheet;
         player.waitTimeGauge = waitTimeGauge;
         player.waitTimeDelay = 5;
         
         BattleEnemy *enemy = 
             [[[BattleEnemy alloc] initWithSpriteFrame:
                 [enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]] autorelease];
+        enemy.parentLayer = self;
         enemy.position = ccp(winSize.width/2.0, winSize.height/2.0);
-        enemy.waitTimeDelay = 10;
+        enemy.waitTimeDelay = 3;
         enemy.spriteSheet = enemySpriteSheet;
+        enemy.debugLabel = [CCLabelTTF labelWithString:NSSTRING_FORMAT(@"%d", enemy.isWaiting)
+                                              fontName:@"Courier"
+                                              fontSize:10.0f];
+        enemy.debugLabel.position = ccp(0.0f, 20.0f);
         
         CCSprite *background = [CCSprite spriteWithFile:@"background.jpg"];
         background.position = ccp(winSize.width/2.0, winSize.height/2.0);
@@ -80,14 +83,26 @@
 
 -(void) resetBattleTimer {
     isBattleTimerOn = true;
-    [player startBattleTimer:[CCCallFunc actionWithTarget:self selector:@selector(stopBattleTimer)]];
-    /*for (BattleCharacter *enemy in enemies) {
-        [enemy update];
-    }*/
+    [player startBattleTimer];
+    for (BattleEnemy *enemy in enemies) {
+        [enemy startBattleTimer];
+    }
 }
 
--(void) stopBattleTimer {
+-(void) resumeBattleTimer {
+    isBattleTimerOn = true;
+    [player resumeBattleTimer];
+    for (BattleEnemy *enemy in enemies) {
+        [enemy resumeBattleTimer];
+    }
+}
+
+-(void) pauseBattleTimer {
     isBattleTimerOn = false;
+    [player pauseBattleTimer];
+    for (BattleEnemy *enemy in enemies) {
+        [enemy pauseBattleTimer];
+    }
 }
 
 -(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -95,11 +110,12 @@
         CGPoint location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
         
-        if (!isBattleTimerOn) {
+        if (!isBattleTimerOn && ![player isWaiting]) {
             for (BattleEnemy *character in enemies) {
                 if ([character isLocationInBoundingBox:location]) {
                     [character isAttackedBy:player];
-                    [self resetBattleTimer];
+                    [self resumeBattleTimer];
+                    [player startBattleTimer];
                     return;
                 }
             }
