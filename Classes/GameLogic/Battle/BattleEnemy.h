@@ -10,6 +10,7 @@
 
 @interface BattleEnemy : BattleCharacter {
     CCLabelTTF *debugLabel;
+    CGFloat currentWaitTime;
 }
 
 @property(nonatomic, retain) CCLabelTTF *debugLabel;
