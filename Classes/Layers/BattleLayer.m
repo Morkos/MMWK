@@ -25,10 +25,12 @@
         
         SpriteSheet *playerSpriteSheet = 
             [[SpriteSheetManager getInstance] loadSpriteSheet:@"megamanSpSheet.png"];
+        
         SpriteSheet *enemySpriteSheet = [SpriteSheet createWithFile:@"orcSkeleton"];
+        
         Gauge * waitTimeGauge = 
-        [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
-                                     barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
+            [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
+                                         barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
         waitTimeGauge.position = ccp(20, 10);
         waitTimeGauge.barChangeDuration = 5;
         
