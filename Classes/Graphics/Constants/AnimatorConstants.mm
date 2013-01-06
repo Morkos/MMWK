@@ -22,3 +22,5 @@ NSString *ANIMATOR_STAND = @"stand";
 NSString *ANIMATOR_MOVE = @"move";
 NSString *ANIMATOR_ATTACK = @"attack%d";
 NSString *ANIMATOR_WOUNDED = @"wounded";
+
+NSString *ANIMATOR_BASIC_ATTACK = @"attack";

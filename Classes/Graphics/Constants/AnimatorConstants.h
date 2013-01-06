@@ -24,6 +24,10 @@ extern NSString *ANIMATOR_MOVE;
 extern NSString *ANIMATOR_ATTACK;
 extern NSString *ANIMATOR_WOUNDED;
 
+/**
+ * Battle animator keys
+ */
+extern NSString *ANIMATOR_BASIC_ATTACK;
 
 
 /*

@@ -7,6 +7,8 @@
 //
 
 #import "SpriteSheet.h"
+#import "NSPropertyUtil.h"
+#import "NSDictionaryExtensions.h"
 
 @interface SpriteSheet ()
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum;
@@ -15,9 +17,10 @@
 @implementation SpriteSheet
 
 @synthesize texture, 
+            textureName,
 			sizeX, 
 			sizeY,
-            animationFrames;
+            numOfFramesForKey;
 
 + (SpriteSheet *) createWithTexture:(CCTexture2D *) texture 
                     animationFrames:(NSDictionary *) animationFrames 
@@ -28,7 +31,8 @@
 	spriteSheet.texture = texture;
 	spriteSheet.sizeX = ([texture pixelsWide] / numOfColumns);
 	spriteSheet.sizeY = ([texture pixelsHigh] / numOfRows);
-    spriteSheet.animationFrames = animationFrames;
+    spriteSheet.numOfFramesForKey = [[NSMutableDictionary dictionary] retain];
+    spriteSheet.textureName = NSSTRING_FORMAT(@"%d", texture.name);
     
     for (NSString *key in animationFrames) {
         NSArray *animationKeys = [animationFrames valueForKey:key];
@@ -43,19 +47,49 @@
                 [CCSpriteFrame frameWithTexture:texture 
                                            rect:CGRectMake(topLeftX, topLeftY, spriteSheet.sizeX, spriteSheet.sizeY)];
             
-            NSString * frameKey = [NSString stringWithFormat:@"%d.%@%d", texture.name, key, i];
+            NSString * frameKey = [NSString stringWithFormat:@"%@-%@%d", spriteSheet.textureName, key, i];
             
             NSLog(@"Adding frameKey: %@ to SpriteFrameCache.", frameKey);
             [[CCSpriteFrameCache sharedSpriteFrameCache] 
-                addSpriteFrame:frame name:[NSString stringWithFormat: @"%d.%@%d", texture.name, key, i]];
+                addSpriteFrame:frame name:frameKey];
         }
+        
+        [spriteSheet.numOfFramesForKey setObject:[NSNumber numberWithInt:[animationKeys count]]
+                                          forKey:key];
     }
 	
 	return spriteSheet;
 }
 
++ (SpriteSheet *) createWithFile:(NSString *) filename {
+    SpriteSheet *spriteSheet = [[[SpriteSheet alloc] init] autorelease];
+    
+    NSString *textureFilename = NSSTRING_FORMAT(@"%@.png", filename);
+    NSString *plistFilename = NSSTRING_FORMAT(@"%@.plist", filename);
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:textureFilename];
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:plistFilename texture:texture];
+    
+    spriteSheet.texture = texture;
+    spriteSheet.textureName = filename;
+    spriteSheet.numOfFramesForKey = [[NSMutableDictionary dictionary] retain];
+    
+    // NOTE: IOS 4 only
+    NSRegularExpression *regex = 
+        [NSRegularExpression regularExpressionWithPattern:NSSTRING_FORMAT(@"%@-(.*)[0-9]+", filename)
+                                                  options:0 
+                                                    error:nil];
+    NSDictionary *framesPList = [NSPropertyUtil loadProperties:plistFilename];
+    for (NSString *key in [framesPList objectForKey:@"frames"]) {
+        NSTextCheckingResult *result = [regex firstMatchInString:key options:0 range:NSMakeRange(0, [key length])];
+        NSString *frameKey = [key substringWithRange:[result rangeAtIndex:1]]; //0 is the whole string, 1 is the capture group
+        [spriteSheet.numOfFramesForKey incrementNumberForKey:frameKey];
+    }
+    return spriteSheet;
+}
+
+
 - (NSUInteger) getNumOfFramesForKey:(NSString *) key {
-	return [[self.animationFrames objectForKey:key] count];
+	return [[self.numOfFramesForKey objectForKey:key] intValue];
 }
 
 - (NSArray *) getSpriteFramesForKey:(NSString *) key {
@@ -78,7 +112,7 @@
 }
 
 - (CCSpriteFrame *) getFrameForKey:(NSString *) key frameNum:(NSUInteger) frameNum {
-    NSString *frameKey = [NSString stringWithFormat:@"%d.%@%d", self.texture.name, key, frameNum];
+    NSString *frameKey = NSSTRING_FORMAT(@"%@-%@%d", textureName, key, frameNum);
     CCSpriteFrame *frame = [[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:frameKey];
     return frame;
 }
@@ -87,4 +121,10 @@
     return [CCSprite spriteWithSpriteFrame:[self getFrameForKey:key frameNum:frameNum]];
 }
 
+-(void) dealloc {
+    [texture release];
+    [numOfFramesForKey release];
+    [textureName release];
+    [super dealloc];
+}
 @end

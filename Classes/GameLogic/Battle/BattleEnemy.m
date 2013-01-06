@@ -8,6 +8,7 @@
 
 #import "BattleEnemy.h"
 #import "BattleLayer.h"
+#import "SpriteSheetAnimator.h"
 
 @interface BattleEnemy()
 -(void) decrementDebugTimer;
@@ -41,6 +42,18 @@
 -(void) endOfWaitTime {
     [super endOfWaitTime];
     [self showDebugLabel];
+    [self runAction:
+     [CCSequence actions:
+      [CCAnimate actionWithAnimation:
+       [SpriteSheetAnimator createAnimationAction:ANIMATOR_BASIC_ATTACK 
+                                      spriteSheet:self.spriteSheet
+                                    frameInterval:0.2f]],
+      [CCAnimate actionWithAnimation:
+       [SpriteSheetAnimator createAnimationAction:ANIMATOR_STAND 
+                                      spriteSheet:self.spriteSheet
+                                    frameInterval:0.2f]], 
+      nil]];
+    
     [parentLayer.player isAttackedBy:self];
     [parentLayer resumeBattleTimer];
     [self startBattleTimer];

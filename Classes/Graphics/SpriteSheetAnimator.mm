@@ -78,7 +78,7 @@
 
 + (CCAnimation *) createAnimationAction:(NSString *) key
                             spriteSheet:(SpriteSheet *) spriteSheet
-                          frameInterval:(float)frameInterval {
+                          frameInterval:(float) frameInterval {
     NSArray *animFrames = [spriteSheet getSpriteFramesForKey:key];
     CCAnimation *animationAction = [CCAnimation animationWithSpriteFrames:animFrames];
     animationAction.delayPerUnit = frameInterval;

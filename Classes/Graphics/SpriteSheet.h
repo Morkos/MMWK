@@ -16,15 +16,18 @@
 	// Size of a single image in x,y direction
 	uint sizeX, sizeY;
     
-    // A map that maps strings -> row, column
-    // E.g. "stand" -> [[0,0],[0,1],[0,2]]
+    // A map that maps keys -> numberOfFrames
+    // E.g. "stand" -> 3
     // See spriteSheets.plist for example
-    NSDictionary *animationFrames;
+    NSMutableDictionary *numOfFramesForKey;
+    
+    NSString *textureName;
 }
 
 @property (nonatomic, retain) CCTexture2D *texture;
+@property (nonatomic, retain) NSString *textureName;
 @property (nonatomic, assign) uint sizeX, sizeY;
-@property (nonatomic, retain) NSDictionary *animationFrames;
+@property (nonatomic, retain) NSMutableDictionary *numOfFramesForKey;
 
 /**
  * Create spritesheet with given parameters:
@@ -39,6 +42,8 @@
                      animationFrames:(NSDictionary *) animationFrames 
                            numOfRows:(NSUInteger) numOfRows
                         numOfColumns:(NSUInteger) numOfColumns;
+
++ (SpriteSheet *) createWithFile:(NSString *) filename;
 
 /**
  * Returns the number of frames for a specific animation sequence
