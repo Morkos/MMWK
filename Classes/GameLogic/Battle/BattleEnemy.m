@@ -28,12 +28,14 @@
 #endif
 
 -(void) startBattleTimer {
-    [super startBattleTimer];
-    
+    if ([self isAlive]) {
+        [super startBattleTimer];
+        
 #ifdef WAIT_TIME_DEBUG
-    currentWaitTime = waitTimeDelay;
-    [self schedule:@selector(decrementDebugTimer) interval:1 repeat:kCCRepeatForever delay:0];
+        currentWaitTime = waitTimeDelay;
+        [self schedule:@selector(decrementDebugTimer) interval:1 repeat:kCCRepeatForever delay:0];
 #endif
+    }
 }
 -(void) startOfWaitTime {
     [super startOfWaitTime];

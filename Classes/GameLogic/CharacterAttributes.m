@@ -15,10 +15,9 @@
             attackPower, 
             magicPower;
 
-- (bool) decreaseHp:(NSUInteger) hpDecrease {
+- (void) decreaseHp:(NSUInteger) hpDecrease {
     // TODO: If zero hp, the target should die
     currentHp = max(0, currentHp - hpDecrease);
-    return currentHp == 0;
 }
 
 @end

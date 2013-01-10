@@ -74,7 +74,9 @@
     
     [sprite stopActionByTag:TAG_ANIMATION_ACTION];
     [sprite runAction:action];
-}   
+}
+
+
 
 + (CCAnimation *) createAnimationAction:(NSString *) key
                             spriteSheet:(SpriteSheet *) spriteSheet
@@ -85,6 +87,5 @@
     
     return animationAction;
 }
-
 
 @end

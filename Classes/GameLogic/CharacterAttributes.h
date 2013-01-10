@@ -15,16 +15,15 @@
                magicPower;
 }
 
-@property (nonatomic, assign) NSUInteger maxHp; 
-@property (nonatomic, assign) NSUInteger currentHp;
-@property (nonatomic, assign) NSUInteger attackPower;
-@property (nonatomic, assign) NSUInteger magicPower;
+@property(nonatomic, assign) NSUInteger maxHp; 
+@property(nonatomic, assign) NSUInteger currentHp;
+@property(nonatomic, assign) NSUInteger attackPower;
+@property(nonatomic, assign) NSUInteger magicPower;
 
 /**
  * Decreases the currentHp by the given parameter.
  * @param hpDecrease the amount of hp decreased.
- * @return Returns true if currentHp == 0
  */
--(bool) decreaseHp:(NSUInteger) hpDecrease;
+-(void) decreaseHp:(NSUInteger) hpDecrease;
 
 @end

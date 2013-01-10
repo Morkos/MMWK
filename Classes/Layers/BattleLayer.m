@@ -32,7 +32,6 @@
             [VerticalGauge gaugeWithContainerTexture:@"healthBar-back.png" 
                                          barTextures:[NSArray arrayWithObjects:@"healthBar-front.png",nil]];
         waitTimeGauge.position = ccp(20, 10);
-        waitTimeGauge.barChangeDuration = 5;
         
         player = 
             [[[BattlePlayer alloc] initWithSpriteFrame:
@@ -41,15 +40,16 @@
         player.position = ccp(winSize.width/2.0, 0);
         player.spriteSheet = playerSpriteSheet;
         player.waitTimeGauge = waitTimeGauge;
-        player.waitTimeDelay = 5;
+        player.waitTimeDelay = 3;
+        waitTimeGauge.barChangeDuration = player.waitTimeDelay;
         
         BattleEnemy *enemy = 
             [[[BattleEnemy alloc] initWithSpriteFrame:
                 [enemySpriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]] autorelease];
         enemy.parentLayer = self;
         enemy.position = ccp(winSize.width/2.0, winSize.height/2.0);
-        enemy.waitTimeDelay = 3;
         enemy.spriteSheet = enemySpriteSheet;
+        enemy.waitTimeDelay = 4;
         enemy.debugLabel = [CCLabelTTF labelWithString:NSSTRING_FORMAT(@"%d", enemy.isWaiting)
                                               fontName:@"Courier"
                                               fontSize:10.0f];
@@ -71,8 +71,8 @@
         player.attributes.maxHp = 100;
         player.attributes.attackPower = 10;
 
-        enemy.attributes.currentHp = 100;
-        enemy.attributes.maxHp = 100;
+        enemy.attributes.currentHp = 20;
+        enemy.attributes.maxHp = 20;
         enemy.attributes.attackPower = 10;
         
         self.isTouchEnabled = true;
@@ -112,11 +112,11 @@
         location = [[CCDirector sharedDirector] convertToGL: location];
         
         if (!isBattleTimerOn && ![player isWaiting]) {
-            for (BattleEnemy *character in enemies) {
-                if ([character isLocationInBoundingBox:location]) {
-                    [character isAttackedBy:player];
-                    [self resumeBattleTimer];
+            for (BattleEnemy *enemy in enemies) {
+                if ([enemy isAlive] && [enemy isLocationInBoundingBox:location]) {
+                    [enemy isAttackedBy:player];
                     [player startBattleTimer];
+                    [self resumeBattleTimer];
                     return;
                 }
             }

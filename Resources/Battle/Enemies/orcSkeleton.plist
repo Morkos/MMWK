@@ -11,7 +11,7 @@
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{33,15},{62,98}}</string>
                 <key>sourceSize</key>
@@ -20,7 +20,7 @@
             <key>orcSkeleton-attack1</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,134},{86,86}}</string>
+                <string>{{154,82},{86,86}}</string>
                 <key>offset</key>
                 <string>{2,8}</string>
                 <key>rotated</key>
@@ -30,16 +30,55 @@
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
+            <key>orcSkeleton-dead0</key>
+            <dict>
+                <key>frame</key>
+                <string>{{66,2},{86,88}}</string>
+                <key>offset</key>
+                <string>{-1,-1}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{20,21},{86,88}}</string>
+                <key>sourceSize</key>
+                <string>{128,128}</string>
+            </dict>
+            <key>orcSkeleton-dead1</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,198},{76,50}}</string>
+                <key>offset</key>
+                <string>{-1,3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{25,36},{76,50}}</string>
+                <key>sourceSize</key>
+                <string>{128,128}</string>
+            </dict>
             <key>orcSkeleton-stand0</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,66},{66,94}}</string>
+                <string>{{2,102},{66,94}}</string>
                 <key>offset</key>
                 <string>{-1,2}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{30,15},{66,94}}</string>
+                <key>sourceSize</key>
+                <string>{128,128}</string>
+            </dict>
+            <key>orcSkeleton-wounded0</key>
+            <dict>
+                <key>frame</key>
+                <string>{{154,2},{78,88}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{25,20},{78,88}}</string>
                 <key>sourceSize</key>
                 <string>{128,128}</string>
             </dict>
@@ -51,9 +90,9 @@
             <key>realTextureFileName</key>
             <string>orcSkeleton.png</string>
             <key>size</key>
-            <string>{128,256}</string>
+            <string>{256,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:13cf2e76cbf4cd0afa461a714a69acfe$</string>
+            <string>$TexturePacker:SmartUpdate:483bc33480bf281383f6f07df04e4713$</string>
             <key>textureFileName</key>
             <string>orcSkeleton.png</string>
         </dict>

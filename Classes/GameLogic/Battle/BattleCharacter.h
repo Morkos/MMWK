@@ -15,6 +15,7 @@
     BattleLayer *parentLayer;
     SpriteSheet * spriteSheet;
     CharacterAttributes *attributes;
+    CCFiniteTimeAction *waitTimeAction;
     CGFloat waitTimeDelay;
     bool isWaiting;
 }
@@ -26,6 +27,7 @@
 @property(nonatomic, readonly) bool isWaiting;
 
 -(void) isAttackedBy:(BattleCharacter *) target;
+-(bool) isAlive;
 -(void) startBattleTimer;
 -(void) resumeBattleTimer;
 -(void) pauseBattleTimer;
@@ -33,5 +35,6 @@
 // Private methods. Do not call directly
 -(void) startOfWaitTime;
 -(void) endOfWaitTime;
+-(void) stopBattleTimer;
 
 @end
