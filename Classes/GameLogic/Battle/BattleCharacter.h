@@ -26,7 +26,7 @@
 @property(nonatomic, assign) CGFloat waitTimeDelay;
 @property(nonatomic, readonly) bool isWaiting;
 
--(void) isAttackedBy:(BattleCharacter *) target;
+-(void) isAttackedBy:(NSUInteger) damage;
 -(bool) isAlive;
 -(void) startBattleTimer;
 -(void) resumeBattleTimer;

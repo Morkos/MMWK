@@ -13,6 +13,7 @@
 #import "HealthPotion.h"
 #import "ParticleInvoker.h"
 #import "VerticalGauge.h"
+#import "PlayerBasicAttack.h"
 
 @implementation BattleLayer
 
@@ -114,7 +115,8 @@
         if (!isBattleTimerOn && ![player isWaiting]) {
             for (BattleEnemy *enemy in enemies) {
                 if ([enemy isAlive] && [enemy isLocationInBoundingBox:location]) {
-                    [enemy isAttackedBy:player];
+                    [PlayerBasicAttack attackWithDamage:player.attributes.attackPower
+                                                 target:enemy];
                     [player startBattleTimer];
                     [self resumeBattleTimer];
                     return;

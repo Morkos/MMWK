@@ -9,6 +9,7 @@
 #import "BattleEnemy.h"
 #import "BattleLayer.h"
 #import "SpriteSheetAnimator.h"
+#import "EnemyBasicAttack.h"
 
 @interface BattleEnemy()
 -(void) decrementDebugTimer;
@@ -44,19 +45,12 @@
 -(void) endOfWaitTime {
     [super endOfWaitTime];
     [self showDebugLabel];
-    [self runAction:
-     [CCSequence actions:
-      [CCAnimate actionWithAnimation:
-       [SpriteSheetAnimator createAnimationAction:ANIMATOR_BASIC_ATTACK 
-                                      spriteSheet:self.spriteSheet
-                                    frameInterval:0.2f]],
-      [CCAnimate actionWithAnimation:
-       [SpriteSheetAnimator createAnimationAction:ANIMATOR_STAND 
-                                      spriteSheet:self.spriteSheet
-                                    frameInterval:0.2f]], 
-      nil]];
     
-    [parentLayer.player isAttackedBy:self];
+    //TODO: Perform some AI instead of just basic attacking all the time
+    [EnemyBasicAttack attackWithDamage:attributes.attackPower 
+                              attacker:self
+                                target:parentLayer.player];
+    
     [parentLayer resumeBattleTimer];
     [self startBattleTimer];
 }

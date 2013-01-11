@@ -27,11 +27,8 @@
     return self;
 }
 
--(void) isAttackedBy:(BattleCharacter *) target {
-    // TODO: To distinguish between basic vs advanced attacks
-    [attributes decreaseHp:target.attributes.attackPower];
-    [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
-                                               prop:self];
+-(void) isAttackedBy:(NSUInteger) damage {
+    [attributes decreaseHp:damage];
     
     if ([self isAlive]) {
         [self runAction:
@@ -55,8 +52,6 @@
              [CCCallFunc actionWithTarget:self selector:@selector(stopBattleTimer)],
              nil]];
     }
-    
-    [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
 }
 
 -(bool) isAlive {
