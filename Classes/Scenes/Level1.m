@@ -15,8 +15,7 @@
 
 @implementation Level1
 
-+(CCScene *) scene
-{
++ (CCScene *) scene {
     [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
     
 	// 'scene' is an autorelease object.

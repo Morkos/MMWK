@@ -12,58 +12,57 @@
 #import "WorldLayer.h"
 #import "SimpleAudioEngine.h"
 #import "Level1.h"
+#import "WorldAtlas.h"
 
 #pragma mark - IntroLayer
 
 // HelloWorldLayer implementation
 @implementation IntroLayer
 
-// Helper class method that creates a Scene with the HelloWorldLayer as the only child.
-+(CCScene *) scene
-{
-	// 'scene' is an autorelease object.
-	CCScene *scene = [CCScene node];
-	
-	// 'layer' is an autorelease object.
-	IntroLayer *layer = [IntroLayer node];
-	
-	// add layer as a child to scene
-	[scene addChild: layer];
-	
-	// return the scene
-	return scene;
-}
-
 // 
--(void) onEnter
-{
-	[super onEnter];
-
-	// ask director for the window size
+-(id) init {
+	self = [super init];
+    // ask director for the window size
 	CGSize size = [[CCDirector sharedDirector] winSize];
-	CCSprite *background;
+    CCSprite *background;
 	
-	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {
+	if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ) {		
 		background = [CCSprite spriteWithFile:@"Default.png"];
 		background.rotation = 90;
 	}
     
-	background.position = ccp(size.width/2, size.height/2);
+	background.position = ccp(size.width, size.height); //100, 100);
     
-    // Pre load music 
-    // TODO: Use constants or config file to preload
-    [[SimpleAudioEngine sharedEngine] preloadEffect:@"swordSwing.wav"];
-    [[SimpleAudioEngine sharedEngine] preloadEffect:@"pickupItem.wav"];
+    CCLabelTTF * gameLabel = [CCLabelTTF labelWithString:@"Fyka's Memento" 
+                                                fontName:@"Courier" 
+                                                fontSize:40];
+    gameLabel.position = ccp(225, 250);
+    
+    CCMenuItemFont * font = [CCMenuItemFont itemWithString:@"Start Game" 
+                                                    target:self 
+                                                  selector:@selector(onClick)];
+    [font setFontSize:30];
+    [font setFontName:@"Courier"];
+    
+    CCMenu * menu = [CCMenu menuWithItems:font, nil];
+    
+    [menu setPosition:ccp(225, 200)];
 
 	// add the label as a child to this Layer
-	[self addChild: background];
+	[self addChild:background];
+    [self addChild:menu];
+    [self addChild:gameLabel];
+    
+    NSLog(@"here....");
+    
+    return self;
 	
-	// In one second transition to the new scene
-	[self scheduleOnce:@selector(makeTransition:) delay:1];
 }
 
--(void) makeTransition:(ccTime)dt
-{
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[Level1 scene] withColor:ccWHITE]];
+-(void) onClick {
+	[[CCDirector sharedDirector] replaceScene:
+     [CCTransitionFade transitionWithDuration:1.0 
+                                        scene:[WorldAtlas scene] 
+                                    withColor:ccWHITE]];
 }
 @end

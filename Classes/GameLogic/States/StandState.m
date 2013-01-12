@@ -33,14 +33,6 @@
 }
 
 - (void) updateState {
-    //NSLog(@"updating state...%@", self.character);
-    if ([self.character isMemberOfClass:[Enemy class]]) {
-        Player * player = [[ObjectContainer sharedInstance] player];
-        
-        if(CGRectIntersectsRect(player.boundingBox, self.character.boundingBox)) {
-            [self.character setState:[AttackState createWithCharacter:self.character]];
-        }
-    }
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

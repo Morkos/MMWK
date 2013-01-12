@@ -13,7 +13,8 @@
 
 @implementation MoveState
 
-@synthesize character;
+@synthesize character,
+            path;
 
 + (MoveState *) createWithCharacter:(Character *) character {
     MoveState *state = [[MoveState alloc] init];
@@ -22,8 +23,17 @@
     return state;
 }
 
++ (MoveState *) createWithCharacter:(Character *) character 
+                               path:(NSArray *) path {
+    
+    MoveState *state = [[MoveState alloc] init];
+    state.character = character;
+    state.path = path;
+    return state;
+}
+
 - (void) start {
-    CCLOGINFO(@"Starting MoveState for %@", self.character);
+    NSLog(@"Starting MoveState for %@", self.character);
     [SpriteSheetAnimator startAnimation:character
                             spriteSheet:character.spriteSheet
                                frameKey:ANIMATOR_MOVE
@@ -31,8 +41,12 @@
 }
 
 - (void) updateState {
-    [character moveTowards:character.currentDirection];
+    NSLog(@"character position:%@", NSStringFromCGPoint(character.position));
     
+    self.character.behavior.wayPoints = self.path;
+    [character.behavior followPath:character];
+    
+    /*
     if (IS_SUBCLASS(character, Player)) {
         Player *player = (Player *) character;
         NSArray *items = 
@@ -41,7 +55,7 @@
         for (Item *item in items) {
             [item isPickedUpBy:player];
         }
-    }
+    }*/
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

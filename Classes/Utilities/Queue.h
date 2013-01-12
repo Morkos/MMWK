@@ -12,5 +12,6 @@
     - (id) dequeue;
     - (void) enqueue:(id)obj;
     - (id) peek;
+    - (BOOL) isEmpty;
 
 @end

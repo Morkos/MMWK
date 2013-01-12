@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "IntroLayer.h"
+#import "MainMenu.h"
 
 @implementation AppController
 
@@ -51,6 +51,7 @@
 	
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
+    
 	//	[director setProjection:kCCDirectorProjection3D];
 	
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
@@ -68,7 +69,7 @@
 	// On iPhone HD: "-hd"
 	CCFileUtils *sharedFileUtils = [CCFileUtils sharedFileUtils];
 	[sharedFileUtils setEnableFallbackSuffixes:NO];				// Default: NO. No fallback suffixes are going to be used
-	[sharedFileUtils setiPhoneRetinaDisplaySuffix:@"-hd"];		// Default on iPhone RetinaDisplay is "-hd"
+	[sharedFileUtils setiPhoneRetinaDisplaySuffix:@"-h	d"];		// Default on iPhone RetinaDisplay is "-hd"
 	[sharedFileUtils setiPadSuffix:@"-ipad"];					// Default on iPad is "ipad"
 	[sharedFileUtils setiPadRetinaDisplaySuffix:@"-ipadhd"];	// Default on iPad RetinaDisplay is "-ipadhd"
 	
@@ -76,7 +77,7 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	[director_ pushScene: [IntroLayer scene]]; 
+	[director_ pushScene: [MainMenu scene]]; 
 	
 	
 	// Create a Navigation Controller with the Director

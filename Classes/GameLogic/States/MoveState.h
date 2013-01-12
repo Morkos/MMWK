@@ -15,11 +15,15 @@
 
 @interface MoveState: NSObject<CharacterState> {
     Character *character;
+    NSArray * path;
 }
 
-@property(nonatomic, retain) Character *character;
+@property(nonatomic, retain) Character * character;
+@property(nonatomic, assign) NSArray * path;
 
 + (MoveState *) createWithCharacter:(Character *) character;
++ (MoveState *) createWithCharacter:(Character *) character
+                               path:(NSArray *) path;
 - (void) start;
 - (void) updateState;
 - (void) transitionToState:(id<CharacterState>) newState;

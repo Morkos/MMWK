@@ -8,23 +8,27 @@
 
 #import "chipmunk.h"
 #import "Character.h"
+#import "Vertex.h"
 
 @interface SteeringBehavior : NSObject {
-    CGFloat wanderRadius;
-    CGFloat wanderDistance;
-    CGFloat wanderJitter;
-    cpVect wanderTarget;
+    NSArray * wayPoints;
+    NSEnumerator * rator;
+    Vertex * start;
 }
 
-@property (nonatomic, assign) CGFloat wanderRadius;
-@property (nonatomic, assign) CGFloat wanderDistance;
-@property (nonatomic, assign) CGFloat wanderJitter;
-@property (nonatomic, assign) cpVect wanderTarget;
+@property (nonatomic, retain) NSArray * wayPoints;
+@property (nonatomic, retain) NSEnumerator * rator;
+@property (nonatomic, retain) Vertex * start;
 
 - (id) init;
-- (cpVect) wander:(Character *) character;
-- (cpVect) calculate:(Character *) character;
+
+- (cpVect) seek:(CGPoint) src 
+         target:(CGPoint) target;
+
+- (BOOL) followPath:(Character *) character;
 - (cpVect) flee:(Character *) character;
 - (cpVect) pursuit:(Character *) character;
+- (cpVect) calculate:(CGPoint) src
+              target:(CGPoint) target;
 
 @end

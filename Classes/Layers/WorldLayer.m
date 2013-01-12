@@ -28,6 +28,8 @@
 -(id) init
 {
     if( (self=[super init])) {
+        NSLog(@"world layer initiation...");
+        
         CGSize winSize = [[CCDirector sharedDirector] winSize];
 
         SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
@@ -123,11 +125,6 @@
         [testValue release];
     }
     
-}
-
-- (void) addChild:(CCNode *)node z:(NSInteger)z tag:(NSInteger)tag {
-    [[ObjectContainer sharedInstance] addObject:node];
-    [super addChild:node z:z tag:tag];
 }
 
 #pragma mark GameKit delegate

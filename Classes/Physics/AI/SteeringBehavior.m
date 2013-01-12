@@ -9,45 +9,62 @@
 #import "SteeringBehavior.h"
 #import "ObjectContainer.h"
 #import "Player.h"
+#import "SparseGraph.h"
+#import "Edge.h"
 
 @implementation SteeringBehavior
-@synthesize wanderRadius, 
-            wanderDistance,
-            wanderJitter,
-            wanderTarget;
-
-static double randomClamp() {
-    double r = (double)rand() / (double)RAND_MAX;    
-    return r;
-}
-
-- (cpVect) seek:(Character *) character {
-    //Player * player = [ObjectContainer sharedInstance].player;
-    return CGPointZero;
-}
+@synthesize wayPoints, 
+            rator,
+            start;
 
 - (id) init {
-    wanderRadius = 20;
-    wanderDistance = 50;
-    wanderJitter = 2;
-    wanderTarget = cpv(150, 150);
+    
+    if(self = [super init]) {
+        //TODO: This should not be here
+
+        NSLog(@"start: %@", start);
+        NSLog(@"way pts: %@", wayPoints);
+        NSLog(@"rator %@", rator);
+    }
     
     return self;
 }
 
-- (cpVect) wander:(Character *) character {
-    wanderTarget = cpvadd(wanderTarget, cpv(randomClamp() * wanderJitter, randomClamp() * wanderJitter));
-    wanderTarget = cpvnormalize(wanderTarget);
-    wanderTarget = cpvmult(wanderTarget, wanderRadius);
+- (cpVect) pursuit:(Character *) character {
     
-    cpVect targetLocal = cpvadd(wanderTarget, cpv(wanderDistance, 0));
-    
-    return cpvsub(targetLocal, cpv(character.position.x, character.position.y));
+    return CGPointZero;
 }
 
-- (cpVect) pursuit:(Character *) character {
- 
-    return CGPointZero;
+- (cpVect) seek:(CGPoint) src
+         target:(CGPoint) target {
+    
+    cpVect seekPath = cpvnormalize(cpvsub(target, src)); 
+    Player * player = [ObjectContainer sharedInstance].player;
+    
+    player.position = cpvadd(src, seekPath);
+    return seekPath;
+}
+
+- (BOOL) followPath:(Character *) character {
+    
+    //NSLog(@"path: %@", self.wayPoints);
+    
+    BOOL nearNextPoint = cpvdist(character.position, self.start.position) < 10;
+    BOOL nearend = cpvdist(character.position, ((Vertex *)[wayPoints lastObject]).position) < 10;
+    
+    if (nearend) {
+        return YES;
+    } else if (nearNextPoint) {
+        self.start = [rator nextObject];
+        NSLog(@"next wayPoint: %@", self.start);
+    } 
+    
+    NSLog(@"seeking to %@", self.start);		
+    
+    [self seek:character.position 
+        target:self.start.position];
+    
+    return NO;
 }
 
 - (cpVect) flee:(Character *)character {
@@ -59,13 +76,13 @@ static double randomClamp() {
         [character setCurrentOrientation:ORIENTATION_BACKWARDS];
     } else {
         [character setCurrentOrientation:ORIENTATION_FORWARD];
-    }
-    //NSLog(@"new pt: %lf, %lf", pt.x, pt.y);
-    
+    }    
     return pt;
 }
 
-- (cpVect) calculate:(Character *) character {
-    return [self flee:character];
+- (cpVect) calculate:(CGPoint) src 
+              target:(CGPoint) target {
+    return [self seek:src 
+               target:target];
 }
 @end
