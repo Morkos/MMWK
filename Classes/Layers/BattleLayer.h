@@ -13,6 +13,9 @@
     NSArray *enemies;
     BattlePlayer *player;
     bool isBattleTimerOn;
+    
+    bool hasPreviousTouch;
+    CGPoint previousLocation;
 }
 
 @property(nonatomic, readonly) BattlePlayer *player;

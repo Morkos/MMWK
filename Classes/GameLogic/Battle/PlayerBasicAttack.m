@@ -13,9 +13,11 @@
 @implementation PlayerBasicAttack
 
 +(void) attackWithDamage:(NSUInteger) damage 
-                  target:(BattleCharacter *) target {
-    [[ParticleInvoker invoker] invokeParticleEffect:slashEffect 
-                                               prop:target];
+                  target:(BattleCharacter *) target 
+            angleOfSwipe:(CGFloat) angle{
+    [[ParticleInvoker invoker] doSlashEffect:target 
+                                       angle:angle
+                                      length:target.boundingBox.size.width/2];
     
     [[SimpleAudioEngine sharedEngine] playEffect:@"swordSwing.wav"];
     

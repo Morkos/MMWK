@@ -14,6 +14,7 @@
 #import "ParticleInvoker.h"
 #import "VerticalGauge.h"
 #import "PlayerBasicAttack.h"
+#import "CoordinateSystem.h"
 
 @implementation BattleLayer
 
@@ -41,7 +42,7 @@
         player.position = ccp(winSize.width/2.0, 0);
         player.spriteSheet = playerSpriteSheet;
         player.waitTimeGauge = waitTimeGauge;
-        player.waitTimeDelay = 3;
+        player.waitTimeDelay = 1.5;
         waitTimeGauge.barChangeDuration = player.waitTimeDelay;
         
         BattleEnemy *enemy = 
@@ -72,11 +73,14 @@
         player.attributes.maxHp = 100;
         player.attributes.attackPower = 10;
 
-        enemy.attributes.currentHp = 20;
-        enemy.attributes.maxHp = 20;
+        enemy.attributes.currentHp = 1000;
+        enemy.attributes.maxHp = 1000;
         enemy.attributes.attackPower = 10;
         
         self.isTouchEnabled = true;
+        [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self 
+                                                                  priority:0
+                                                           swallowsTouches:false];
         [self resetBattleTimer];
     }
     
@@ -107,27 +111,49 @@
     }
 }
 
--(void) ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInView: [touch view]];
-        location = [[CCDirector sharedDirector] convertToGL: location];
-        
-        if (!isBattleTimerOn && ![player isWaiting]) {
-            for (BattleEnemy *enemy in enemies) {
-                if ([enemy isAlive] && [enemy isLocationInBoundingBox:location]) {
-                    [PlayerBasicAttack attackWithDamage:player.attributes.attackPower
-                                                 target:enemy];
-                    [player startBattleTimer];
-                    [self resumeBattleTimer];
-                    return;
-                }
+-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+    if (!hasPreviousTouch) {
+        hasPreviousTouch = true;
+        previousLocation = [touch previousLocationInView:[touch view]];
+        previousLocation = [[CCDirector sharedDirector] convertToGL: previousLocation];
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint location = [touch locationInView: [touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    
+    if (!isBattleTimerOn && ![player isWaiting] && (ccpDistance(previousLocation, location) >= 5)) {
+        for (BattleEnemy *enemy in enemies) {
+            if ([enemy isAlive] && [enemy isLocationInBoundingBox:location]) {
+                CGFloat angleInDegrees = [CoordinateSystem calculateDegreesFromPoint:previousLocation 
+                                                                             toPoint:location];
+                CGFloat angle = CC_DEGREES_TO_RADIANS(angleInDegrees);
+                CCLOG(@"Angle of swipe: %f, %@, %@", 
+                      angleInDegrees, 
+                      NSStringFromCGPoint(previousLocation), 
+                      NSStringFromCGPoint(location));
+                [PlayerBasicAttack attackWithDamage:player.attributes.attackPower
+                                             target:enemy
+                                       angleOfSwipe:angle];
+                [player startBattleTimer];
+                [self resumeBattleTimer];
+                return;
             }
         }
     }
 }
 
+-(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    hasPreviousTouch = false;
+}
+
 -(void) dealloc {
     [enemies release];
+    [[[CCDirector sharedDirector] touchDispatcher] removeDelegate:self];
     [super dealloc];
 }
 

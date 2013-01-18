@@ -11,5 +11,6 @@
 @interface PlayerBasicAttack : NSObject
 
 +(void) attackWithDamage:(NSUInteger) damage 
-                  target:(BattleCharacter *) target;
+                  target:(BattleCharacter *) target
+            angleOfSwipe:(CGFloat) angle;
 @end

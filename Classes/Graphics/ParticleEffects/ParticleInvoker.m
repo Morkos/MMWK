@@ -10,10 +10,7 @@
 #import "OverlayLayer.h"
 #import "CCBlade.h"
 #import "CCUtil.h"
-
-@interface ParticleInvoker()
--(void) doSlashEffect:(Prop *) prop;
-@end
+#import "CoordinateSystem.h"
 
 @implementation ParticleInvoker
 static ParticleInvoker * invoker = nil;
@@ -36,40 +33,31 @@ static ParticleInvoker * invoker = nil;
     return self;
 }
 
+// Deprecated
 - (void) invokeParticleEffect:(ParticleEffectId) idTag 
                          prop:(Prop *) target {
-    switch (idTag) {
-        case slashEffect:
-            [self doSlashEffect:target];
-            break;
-            
-        default:
-            break;
-    }
 }
 
 /*** Methods for various particle effects ***/
-- (void) doSlashEffect:(Prop *) prop {
+-(void) doSlashEffect:(Prop *) prop
+                angle:(CGFloat) angle
+               length:(CGFloat) length {
     CCBlade *blade = [CCBlade bladeWithMaximumPoint:50];
     blade.autoDim = NO;
     blade.texture = [[CCTextureCache sharedTextureCache] addImage:@"streak1.png"];
     
-    /*ccBezierConfig bezierConfig;
-     bezierConfig.controlPoint_1 = ccp(10, -10);
-     bezierConfig.controlPoint_2 = ccp(10, -20);
-     bezierConfig.endPosition = ccp(0, -50);
-     CCBezierBy *action = [CCBezierBy actionWithDuration:0.2f bezier:bezierConfig];*/
+    CGPoint slashVector = ccpMult(ccpForAngle(angle), length);
     
-    //TODO: Make random slashing effects
-    CGFloat slashHeight = prop.boundingBox.size.height/2;
-    CGFloat slashXPos = prop.boundingBox.size.width/2;
+    CCLOG(@"Slash vector: %@", NSStringFromCGPoint(ccpForAngle(angle)));
     CCFiniteTimeAction *action = 
-        [CCMoveTo actionWithDuration:0.15f position:ccp(slashXPos, -slashHeight)];
+        [CCMoveBy actionWithDuration:0.15f position:slashVector];
     CCAction *bladeAction = 
         [CCSequence actions:action, [CCCallFunc actionWithTarget:blade selector:@selector(finish)], nil];
     
+    CGPoint midSpritePosition = ccp(prop.boundingBox.size.width/2, prop.boundingBox.size.height/2);
+    
     [prop addChild:blade];
-    [blade setPosition:ccp(slashXPos, slashHeight)];
+    [blade setPosition:ccpSub(midSpritePosition, ccpMult(slashVector, 0.5))];
     [blade runAction:bladeAction];
 }
 

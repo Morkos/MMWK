@@ -46,9 +46,9 @@
         [self runAction:
          [CCSequence actions:
              [CCAnimate actionWithAnimation:
-              [SpriteSheetAnimator createAnimationAction:ANIMATOR_DEAD 
-                                             spriteSheet:self.spriteSheet
-                                           frameInterval:0.1f]],
+                 [SpriteSheetAnimator createAnimationAction:ANIMATOR_DEAD 
+                                                spriteSheet:self.spriteSheet
+                                              frameInterval:0.1f]],
              [CCCallFunc actionWithTarget:self selector:@selector(stopBattleTimer)],
              nil]];
     }

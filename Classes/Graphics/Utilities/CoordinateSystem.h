@@ -36,6 +36,10 @@ static const CGFloat RADIUS_PCT_TO_STAND_STILL_IN_CENTER   = 0.10f;
 + (CoordinateSystem *) createWithCenter:(CGFloat) imgWidth 
                               imgHeight:(CGFloat) imgHeight;
 
+/**
+ * Calculate degrees from a point to point w.r.t x-axis
+ * 
+ */ 
 + (CGFloat) calculateDegreesFromPoint:(CGPoint) fromPoint
                               toPoint:(CGPoint) toPoint;
 
