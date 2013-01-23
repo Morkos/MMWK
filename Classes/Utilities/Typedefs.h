@@ -65,6 +65,7 @@ typedef enum {
     tagBackgroundLayer = 3,
     tagHudLayer = 4,
     tagVertex = 200
+    tagBattleLayer = 5
 } CCNodeTag; 
 
 typedef enum {

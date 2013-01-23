@@ -22,8 +22,8 @@
     
     if (self = [super initWithContainerTexture:containerTexture
                                    barTextures:barTextures]) {
-        containerSprite.rotation = 90;
-        barProgressTimer.rotation = 90;
+        containerSprite.rotation = -90;
+        barProgressTimer.rotation = -90;
     }
     
     return self;

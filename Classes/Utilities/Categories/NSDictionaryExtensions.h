@@ -10,4 +10,5 @@
 
 @interface NSMutableDictionary(NSDictionaryExtensions)
     -(void) addObjectToArray:(id)object forKey:(NSString *) key;
+    -(void) incrementNumberForKey:(NSString *) key;
 @end

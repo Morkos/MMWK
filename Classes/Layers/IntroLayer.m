@@ -13,6 +13,7 @@
 #import "SimpleAudioEngine.h"
 #import "Level1.h"
 #import "WorldAtlas.h"
+#import "BattleScene.h"
 
 #pragma mark - IntroLayer
 
@@ -65,4 +66,9 @@
                                         scene:[WorldAtlas scene] 
                                     withColor:ccWHITE]];
 }
+/*
+-(void) makeTransition:(ccTime)dt
+{
+	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[BattleScene scene] withColor:ccWHITE]];
+}*/
 @end

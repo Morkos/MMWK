@@ -15,4 +15,6 @@
 @interface Prop : CCSprite <Drawable, Collidable> {
 }
 
+- (bool) isLocationInBoundingBox:(CGPoint) location;
+
 @end
