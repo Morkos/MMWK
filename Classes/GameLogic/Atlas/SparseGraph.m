@@ -11,12 +11,12 @@
 #import "Vertex.h"
 #import "chipmunk.h"
 #import "Queue.h"
+#import "NSPropertyUtil.h"
 
 static SparseGraph * sparseGraph = nil;
 
 @implementation SparseGraph
-@synthesize adjacencyList,
-            shortestPath;
+@synthesize adjacencyList;
 
 Vertex * getLeastCostVertex(Queue * queue) {
     NSUInteger minDistance = INFINITY;
@@ -40,59 +40,60 @@ Vertex * getLeastCostVertex(Queue * queue) {
     [end.adjacencies addObject:[Edge newEdge:start]];
 }
 
+- (void) loadGraphByPropertyList:(NSString *) plist {
+    
+    NSMutableDictionary * stringKeyToVertices = [NSMutableDictionary dictionaryWithCapacity:10];
+    
+    NSDictionary * atlasProps = [NSPropertyUtil loadProperties:plist];
+    NSDictionary * verticesPlist = [atlasProps objectForKey:@"Vertices"];
+    NSArray * edgesPlist = [atlasProps objectForKey:@"edges"];
+    
+    self.adjacencyList = [NSMutableArray arrayWithCapacity:[verticesPlist count]];
+    
+    [verticesPlist enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString * position = (NSString *) obj;
+        NSArray * positions = [position componentsSeparatedByString:@","];
+        Vertex * vertex = [Vertex newVertex:cpv(
+                                                [[positions objectAtIndex:0] intValue],
+                                                [[positions objectAtIndex:1] intValue])
+                           ];
+        
+        [self.adjacencyList addObject:vertex];
+        [stringKeyToVertices setObject:vertex 
+                                forKey:key];
+        
+    }];
+    
+    NSRegularExpression * regex = [NSRegularExpression regularExpressionWithPattern:@"(\\w+)\\s*:\\s*([a-z,\\s*]+)" 
+                                                                            options:NSRegularExpressionCaseInsensitive 
+                                                                              error:nil];
+    
+    NSString * edgeStrings = [edgesPlist description];
+    NSArray * matches = [regex matchesInString:edgeStrings
+                                       options:0 
+                                         range:NSMakeRange(0, [edgeStrings length])];
+    
+    for(NSTextCheckingResult * match in matches) {
+        NSString * vertex = [edgeStrings substringWithRange:[match rangeAtIndex:1]];
+        NSString * adjacencies = [edgeStrings substringWithRange:[match rangeAtIndex:2]];
+        
+        NSArray * edges = [adjacencies componentsSeparatedByString:@","];
+        for (NSString * edge in edges) {
+            NSString * trimmeddge = [edge stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            [SparseGraph addUndirectEdge:[stringKeyToVertices objectForKey:vertex] 
+                                     end:[stringKeyToVertices objectForKey:trimmeddge]];
+            
+        }
+        
+    }
+    
+    CCLOG(@"Sparse-Graph: %@", self.adjacencyList);
+}
+
 + (SparseGraph *) sharedInstance {
     if (sparseGraph == nil) {
         sparseGraph = [[SparseGraph alloc] init];
-        sparseGraph.adjacencyList = [NSMutableArray arrayWithCapacity:10];
-        sparseGraph.shortestPath = [NSMutableArray arrayWithCapacity:10];
-        
-        Vertex * start = [Vertex newVertex:cpv(50, 245)];
-        Vertex * a = [Vertex newVertex:cpv(105, 220)];
-        Vertex * b = [Vertex newVertex:cpv(163, 230)];
-        Vertex * c = [Vertex newVertex:cpv(273, 243)];
-        Vertex * d = [Vertex newVertex:cpv(332, 246)];
-        Vertex * e = [Vertex newVertex:cpv(442, 243)];
-        Vertex * f = [Vertex newVertex:cpv(439, 243)];
-        Vertex * g = [Vertex newVertex:cpv(378, 138)];
-        Vertex * belowLadder = [Vertex newVertex:cpv(439, 138)];
-
-        Vertex * h = [Vertex newVertex:cpv(364, 151)];
-        Vertex * end = [Vertex newVertex:cpv(360, 186)];
-                
-        Vertex * off = [Vertex newVertex:cpv(100, 75)];
-        
-        [SparseGraph addUndirectEdge:start end:a];
-        [SparseGraph addUndirectEdge:start end:off];
-        [SparseGraph addUndirectEdge:off end:end];
-        
-        [SparseGraph addUndirectEdge:a end:b];
-        [SparseGraph addUndirectEdge:b end:c];
-        [SparseGraph addUndirectEdge:c end:d];
-        [SparseGraph addUndirectEdge:d end:e];
-        [SparseGraph addUndirectEdge:e end:f];
-        [SparseGraph addUndirectEdge:f end:g];
-        [SparseGraph addUndirectEdge:g end:h];
-        [SparseGraph addUndirectEdge:h end:end];
-        
-        [SparseGraph addUndirectEdge:belowLadder end:g];
-        [SparseGraph addUndirectEdge:f end:belowLadder];
-        
-        [sparseGraph.adjacencyList addObject:start];
-        [sparseGraph.adjacencyList addObject:off];
-        [sparseGraph.adjacencyList addObject:belowLadder];
-        [sparseGraph.adjacencyList addObject:a];
-        [sparseGraph.adjacencyList addObject:b];
-        [sparseGraph.adjacencyList addObject:c];
-        [sparseGraph.adjacencyList addObject:d];
-        [sparseGraph.adjacencyList addObject:e];
-        [sparseGraph.adjacencyList addObject:f];
-        [sparseGraph.adjacencyList addObject:g];
-        [sparseGraph.adjacencyList addObject:h];
-        [sparseGraph.adjacencyList addObject:end];
-        
-        NSLog(@"Sparse-Graph: %@", sparseGraph.adjacencyList);
-        
-        [sparseGraph computePaths:start.position];
+        [sparseGraph loadGraphByPropertyList:@"level1-atlas.plist"];
     }
     return sparseGraph;
 }
@@ -103,15 +104,16 @@ Vertex * getLeastCostVertex(Queue * queue) {
             return vertex;
         }
     }
-    
+        
+    //TODO: if a user clicks another node to go to while traveling; it will fail.
     return nil;
 }
 
 - (void) computePaths:(CGPoint) src {
     
-    
     Vertex * start = [self findNearestNode:src];
-    NSLog(@"recomputing paths from %@", start);
+    CCLOG(@"recomputing paths from %@", start);
+    
     Queue * queue = [NSMutableArray arrayWithCapacity:10];
     [queue enqueue:start];
     
@@ -143,23 +145,23 @@ Vertex * getLeastCostVertex(Queue * queue) {
                                target:(CGPoint) target {
    
     NSMutableArray * array = [NSMutableArray arrayWithCapacity:10];
+    
     Vertex * end = [self findNearestNode:target];
     Vertex * source = [self findNearestNode:src];
-
-    Vertex * vertex = nil;
-    for(vertex = end; ! CGPointEqualToPoint(vertex.position, source.position); vertex = vertex.previous) {
-        NSLog(@"vertex: %@", vertex);
-        [array addObject:vertex];
+    Vertex * current = nil;
+    
+    for(current = end; ! CGPointEqualToPoint(current.position, source.position); current = current.previous) {
+        NSLog(@"vertex: %@", current);
+        [array addObject:current];
     }
     
-    NSLog(@"last %@", vertex);
-    if (vertex) { //hack
-        [array addObject:vertex];
+    if (current) { //hack
+        [array addObject:current];
     }
-    
     
     NSMutableArray * reverseArray = 
         [NSMutableArray arrayWithArray:[[array reverseObjectEnumerator] allObjects]];
+    
     return reverseArray;
 }
 

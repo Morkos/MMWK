@@ -11,12 +11,11 @@
 
 @interface SparseGraph : NSObject<Atlas> {
     NSMutableArray * adjacencyList;
-    NSMutableArray * shortestPath;
 }
 
 @property (nonatomic, retain) NSMutableArray * adjacencyList;
-@property (nonatomic, retain) NSMutableArray * shortestPath;
 
 + (SparseGraph *) sharedInstance;
+- (void) computePaths:(CGPoint) src;
 
 @end

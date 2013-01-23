@@ -29,7 +29,7 @@
 }
 
 - (id) copyWithZone:(NSZone *) zone {
-    //Should we be calling the super class' copyWithZone
+    //Should we be calling the super class' copyWithZone?
     return [Vertex newVertex:self.position];
 }
 

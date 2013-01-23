@@ -13,42 +13,35 @@
 #import "ObjectContainer.h"
 #import "Atlas.h"
 #import "SparseGraph.h"
-
-static NSMutableArray * nodes = nil;
-static int nodTag = 200;
+#import "TravelState.h"
+#import "Typedefs.h"
 
 @implementation WorldMap
 
 -(id) init {
     if(self = [super init]) {
-        NSLog(@"world layer initiation...");
+        NSLog(@"Initializing the world map.");
         
         self.isTouchEnabled = YES;
-        
-        id<Atlas> atlas = [SparseGraph sharedInstance];
-        
-        nodes = [NSMutableArray arrayWithCapacity:10];
-        
+                        
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        SpriteSheet *spriteSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
+        SpriteSheet *playerSheet = [[SpriteSheetManager getInstance] loadSpriteSheet:@"lancelotSpSheet.png"];
         NSMutableArray * graph = [SparseGraph sharedInstance].adjacencyList;
         
-        int tmpTag = nodTag;
+        int tmpTag = tagVertex;
         for (Vertex * vertex in graph) {
             CCSprite * sprite = [CCSprite spriteWithFile:@"attackButton.png"];
             sprite.position = vertex.position;
             sprite.scale = 0.25f;
             [self addChild:sprite z:2 tag:tmpTag++];
         }
-        
-        NSLog(@"nods ?= %@", nodes);
-            
+                    
         PlayerBuilder *builder = 
             [PlayerBuilder newBuilder:ccp(50, 245) 
                                  size:CGSizeMake(0.5f, 0.5f)
-                          spriteFrame:[spriteSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
+                          spriteFrame:[playerSheet getFrameForKey:ANIMATOR_STAND frameNum:0]];
         
-        Player *player = [[[[builder buildSpriteSheet:spriteSheet] 
+        Player *player = [[[[builder buildSpriteSheet:playerSheet] 
                                         buildStrength:5] 
                                            buildSpeed:2]
                                                   build];
@@ -74,24 +67,20 @@ static int nodTag = 200;
     UITouch * touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
+    
     Player * player = [ObjectContainer sharedInstance].player;
-
-    NSLog(@"Touch Point: %@", NSStringFromCGPoint(location));
+    CCLOG(@"Touch Point: %@", NSStringFromCGPoint(location));
+    
     [[SparseGraph sharedInstance] computePaths:player.position];
     NSArray * shortestPath = [[SparseGraph sharedInstance] findShortestPath:CGPointZero 
                                                                      target:location];
     
-    player.behavior.wayPoints = shortestPath;
-    player.behavior.rator = [shortestPath objectEnumerator];
-    player.behavior.start = [player.behavior.rator nextObject];
-    
-    NSLog(@"shortest path: %@", shortestPath);
-    int tmp = nodTag;
+    int tmp = tagVertex;
     for (int i = 0; i < [[SparseGraph sharedInstance].adjacencyList count]; i++) {
-        CCNode * nod = [self getChildByTag:tmp++];
-        if (CGRectContainsPoint([nod boundingBox], location)) {
-            [player setState:[MoveState createWithCharacter:player 
-                                                       path:shortestPath]];
+        CCNode * vertex = [self getChildByTag:tmp++];
+        if (CGRectContainsPoint([vertex boundingBox], location)) {
+            [player setState:[TravelState createWithCharacter:player 
+                                                         path:shortestPath]];
             break;
         }
     }
@@ -101,14 +90,16 @@ static int nodTag = 200;
                 z:(NSInteger)z 
               tag:(NSInteger)tag {
     [[ObjectContainer sharedInstance] addObject:node];
-    [super addChild:node z:z tag:tag];
+    [super addChild:node 
+                  z:z 
+                tag:tag];
 }
 
-- (void)dealloc {
+- (void) dealloc {
     [super dealloc];
 }
 
--(void) update:(ccTime) delta {
+- (void) update:(ccTime) delta {
     [[ObjectContainer sharedInstance] update];
 }
 

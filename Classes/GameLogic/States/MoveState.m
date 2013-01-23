@@ -41,21 +41,8 @@
 }
 
 - (void) updateState {
-    NSLog(@"character position:%@", NSStringFromCGPoint(character.position));
-    
     self.character.behavior.wayPoints = self.path;
     [character.behavior followPath:character];
-    
-    /*
-    if (IS_SUBCLASS(character, Player)) {
-        Player *player = (Player *) character;
-        NSArray *items = 
-            [[ObjectContainer sharedInstance] findCollidingProps:character fromContainer:CONTAINER_ITEMS];
-        
-        for (Item *item in items) {
-            [item isPickedUpBy:player];
-        }
-    }*/
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

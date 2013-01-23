@@ -20,11 +20,7 @@
 - (id) init {
     
     if(self = [super init]) {
-        //TODO: This should not be here
-
-        NSLog(@"start: %@", start);
-        NSLog(@"way pts: %@", wayPoints);
-        NSLog(@"rator %@", rator);
+    
     }
     
     return self;
@@ -45,12 +41,11 @@
     return seekPath;
 }
 
-- (BOOL) followPath:(Character *) character {
-    
-    //NSLog(@"path: %@", self.wayPoints);
-    
+- (BOOL) followPath:(Character *) character 
+               path:(NSArray *)path {
+        
     BOOL nearNextPoint = cpvdist(character.position, self.start.position) < 10;
-    BOOL nearend = cpvdist(character.position, ((Vertex *)[wayPoints lastObject]).position) < 10;
+    BOOL nearend = cpvdist(character.position, ((Vertex *)[path lastObject]).position) < 10;
     
     if (nearend) {
         return YES;
@@ -58,9 +53,7 @@
         self.start = [rator nextObject];
         NSLog(@"next wayPoint: %@", self.start);
     } 
-    
-    NSLog(@"seeking to %@", self.start);		
-    
+        
     [self seek:character.position 
         target:self.start.position];
     
@@ -68,6 +61,7 @@
 }
 
 - (cpVect) flee:(Character *)character {
+    
     Player * player = [ObjectContainer sharedInstance].player;
     cpVect desiredV = cpvmult(cpvnormalize(cpvsub(character.position, player.position)), character.speed);
     
@@ -82,7 +76,9 @@
 
 - (cpVect) calculate:(CGPoint) src 
               target:(CGPoint) target {
+    
     return [self seek:src 
                target:target];
 }
+
 @end

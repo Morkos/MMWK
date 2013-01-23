@@ -25,7 +25,9 @@
 - (cpVect) seek:(CGPoint) src 
          target:(CGPoint) target;
 
-- (BOOL) followPath:(Character *) character;
+- (BOOL) followPath:(Character *) character
+               path:(NSArray *) path;
+
 - (cpVect) flee:(Character *) character;
 - (cpVect) pursuit:(Character *) character;
 - (cpVect) calculate:(CGPoint) src

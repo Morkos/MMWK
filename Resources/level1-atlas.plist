@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Vertices</key>
+	<dict>
+		<key>start</key>
+		<string>50, 245</string>
+		<key>b</key>
+		<string>105, 220</string>
+		<key>c</key>
+		<string>164, 240</string>
+		<key>d</key>
+		<string>275, 230</string>
+		<key>f</key>
+		<string>333, 230</string>
+		<key>g</key>
+		<string>443, 229</string>
+		<key>h</key>
+		<string>443, 124</string>
+		<key>i</key>
+		<string>378, 126</string>
+		<key>j</key>
+		<string>360, 142</string>
+		<key>k</key>
+		<string>360, 174</string>
+        <key>l</key>
+        <string>276, 172</string>
+        <key>m</key>
+        <string>276, 91</string>
+		<key>end</key>
+		<string>100, 75</string>
+	</dict>
+	<key>edges</key>
+	<array>
+		<string>start : b, end</string>
+		<string>b : c</string>
+		<string>c : d</string>
+		<string>d : f</string>
+		<string>f : g</string>
+        <string>g : h</string>
+		<string>h : i</string>
+        <string>i : j</string>
+        <string>j : k</string>
+        <string>k : l</string>
+        <string>l : m, end</string>
+        <string>end : start</string>
+	</array>
+</dict>
+</plist>
