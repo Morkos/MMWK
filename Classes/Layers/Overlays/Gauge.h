@@ -11,7 +11,11 @@
 @interface Gauge : CCNode {
     CCSprite *containerSprite;
     CCProgressTimer *barProgressTimer;
+    CGFloat barChangeDuration;
 }
+
+@property(nonatomic, readonly) CCProgressTimer *barProgressTimer;
+@property(nonatomic, assign) CGFloat barChangeDuration;
 
 + (Gauge *) gaugeWithContainerTexture:(NSString *) containerTexture
                           barTextures:(NSArray *) barTextures;

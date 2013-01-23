@@ -17,7 +17,13 @@
 @property(nonatomic, retain) CCLayer *layer;
 
 + (ParticleInvoker *) invoker;
+
+// Deprecated. Use individual particle effects instead
 - (void) invokeParticleEffect:(ParticleEffectId) idTag
                          prop:(Prop *) prop;
+
+-(void) doSlashEffect:(Prop *) prop
+                angle:(CGFloat) angle
+               length:(CGFloat) length; 
 
 @end

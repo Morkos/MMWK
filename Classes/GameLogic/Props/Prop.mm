@@ -17,4 +17,20 @@
 - (void) resolveCollisions {
 }
 
+-(void) draw {
+    [super draw];
+    
+#ifdef BOUNDING_BOX
+    CGPoint origin = self.boundingBox.origin;
+    CGPoint destination = ccpAdd(origin, ccp(self.boundingBox.size.width, self.boundingBox.size.height));
+    
+    ccDrawRect([self convertToNodeSpace:origin], 
+               [self convertToNodeSpace:destination]);
+#endif
+}
+
+- (bool) isLocationInBoundingBox:(CGPoint) location {
+    return CGRectContainsPoint(self.boundingBox, location);
+}
+
 @end

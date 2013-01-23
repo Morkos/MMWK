@@ -22,4 +22,16 @@
     [(NSMutableArray *) value addObject:object];
 }
 
+-(void) incrementNumberForKey:(NSString *) key {
+    NSNumber *value = [self objectForKey:key];
+    if (!value) {
+        value = [NSNumber numberWithInt:0];
+    } else if (!IS_SUBCLASS(value, NSNumber)) {
+        return;
+    }
+    
+    value = [NSNumber numberWithInt:[value intValue] + 1];
+    [self setValue:value forKey:key];
+}
+
 @end

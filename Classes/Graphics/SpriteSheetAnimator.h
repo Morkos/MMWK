@@ -73,4 +73,8 @@
                        target:(id) target
                      selector:(SEL) selector;
 
++ (CCAnimation *) createAnimationAction:(NSString *) key
+                            spriteSheet:(SpriteSheet *) spriteSheet
+                          frameInterval:(float) frameInterval;
+
 @end
