@@ -42,5 +42,11 @@
  */
 - (void) initiateComboAnimation:(NSString *) comboKey;
 
+/**
+ * Is the main player walking around the world map?
+ *
+ * @return yes or no
+ */
+- (BOOL) isTravelingTheWorld;
 
 @end

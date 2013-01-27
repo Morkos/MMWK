@@ -12,18 +12,19 @@
 #import "SparseGraph.h"
 #import "Edge.h"
 
+#define CLOSE_FOR_COMFORT 10
+
 @implementation SteeringBehavior
-@synthesize wayPoints, 
-            rator,
+@synthesize wayPointEnumerator,
             start;
 
-- (id) init {
+- (id) newBehavior:(NSEnumerator *) enumerator {
     
-    if(self = [super init]) {
-    
-    }
+    self.wayPointEnumerator = enumerator;
+    self.start = [enumerator nextObject];
     
     return self;
+    
 }
 
 - (cpVect) pursuit:(Character *) character {
@@ -44,13 +45,13 @@
 - (BOOL) followPath:(Character *) character 
                path:(NSArray *)path {
         
-    BOOL nearNextPoint = cpvdist(character.position, self.start.position) < 10;
-    BOOL nearend = cpvdist(character.position, ((Vertex *)[path lastObject]).position) < 10;
+    BOOL nearNextPoint = cpvdist(character.position, self.start.position) < CLOSE_FOR_COMFORT;
+    BOOL nearend = cpvdist(character.position, ((Vertex *)[path lastObject]).position) < CLOSE_FOR_COMFORT;
     
     if (nearend) {
         return YES;
     } else if (nearNextPoint) {
-        self.start = [rator nextObject];
+        self.start = [wayPointEnumerator nextObject];
         NSLog(@"next wayPoint: %@", self.start);
     } 
         
@@ -66,6 +67,8 @@
     cpVect desiredV = cpvmult(cpvnormalize(cpvsub(character.position, player.position)), character.speed);
     
     CGPoint pt = cpvadd(desiredV, character.position);
+    
+    //TODO: clean this up
     if (character.position.x < player.position.x) {
         [character setCurrentOrientation:ORIENTATION_BACKWARDS];
     } else {

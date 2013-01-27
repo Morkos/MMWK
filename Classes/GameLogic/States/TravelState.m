@@ -8,6 +8,7 @@
 
 #import "TravelState.h"
 #import "Player.h"
+#import "BattleScene.h"
 
 @implementation TravelState
 
@@ -27,9 +28,7 @@
     TravelState *state = [[TravelState alloc] init];
     state.character = character;
     state.path = path;
-    
-    state.character.behavior.rator = [path objectEnumerator];
-    state.character.behavior.start = [state.character.behavior.rator nextObject];
+    [state.character.behavior newBehavior:[path objectEnumerator]];    
     
     return state;
 }
@@ -45,7 +44,14 @@
 }
 
 - (void) updateState {
-    [character.behavior followPath:character path:self.path];
+    BOOL atend = [character.behavior followPath:character path:self.path];
+    if(atend) {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFlipX transitionWithDuration:1.0 
+                                                                                      scene:[BattleScene scene]]];
+        [self transitionToState:[StandState createWithCharacter:self.character]];
+    
+    }
+
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

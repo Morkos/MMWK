@@ -16,7 +16,7 @@ static SpriteSheetManager *manager = nil;
 
 + (SpriteSheetManager *) getInstance {
     if(manager == nil) {
-		manager = [[[SpriteSheetManager alloc] init] autorelease];
+		manager = [[SpriteSheetManager alloc] init];
         manager.attributesStore = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	

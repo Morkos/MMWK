@@ -70,12 +70,12 @@ NSLog(@"%@",[NSString stringWithFormat:(s), ##__VA_ARGS__])
 #define CCLOGINFO(...) do {} while (0)
 
 #elif COCOS2D_DEBUG == 1
-#define CCLOG(...) __CCLOG(__VA_ARGS__)
+#define CCLOG(...) __CCLOGWITHFUNCTION(__VA_ARGS__)
 #define CCLOGWARN(...) __CCLOGWITHFUNCTION(__VA_ARGS__)
 #define CCLOGINFO(...) do {} while (0)
 
 #elif COCOS2D_DEBUG > 1
-#define CCLOG(...) __CCLOG(__VA_ARGS__)
+#define CCLOG(...) __CCLOGWITHFUNCTION(__VA_ARGS__)
 #define CCLOGWARN(...) __CCLOGWITHFUNCTION(__VA_ARGS__)
 #define CCLOGINFO(...) __CCLOG(__VA_ARGS__)
 #endif // COCOS2D_DEBUG

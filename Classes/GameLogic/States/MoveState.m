@@ -41,8 +41,7 @@
 }
 
 - (void) updateState {
-    self.character.behavior.wayPoints = self.path;
-    [character.behavior followPath:character];
+    
 }
 
 - (void) transitionToState:(id<CharacterState>) newState {

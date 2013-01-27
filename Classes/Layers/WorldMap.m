@@ -16,7 +16,6 @@
 #import "TravelState.h"
 #import "Typedefs.h"
 
-
 @implementation WorldMap
 
 -(id) init {
@@ -70,24 +69,19 @@
     location = [[CCDirector sharedDirector] convertToGL:location];
     
     Player * player = [ObjectContainer sharedInstance].player;
-    NSLog(@"Touch Point: %@", NSStringFromCGPoint(location));
+    CCLOG(@"Touch Point: %@", NSStringFromCGPoint(location));
     
     [[SparseGraph sharedInstance] computePaths:player.position];
     
     NSArray * shortestPath = [[SparseGraph sharedInstance] findShortestPath:CGPointZero 
                                                                      target:location];
     
-    player.behavior.wayPoints = shortestPath;
-    player.behavior.rator = [shortestPath objectEnumerator];
-    player.behavior.start = [player.behavior.rator nextObject];
-    
-    NSLog(@"shortest path: %@", shortestPath);
-    int tmp = nodTag;
+    int tmp = tagVertex;
     for (int i = 0; i < [[SparseGraph sharedInstance].adjacencyList count]; i++) {
         CCNode * nod = [self getChildByTag:tmp++];
         if (CGRectContainsPoint([nod boundingBox], location)) {
-            [player setState:[MoveState createWithCharacter:player 
-                                                       path:shortestPath]];
+            [player setState:[TravelState createWithCharacter:player 
+                                                         path:shortestPath]];
             break;
         }
     }
@@ -103,14 +97,6 @@
 }
 
 - (void) dealloc {
-    [super dealloc];
-}
-
-- (void) update:(ccTime) delta {
-    [super addChild:node z:z tag:tag];
-}
-
-- (void)dealloc {
     [super dealloc];
 }
 

@@ -6,8 +6,6 @@
 //  Copyright __MyCompanyName__ 2012. All rights reserved.
 //
 
-
-// Import the interfaces
 #import "IntroLayer.h"
 #import "WorldLayer.h"
 #import "SimpleAudioEngine.h"
@@ -17,10 +15,8 @@
 
 #pragma mark - IntroLayer
 
-// HelloWorldLayer implementation
 @implementation IntroLayer
 
-// 
 -(id) init {
 	self = [super init];
     // ask director for the window size
@@ -32,7 +28,7 @@
 		background.rotation = 90;
 	}
     
-	background.position = ccp(size.width, size.height); //100, 100);
+	background.position = ccp(size.width, size.height);
     
     CCLabelTTF * gameLabel = [CCLabelTTF labelWithString:@"Fyka's Memento" 
                                                 fontName:@"Courier" 
@@ -53,9 +49,7 @@
 	[self addChild:background];
     [self addChild:menu];
     [self addChild:gameLabel];
-    
-    NSLog(@"here....");
-    
+        
     return self;
 	
 }
@@ -66,9 +60,5 @@
                                         scene:[WorldAtlas scene] 
                                     withColor:ccWHITE]];
 }
-/*
--(void) makeTransition:(ccTime)dt
-{
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1.0 scene:[BattleScene scene] withColor:ccWHITE]];
-}*/
+
 @end

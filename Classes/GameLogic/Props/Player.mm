@@ -14,6 +14,7 @@
 #import "ComboState.h"
 #import "OverlayLayer.h"
 #import "cocos2d.h"
+#import "TravelState.h"
 
 @implementation Player
 
@@ -51,6 +52,10 @@
     [healthGauge animateBarFromStartCapacity:currentHp 
                                  endCapacity:currentHp 
                                  maxCapacity:maxHp];
+}
+
+- (BOOL) isTravelingTheWorld {
+    return ([self.fsm.currentState isMemberOfClass:[TravelState class]]);
 }
 
 @end

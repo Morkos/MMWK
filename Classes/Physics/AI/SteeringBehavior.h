@@ -11,16 +11,14 @@
 #import "Vertex.h"
 
 @interface SteeringBehavior : NSObject {
-    NSArray * wayPoints;
-    NSEnumerator * rator;
+    NSEnumerator * wayPointEnumerator;
     Vertex * start;
 }
 
-@property (nonatomic, retain) NSArray * wayPoints;
-@property (nonatomic, retain) NSEnumerator * rator;
+@property (nonatomic, retain) NSEnumerator * wayPointEnumerator;
 @property (nonatomic, retain) Vertex * start;
 
-- (id) init;
+- (id) newBehavior:(NSEnumerator *) wayPointEnumerator;
 
 - (cpVect) seek:(CGPoint) src 
          target:(CGPoint) target;

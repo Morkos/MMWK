@@ -18,7 +18,7 @@
 @implementation BattleScene
 
 +(CCScene *) scene {
-    [[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
+    //[[SpriteSheetManager getInstance] loadFromItems:[NSPropertyUtil loadProperties:@"spriteSheets.plist"]];
     
 	// 'scene' is an autorelease object.
 	CCScene *scene = [BattleScene node];

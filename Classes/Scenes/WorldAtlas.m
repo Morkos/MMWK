@@ -10,6 +10,7 @@
 #import "WorldLayer.h"
 #import "WorldMap.h"
 #import "SpriteSheetManager.h"
+#import "FloatingMenu.h"
 
 @implementation WorldAtlas
 
@@ -21,7 +22,7 @@
     
 	// 'scene' is an autorelease object.
     [scene addChild:[WorldMap node] z:2];
-    
+    [scene addChild:[FloatingMenu node] z:3];
     NSLog(@"Finishing creating scene...");
     return scene;
 }

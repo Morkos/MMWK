@@ -12,6 +12,7 @@
 #import "chipmunk.h"
 #import "Queue.h"
 #import "NSPropertyUtil.h"
+#import "ObjectContainer.h"
 
 static SparseGraph * sparseGraph = nil;
 
@@ -99,12 +100,18 @@ Vertex * getLeastCostVertex(Queue * queue) {
 }
 
 - (Vertex *) findNearestNode:(CGPoint)point {
+    Player * player = [ObjectContainer sharedInstance].player;
+    
     for(Vertex * vertex in sparseGraph.adjacencyList) {
         if(cpvdist(vertex.position, point) < 10) {
             return vertex;
         }
     }
-        
+    
+    if([player isTravelingTheWorld]) {
+        return  player.behavior.start;
+    }
+    
     //TODO: if a user clicks another node to go to while traveling; it will fail.
     return nil;
 }
